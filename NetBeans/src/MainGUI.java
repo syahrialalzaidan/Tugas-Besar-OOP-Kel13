@@ -58,7 +58,7 @@ public class MainGUI extends javax.swing.JFrame {
         lblProgbarKesehatan = new javax.swing.JLabel();
         jSeparator3 = new javax.swing.JSeparator();
         jSeparator4 = new javax.swing.JSeparator();
-        dropdownAction = new javax.swing.JComboBox<>();
+        dropdownDirection = new javax.swing.JComboBox<>();
         lblSimActions = new javax.swing.JLabel();
         dropdownObject = new javax.swing.JComboBox<>();
         btnMoveToRoom = new javax.swing.JButton();
@@ -73,6 +73,8 @@ public class MainGUI extends javax.swing.JFrame {
         lblObject = new javax.swing.JLabel();
         lblAction = new javax.swing.JLabel();
         jScrollBar2 = new javax.swing.JScrollBar();
+        dropdownAction = new javax.swing.JComboBox<>();
+        jLabel1 = new javax.swing.JLabel();
         gamePane = new javax.swing.JPanel();
         menuBar = new javax.swing.JMenuBar();
         fileMenu = new javax.swing.JMenu();
@@ -101,7 +103,6 @@ public class MainGUI extends javax.swing.JFrame {
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(1024, 791));
 
         mainMenuPanel.setMaximumSize(new java.awt.Dimension(256, 32767));
         mainMenuPanel.setPreferredSize(new java.awt.Dimension(256, 768));
@@ -188,7 +189,12 @@ public class MainGUI extends javax.swing.JFrame {
         lblProgbarKesehatan.setFont(new java.awt.Font("Public Sans", 0, 12)); // NOI18N
         lblProgbarKesehatan.setText("100");
 
-        dropdownAction.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tidur" }));
+        dropdownDirection.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Right", "Left", "Up", "Down" }));
+        dropdownDirection.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dropdownDirectionActionPerformed(evt);
+            }
+        });
 
         lblSimActions.setFont(new java.awt.Font("Public Sans", 1, 12)); // NOI18N
         lblSimActions.setText("SIM ACTIONS");
@@ -258,7 +264,16 @@ public class MainGUI extends javax.swing.JFrame {
         lblObject.setText("Object");
 
         lblAction.setFont(new java.awt.Font("Public Sans", 0, 12)); // NOI18N
-        lblAction.setText("Action");
+        lblAction.setText("Direction");
+
+        dropdownAction.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tidur" }));
+        dropdownAction.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dropdownActionActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setText("Action");
 
         javax.swing.GroupLayout mainMenuPanelLayout = new javax.swing.GroupLayout(mainMenuPanel);
         mainMenuPanel.setLayout(mainMenuPanelLayout);
@@ -308,14 +323,6 @@ public class MainGUI extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(lblProgbarKesehatan))
                             .addComponent(jSeparator4)
-                            .addGroup(mainMenuPanelLayout.createSequentialGroup()
-                                .addGroup(mainMenuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(lblAction)
-                                    .addComponent(lblObject))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(mainMenuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(dropdownObject, 0, 181, Short.MAX_VALUE)
-                                    .addComponent(dropdownAction, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainMenuPanelLayout.createSequentialGroup()
                                 .addGroup(mainMenuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(lblObjectActions)
@@ -344,7 +351,17 @@ public class MainGUI extends javax.swing.JFrame {
                                 .addGroup(mainMenuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(lblStatus)
                                     .addComponent(lblSims, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(0, 0, Short.MAX_VALUE)))))
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainMenuPanelLayout.createSequentialGroup()
+                                .addGroup(mainMenuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblAction)
+                                    .addComponent(jLabel1)
+                                    .addComponent(lblObject))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(mainMenuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(dropdownAction, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(dropdownObject, 0, 181, Short.MAX_VALUE)
+                                    .addComponent(dropdownDirection, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollBar2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -353,6 +370,7 @@ public class MainGUI extends javax.swing.JFrame {
             .addGroup(mainMenuPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(mainMenuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollBar2, javax.swing.GroupLayout.PREFERRED_SIZE, 625, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(mainMenuPanelLayout.createSequentialGroup()
                         .addGroup(mainMenuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblSims)
@@ -389,7 +407,6 @@ public class MainGUI extends javax.swing.JFrame {
                         .addComponent(lblStatus)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(scrollpaneStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(mainMenuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(mainMenuPanelLayout.createSequentialGroup()
                                 .addGroup(mainMenuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -429,10 +446,14 @@ public class MainGUI extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(mainMenuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblAction)
-                            .addComponent(dropdownAction, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(dropdownDirection, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnConfirm))
-                    .addComponent(jScrollBar2, javax.swing.GroupLayout.PREFERRED_SIZE, 625, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(mainMenuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(dropdownAction, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1))
+                        .addGap(8, 8, 8)
+                        .addComponent(btnConfirm)))
+                .addContainerGap(116, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout gamePaneLayout = new javax.swing.GroupLayout(gamePane);
@@ -516,8 +537,8 @@ public class MainGUI extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(mainMenuPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(mainMenuPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(2, 2, 2)
                 .addComponent(gamePane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -580,6 +601,14 @@ public class MainGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnInventoryActionPerformed
 
+    private void dropdownActionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dropdownActionActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_dropdownActionActionPerformed
+
+    private void dropdownDirectionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dropdownDirectionActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_dropdownDirectionActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -641,6 +670,7 @@ public class MainGUI extends javax.swing.JFrame {
     private javax.swing.JMenuItem cutMenuItem;
     private javax.swing.JMenuItem deleteMenuItem;
     private javax.swing.JComboBox<String> dropdownAction;
+    private javax.swing.JComboBox<String> dropdownDirection;
     private javax.swing.JComboBox<String> dropdownObject;
     private javax.swing.JMenu editMenu;
     private javax.swing.JMenuItem exitMenuItem;
@@ -648,6 +678,7 @@ public class MainGUI extends javax.swing.JFrame {
     private javax.swing.JPanel gamePane;
     private javax.swing.JMenu helpMenu;
     private javax.swing.JFrame jFrame1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollBar jScrollBar1;
     private javax.swing.JScrollBar jScrollBar2;
     private javax.swing.JSeparator jSeparator2;

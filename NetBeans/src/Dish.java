@@ -1,11 +1,11 @@
 import java.util.List;
 
-public class Food extends Objects {
-    private List<Food> ingredients;
+public class Dish extends Objects {
+    private List<Dish> ingredients;
     private int fullness;
     private int time;
 
-    public Food(String name, Inventory inventory, int fullness, int time, List<Food> ingredients) {
+    public Dish(String name, Inventory inventory, int fullness, int time, List<Dish> ingredients) {
         super(name, inventory);
         this.fullness = fullness;
         this.time = time;
@@ -18,7 +18,7 @@ public class Food extends Objects {
     public int getTime() {
         return time;
     }
-    public String getIngredients() {
+    public String getIngredient() {
         return ingredients.toString();
     }
 }

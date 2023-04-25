@@ -7,16 +7,12 @@
  *
  * @author ilmag
  */
-public class MainGUI extends javax.swing.JFrame {
+public class RoomGUI extends javax.swing.JFrame {
 
     /**
      * Creates new form NewApplication
      */
-
-    private Boolean actionPlaceFurniture = false;
-
-
-    public MainGUI() {
+    public RoomGUI() {
         initComponents();
     }
 
@@ -79,7 +75,10 @@ public class MainGUI extends javax.swing.JFrame {
         jScrollBar2 = new javax.swing.JScrollBar();
         dropdownAction = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
         gamePane = new javax.swing.JPanel();
+        titleBackground = new javax.swing.JPanel();
+        javax.swing.JLabel roomName = new javax.swing.JLabel();
         menuBar = new javax.swing.JMenuBar();
         fileMenu = new javax.swing.JMenu();
         loadMenuItem = new javax.swing.JMenuItem();
@@ -203,7 +202,7 @@ public class MainGUI extends javax.swing.JFrame {
         lblSimActions.setFont(new java.awt.Font("Public Sans", 1, 12)); // NOI18N
         lblSimActions.setText("SIM ACTIONS");
 
-        dropdownObject.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Kasur", "Meja", "Kursi" }));
+        dropdownObject.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Kasur", "Lemari" }));
 
         btnMoveToRoom.setText("MOVE TO ROOM");
         btnMoveToRoom.addActionListener(new java.awt.event.ActionListener() {
@@ -278,6 +277,17 @@ public class MainGUI extends javax.swing.JFrame {
         });
 
         jLabel1.setText("Action");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
 
         javax.swing.GroupLayout mainMenuPanelLayout = new javax.swing.GroupLayout(mainMenuPanel);
         mainMenuPanel.setLayout(mainMenuPanelLayout);
@@ -367,7 +377,9 @@ public class MainGUI extends javax.swing.JFrame {
                                     .addComponent(dropdownObject, 0, 181, Short.MAX_VALUE)
                                     .addComponent(dropdownDirection, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollBar2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jScrollBar2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         mainMenuPanelLayout.setVerticalGroup(
             mainMenuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -458,17 +470,45 @@ public class MainGUI extends javax.swing.JFrame {
                         .addGap(8, 8, 8)
                         .addComponent(btnConfirm)))
                 .addContainerGap(116, Short.MAX_VALUE))
+            .addGroup(mainMenuPanelLayout.createSequentialGroup()
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+
+        titleBackground.setBackground(new java.awt.Color(51, 51, 51));
+
+        roomName.setFont(new java.awt.Font("Arial Black", 0, 18)); // NOI18N
+        roomName.setForeground(new java.awt.Color(255, 255, 255));
+        roomName.setText("Room");
+
+        javax.swing.GroupLayout titleBackgroundLayout = new javax.swing.GroupLayout(titleBackground);
+        titleBackground.setLayout(titleBackgroundLayout);
+        titleBackgroundLayout.setHorizontalGroup(
+            titleBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(titleBackgroundLayout.createSequentialGroup()
+                .addGap(351, 351, 351)
+                .addComponent(roomName)
+                .addContainerGap(355, Short.MAX_VALUE))
+        );
+        titleBackgroundLayout.setVerticalGroup(
+            titleBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(titleBackgroundLayout.createSequentialGroup()
+                .addGap(26, 26, 26)
+                .addComponent(roomName)
+                .addContainerGap(29, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout gamePaneLayout = new javax.swing.GroupLayout(gamePane);
         gamePane.setLayout(gamePaneLayout);
         gamePaneLayout.setHorizontalGroup(
             gamePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 762, Short.MAX_VALUE)
+            .addComponent(titleBackground, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         gamePaneLayout.setVerticalGroup(
             gamePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(gamePaneLayout.createSequentialGroup()
+                .addComponent(titleBackground, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         menuBar.setPreferredSize(new java.awt.Dimension(256, 23));
@@ -595,7 +635,6 @@ public class MainGUI extends javax.swing.JFrame {
 
     private void btnPlaceFurnitureActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPlaceFurnitureActionPerformed
         // TODO add your handling code here:
-        setActionPlaceFurniture(!actionPlaceFurniture);
     }//GEN-LAST:event_btnPlaceFurnitureActionPerformed
 
     private void btnBuildBuyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuildBuyActionPerformed
@@ -613,22 +652,6 @@ public class MainGUI extends javax.swing.JFrame {
     private void dropdownDirectionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dropdownDirectionActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_dropdownDirectionActionPerformed
-
-    public Boolean getActionPlaceFurniture() {
-        return actionPlaceFurniture;
-    }
-
-    public void setActionPlaceFurniture(Boolean actionplaceFurniture) {
-        this.actionPlaceFurniture = actionplaceFurniture;
-    }
-
-    public javax.swing.JComboBox<String> getFurniture() {
-        return dropdownObject;
-    }
-
-    public javax.swing.JComboBox<String> getDirection() {
-        return dropdownDirection;
-    }
 
     /**
      * @param args the command line arguments
@@ -700,6 +723,7 @@ public class MainGUI extends javax.swing.JFrame {
     private javax.swing.JMenu helpMenu;
     private javax.swing.JFrame jFrame1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollBar jScrollBar1;
     private javax.swing.JScrollBar jScrollBar2;
     private javax.swing.JSeparator jSeparator2;
@@ -738,6 +762,7 @@ public class MainGUI extends javax.swing.JFrame {
     private javax.swing.JScrollPane scrollpaneUang;
     private javax.swing.JTextPane textPaneStatus;
     private javax.swing.JTextPane textpanePekerjaan;
+    private javax.swing.JPanel titleBackground;
     // End of variables declaration//GEN-END:variables
 
 }

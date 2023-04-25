@@ -649,9 +649,10 @@
         <Component class="javax.swing.JComboBox" name="dropdownObject">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="2">
+              <StringArray count="3">
                 <StringItem index="0" value="Kasur"/>
-                <StringItem index="1" value="Lemari"/>
+                <StringItem index="1" value="Meja"/>
+                <StringItem index="2" value="Kursi"/>
               </StringArray>
             </Property>
           </Properties>

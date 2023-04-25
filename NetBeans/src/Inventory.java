@@ -3,19 +3,40 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 
+import java.util.HashMap;
 /**
  *
  * @author ilmag
  */
 public class Inventory extends javax.swing.JFrame {
 
+    //make a hashmap of string and integer
+
+    private HashMap<String, Integer> items = new HashMap<String, Integer>();
+
     /**
      * Creates new form Inventory
      */
+
+    //ALGORITHM
     public Inventory() {
         initComponents();
     }
 
+    public void addItems(String name) {
+        if (items.containsKey(name)) {
+            items.put(name, items.get(name) + 1);
+        } else {
+            items.put(name, 1);
+        }
+    }
+
+    public HashMap<String, Integer> getItems() {
+        return items;
+    }
+
+
+    // GUI
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

@@ -256,8 +256,8 @@ public class Room implements ActionListener {
                         javax.swing.JComboBox<String> Direction = frame.getDirection();
                         String direction = Direction.getSelectedItem().toString();
 
-                        int x1 = i;
-                        int y1 = j;
+                        int x1 = j;
+                        int y1 = i;
                         Object object = null;
                         Color color = null;
                         Color foregColor = null;

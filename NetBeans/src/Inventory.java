@@ -4,37 +4,83 @@
  */
 
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+
 /**
  *
  * @author ilmag
  */
-public class Inventory extends javax.swing.JFrame {
-
-    //make a hashmap of string and integer
-
-    private HashMap<String, Integer> items = new HashMap<String, Integer>();
-
+public class Inventory<T> extends javax.swing.JFrame {
     /**
      * Creates new form Inventory
      */
 
+    // Make a hashmap of string and integer
+    private T type;
+    private HashMap<T, Integer> inventory = new HashMap<T, Integer>();
+    private String inventoryType;
+    private String simName;
+
     //ALGORITHM
-    public Inventory() {
+    public Inventory(String inventoryType, String simName) {
+        this.inventoryType = inventoryType;
+        this.simName = simName;
+        // For GUI
         initComponents();
     }
 
-    public void addItems(String name) {
-        if (items.containsKey(name)) {
-            items.put(name, items.get(name) + 1);
+    public HashMap<T, Integer> getInventory() {
+        return inventory;
+    }
+
+    public String getInventoryType() {
+        return this.inventoryType;
+    }
+
+    public int getValue(T name) {
+        return inventory.get(name);
+    }
+
+    public void setInventoryType(String inventoryType) {
+        this.inventoryType = inventoryType;
+    }
+
+    public void setValue(T name, int value) {
+        if (inventory.containsKey(name)) {
+            inventory.put(name, value);
         } else {
-            items.put(name, 1);
+            inventory.put(name, 1);
         }
     }
 
-    public HashMap<String, Integer> getItems() {
-        return items;
+    public void addInventory(T name, int value) {
+        if (inventory.containsKey(name)) {
+            inventory.put(name, inventory.get(name) + value);
+        } else {
+            inventory.put(name, 1);
+        }
     }
 
+    public void reduceInventory(T name, int value) throws Exception {
+        if (inventory.containsKey(name)) {
+            inventory.put(name, inventory.get(name) - value);
+            removeFromInventory();
+        } else {
+            throw new Exception("Item doesn't exist!");
+        }
+    }
+
+    public void removeFromInventory() {
+        Iterator<Map.Entry<T, Integer>> iterator = inventory.entrySet().iterator();
+        while (iterator.hasNext()) {
+            Map.Entry<T, Integer> entry = iterator.next();
+            if (entry.getValue() == 0) {
+                iterator.remove();
+                System.out.println(entry.getKey() + "is deleted from inventory because the amount is 0.");
+            }
+        }
+    }
 
     // GUI
     /**
@@ -190,7 +236,7 @@ public class Inventory extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCloseActionPerformed
+    private void btnCloseActionPerformed(java.awt.event.ActionEvent evt) { //GEN-FIRST:event_btnCloseActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnCloseActionPerformed
 
@@ -224,7 +270,7 @@ public class Inventory extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Inventory().setVisible(true);
+                new Inventory("Food", "SimName").setVisible(true);
             }
         });
     }

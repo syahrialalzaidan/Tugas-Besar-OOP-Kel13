@@ -32,4 +32,9 @@ public class Buttons extends JButton {
     public Boolean getIsOccupied() {
         return isOccupied;
     }
+
+    public void setIsOccupied(Boolean isOccupied)
+    {
+        this.isOccupied = isOccupied;
+    }
 }

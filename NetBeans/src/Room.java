@@ -35,7 +35,7 @@ public class Room implements ActionListener {
             // button_panel.add(buttons[i]);
             space[i][j].setBackground(Color.BLACK);
             //space[i][i].setFocusable(false);
-            space[i][j].setBounds(500 + i * 100, 50 + j * 100, 100, 100);
+            space[i][j].setBounds(500 + j * 100, 50 + i * 100, 100, 100);
             space[i][j].addActionListener(this);
             // String text = i + "," + j;
             // buttons[i][j].setText(text);
@@ -183,17 +183,18 @@ public class Room implements ActionListener {
         if(checkAvailableSpace(coordinate))
         {
             this.object.put(object, coordinate);
-            //System.out.println(coordinate.getX1() + " " + coordinate.getY1() + " " + coordinate.getX2() + " " + coordinate.getY2());
+            System.out.println(coordinate.getX1() + " " + coordinate.getY1() + " " + coordinate.getX2() + " " + coordinate.getY2());
             for(int i = coordinate.getY1(); i < coordinate.getY2(); i++)
             {
                 //System.out.println(i);
                 for(int j = coordinate.getX1(); j < coordinate.getX2(); j++)
                 {
-                    //System.out.println(j);
+                    System.out.println(i + " , " + j);
                     //this.space[i][j] = object.getName().charAt(0);
                     space[i][j].setBackground(color);
                     space[i][j].setText(name);
-                    space[i][j].setForeground(foregColor); 
+                    space[i][j].setForeground(foregColor);
+                    space[i][j].setIsOccupied(true);
                 }
             }
             System.out.println("Berhasil memasukkan " + object.getName());
@@ -228,7 +229,10 @@ public class Room implements ActionListener {
                 for(int j = coordinate.getX1(); j < coordinate.getX2(); j++)
                 {
                     if(this.space[i][j].getIsOccupied())
+                    {
+                        System.out.println("Masuk Sini");
                         return false;
+                    }
                 }
             }
             return true;
@@ -252,8 +256,8 @@ public class Room implements ActionListener {
                         javax.swing.JComboBox<String> Direction = frame.getDirection();
                         String direction = Direction.getSelectedItem().toString();
 
-                        int x1 = j;
-                        int y1 = i;
+                        int x1 = i;
+                        int y1 = j;
                         Object object = null;
                         Color color = null;
                         Color foregColor = null;
@@ -263,7 +267,7 @@ public class Room implements ActionListener {
                             color = Color.RED;
                             foregColor = Color.BLACK;
                         }
-                        else if(benda.equals("Meja") )
+                        else if(benda.equals("Meja"))
                         {
                             object = new Object("Meja", 3, 3);
                             color = Color.BLUE;

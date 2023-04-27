@@ -62,17 +62,19 @@ public class Inventory<T> extends javax.swing.JFrame {
         this.simOwner = simOwner;
     }
 
-    public void addInventory(T name, int value) {
+    public void addInventory(T name) {
+        /* Increments or adds item to inventory */
         if (inventory.containsKey(name)) {
-            inventory.put(name, inventory.get(name) + value);
+            inventory.put(name, inventory.get(name) + 1);
         } else {
-            inventory.put(name, value);
+            inventory.put(name, 1);
         }
     }
 
-    public void reduceInventory(T name, int value) throws Exception {
+    public void reduceInventory(T name) throws Exception {
+        /* Decrements from inventory if item exists */
         if (inventory.containsKey(name)) {
-            inventory.put(name, inventory.get(name) - value);
+            inventory.put(name, inventory.get(name) - 1);
             removeFromInventory();
         } else {
             throw new Exception("Item doesn't exist!");
@@ -80,13 +82,31 @@ public class Inventory<T> extends javax.swing.JFrame {
     }
 
     public void removeFromInventory() {
+        /* Removes from inventory if the value of an item reaches 0 */
         Iterator<Map.Entry<T, Integer>> iterator = inventory.entrySet().iterator();
         while (iterator.hasNext()) {
             Map.Entry<T, Integer> entry = iterator.next();
             if (entry.getValue() == 0) {
                 iterator.remove();
-                System.out.println(entry.getKey() + "is deleted from inventory because the amount is 0.");
+                Objects object = (Objects) entry.getKey();
+                System.out.println(object.getName() + " is deleted from inventory because the amount is 0.");
             }
+        }
+    }
+
+    public void printInventory() {
+        /* Prints items in HashMap. If HashMap has "Kasur Queen Size" with the value of 2 
+         * and "Kasur Single" with the value of 1, then it will print:
+         * 
+         * List of items in inventory
+         * Kasur Queen Size = 2
+         * Kasur Single = 1
+        */
+        System.out.println("List of items in inventory");
+        for (T item : inventory.keySet()) {
+            int count = inventory.get(item);
+            Objects object = (Objects) item;
+            System.out.println(object.getName() + " = " + count);
         }
     }
 

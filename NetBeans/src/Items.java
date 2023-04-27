@@ -3,7 +3,7 @@ public class Items extends Objects {
     private int price;
     private String action;
 
-    public Items(String name, Inventory inventory, int size, int price) {
+    public Items(String name, Inventory<Items> inventory, int size, int price) {
         super(name, inventory);
         this.size = size;
         this.price = price;

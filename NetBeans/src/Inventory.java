@@ -14,18 +14,18 @@ import java.util.Map;
 public class Inventory<T> extends javax.swing.JFrame {
     /**
      * Creates new form Inventory
+     * With Generics
      */
 
-    // Make a hashmap of string and integer
-    private T type;
+    // private T type;
     private HashMap<T, Integer> inventory = new HashMap<T, Integer>();
     private String inventoryType;
-    private String simName;
+    private String simOwner;
 
     //ALGORITHM
-    public Inventory(String inventoryType, String simName) {
+    public Inventory(String inventoryType, String simOwner) {
         this.inventoryType = inventoryType;
-        this.simName = simName;
+        this.simOwner = simOwner;
         // For GUI
         initComponents();
     }
@@ -42,6 +42,10 @@ public class Inventory<T> extends javax.swing.JFrame {
         return inventory.get(name);
     }
 
+    public String getSimOwner() {
+        return simOwner;
+    }
+
     public void setInventoryType(String inventoryType) {
         this.inventoryType = inventoryType;
     }
@@ -54,11 +58,15 @@ public class Inventory<T> extends javax.swing.JFrame {
         }
     }
 
+    public void setSimOwner(String simOwner) {
+        this.simOwner = simOwner;
+    }
+
     public void addInventory(T name, int value) {
         if (inventory.containsKey(name)) {
             inventory.put(name, inventory.get(name) + value);
         } else {
-            inventory.put(name, 1);
+            inventory.put(name, value);
         }
     }
 
@@ -82,7 +90,7 @@ public class Inventory<T> extends javax.swing.JFrame {
         }
     }
 
-    // GUI
+    /* GUI */
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

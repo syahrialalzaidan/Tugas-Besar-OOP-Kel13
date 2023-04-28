@@ -3,6 +3,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/Application.java to edit this template
  */
 
+import java.awt.Color;
+
 /**
  *
  * @author ilmag
@@ -581,6 +583,14 @@ public class MainGUI extends javax.swing.JFrame {
     private void btnPlaceFurnitureActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPlaceFurnitureActionPerformed
         // TODO add your handling code here:
         setActionPlaceFurniture(!actionPlaceFurniture);
+        if(actionPlaceFurniture)
+        {
+            btnPlaceFurniture.setBackground(Color.GREEN);
+        }
+        else
+        {
+            btnPlaceFurniture.setBackground(new Color(255,255,255));
+        }
     }//GEN-LAST:event_btnPlaceFurnitureActionPerformed
 
     private void btnBuildBuyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuildBuyActionPerformed
@@ -603,6 +613,22 @@ public class MainGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_dropdownObjectActionPerformed
 
+    public Boolean getActionplaceFurniture() {
+        return actionplaceFurniture;
+    }
+
+    public void setActionplaceFurniture(Boolean actionplaceFurniture) {
+        this.actionplaceFurniture = actionplaceFurniture;
+    }
+
+    public javax.swing.JComboBox<String> getFurniture() {
+        return Furniture;
+    }
+
+    public javax.swing.JComboBox<String> getDirection() {
+        return Direction;
+    }
+    
     /**
      * @param args the command line arguments
      */

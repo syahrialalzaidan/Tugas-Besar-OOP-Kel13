@@ -97,7 +97,7 @@ public class Room implements ActionListener {
         this.lowerRoom = lowerRoom;
     }
 
-    public void placeObject(Object object , int x1 , int y1 , String direction , Color color , Color foregColor , String name)
+    public void placeObject(Item object , int x1 , int y1 , String direction , Color color , Color foregColor , String name)
     {
         
 
@@ -258,24 +258,24 @@ public class Room implements ActionListener {
 
                         int x1 = j;
                         int y1 = i;
-                        Object object = null;
+                        Item object = null;
                         Color color = null;
                         Color foregColor = null;
                         if(benda.equals("Kasur"))
                         {
-                            object = new Object("Kasur", 4, 2);
+                            object = new Item("Kasur", 4, 2 , 300);
                             color = Color.RED;
                             foregColor = Color.BLACK;
                         }
                         else if(benda.equals("Meja"))
                         {
-                            object = new Object("Meja", 3, 3);
+                            object = new Item("Meja", 3, 3 , 200);
                             color = Color.BLUE;
                             foregColor = Color.WHITE;
                         }
                         else if(benda.equals("Kursi"))
                         {
-                            object = new Object("Kursi", 3, 3);
+                            object = new Item("Kursi", 3, 3 , 100);
                             color = Color.GREEN;
                             foregColor = Color.BLACK;
                         }

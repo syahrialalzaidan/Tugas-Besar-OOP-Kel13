@@ -1,11 +1,13 @@
 public class Items extends Objects {
-    private int size;
+    private int[] dimension;
     private int price;
     private String action;
 
-    public Items(String name, Inventory<Items> inventory, int size, int price) {
-        super(name, inventory);
-        this.size = size;
+    public Items(String name, int x, int y, int price) {
+        super(name);
+        this.dimension = new int[2];
+        this.dimension[0] = x;
+        this.dimension[1] = y;
         this.price = price;
         switch (name) {
             case "Kasur Single":
@@ -38,12 +40,26 @@ public class Items extends Objects {
         }
     }
 
-    public int getSize() {
-        return size;
+    public int[] getDimension() {
+        return dimension;
     }
+
+    public void setDimension(int[] dimension) {
+        this.dimension = dimension;
+    }
+
+    public int getX() {
+        return dimension[0];
+    }
+
+    public int getY() {
+        return dimension[1];
+    }
+
     public int getPrice() {
         return price;
     }
+
     public String getAction() {
         return action;
     }

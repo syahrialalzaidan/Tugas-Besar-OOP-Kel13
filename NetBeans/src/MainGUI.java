@@ -613,20 +613,20 @@ public class MainGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_dropdownObjectActionPerformed
 
-    public Boolean getActionplaceFurniture() {
-        return actionplaceFurniture;
+    public Boolean getActionPlaceFurniture() {
+        return actionPlaceFurniture;
     }
 
-    public void setActionplaceFurniture(Boolean actionplaceFurniture) {
-        this.actionplaceFurniture = actionplaceFurniture;
+    public void setActionPlaceFurniture(Boolean actionPlaceFurniture) {
+        this.actionPlaceFurniture = actionPlaceFurniture;
     }
 
     public javax.swing.JComboBox<String> getFurniture() {
-        return Furniture;
+        return dropdownObject;
     }
 
     public javax.swing.JComboBox<String> getDirection() {
-        return Direction;
+        return dropdownDirection;
     }
     
     /**

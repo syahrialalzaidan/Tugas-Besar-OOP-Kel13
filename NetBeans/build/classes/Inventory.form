@@ -1,29 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 <Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
-  <NonVisualComponents>
-    <Container class="javax.swing.JScrollPane" name="jScrollPane2">
-      <AuxValues>
-        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
-      </AuxValues>
-
-      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
-      <SubComponents>
-        <Component class="javax.swing.JTable" name="jTable1">
-          <Properties>
-            <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-              <Table columnCount="4" rowCount="4">
-                <Column editable="true" title="Title 1" type="java.lang.Object"/>
-                <Column editable="true" title="Title 2" type="java.lang.Object"/>
-                <Column editable="true" title="Title 3" type="java.lang.Object"/>
-                <Column editable="true" title="Title 4" type="java.lang.Object"/>
-              </Table>
-            </Property>
-          </Properties>
-        </Component>
-      </SubComponents>
-    </Container>
-  </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
     <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
@@ -53,12 +30,12 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
-                      <Component id="tblInventoryFood" min="-2" pref="226" max="-2" attributes="0"/>
+                      <Component id="tblInventoryFoodScrollPane" min="-2" pref="226" max="-2" attributes="0"/>
                       <EmptySpace min="0" pref="6" max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                          <Component id="tblInventoryItem" alignment="0" pref="226" max="32767" attributes="0"/>
+                          <Component id="tblInventoryItemScrollPane" alignment="0" pref="226" max="32767" attributes="0"/>
                           <Component id="lblItem" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="lblDish" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="lblFood" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -68,9 +45,9 @@
                               <EmptySpace max="32767" attributes="0"/>
                               <Component id="btnClose" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="tblInventoryDish" alignment="0" pref="0" max="32767" attributes="0"/>
+                          <Component id="tblInventoryDishScrollPane" alignment="0" pref="0" max="32767" attributes="0"/>
                       </Group>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
           </Group>
@@ -89,15 +66,15 @@
               <EmptySpace max="-2" attributes="0"/>
               <Component id="lblFood" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="tblInventoryFood" min="-2" pref="101" max="-2" attributes="0"/>
+              <Component id="tblInventoryFoodScrollPane" min="-2" pref="101" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="lblDish" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="tblInventoryDish" min="-2" pref="101" max="-2" attributes="0"/>
+              <Component id="tblInventoryDishScrollPane" min="-2" pref="101" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="lblItem" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="tblInventoryItem" min="-2" pref="101" max="-2" attributes="0"/>
+              <Component id="tblInventoryItemScrollPane" min="-2" pref="101" max="-2" attributes="0"/>
               <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
@@ -120,14 +97,14 @@
         <Property name="text" type="java.lang.String" value="Melly"/>
       </Properties>
     </Component>
-    <Container class="javax.swing.JScrollPane" name="tblInventoryFood">
+    <Container class="javax.swing.JScrollPane" name="tblInventoryFoodScrollPane">
       <AuxValues>
         <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
       </AuxValues>
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
-        <Component class="javax.swing.JTable" name="jTable2">
+        <Component class="javax.swing.JTable" name="tblInventoryFood">
           <Properties>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
               <Table columnCount="2" rowCount="4">
@@ -155,14 +132,14 @@
         <Property name="text" type="java.lang.String" value="Dish"/>
       </Properties>
     </Component>
-    <Container class="javax.swing.JScrollPane" name="tblInventoryDish">
+    <Container class="javax.swing.JScrollPane" name="tblInventoryDishScrollPane">
       <AuxValues>
         <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
       </AuxValues>
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
-        <Component class="javax.swing.JTable" name="jTable3">
+        <Component class="javax.swing.JTable" name="tblInventoryDish">
           <Properties>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
               <Table columnCount="2" rowCount="4">
@@ -182,14 +159,14 @@
         <Property name="text" type="java.lang.String" value="Item"/>
       </Properties>
     </Component>
-    <Container class="javax.swing.JScrollPane" name="tblInventoryItem">
+    <Container class="javax.swing.JScrollPane" name="tblInventoryItemScrollPane">
       <AuxValues>
         <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
       </AuxValues>
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
-        <Component class="javax.swing.JTable" name="jTable4">
+        <Component class="javax.swing.JTable" name="tblInventoryItem">
           <Properties>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
               <Table columnCount="2" rowCount="4">

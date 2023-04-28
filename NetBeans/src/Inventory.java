@@ -3,19 +3,114 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+
 /**
  *
  * @author ilmag
  */
-public class Inventory extends javax.swing.JFrame {
-
+public class Inventory<T> extends javax.swing.JFrame {
     /**
      * Creates new form Inventory
+     * With Generics
      */
-    public Inventory() {
+
+    // private T type;
+    private HashMap<T, Integer> inventory = new HashMap<T, Integer>();
+    private String inventoryType;
+    private String simOwner;
+
+    //ALGORITHM
+    public Inventory(String inventoryType, String simOwner) {
+        this.inventoryType = inventoryType;
+        this.simOwner = simOwner;
+        // For GUI
         initComponents();
     }
 
+    public HashMap<T, Integer> getInventory() {
+        return inventory;
+    }
+
+    public String getInventoryType() {
+        return this.inventoryType;
+    }
+
+    public int getValue(T name) {
+        return inventory.get(name);
+    }
+
+    public String getSimOwner() {
+        return simOwner;
+    }
+
+    public void setInventoryType(String inventoryType) {
+        this.inventoryType = inventoryType;
+    }
+
+    public void setValue(T name, int value) {
+        if (inventory.containsKey(name)) {
+            inventory.put(name, value);
+        } else {
+            inventory.put(name, 1);
+        }
+    }
+
+    public void setSimOwner(String simOwner) {
+        this.simOwner = simOwner;
+    }
+
+    public void addInventory(T name) {
+        /* Increments or adds item to inventory */
+        if (inventory.containsKey(name)) {
+            inventory.put(name, inventory.get(name) + 1);
+        } else {
+            inventory.put(name, 1);
+        }
+    }
+
+    public void reduceInventory(T name) throws Exception {
+        /* Decrements from inventory if item exists */
+        if (inventory.containsKey(name)) {
+            inventory.put(name, inventory.get(name) - 1);
+            removeFromInventory();
+        } else {
+            throw new Exception("Item doesn't exist!");
+        }
+    }
+
+    public void removeFromInventory() {
+        /* Removes from inventory if the value of an item reaches 0 */
+        Iterator<Map.Entry<T, Integer>> iterator = inventory.entrySet().iterator();
+        while (iterator.hasNext()) {
+            Map.Entry<T, Integer> entry = iterator.next();
+            if (entry.getValue() == 0) {
+                iterator.remove();
+                Objects object = (Objects) entry.getKey();
+                System.out.println(object.getName() + " is deleted from inventory because the amount is 0.");
+            }
+        }
+    }
+
+    public void printInventory() {
+        /* Prints items in HashMap. If HashMap has "Kasur Queen Size" with the value of 2 
+         * and "Kasur Single" with the value of 1, then it will print:
+         * 
+         * List of items in inventory
+         * Kasur Queen Size = 2
+         * Kasur Single = 1
+        */
+        System.out.println("List of items in inventory");
+        for (T item : inventory.keySet()) {
+            int count = inventory.get(item);
+            Objects object = (Objects) item;
+            System.out.println(object.getName() + " = " + count);
+        }
+    }
+
+    /* GUI */
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -25,33 +120,18 @@ public class Inventory extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
         lblInventory = new javax.swing.JLabel();
         lblSimName = new javax.swing.JLabel();
-        tblInventoryFood = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        tblInventoryFoodScrollPane = new javax.swing.JScrollPane();
+        tblInventoryFood = new javax.swing.JTable();
         lblFood = new javax.swing.JLabel();
         lblDish = new javax.swing.JLabel();
-        tblInventoryDish = new javax.swing.JScrollPane();
-        jTable3 = new javax.swing.JTable();
+        tblInventoryDishScrollPane = new javax.swing.JScrollPane();
+        tblInventoryDish = new javax.swing.JTable();
         lblItem = new javax.swing.JLabel();
-        tblInventoryItem = new javax.swing.JScrollPane();
-        jTable4 = new javax.swing.JTable();
+        tblInventoryItemScrollPane = new javax.swing.JScrollPane();
+        tblInventoryItem = new javax.swing.JTable();
         btnClose = new javax.swing.JButton();
-
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane2.setViewportView(jTable1);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(256, 503));
@@ -62,7 +142,7 @@ public class Inventory extends javax.swing.JFrame {
         lblSimName.setFont(new java.awt.Font("Public Sans", 1, 20)); // NOI18N
         lblSimName.setText("Melly");
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        tblInventoryFood.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},
                 {null, null},
@@ -73,7 +153,7 @@ public class Inventory extends javax.swing.JFrame {
                 "Name", "Count"
             }
         ));
-        tblInventoryFood.setViewportView(jTable2);
+        tblInventoryFoodScrollPane.setViewportView(tblInventoryFood);
 
         lblFood.setFont(new java.awt.Font("Public Sans", 0, 12)); // NOI18N
         lblFood.setText("Food");
@@ -81,7 +161,7 @@ public class Inventory extends javax.swing.JFrame {
         lblDish.setFont(new java.awt.Font("Public Sans", 0, 12)); // NOI18N
         lblDish.setText("Dish");
 
-        jTable3.setModel(new javax.swing.table.DefaultTableModel(
+        tblInventoryDish.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},
                 {null, null},
@@ -92,12 +172,12 @@ public class Inventory extends javax.swing.JFrame {
                 "Name", "Count"
             }
         ));
-        tblInventoryDish.setViewportView(jTable3);
+        tblInventoryDishScrollPane.setViewportView(tblInventoryDish);
 
         lblItem.setFont(new java.awt.Font("Public Sans", 0, 12)); // NOI18N
         lblItem.setText("Item");
 
-        jTable4.setModel(new javax.swing.table.DefaultTableModel(
+        tblInventoryItem.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},
                 {null, null},
@@ -108,7 +188,7 @@ public class Inventory extends javax.swing.JFrame {
                 "Name", "Count"
             }
         ));
-        tblInventoryItem.setViewportView(jTable4);
+        tblInventoryItemScrollPane.setViewportView(tblInventoryItem);
 
         btnClose.setFont(new java.awt.Font("Public Sans SemiBold", 1, 12)); // NOI18N
         btnClose.setText("X");
@@ -126,11 +206,11 @@ public class Inventory extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(tblInventoryFood, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(tblInventoryFoodScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 6, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(tblInventoryItem, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 226, Short.MAX_VALUE)
+                            .addComponent(tblInventoryItemScrollPane, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 226, Short.MAX_VALUE)
                             .addComponent(lblItem, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblDish, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblFood, javax.swing.GroupLayout.Alignment.LEADING)
@@ -139,8 +219,8 @@ public class Inventory extends javax.swing.JFrame {
                                 .addComponent(lblInventory)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(btnClose))
-                            .addComponent(tblInventoryDish, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(tblInventoryDishScrollPane, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -154,15 +234,15 @@ public class Inventory extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblFood)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(tblInventoryFood, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(tblInventoryFoodScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lblDish)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(tblInventoryDish, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(tblInventoryDishScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lblItem)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(tblInventoryItem, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(tblInventoryItemScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -203,25 +283,23 @@ public class Inventory extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Inventory().setVisible(true);
+                new Inventory("Food", "SimName").setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnClose;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
-    private javax.swing.JTable jTable3;
-    private javax.swing.JTable jTable4;
     private javax.swing.JLabel lblDish;
     private javax.swing.JLabel lblFood;
     private javax.swing.JLabel lblInventory;
     private javax.swing.JLabel lblItem;
     private javax.swing.JLabel lblSimName;
-    private javax.swing.JScrollPane tblInventoryDish;
-    private javax.swing.JScrollPane tblInventoryFood;
-    private javax.swing.JScrollPane tblInventoryItem;
+    private javax.swing.JTable tblInventoryDish;
+    private javax.swing.JScrollPane tblInventoryDishScrollPane;
+    private javax.swing.JTable tblInventoryFood;
+    private javax.swing.JScrollPane tblInventoryFoodScrollPane;
+    private javax.swing.JTable tblInventoryItem;
+    private javax.swing.JScrollPane tblInventoryItemScrollPane;
     // End of variables declaration//GEN-END:variables
 }

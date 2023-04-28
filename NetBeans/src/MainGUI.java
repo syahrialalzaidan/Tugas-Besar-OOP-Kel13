@@ -201,7 +201,12 @@ public class MainGUI extends javax.swing.JFrame {
         lblSimActions.setFont(new java.awt.Font("Public Sans", 1, 12)); // NOI18N
         lblSimActions.setText("SIM ACTIONS");
 
-        dropdownObject.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Kasur", "Meja", "Kursi" }));
+        dropdownObject.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Kasur", "Lemari" }));
+        dropdownObject.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dropdownObjectActionPerformed(evt);
+            }
+        });
 
         btnMoveToRoom.setText("MOVE TO ROOM");
         btnMoveToRoom.addActionListener(new java.awt.event.ActionListener() {
@@ -594,21 +599,9 @@ public class MainGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_dropdownDirectionActionPerformed
 
-    public Boolean getActionPlaceFurniture() {
-        return actionPlaceFurniture;
-    }
-
-    public void setActionPlaceFurniture(Boolean actionplaceFurniture) {
-        this.actionPlaceFurniture = actionplaceFurniture;
-    }
-
-    public javax.swing.JComboBox<String> getFurniture() {
-        return dropdownObject;
-    }
-
-    public javax.swing.JComboBox<String> getDirection() {
-        return dropdownDirection;
-    }
+    private void dropdownObjectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dropdownObjectActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_dropdownObjectActionPerformed
 
     /**
      * @param args the command line arguments

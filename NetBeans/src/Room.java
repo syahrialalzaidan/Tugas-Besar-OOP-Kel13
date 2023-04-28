@@ -8,7 +8,7 @@ import java.util.*;
 public class Room implements ActionListener {
     
     private String roomName;
-    private HashMap<Object, Coordinate> object;
+    private HashMap<Items, Coordinate> object;
     Buttons[][] space = new Buttons[6][6];
     //private char[][] space;
     private Room rigthRoom;
@@ -21,7 +21,7 @@ public class Room implements ActionListener {
     public Room(String roomName)
     {
         this.roomName = roomName;
-        this.object = new HashMap<Object, Coordinate>();
+        this.object = new HashMap<Items, Coordinate>();
         this.rigthRoom = null;
         this.leftRoom = null;
         this.upperRoom = null;
@@ -57,11 +57,11 @@ public class Room implements ActionListener {
         this.roomName = roomName;
     }
 
-    public HashMap<Object, Coordinate> getObject() {
+    public HashMap<Items, Coordinate> getObject() {
         return object;
     }
 
-    public void setObject(HashMap<Object, Coordinate> object) {
+    public void setObject(HashMap<Items, Coordinate> object) {
         this.object = object;
     }
 
@@ -97,7 +97,7 @@ public class Room implements ActionListener {
         this.lowerRoom = lowerRoom;
     }
 
-    public void placeObject(Item object , int x1 , int y1 , String direction , Color color , Color foregColor , String name)
+    public void placeObject(Items object , int x1 , int y1 , String direction , Color color , Color foregColor , String name)
     {
         
 
@@ -258,27 +258,58 @@ public class Room implements ActionListener {
 
                         int x1 = j;
                         int y1 = i;
-                        Item object = null;
+                        Items object = null;
                         Color color = null;
                         Color foregColor = null;
                         if(benda.equals("Kasur"))
                         {
-                            object = new Item("Kasur", 4, 2 , 300);
+                            object = new Items("Kasur Single");
                             color = Color.RED;
                             foregColor = Color.BLACK;
                         }
-                        else if(benda.equals("Meja"))
+                        else if(benda.equals("Kasur Queen Size"))
                         {
-                            object = new Item("Meja", 3, 3 , 200);
-                            color = Color.BLUE;
-                            foregColor = Color.WHITE;
+                            object = new Items("Kasur Queen Size");
+                            color = Color.RED;
+                            foregColor = Color.BLACK;
                         }
                         else if(benda.equals("Kursi"))
                         {
-                            object = new Item("Kursi", 3, 3 , 100);
-                            color = Color.GREEN;
+                            object = new Items("Kasur King Size");
+                            color = Color.RED;
                             foregColor = Color.BLACK;
                         }
+                        else if(benda.equals("Toilet"))
+                        {
+                            object = new Items("Toilet");
+                            color = Color.BLUE;
+                            foregColor = Color.WHITE;
+                        }
+                        else if(benda.equals("Kompor Gas"))
+                        {
+                            object = new Items("Kompor Gas");
+                            color = Color.BLACK;
+                            foregColor = Color.WHITE;
+                        }
+                        else if(benda.equals("Kompor Listrik"))
+                        {
+                            object = new Items("Kompor Listrik");
+                            color = Color.BLACK;
+                            foregColor = Color.WHITE;
+                        }
+                        else if(benda.equals("Meja dan Kursi"))
+                        {
+                            object = new Items("Meja dan Kursi");
+                            color = new Color(150,75,00);
+                            foregColor = Color.WHITE;
+                        }
+                        else if(benda.equals("Jam"))
+                        {
+                            object = new Items("Jam");
+                            color = new Color(93,156,89);
+                            foregColor = Color.WHITE;
+                        }
+
                         placeObject(object , x1 , y1 , direction , color , foregColor , object.getName());
 
                     }

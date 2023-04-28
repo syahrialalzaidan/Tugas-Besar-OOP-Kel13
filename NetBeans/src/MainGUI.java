@@ -203,7 +203,7 @@ public class MainGUI extends javax.swing.JFrame {
         lblSimActions.setFont(new java.awt.Font("Public Sans", 1, 12)); // NOI18N
         lblSimActions.setText("SIM ACTIONS");
 
-        dropdownObject.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Kasur", "Lemari" }));
+        dropdownObject.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Kasur Single", "Kasur Queen Size", "Kasur King Size" , "Buang air" , "Kompor Gas" , "Kompor Listrik" , "Meja dan Kursi" , "Jam"}));
         dropdownObject.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 dropdownObjectActionPerformed(evt);

@@ -8,8 +8,8 @@ public abstract class Objects {
     public Objects(String name, Inventory inventory) {
         this.name = name;
         this.inventory = inventory;
-        inventory.addItems(name);
-        amount = inventory.getItems().get(name);
+        // inventory.addItems(name);
+        // amount = inventory.getItems().get(name);
     }
 
     public String getName() {
@@ -21,6 +21,6 @@ public abstract class Objects {
     }
 
     public HashMap<String, Integer> getInventory() {
-        return inventory.getItems();
+        return inventory.getInventory();
     }
 }

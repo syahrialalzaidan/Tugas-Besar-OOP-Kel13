@@ -2,8 +2,8 @@ public class Food extends Objects {
     private int price;
     private int fullness;
 
-    public Food(String name,  Inventory<Food> inventory, int price, int fullness) {
-        super(name, inventory);
+    public Food(String name, int price, int fullness) {
+        super(name);
         this.price = price;
         this.fullness = fullness;
     }

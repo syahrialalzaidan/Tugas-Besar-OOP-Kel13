@@ -3,8 +3,8 @@ public class Items extends Objects {
     private int price;
     private String action;
 
-    public Items(String name, Inventory<Items> inventory, int x, int y, int price) {
-        super(name, inventory);
+    public Items(String name, int x, int y, int price) {
+        super(name);
         this.dimension = new int[2];
         this.dimension[0] = x;
         this.dimension[1] = y;

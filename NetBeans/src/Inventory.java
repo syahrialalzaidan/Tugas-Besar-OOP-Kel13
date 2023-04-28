@@ -102,7 +102,7 @@
           * Kasur Queen Size = 2
           * Kasur Single = 1
          */
-         System.out.println("List of items in inventory");
+         System.out.printf("List of %s in inventory\n", inventoryType);
          for (T item : inventory.keySet()) {
              int count = inventory.get(item);
              Objects object = (Objects) item;

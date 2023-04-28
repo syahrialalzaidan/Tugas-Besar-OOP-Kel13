@@ -1,5 +1,5 @@
 public class Items extends Objects {
-    private int[] dimension;
+    private int[] dimension = new int[2];
     private int price;
     private String action;
 

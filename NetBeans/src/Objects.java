@@ -1,5 +1,3 @@
-import java.util.HashMap;
-
 public abstract class Objects {
     private String name;
 

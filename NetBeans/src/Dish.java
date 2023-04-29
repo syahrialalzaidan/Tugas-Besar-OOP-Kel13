@@ -54,7 +54,7 @@ public class Dish extends Objects implements Edible {
         return time;
     }
 
-    public String getIngredient() {
-        return ingredients.toString();
+    public List<String> getIngredient() {
+        return ingredients;
     }
 }

@@ -68,11 +68,11 @@ public class Room { //implements ActionListener {
         this.object = object;
     }
 
-    public Room getRigthRoom() {
+    public Room getRightRoom() {
         return rigthRoom;
     }
 
-    public void setRigthRoom(Room rigthRoom) {
+    public void setRightRoom(Room rigthRoom) {
         this.rigthRoom = rigthRoom;
     }
 
@@ -363,6 +363,67 @@ public class Room { //implements ActionListener {
             }
         }
     }
+
+    public void printAroundRoom()
+    {
+        if(this.getUpperRoom() != null)
+        {
+            System.out.println("Up : " + this.getUpperRoom().getRoomName());
+        }
+        else
+        {
+            System.out.println("Up : -");
+        }
+        if(this.getLowerRoom() != null)
+        {
+            System.out.println("Down : " + this.getLowerRoom().getRoomName());
+        }
+        else
+        {
+            System.out.println("Down : -");
+        }
+        if(this.getLeftRoom() != null)
+        {
+            System.out.println("Left : " + this.getLeftRoom().getRoomName());
+        }
+        else
+        {
+            System.out.println("Left : -");
+        }
+        if(this.getRightRoom() != null)
+        {
+            System.out.println("Right : " + this.getRightRoom().getRoomName());
+        }
+        else
+        {
+            System.out.println("Right : -");
+        }
+        
+    }
+
+    public Boolean checkAroundRoom()
+        {
+            if(this.getUpperRoom() == null)
+            {
+                return true;
+            }
+            else if(this.getlowerRoom() == null)
+            {
+                return true;
+            }
+            else if(this.getLeftRoom() == null)
+            {
+                return true;
+            }
+            else if(this.getRightRoom() == null)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
     // public void actionPerformed(ActionEvent e)
     // {   
     //     System.out.println("actionPlaceFurniture = " + frame.getActionPlaceFurniture());

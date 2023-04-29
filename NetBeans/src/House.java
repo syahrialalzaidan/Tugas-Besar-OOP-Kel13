@@ -25,6 +25,10 @@ public class House {
         return rooms;
     }
 
+    public Room getRoom(int index) {
+        return rooms[index];
+    }
+
     public void setRooms(Room[] rooms) {
         if (rooms.length > roomCapacity) {
             throw new IllegalArgumentException("rooms must be less than 100");

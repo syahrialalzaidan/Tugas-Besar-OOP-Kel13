@@ -404,7 +404,53 @@ public class GameManager {
             else if(actionMenuInput.equals("5")|| actionMenuInput.equalsIgnoreCase("Move Room"))
             {
                 // TODO: Move Room
+                 
+                //Validasi apakah Sims berada didalam Rumah
+                if(!simInHouse)
+                {
+                    System.out.println("Sim tidak berada didalam rumah");
+                }
+
+                Room[] listRooms = currentHouse.getRooms();
+                System.out.println("Berikut adalah List Ruangan yang tersedia : ");
+                for(int i = 0; i < currentHouse.getRoomsTotal(); i++)
+                {
+                    System.out.println((i+1) + ". " + listRooms[i].getRoomName());
+                }
+                System.out.println("");
+
+                Boolean inputbenar = false;
+                int roomindex;
+                while(!inputbenar)
+                {
+                    System.out.print("Masukkan nama ruangan yang ingin dipindahkan : ");
+                    String roomName = input.nextLine();
+                    for(int i = 0; i < currentHouse.getRoomsTotal(); i++)
+                    {
+                        if(roomName.equalsIgnoreCase(listRooms[i].getRoomName()))
+                        {
+                            inputbenar = true;
+                            roomindex = i;
+                            break;
+                        }
+                    }
+                    if(!inputbenar)
+                    {
+                        System.out.println("Ruangan tidak ditemukan");
+                        System.out.println("Silakan masukan ruangan ulang");
+                        System.out.println("");
+                    }
+                }
+
+                currentRoom = currentHouse.getRoom(roomindex);
+                System.out.println("Sim berhasil berpindah ke Ruangan " + currentRoom.getRoomName());
+                System.out.println("");
+
+                System.out.println(currentRoom.getRoomName());
+                currentRoom.printSpace();
+                System.out.println("");
             }
+
             else if(actionMenuInput.equals("6")|| actionMenuInput.equalsIgnoreCase("Edit Room"))
             {
                 // TODO: Edit Room
@@ -424,6 +470,54 @@ public class GameManager {
             else if(actionMenuInput.equals("10")|| actionMenuInput.equalsIgnoreCase("Go To Object"))
             {
                 // TODO : Go To Object
+                HashMap<Items, Coordinate> listItemInRoom = currentRoom.getObject();
+                System.out.println("Berikut adalah List Object yang ada di " + currentRoom.getRoomName() + " : ");
+                int i = 1;
+                for(Items item : listItemInRoom.keySet())
+                {
+                    System.out.println(i + ". " + item.getName());
+                    i++;
+                }
+                System.out.println("");
+
+                Boolean inputbenar = false;
+                int itemindex;
+                while(!inputbenar)
+                {
+                    System.out.print("Masukkan nama object yang ingin dituju : ");
+                    String itemName = input.nextLine();
+                    for(Items item : listItemInRoom.keySet())
+                    {
+                        if(itemName.equalsIgnoreCase(item.getName()))
+                        {
+                            inputbenar = true;
+                            break;
+                            
+                        }
+                    }
+                    if(!inputbenar)
+                    {
+                        System.out.println("Object tidak ditemukan");
+                        System.out.println("Silakan masukan object ulang");
+                        System.out.println("");
+                    }
+                }
+
+
+                System.out.print("Apakah Anda ingin melakukan action pada object ini? (Y/N) : ");
+                String yesno = input.nextLine();
+                while(!(yesno.equals("Y") || yesno.equals("N")))
+                {
+                    System.out.println("Input tidak dikenali");
+                    System.out.println("Silakan masukan input ulang");
+                    System.out.println("");
+                    System.out.print("Apakah Anda ingin melakukan action pada object ini? (Y/N) : ");
+                    yesno = input.nextLine();
+                }
+
+                //Memanggil Action Object disini
+
+
             }
             else if(actionMenuInput.equals("11")|| actionMenuInput.equalsIgnoreCase("Action"))
             {

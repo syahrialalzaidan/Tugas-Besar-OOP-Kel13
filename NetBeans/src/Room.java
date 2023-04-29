@@ -44,7 +44,7 @@ public class Room { //implements ActionListener {
             // // System.out.println(buttons[i][j].getBounds());
             // frame.add(space[i][j]);
             
-                this.space[i][j] = "X";
+                this.space[i][j] = " ";
             }
         }
 
@@ -102,6 +102,10 @@ public class Room { //implements ActionListener {
 
     public void placeObject(Items object)
     {
+        printSpace();
+        System.out.print("\n");
+        System.out.println("Dimensi Objek : " + object.getX() + " x " + object.getY());
+        System.out.print("\n");
         
         System.out.println("Masukan koordinat x1: ");
         int x1 = input.nextInt();
@@ -213,7 +217,7 @@ public class Room { //implements ActionListener {
                 //System.out.println(i);
                 for(int j = coordinate.getX1(); j < coordinate.getX2(); j++)
                 {
-                    System.out.println(i + " , " + j);
+                    //System.out.println(i + " , " + j);
                     String value = object.getName();
                     
                     if(value.equalsIgnoreCase("Kasur Single"))

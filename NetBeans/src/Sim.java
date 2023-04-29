@@ -55,6 +55,18 @@ public class Sim {
         return inventorydish;
     }
 
+    public void addInventoryfood(Food food){
+        inventoryfood.addInventory(food);
+    }
+
+    public void addInventoryitems(Items items){
+        inventoryitems.addInventory(items);
+    }
+
+    public void addInventorydish(Dish dish){
+        inventorydish.addInventory(dish);
+    }
+
     public House getHouse(){
         return house;
     }

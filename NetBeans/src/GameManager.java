@@ -78,7 +78,7 @@ public class GameManager {
 
         
         Boolean validInput = false;
-        While(!validInput)
+        while(!validInput)
         {
             // Masukan Pilihan
             System.out.print("Masukkan Pilihan Anda: ");

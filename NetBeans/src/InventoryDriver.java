@@ -6,10 +6,10 @@ public class InventoryDriver {
         Inventory<Items> itemsInventory = new Inventory<>("Items", "Dolly");
         Inventory<Dish> dishInventory = new Inventory<>("Dish", "Dolly");
 
-        Items kasurSingle1 = new Items("Kasur Single", 4, 1, 50);
-        Items kasurSingle2 = new Items("Kasur Single", 4, 1, 50);
-        Items kasurQueen1 = new Items("Kasur Queen Size", 1,2, 200);
-        Items toilet = new Items("Toilet", 20, 10, 100);
+        Items kasurSingle1 = new Items("Kasur Single");
+        Items kasurSingle2 = new Items("Kasur Single");
+        Items kasurQueen1 = new Items("Kasur Queen Size");
+        Items toilet = new Items("Toilet");
 
         List<String> ingredients = new ArrayList<>();
         ingredients.add("tepung");

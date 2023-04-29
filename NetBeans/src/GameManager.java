@@ -20,6 +20,28 @@ public class GameManager {
         }
     }
 
+    public static void printActionMenu()
+    {
+        System.out.println("Menu: ");
+        System.out.println("1.View Sim Info");
+        System.out.println("2.View Current Location");
+        System.out.println("3.View Inventory");
+        System.out.println("4.Upgrade House");
+        System.out.println("5.Move Room");
+        System.out.println("6.Edit Room");
+        System.out.println("7.Add Sim");
+        System.out.println("8.Change Sim");
+        System.out.println("9.List Object");
+        System.out.println("10.Go To Object");
+        System.out.println("11.Action");
+        System.out.println("12.Exit");
+        System.out.println("");
+        System.out.println("action: ");
+        System.out.println("13.Beli barang");
+        System.out.println("14.Memasang barang");
+        System.out.println("");
+    }
+
     public static void help()
     {
         // Isi Help Disini
@@ -110,5 +132,90 @@ public class GameManager {
             }
         }
 
+        System.out.println("Selamat datang " + currentSim.getName() + "di dunia SIM!");
+        System.out.println("");
+
+        for(int i=0; i<4; i++) {
+            System.out.print("\rHold on , we are Generating Sims Map . . . . . ");
+            Thread.sleep(1000);
+            System.out.print("\r                                 ");
+            Thread.sleep(1000);
+        }
+
+        System.out.println("Map Generated!");
+        System.out.println("Kamu Sekarang berada di " + currentRoom.getRoomName());
+        currentRoom.printSpace();
+        System.out.println("");
+
+        printActionMenu();
+
+        Boolean exit = false;
+
+        while(!exit)
+        {
+            System.out.print("Masukan Pilihan Anda (Angka / Aksi): ");
+            if(menuInput.equals("1")|| menuInput.equalsIgnoreCase("View Sim Info"))
+            {
+                // TODO: View Sim Info
+            }
+            else if(menuInput.equals("2")|| menuInput.equalsIgnoreCase("View Current Location"))
+            {
+                // TODO: View Current Location
+            }
+            else if(menuInput.equals("3")|| menuInput.equalsIgnoreCase("View Inventory"))
+            {
+                // TODO: View Inventory
+            }
+            else if(menuInput.equals("4")|| menuInput.equalsIgnoreCase("Upgrade House"))
+            {
+                // TODO: Upgrade House
+            }
+            else if(menuInput.equals("5")|| menuInput.equalsIgnoreCase("Move Room"))
+            {
+                // TODO: Move Room
+            }
+            else if(menuInput.equals("6")|| menuInput.equalsIgnoreCase("Edit Room"))
+            {
+                // TODO: Edit Room
+            }
+            else if(menuInput.equals("7")|| menuInput.equalsIgnoreCase("Add Sim"))
+            {
+                // TODO: Add Sim
+            }
+            else if(menuInput.equals("8")|| menuInput.equalsIgnoreCase("Change Sim"))
+            {
+                // TODO: Change Sim
+            }
+            else if(menuInput.equals("9")|| menuInput.equalsIgnoreCase("List Object"))
+            {
+                // TODO: List Object
+            }
+            else if(menuInput.equals("10")|| menuInput.equalsIgnoreCase("Go To Object"))
+            {
+                // TODO : Go To Object
+            }
+            else if(menuInput.equals("11")|| menuInput.equalsIgnoreCase("Action"))
+            {
+                // TODO: Action
+            }
+            else if(menuInput.equals("12")|| menuInput.equalsIgnoreCase("Exit"))
+            {
+                // TODO: Exit
+            }
+            else if(menuInput.equals("13")|| menuInput.equalsIgnoreCase("Beli barang"))
+            {
+                // TODO: Beli barang
+            }
+            else if(menuInput.equals("14")|| menuInput.equalsIgnoreCase("Memasang barang"))
+            {
+                // TODO: Memasang barang
+            }
+            else
+            {
+                // Invalid Input
+                System.out.println("Aksi tidak dikenali!");
+                System.out.println("");
+            }
+        }
     }
 }

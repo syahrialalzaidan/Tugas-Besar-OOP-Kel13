@@ -1,9 +1,7 @@
-import java.util.HashMap;
-
 public abstract class Objects {
     private String name;
 
-    public Objects(String name, Inventory inventory) {
+    public Objects(String name) {
         this.name = name;
     }
 

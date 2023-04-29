@@ -5,48 +5,51 @@ import javax.swing.*;
 import java.awt.event.*;
 import java.util.*;
 
-public class Room implements ActionListener {
+public class Room { //implements ActionListener {
     
     private String roomName;
-    private HashMap<Object, Coordinate> object;
-    Buttons[][] space = new Buttons[6][6];
-    //private char[][] space;
+    private HashMap<Items, Coordinate> object;
+    //Buttons[][] space = new Buttons[6][6];
+    private String[][] space = new String[6][6];
     private Room rigthRoom;
     private Room leftRoom;
     private Room upperRoom;
     private Room lowerRoom;
-    // private Scanner input;
-    MainGUI frame = new MainGUI();
+    private Scanner input;
+
+    //MainGUI frame = new MainGUI();
     //MainGUI frame;
     public Room(String roomName)
     {
         this.roomName = roomName;
-        this.object = new HashMap<Object, Coordinate>();
+        this.object = new HashMap<Items, Coordinate>();
         this.rigthRoom = null;
         this.leftRoom = null;
         this.upperRoom = null;
         this.lowerRoom = null;
-
+        this.input = new Scanner(System.in);
         for(int i = 0; i < 6; i++) 
         {
             for(int j = 0; j < 6; j++)
             {
-            space[i][j] = new Buttons(i,j);
-            // button_panel.add(buttons[i]);
-            space[i][j].setBackground(Color.BLACK);
-            //space[i][i].setFocusable(false);
-            space[i][j].setBounds(500 + j * 100, 50 + i * 100, 100, 100);
-            space[i][j].addActionListener(this);
-            // String text = i + "," + j;
-            // buttons[i][j].setText(text);
-            // System.out.println("i = " + i + " j = " + j);
-            // System.out.println(buttons[i][j].getBounds());
-            frame.add(space[i][j]);
+            // space[i][j] = new Buttons(i,j);
+            // // button_panel.add(buttons[i]);
+            // space[i][j].setBackground(Color.BLACK);
+            // //space[i][i].setFocusable(false);
+            // space[i][j].setBounds(500 + j * 100, 50 + i * 100, 100, 100);
+            // space[i][j].addActionListener(this);
+            // // String text = i + "," + j;
+            // // buttons[i][j].setText(text);
+            // // System.out.println("i = " + i + " j = " + j);
+            // // System.out.println(buttons[i][j].getBounds());
+            // frame.add(space[i][j]);
+            
+                this.space[i][j] = " ";
             }
         }
 
-        frame.setVisible(true);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        // frame.setVisible(true);
+        // frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
     public String getRoomName() {
@@ -57,11 +60,11 @@ public class Room implements ActionListener {
         this.roomName = roomName;
     }
 
-    public HashMap<Object, Coordinate> getObject() {
+    public HashMap<Items, Coordinate> getObject() {
         return object;
     }
 
-    public void setObject(HashMap<Object, Coordinate> object) {
+    public void setObject(HashMap<Items, Coordinate> object) {
         this.object = object;
     }
 
@@ -97,12 +100,37 @@ public class Room implements ActionListener {
         this.lowerRoom = lowerRoom;
     }
 
-    public void placeObject(Item object , int x1 , int y1 , String direction , Color color , Color foregColor , String name)
+    public void placeObject(Items object)
     {
+        printSpace();
+        System.out.print("\n");
+        System.out.println("Dimensi Objek : " + object.getX() + " x " + object.getY());
+        System.out.print("\n");
         
+        System.out.println("Masukan koordinat x1: ");
+        int x1 = input.nextInt();
 
+        // memasukan Koordinat awal benda
+        System.out.println("Masukan koordinat y1: ");
+        int y1 = input.nextInt();
+
+        // Menghilangkan \n yang tidak terbaca
+        input.nextLine();
+
+        // Memasukan Arah Benda
+        System.out.println("Masukan arah: ");
+        String direction = input.nextLine();
+
+        // Cek apakah Arah benda yang dimasukan sudah benar
+        while(!(direction.equalsIgnoreCase("Right") || direction.equalsIgnoreCase("Left") || direction.equalsIgnoreCase("Up") || direction.equalsIgnoreCase("Down")))
+        {
+            System.out.println("Arah yang diberikan Salah! (Right, Left, Up, Down)");
+            System.out.println("Masukan arah: ");
+            direction = input.nextLine();
+        }
         Coordinate coordinate = new Coordinate(0, 0, 0, 0);
         
+
         // persegi panjang orientasi kanan
         if(object.getX() >= object.getY())
         {
@@ -189,12 +217,46 @@ public class Room implements ActionListener {
                 //System.out.println(i);
                 for(int j = coordinate.getX1(); j < coordinate.getX2(); j++)
                 {
-                    System.out.println(i + " , " + j);
-                    //this.space[i][j] = object.getName().charAt(0);
-                    space[i][j].setBackground(color);
-                    space[i][j].setText(name);
-                    space[i][j].setForeground(foregColor);
-                    space[i][j].setIsOccupied(true);
+                    //System.out.println(i + " , " + j);
+                    String value = object.getName();
+                    
+                    if(value.equalsIgnoreCase("Kasur Single"))
+                    {
+                        this.space[i][j] = "KS";
+                    }
+                    if(value.equalsIgnoreCase("Kasur Queen Size"))
+                    {
+                        this.space[i][j] = "KQS";
+                    }
+                    if(value.equalsIgnoreCase("Kasur King Size"))
+                    {
+                        this.space[i][j] = "KKS";
+                    }
+                    if(value.equalsIgnoreCase("Toilet"))
+                    {
+                        this.space[i][j] = "T";
+                    }
+                    if(value.equalsIgnoreCase("Kompor Gas"))
+                    {
+                        this.space[i][j] = "KG";
+                    }
+                    if(value.equalsIgnoreCase("Kompor Listrik"))
+                    {
+                        this.space[i][j] = "KL";
+                    }
+                    if(value.equalsIgnoreCase("Meja dan Kursi"))
+                    {
+                        this.space[i][j] = "MDK";
+                    }
+                    if(value.equalsIgnoreCase("Jam"))
+                    {
+                        this.space[i][j] = "J";
+                    }
+
+                    // space[i][j].setBackground(color);
+                    // space[i][j].setText(name);
+                    // space[i][j].setForeground(foregColor);
+                    // space[i][j].setIsOccupied(true);
                 }
             }
             System.out.println("Berhasil memasukkan " + object.getName());
@@ -228,9 +290,9 @@ public class Room implements ActionListener {
             {
                 for(int j = coordinate.getX1(); j < coordinate.getX2(); j++)
                 {
-                    if(this.space[i][j].getIsOccupied())
+                    if(!this.space[i][j].equalsIgnoreCase(" "))
                     {
-                        System.out.println("Masuk Sini");
+                        //System.out.println("Masuk Sini");
                         return false;
                     }
                 }
@@ -238,62 +300,162 @@ public class Room implements ActionListener {
             return true;
         }
     }
-    public void actionPerformed(ActionEvent e)
-    {   
-        System.out.println("actionPlaceFurniture = " + frame.getActionPlaceFurniture());
-        if(frame.getActionPlaceFurniture())
+
+    public void printSpace()
+    {
+        for(int i = 1 ; i <= 13 ; i++)
         {
-            for(int i= 0 ; i < 6 ; i++)
+            if(i%2 == 1)
             {
-                for(int j = 0 ; j < 6 ; j++)
+                printline();
+            }
+            else
+            {
+                int k = 0;
+                
+                for(int j = 0 ; j < 25 ; j++)
                 {
-                    if(e.getSource() == space[i][j])
+                    if(j%4 == 0)
                     {
-
-                        javax.swing.JComboBox<String> Furniture = frame.getFurniture();
-                        String benda = Furniture.getSelectedItem().toString();
-
-                        javax.swing.JComboBox<String> Direction = frame.getDirection();
-                        String direction = Direction.getSelectedItem().toString();
-
-                        int x1 = j;
-                        int y1 = i;
-                        Item object = null;
-                        Color color = null;
-                        Color foregColor = null;
-                        if(benda.equals("Kasur"))
-                        {
-                            object = new Item("Kasur", 4, 2 , 300);
-                            color = Color.RED;
-                            foregColor = Color.BLACK;
-                        }
-                        else if(benda.equals("Meja"))
-                        {
-                            object = new Item("Meja", 3, 3 , 200);
-                            color = Color.BLUE;
-                            foregColor = Color.WHITE;
-                        }
-                        else if(benda.equals("Kursi"))
-                        {
-                            object = new Item("Kursi", 3, 3 , 100);
-                            color = Color.GREEN;
-                            foregColor = Color.BLACK;
-                        }
-                        placeObject(object , x1 , y1 , direction , color , foregColor , object.getName());
-
+                        System.out.print("|");
                     }
-                        
-                       
+                    else if(j%4 == 1)
+                    {
+                        String value = space[i/2 - 1][k];
+
+                        if(value.length() == 3)
+                        {
+                            System.out.print(value);
+                        }
+                        else if(value.length() == 2)
+                        {
+                            System.out.print(value + " ");
+                        }
+                        else if(value.length() == 1 && (!value.equals("X")))
+                        {
+                            System.out.print(" " + value + " ");
+                        }
+                        else
+                        {
+                            System.out.print("   ");
+                        }
+                        k++;
+                    }
                 }
+            }
+            System.out.println("\n");
+        }
+    }
+
+    public static void printline()
+    {
+        char ascii = ' ';
+        for(int i =  0 ; i < 25 ; i++){
+            if(i == 0 | i == 24 | i%4 == 0)
+            {
+                ascii = '+';
+                System.out.print(ascii);
+            }
+            else
+            {
+                ascii = '-';
+                System.out.print(ascii);
             }
         }
     }
+    // public void actionPerformed(ActionEvent e)
+    // {   
+    //     System.out.println("actionPlaceFurniture = " + frame.getActionPlaceFurniture());
+    //     if(frame.getActionPlaceFurniture())
+    //     {
+    //         for(int i= 0 ; i < 6 ; i++)
+    //         {
+    //             for(int j = 0 ; j < 6 ; j++)
+    //             {
+    //                 if(e.getSource() == space[i][j])
+    //                 {
+
+    //                     javax.swing.JComboBox<String> Furniture = frame.getFurniture();
+    //                     String benda = Furniture.getSelectedItem().toString();
+
+    //                     javax.swing.JComboBox<String> Direction = frame.getDirection();
+    //                     String direction = Direction.getSelectedItem().toString();
+
+    //                     int x1 = j;
+    //                     int y1 = i;
+    //                     Items object = null;
+    //                     Color color = null;
+    //                     Color foregColor = null;
+    //                     if(benda.equals("Kasur Single"))
+    //                     {
+    //                         object = new Items("Kasur Single");
+    //                         color = Color.RED;
+    //                         foregColor = Color.BLACK;
+    //                     }
+    //                     else if(benda.equals("Kasur Queen Size"))
+    //                     {
+    //                         object = new Items("Kasur Queen Size");
+    //                         color = Color.RED;
+    //                         foregColor = Color.BLACK;
+    //                     }
+    //                     else if(benda.equals("Kasur King Size"))
+    //                     {
+    //                         object = new Items("Kasur King Size");
+    //                         color = Color.RED;
+    //                         foregColor = Color.BLACK;
+    //                     }
+    //                     else if(benda.equals("Toilet"))
+    //                     {
+    //                         object = new Items("Toilet");
+    //                         color = Color.BLUE;
+    //                         foregColor = Color.WHITE;
+    //                     }
+    //                     else if(benda.equals("Kompor Gas"))
+    //                     {
+    //                         object = new Items("Kompor Gas");
+    //                         color = Color.BLACK;
+    //                         foregColor = Color.WHITE;
+    //                     }
+    //                     else if(benda.equals("Kompor Listrik"))
+    //                     {
+    //                         object = new Items("Kompor Listrik");
+    //                         color = Color.BLACK;
+    //                         foregColor = Color.WHITE;
+    //                     }
+    //                     else if(benda.equals("Meja dan Kursi"))
+    //                     {
+    //                         object = new Items("Meja dan Kursi");
+    //                         color = new Color(150,75,00);
+    //                         foregColor = Color.WHITE;
+    //                     }
+    //                     else if(benda.equals("Jam"))
+    //                     {
+    //                         object = new Items("Jam");
+    //                         color = new Color(93,156,89);
+    //                         foregColor = Color.WHITE;
+    //                     }
+
+    //                     placeObject(object , x1 , y1 , direction , color , foregColor , object.getName());
+
+    //                 }
+                        
+                       
+    //             }
+    //         }
+    //     }
+    // }
 
     public static void main(String[] args)
     {
         // MainGUI mainGUI = new MainGUI(); // Create an instance of MainGUI
         // Room room = new Room(null);
-        new Room("Room 1");
+        Room room = new Room("Room 1");
+
+        Items objek1 = new Items("Kasur Single");
+        //System.out.println("Insert Bed");
+        room.placeObject(objek1);
+
+        room.printSpace();
         
         // Create an instance of MainGUI
        

@@ -6,209 +6,90 @@
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
-import java.util.ArrayList;
 
 /**
  *
 * @author ilmag
 */
-public class Inventory<T extends Objects> extends javax.swing.JFrame {
+public class Inventory<T> extends javax.swing.JFrame {
     /**
      * Creates new form Inventory
     * With Generics
     */
 
-    // ATTRIBUTES
-
-    // Stores the types of items in invetory and their count (Visible to user)
-    private HashMap<String, Integer> inventory = new HashMap<String, Integer>();
-    // Stores the actual instantiation of objects of items in inventory
-    private ArrayList<T> inventoryList = new ArrayList<T>();
+    // private T type;
+    private HashMap<T, Integer> inventory = new HashMap<T, Integer>();
     private String inventoryType;
     private String simOwner;
 
-    // ALGORITHM
-
+    //ALGORITHM
     public Inventory(String inventoryType, String simOwner) {
-        /* Constructor */
         this.inventoryType = inventoryType;
         this.simOwner = simOwner;
         // For GUI
         initComponents();
     }
 
-    public HashMap<String, Integer> getInventory() {
-        /* Getter inventory */
+    public HashMap<T, Integer> getInventory() {
         return inventory;
     }
 
-    public ArrayList<T> getInventoryList() {
-        /* Getter list of inventory */
-        return inventoryList;
-    }
-
     public String getInventoryType() {
-        /* Getter inventoryType */
         return this.inventoryType;
     }
 
-    public T getInventoryElement(T item) throws Exception {
-        /* Returns and REDUCES an object instantiation from inventory 
-         * 
-         * @param T item
-         * 
-         * Example : getInventoryitem(kasurSingle)
-        */
-        T inventoryItem = null;
-        int index = -1;
-
-        for (int i = 0; i < inventoryList.size(); i++) {
-            T currentEl = inventoryList.get(i);
-            inventoryItem = currentEl;
-            if (currentEl.equals(item)) {
-                index = i;
-                break;
-            }
-        }
-        if (index == -1) {
-            inventoryItem = null;
-        }
-        reduceInventory(item);
-        return inventoryItem;
-    }
-
-    public T getInventoryElement(String itemName) throws Exception {
-        /* Returns and REDUCES the oldest item with the same name as param from inventory 
-         * 
-         * @param T item
-         * 
-         * Example : getInventoryItem("Kasur Single")
-        */
-        T inventoryItem = null;
-        int index = -1;
-
-        for (int i = 0; i < inventoryList.size(); i++) {
-            T currentEl = inventoryList.get(i);
-            inventoryItem = currentEl;
-            if (currentEl.getName().equals(itemName)) {
-                index = i;
-                break;
-            }
-        }
-        if (index == -1) {
-            inventoryItem = null;
-        }
-        reduceInventory(itemName);
-        return inventoryItem;
-    }
-
-    public int getValue(T item) {
-        /* Getter value count of an item
-         * 
-         * @param T item (instansiasi dari sebuah generic type Objects)
-         * Contoh : getValue(kasurSingle)
-         */
-        if (inventory.containsKey(item.getName())) {
-            return inventory.get(item.getName());
-        } else {
-            return 0;
-        }
-    }
-
-    public int getValue(String itemName) {
-        /* Getter value count of an item
-         * 
-         * @param String itemName (String sebuah nama item)
-         * Contoh : getValue("Kasur Single");
-         */
-        if (inventory.containsKey(itemName)) {
-            return inventory.get(itemName);
-        } else {
-            return 0;
-        }
+    public int getValue(T name) {
+        return inventory.get(name);
     }
 
     public String getSimOwner() {
-        /* Getter simOwner */
         return simOwner;
     }
 
     public void setInventoryType(String inventoryType) {
-        /* Setter inventoryType 
-         * Can only be done if inventory and inventoryList are empty
-        */
-        if (inventory.isEmpty() && inventoryList.isEmpty()) {
-            this.inventoryType = inventoryType;
+        this.inventoryType = inventoryType;
+    }
+
+    public void setValue(T name, int value) {
+        if (inventory.containsKey(name)) {
+            inventory.put(name, value);
+        } else {
+            inventory.put(name, 1);
         }
     }
 
     public void setSimOwner(String simOwner) {
-        /* Setter simOwner */
         this.simOwner = simOwner;
     }
 
-    public void addInventory(T item) {
+    public void addInventory(T name) {
         /* Increments or adds item to inventory */
-        
-        // Adds object to inventoryList ArrayList
-        inventoryList.add(item);
-
-        // Adds count to inventory HashMap
-        if (inventory.containsKey(item.getName())) {
-            inventory.put(item.getName(), inventory.get(item.getName()) + 1);
+        if (inventory.containsKey(name)) {
+            inventory.put(name, inventory.get(name) + 1);
         } else {
-            inventory.put(item.getName(), 1);
+            inventory.put(name, 1);
         }
     }
 
-    public void reduceInventory(T item) throws Exception {
-        /* Decrements from inventory if item exists 
-         * If not, then an error is thrown
-         * 
-         * @param T item
-         * Contoh: reduceInventory(kasurSingle)
-        */
-        inventoryList.remove(item);
-        if (inventory.containsKey(item.getName())) {
-            inventory.put(item.getName(), inventory.get(item.getName()) - 1);
+    public void reduceInventory(T name) throws Exception {
+        /* Decrements from inventory if item exists */
+        if (inventory.containsKey(name)) {
+            inventory.put(name, inventory.get(name) - 1);
             removeFromInventory();
-        } else {
-            throw new Exception("Item doesn't exist!");
-        }
-    }
-
-    public void reduceInventory(String itemName) throws Exception {
-        /* Decrements from inventory if item exists 
-         * If not, then an error is thrown
-         * Removes the newest added object with the name same as parameter
-         * 
-         * @param String itemName
-         * Contoh: reduceInventory("Kasur Single")
-        */
-        if (inventory.containsKey(itemName)) {
-            inventory.put(itemName, inventory.get(itemName) - 1);
-            removeFromInventory();
-            // Removing the oldest added object to inventoryList that has the name same as parameter
-            for (int i = 0; i < inventoryList.size(); i++) {
-                if (inventoryList.get(i).getName().equals(itemName)) {
-                    inventoryList.remove(i);
-                    break;
-                }
-            }
         } else {
             throw new Exception("Item doesn't exist!");
         }
     }
 
     public void removeFromInventory() {
-        /* Helper function */
         /* Removes from inventory if the value of an item reaches 0 */
-        Iterator<Map.Entry<String, Integer>> iterator = inventory.entrySet().iterator();
+        Iterator<Map.Entry<T, Integer>> iterator = inventory.entrySet().iterator();
         while (iterator.hasNext()) {
-            Map.Entry<String, Integer> entry = iterator.next();
+            Map.Entry<T, Integer> entry = iterator.next();
             if (entry.getValue() == 0) {
                 iterator.remove();
-                System.out.println(entry.getKey() + " is deleted from inventory because the amount is now 0.");
+                Objects object = (Objects) entry.getKey();
+                System.out.println(object.getName() + " is deleted from inventory because the amount is 0.");
             }
         }
     }
@@ -217,18 +98,15 @@ public class Inventory<T extends Objects> extends javax.swing.JFrame {
         /* Prints items in HashMap. If HashMap has "Kasur Queen Size" with the value of 2 
         * and "Kasur Single" with the value of 1, then it will print:
         * 
-        * List of Items in inventory
+        * List of items in inventory
         * Kasur Queen Size = 2
         * Kasur Single = 1
         */
         System.out.printf("List of %s in inventory\n", inventoryType);
-        if (inventory.isEmpty()) {
-            System.out.println("Inventory is empty. Buy some stuff?");
-        } else {
-            for (String item : inventory.keySet()) {
-                int count = inventory.get(item);
-                System.out.println(item + " = " + count);
-            }
+        for (T item : inventory.keySet()) {
+            int count = inventory.get(item);
+            Objects object = (Objects) item;
+            System.out.println(object.getName() + " = " + count);
         }
     }
 

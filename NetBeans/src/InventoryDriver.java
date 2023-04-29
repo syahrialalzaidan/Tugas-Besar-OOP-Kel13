@@ -47,8 +47,15 @@ public class InventoryDriver {
         //     // Catch the exception and handle it appropriately
         //     System.out.println("Error: " + e.getMessage());
         // }
+      
+        try {
+            // Call reduceInventory() method and pass in the name of the item to reduce inventory
+            itemsInventory.reduceInventory(toilet);
+        } catch (Exception e) {
+            // Catch the exception and handle it appropriately
+            System.out.println("Error: " + e.getMessage());
+        }
 
-        System.out.println("Trying to reduce kasur");
         try {
             // Call reduceInventory() method and pass in the name of the item to reduce inventory
             itemsInventory.reduceInventory(kasurSingle1);

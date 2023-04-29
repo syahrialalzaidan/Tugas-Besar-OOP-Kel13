@@ -1,8 +1,13 @@
+import java.util.Random;
+
+
 public class Sim {
     private String name;
     private Job job;
     private int money;
-    private Inventory<Object> inventory;
+    private Inventory<Food> inventoryfood;
+    private Inventory<Items> inventoryitems;
+    private Inventory<Dish> inventorydish; 
     private House house;
     private int mood;
     private int health;
@@ -12,14 +17,18 @@ public class Sim {
     private int dailyWork;
     private boolean dailyPay;
 
+    private static final String[] jobChoices = {"Badut Sulap", "Koki", "Polisi", "Programmer", "Dokter", "Mata-mata", "Pengacara"};
 
 
-    public Sim(String name, Job job, Inventory<Object> inventory, House house){
+    public Sim(String name){
         this.name = name;
-        this.job = job;
+        Random rand = new Random();
+        this.job = new Job(jobChoices[rand.nextInt(jobChoices.length)]);
         this.money = 100;
-        this.inventory = inventory;
-        this.house = house;
+        this.inventoryfood = new Inventory<Food>("Food", name);
+        this.inventoryitems = new Inventory<Items>("Items", name);
+        this.inventorydish = new Inventory<Dish>("Dish", name);
+        this.house = new House(new Point(0, 0));
         this.mood = 80;
         this.health = 80;
         this.fullness = 80;
@@ -28,6 +37,7 @@ public class Sim {
         this.dailyWork = 0;
         this.dailyPay = false;
     }
+
     public String getName(){
         return name;
     }
@@ -40,8 +50,16 @@ public class Sim {
         return money;
     }
 
-    public Inventory<Object> getInventory(){
-        return inventory;
+    public Inventory<Food> getInventoryfood(){
+        return inventoryfood;
+    }
+
+    public Inventory<Items> getInventoryitems(){
+        return inventoryitems;
+    }
+
+    public Inventory<Dish> getInventorydish(){
+        return inventorydish;
     }
 
     public House getHouse(){
@@ -60,7 +78,13 @@ public class Sim {
         return fullness;
     }
 
-    
+    public int getDailyWork(){
+        return dailyWork;
+    }
+
+    public boolean getDailyPay(){
+        return dailyPay;
+    }
     
     public void setName(String name){
         this.name = name;
@@ -74,15 +98,9 @@ public class Sim {
         this.money = money;
     }
 
-    public void setInventory(Inventory<Object> inventory){
-        this.inventory = inventory;
-    }
-
-    public void setHouse(){
+    public void setHouse(House house){
         this.house = house;
     }
-
-    
     
     public void isNgantuk(){
         if (ngantuk>=600){

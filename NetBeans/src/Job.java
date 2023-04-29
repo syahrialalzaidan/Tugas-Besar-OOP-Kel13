@@ -11,7 +11,7 @@ public class Job {
     private String name;
     private int dailyPay;
 
-    private Job(String name) {
+    public Job(String name) {
         this.name = name;
 
         switch(name) {

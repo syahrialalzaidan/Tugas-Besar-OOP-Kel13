@@ -1,3 +1,9 @@
+import java.util.HashMap;
+import java.util.Random;
+import java.util.Set;
+import java.util.List;
+import java.util.ArrayList;
+
 /**
  *
  * @author ilmag
@@ -8,29 +14,35 @@
  */
 
 public class Job {
+    private static HashMap<String, Integer> jobs = new HashMap<String, Integer>();
     private String name;
     private int dailyPay;
 
-    private Job(String name) {
-        this.name = name;
+    static {
+        jobs.put("Badut Sulap", 15);
+        jobs.put("Koki", 30);
+        jobs.put("Polisi", 35);
+        jobs.put("Programmer", 45);
+        jobs.put("Dokter", 50);
+        jobs.put("Mata-mata", 60);
+        jobs.put("Pengacara", 60);
+    }
 
-        switch(name) {
-            case "Badut Sulap":
-                dailyPay = 15;
-            case "Koki":
-                dailyPay = 30;
-            case "Polisi":
-                dailyPay = 35;
-            case "Programmer":
-                dailyPay = 45;
-            case "Dokter":
-                dailyPay = 50;
-            case "Mata-mata":
-                dailyPay = 60;
-            case "Pengacara":
-                dailyPay = 60;
+    public Job() {
+        int randomIndex = randomize();
+        List<String> jobKeys = new ArrayList<String>(jobs.keySet());
+        this.name = jobKeys.get(randomIndex);
+        this.dailyPay = jobs.get(name);
+
+    }
+
+    public Job(String name) throws Exception {
+        if (jobs.containsKey(name)) {
+            this.name = name;
+            this.dailyPay = jobs.get(name);
+        } else {
+            throw new Exception("Job name not in list of jobs!");
         }
-
 
     }
 
@@ -40,5 +52,23 @@ public class Job {
 
     public int getDailyPay() {
         return this.dailyPay;
+    }
+
+    public void setJob(String name) throws Exception {
+        if (jobs.containsKey(name)) {
+            this.name = name;
+            this.dailyPay = jobs.get(name);
+        } else {
+            throw new Exception("Job name not in list of jobs!");
+        }
+    }
+
+    public int randomize() {
+        long currentTime = System.currentTimeMillis();
+        Random random = new Random(currentTime);
+        Set<String> keySet = jobs.keySet();
+        String[] keyArray = keySet.toArray(new String[keySet.size()]);
+        int randomIndex = random.nextInt(keyArray.length);
+        return randomIndex;
     }
 }

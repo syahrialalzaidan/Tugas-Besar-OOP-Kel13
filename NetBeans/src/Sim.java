@@ -1,6 +1,5 @@
 
 
-
 public class Sim{
     private String name;
     private Job job;
@@ -13,7 +12,6 @@ public class Sim{
     private int mood;
     private int health;
     private int fullness;
-    private int ngantuk;
     private int kebelet;
     private boolean afterEating;
     private int dailyWork;
@@ -34,8 +32,8 @@ public class Sim{
         this.mood = 80;
         this.health = 80;
         this.fullness = 80;
-        this.ngantuk = 0;
         this.kebelet = 0;
+        this.afterEating = false;
         this.dailyWork = 0;
         this.dailySleep = 0;
         this.dailyPay = 1;
@@ -91,42 +89,66 @@ public class Sim{
         return fullness;
     }
 
-    
+    public int getKebelet(){
+        return kebelet;
+    }
+
+    public boolean getAfterEating(){
+        return afterEating;
+    }
+
+    public int getDailyPay(){
+        return dailyPay;
+    }
+
+    public int getDailySleep(){
+        return dailySleep;
+    }
+
+    public int getDailyWork(){
+        return dailyWork;
+    }
     
     public void setName(String name){
         this.name = name;
     }
 
-    public void setJob(Job job){
-        this.job = job;
-    }
+    public void setSimJob(String jobname) throws Exception{
+        this.job.setJob(jobname);}
 
     public void setMoney(int money){
         this.money = money;
     }
 
+    public void setMood(int mood){
+        this.mood = mood;
+    }
 
+    public void setHeath(int health){
+        this.health =  health;
+    }
 
-    public void setHouse(){
+    public void setFullness(int fullness){
+        this.fullness = fullness;
+    }
+
+    public void setKebelet(int kebelet){
+        this.kebelet = kebelet;
+    }
+
+    public void setHouse(House house){
         this.house = house;
     }
 
     
     
-    public void isNgantuk(){
-        if (ngantuk>=600){
-            mood-=5;
-            health=-5;
-            ngantuk-=600;
+
+    public void resetSim(){
+        if (dailyPay<2){
+            dailyPay++;
         }
-        
-    }
-    public void isKebelet(){
-        if (kebelet>=240){
-            mood-=5;
-            health=-5;
-            ngantuk-=240;
-        }
+        dailySleep=0;
+
     }
 
     class InputActionException extends Exception {
@@ -163,13 +185,17 @@ public class Sim{
                         }
     
                 }
+                if (dailyWork>=240 && dailyPay > 0){
+                    dailyWork=0;
+                    dailyPay--;
+                }
             }
     
         });
 
         try{
-            if (time%30!=0){
-                throw new InputActionException("Input waktu adalah kelipatan 30 detik");
+            if (time%120!=0){
+                throw new InputActionException("Input waktu adalah kelipatan 120 detik");
             }
             if ((time/30)*10>fullness || (time/30)*10>mood){
                 throw new StatusException("Atribut kekenyangan anda tidak cukup untuk melakukan kerja selama " + time + " detik.");
@@ -275,11 +301,18 @@ public class Sim{
                         }finally{
                             fullness+=food.getFullness();
                             afterEating = true;
+
                             if (food.getClass().getName().equals("Dish")){
-                                inventorydish.reduceInventory(food);
+                                Dish temp = (Dish) food;
+                                try {
+                                    inventorydish.reduceInventory(temp);
+                                } catch (Exception e) {
+                                    
+                                }
                             }
                             else{
-                                inventoryfood.reduceInventory(food);
+                                Food temp = (Food) food;
+                                inventoryfood.addInventory(temp);
                             }
                         }
                         
@@ -309,10 +342,22 @@ public class Sim{
                             mood+=10;
                             inventorydish.addInventory(food);
                             for (String foods:food.getIngredient()){
-                                inventoryfood.reduceInventory(new Food(foods));
+
+                                try {
+                                    inventoryfood.reduceInventory(new Food(foods));
+                                } catch (Exception e) {
+
+                                }
                             }
                         }
     
+                    
+                }
+                Food temp = new Food("Susu");
+                try {
+                    inventoryfood.reduceInventory(temp);
+                } catch (Exception e) {
+
                 }
 
 
@@ -351,13 +396,13 @@ public class Sim{
                         
                         }catch(Exception e){
                             
-                        }finally{
-                            mood+=10;
-                            fullness-=20;
-                            afterEating = false;
                         }
+                        
     
                 }
+                mood+=10;
+                fullness-=20;
+                afterEating = false;
 
 
             }

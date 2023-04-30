@@ -36,13 +36,14 @@ public class Job {
 
     }
 
-    public Job(String name) throws Exception {
+    public Job(String name) {
         if (jobs.containsKey(name)) {
             this.name = name;
             this.dailyPay = jobs.get(name);
-        } else {
-            throw new Exception("Job name not in list of jobs!");
         }
+        // } else {
+        //     throw new Exception("Job name not in list of jobs!");
+        // }
 
     }
 

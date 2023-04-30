@@ -583,7 +583,169 @@ public class GameManager {
                     yesno = input.nextLine();
                 }
 
-                //Memanggil Action Object disini
+                switch(itemName){
+                    case "Toilet" :
+                        if (currentSim.getFullness()<20){
+        
+                            System.out.println("Perut anda terlalu kosong untuk melakukan aktivitas buang air besar");
+                            
+                        }
+                        else {
+                            currentSim.defecate(10);
+                            
+                            
+                        }
+                        break;
+                    case "TV" : 
+                        if (currentSim.getFullness()<5 && currentSim.getHealth()<5){
+        
+                            System.out.println("Anda terlalu lapar atau kurang sehat untuk menonton TV");
+                            
+                        }
+                        else{
+                            boolean check = false;
+                            while(!check){
+                                int inputTime = input.nextInt;
+                                if (inputTime%30!=0 || (inputTime/30)*5>fullness || (inputTime/30)*5>health){
+                                    check = false;
+                                    System.out.println("Masukkan waktu harus keliapatan 30 atau status kesejahteraan anda tidak mencukupi");
+                                }
+                                else{
+                                    check = true;
+                                }
+                            }
+                            currentSim.watchingTV(inputTime);
+                        }
+                        break;
+                    case "Komputer" :
+                        if (currentSim.getFullness()<10 && currentSim.getHealth()<10){
+        
+                            System.out.println("Anda terlalu lapar atau kurang sehat untuk bermain game");
+                        
+                        }
+                        else{
+                            boolean check = false;
+                            while(!check){
+                                int inputTime = input.nextInt;
+                                if (inputTime%20!=0 || (inputTime/20)*10>fullness || (inputTime/20)*10>health){
+                                    check = false;
+                                    System.out.println("Masukkan waktu harus keliapatan 20 atau status kesejahteraan anda tidak mencukupi");
+                                }
+                                else{
+                                    check = true;
+                                }
+                            }
+                            currentSim.playingGame(inputTime);
+                        }
+                        break;
+                    case "Kolam Renang" :
+                        if (currentSim.getFullness()<15){
+        
+                            System.out.println("Anda terlalu lapar untuk beranang");
+                    
+                        }
+                        else{
+                            boolean check = false;
+                            while(!check){
+                                int inputTime = input.nextInt;
+                                if (inputTime%30!=0 || (inputTime/30)*15>fullness){
+                                    check = false;
+                                    System.out.println("Masukkan waktu harus keliapatan 30 atau status kesejahteraan anda tidak mencukupi");
+                                }
+                                else{
+                                    check = true;
+                                }
+                            }
+                            currentSim.swiming(inputTime);
+                        }
+                        break;
+                    case "Shower" :
+                        if (currentSim.getFullness()<10){
+                            System.out.println("Anda terlalu lapar untuk mandi");
+                    
+                        }
+                        else{
+                            boolean check = false;
+                            while(!check){
+                                int inputTime = input.nextInt;
+                                if (inputTime%15!=0 || (inputTime/15)*10>fullness){
+                                    check = false;
+                                    System.out.println("Masukkan waktu harus keliapatan 15 atau status kesejahteraan anda tidak mencukupi");
+                                }
+                                else{
+                                    check = true;
+                                }
+                            }
+                            currentSim.swiming(inputTime);
+                        }
+                        break;
+                    default :
+                            switch (itemName){
+                                
+                                case "Jam" :
+                                    currentSim.viewClock();
+                                case "Meja dan Kursi" :
+                                    currentSim.getInventoryfood().printInventory();
+                                    currentSim.getInventorydish().printInventory();
+                                    System.out.println("Pilih makanan untuk dimakan");
+                                    boolean check = true;
+                                    boolean isFood = true;
+                                    whie (check){
+                                        String inputMakanan = input.nextLine;
+                                        if (currentSim.getInventoryfood().containsKey(inputMakanan)){
+                                            currentSim.eat(new Food(inputMakanan), currentSim.getInventorydish(), currentSim.getInventoryfood())
+                                            check = false;
+                                        }
+                                        else if(currentSim.getInventorydish().containsKey(inputMakanan)){
+                                            currentSim.eat(new Dish(inputMakanan), currentSim.getInventorydish(), currentSim.getInventoryfood())
+                                        }
+                                        else{
+                                            System.out.println("Kamu tidak memiliki makanan tersebut di inventory, mohon masukkan kembali makanan yang ingin dimakan");
+                                        }
+                                    }
+                                    
+                                case "Kompor Gas" :
+                                case "Kompor Listrik" :
+                                boolean check3 = true;
+                                System.out.println("Pilih makanan yang ingin dimasak");
+                                System.out.println("1. Nasi Ayam");
+                                System.out.println("2. Nasi Kari");
+                                System.out.println("3. Susu Kacang");
+                                System.out.println("4. Tumis Sayur");
+                                System.out.println("5. Bistik");
+                                String makanan = input.nextLine();
+                                Dish dish = new Dish(makanan);
+                                for (String foods: dish.getIngredient()){
+                                    if (!currentSim.getInventoryfood().containsKey(foods)){
+                                        check3 = false;
+                                    }
+                                }
+                                if (check3){
+                                    currentSim.cook(dish,currentSim.getInventoryfood());
+                                }
+                                else {
+                                    System.out.println("Bahan makanan tidak cukup untuk memasak");
+                                }
+                                break;
+                                default : 
+                                int waktuTidur = input.nextInt();
+                                    try{
+                                        if (waktuTidur%180!=0){
+                                            throw new Exception("Input waktu adalah kelipatan 180 detik atau 3 menit");
+                                        }
+                        
+                                        else{
+                                            currentSim.sleep(waktuTidur);
+        
+                                        }
+                                    }catch(Exception e){
+                                        System.out.println(e.getMessage());
+                                    }
+                                
+                                    
+                            }
+                        
+                }
 
 
             }

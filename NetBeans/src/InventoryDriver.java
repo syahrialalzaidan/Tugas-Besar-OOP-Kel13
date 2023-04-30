@@ -11,15 +11,9 @@ public class InventoryDriver {
         Items kasurQueen1 = new Items("Kasur Queen Size");
         Items toilet = new Items("Toilet");
 
-        List<String> ingredients = new ArrayList<>();
-        ingredients.add("tepung");
-        ingredients.add("air");
-        Dish roti = new Dish("Roti", 1, 2, ingredients);
-
         itemsInventory.addInventory(kasurSingle1);
         itemsInventory.addInventory(kasurSingle2);
         itemsInventory.addInventory(kasurQueen1);
-        dishInventory.addInventory(roti);
 
         System.out.println(itemsInventory.getInventoryType());      // Items
         System.out.println(itemsInventory.getValue(kasurSingle1));   // 2
@@ -29,14 +23,6 @@ public class InventoryDriver {
          * List of items in inventory
          * Kasur Queen Size = 2
          * Kasur Single = 1
-         */
-
-        System.out.println(dishInventory.getInventoryType());       // Dish
-        System.out.println(dishInventory.getValue(roti));           // 1
-        dishInventory.printInventory();
-        /*
-         * List of Dish in inventory
-         * Roti = 1
          */
 
         // System.out.println("Trying to reduce toilet");

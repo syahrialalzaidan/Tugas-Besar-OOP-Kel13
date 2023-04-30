@@ -19,6 +19,8 @@ public class World {
         return houseTotal;
     }
 
+    pub
+
     public int[][] getPointHouse(){
         return pointHouse;
     }

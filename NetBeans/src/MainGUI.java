@@ -4,6 +4,18 @@
  */
 
 import java.awt.Color;
+import java.io.Writer;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.io.Reader;
+import java.io.FileReader;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonElement;
+
+
 
 /**
  *
@@ -544,6 +556,34 @@ public class MainGUI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public void save(String fileName, Inventory inventory,World world) {
+        Path path = Paths.get(fileName);
+        try(Writer writer = Files.newBufferedWriter(path, StandardCharsets.UTF_8)){ 
+            Gson gson = new GsonBuilder().setPrettyPrinting().create();
+            
+            JsonElement inventoryElement = gson.toJsonTree(inventory);
+            JsonElement worldElement = gson.toJsonTree(world);
+            gson.toJson(inventoryElement, writer);
+            gson.toJson(worldElement, writer);
+            System.out.println("Data saved to " + fileName + " successfully.");
+            
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+    }
+
+    public void load(String fileName) {
+        try {
+            Gson gson = new Gson();
+            Reader reader = Files.newBufferedReader(Paths.get(fileName));
+            Inventory inventory = gson.fromJson(reader, Inventory.class);
+            World world = gson.fromJson(reader, World.class);
+            System.out.println("Data loaded from " + fileName + " successfully.");
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+    }
+    
     private void exitMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitMenuItemActionPerformed
         System.exit(0);
     }//GEN-LAST:event_exitMenuItemActionPerformed

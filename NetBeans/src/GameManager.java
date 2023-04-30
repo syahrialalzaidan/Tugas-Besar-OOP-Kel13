@@ -2,6 +2,9 @@ import java.util.Scanner;
 import java.util.Random;
 import java.lang.Math;
 import java.util.*;
+import java.util.Calendar;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class GameManager {
     private static List<Sim> simList = new ArrayList<>();
@@ -59,6 +62,7 @@ public class GameManager {
         World world;
         House currentHouse;
         Room currentRoom;
+        int upgradeHouse = 0;
 
         Scanner input = new Scanner(System.in);
 
@@ -95,8 +99,8 @@ public class GameManager {
                 House firstHouse = new House(coordinate);
 
                 // membuat Sim pertama
-                Sim firstSim = new Sim(namaSim, firstHouse);
-
+                Sim firstSim = new Sim(namaSim);
+                
                 // Memasukan Sim kedalam SimList
                 addSim(namaSim, simList);
 
@@ -140,10 +144,13 @@ public class GameManager {
         printActionMenu();
 
         Boolean exit = false;
-
-        while (!exit) {
+        Boolean simInHouse = true;
+        while(!exit)
+        {
             System.out.print("Masukan Pilihan Anda (Angka / Aksi): ");
-            if (menuInput.equals("1") || menuInput.equalsIgnoreCase("View Sim Info")) {
+            String actionMenuInput = input.nextLine();
+            if(actionMenuInput.equals("1")|| actionMenuInput.equalsIgnoreCase("View Sim Info"))
+            {
                 // TODO: View Sim Info
             } else if (menuInput.equals("2") || menuInput.equalsIgnoreCase("View Current Location")) {
                 // TODO: View Current Location
@@ -151,9 +158,283 @@ public class GameManager {
                 // TODO: View Inventory
             } else if (menuInput.equals("4") || menuInput.equalsIgnoreCase("Upgrade House")) {
                 // TODO: Upgrade House
-            } else if (menuInput.equals("5") || menuInput.equalsIgnoreCase("Move Room")) {
+                
+                //Validasi apakah Sims berada didalam Rumah
+                if(!simInHouse)
+                {
+                    System.out.println("Sim tidak berada didalam rumah");
+                }
+
+                //Validasi Uang Sim
+                else if(currentSim.getMoney() < 1500)
+                {
+                    System.out.println("Uang tidak cukup");
+                }
+
+                else
+                {
+                    System.out.print("Masukan Nama Ruangan Baru: ");
+                    String namaRumah = input.nextLine();
+
+                    Room room = new Room(namaRumah);
+
+                    Room[] rooms = currentHouse.getRooms();
+                    for(int i = 0 ; i < currentHouse.getRoomsTotal() ; i++)
+                    {
+                        System.out.printf("%d. %s" , i+1 , rooms[i].getRoomName());
+                        System.out.println("");
+                    }
+
+                    Boolean roomRootSet = false;
+                    Room roomRoot = null;
+
+                    while(!roomRootSet)
+                    {
+                        System.out.print("Masukan Ruangan yang akan dihubungkan: ");
+                        String roomRootName = input.nextLine();
+
+                        for(int i = 0 ; i < currentHouse.getRoomsTotal() ; i++)
+                        {
+                            if(rooms[i].getRoomName().equalsIgnoreCase(roomRootName))
+                            {
+                                roomRoot = rooms[i];
+                            }
+                        }
+
+                        if(roomRoot == null)
+                        {
+                            System.out.println("Ruangan tidak ditemukan");
+                        }
+                        else
+                        {
+                            validInput = true;
+                        }
+                    }
+
+                    System.out.println("Berikut adalah Ruangan yang terkoneksi dengan Ruangan " + roomRoot.getRoomName());
+                    roomRoot.printAroundRoom();
+                    System.out.println("");
+
+                    // Check Apakah masih ada ruang yang bisa ditambahkan disekitar RoomRoot
+                    if(roomRoot.checkAroundRoom())
+                    {
+                        System.out.print("Masukan Posisi Ruangan Baru (Up, Down , Right , Left): ");
+                        String direction = input.nextLine();
+
+                        while(!(direction.equalsIgnoreCase("Up") || direction.equalsIgnoreCase("Down") || direction.equalsIgnoreCase("Right") || direction.equalsIgnoreCase("Left")))
+                        {
+                            System.out.println("Posisi Ruangan tidak valid");
+                            System.out.print("Masukan Posisi Ruangan Baru (Up, Down , Right , Left): ");
+                            direction = input.nextLine();
+                        }
+                    
+                    
+                        Boolean isRoomSet = false;
+
+                        while(!isRoomSet)
+                        {                    
+                            if(direction.equalsIgnoreCase("Up"))
+                            {
+                                if(roomRoot.getUpperRoom() != null)
+                                {
+                                    System.out.println("Room Sudah ada");
+                                    System.out.println("The Room is : " + roomRoot.getUpperRoom().getRoomName());
+                                }
+                                else
+                                {
+                                    Timer T = new Timer();
+                                    TimerTask UpgradeHouse = new TimerTask()
+                                    {
+                                        @Override
+                                        public void run()
+                                        {
+                                            if(upgradeHouse < 1080)
+                                            {
+                                                upgradeHouse++;
+                                            }
+                                            else
+                                            {
+                                                roomRoot.setUpperRoom(room);
+                                                room.setLowerRoom(roomRoot);
+                                                isRoomSet = true;
+                                                upgradeHouse = 0;
+                                                System.out.println("Ruangan berhasil ditambahkan");
+                                                T.cancel();
+                                            }
+                                        }
+                                    };
+                                    Calendar date = Calendar.getInstance();
+                                    date.set(2021, Calendar.OCTOBER, 30,23, 59, 54);
+                                    T.scheduleAtFixedRate(UpgradeHouse, date.getTime(), 1000);
+                                }       
+                                
+                            }
+                            else if(direction == "Down")
+                            {
+                                if(roomRoot.getLowerRoom() != null)
+                                {
+                                    System.out.println("Room Sudah ada");
+                                    System.out.println("The Room is : " + roomRoot.getLowerRoom().getRoomName());
+                                }
+                                else
+                                {
+                                    Timer T = new Timer();
+                                    TimerTask UpgradeHouse = new TimerTask()
+                                    {
+                                        @Override
+                                        public void run()
+                                        {
+                                            if(upgradeHouse < 1080)
+                                            {
+                                                upgradeHouse++;
+                                            }
+                                            else
+                                            {
+                                                roomRoot.setLowerRoom(room);
+                                                room.setUpperRoom(roomRoot);
+                                                isRoomSet = true;
+                                                upgradeHouse = 0;
+                                                System.out.println("Ruangan berhasil ditambahkan");
+                                                T.cancel();
+                                            }
+                                        }
+                                    };
+                                    Calendar date = Calendar.getInstance();
+                                    date.set(2021, Calendar.OCTOBER, 30,23, 59, 54);
+                                    T.scheduleAtFixedRate(UpgradeHouse, date.getTime(), 1000);
+                                }
+                            }
+                            else if(direction == "Left")
+                            {
+                                if(roomRoot.getLeftRoom() != null)
+                                {
+                                    System.out.println("Room Sudah ada");
+                                    System.out.println("The Room is : " + roomRoot.getLeftRoom().getRoomName());
+                                }
+                                else
+                                {
+                                    Timer T = new Timer();
+                                    TimerTask UpgradeHouse = new TimerTask()
+                                    {
+                                        @Override
+                                        public void run()
+                                        {
+                                            if(upgradeHouse < 1080)
+                                            {
+                                                upgradeHouse++;
+                                            }
+                                            else
+                                            {
+                                                roomRoot.setLeftRoom(room);
+                                                room.setRightRoom(roomRoot);
+                                                isRoomSet = true;
+                                                upgradeHouse = 0;
+                                                System.out.println("Ruangan berhasil ditambahkan");
+                                                T.cancel();
+                                            }
+                                        }
+                                    };
+                                    Calendar date = Calendar.getInstance();
+                                    date.set(2021, Calendar.OCTOBER, 30,23, 59, 54);
+                                    T.scheduleAtFixedRate(UpgradeHouse, date.getTime(), 1000);
+                                    
+                                }
+                            }
+                            else if(direction == "Right")
+                            {
+                                if(roomRoot.getRightRoom() != null)
+                                {
+                                    System.out.println("Room Sudah ada");
+                                    System.out.println("The Room is : " + roomRoot.getRightRoom().getRoomName());
+                                }
+                                else
+                                {
+                                    Timer T = new Timer();
+                                    TimerTask UpgradeHouse = new TimerTask()
+                                    {
+                                        @Override
+                                        public void run()
+                                        {
+                                            if(upgradeHouse < 1080)
+                                            {
+                                                upgradeHouse++;
+                                            }
+                                            else
+                                            {
+                                                roomRoot.setRightRoom(room);
+                                                room.setLeftRoom(roomRoot);
+                                                isRoomSet = true;
+                                                upgradeHouse = 0;
+                                                System.out.println("Ruangan berhasil ditambahkan");
+                                                T.cancel();
+                                            }
+                                        }
+                                    };
+                                    Calendar date = Calendar.getInstance();
+                                    date.set(2021, Calendar.OCTOBER, 30,23, 59, 54);
+                                    T.scheduleAtFixedRate(UpgradeHouse, date.getTime(), 1000);
+                                }
+                            }
+                            else
+                            {
+                                System.out.println("Invalid Direction");
+                            }
+                        }
+                    }
+                }
+            }
+            else if(actionMenuInput.equals("5")|| actionMenuInput.equalsIgnoreCase("Move Room"))
+            {
                 // TODO: Move Room
-            } else if (menuInput.equals("6") || menuInput.equalsIgnoreCase("Edit Room")) {
+                 
+                //Validasi apakah Sims berada didalam Rumah
+                if(!simInHouse)
+                {
+                    System.out.println("Sim tidak berada didalam rumah");
+                }
+
+                Room[] listRooms = currentHouse.getRooms();
+                System.out.println("Berikut adalah List Ruangan yang tersedia : ");
+                for(int i = 0; i < currentHouse.getRoomsTotal(); i++)
+                {
+                    System.out.println((i+1) + ". " + listRooms[i].getRoomName());
+                }
+                System.out.println("");
+
+                Boolean inputbenar = false;
+                int roomindex;
+                while(!inputbenar)
+                {
+                    System.out.print("Masukkan nama ruangan yang ingin dipindahkan : ");
+                    String roomName = input.nextLine();
+                    for(int i = 0; i < currentHouse.getRoomsTotal(); i++)
+                    {
+                        if(roomName.equalsIgnoreCase(listRooms[i].getRoomName()))
+                        {
+                            inputbenar = true;
+                            roomindex = i;
+                            break;
+                        }
+                    }
+                    if(!inputbenar)
+                    {
+                        System.out.println("Ruangan tidak ditemukan");
+                        System.out.println("Silakan masukan ruangan ulang");
+                        System.out.println("");
+                    }
+                }
+
+                currentRoom = currentHouse.getRoom(roomindex);
+                System.out.println("Sim berhasil berpindah ke Ruangan " + currentRoom.getRoomName());
+                System.out.println("");
+
+                System.out.println(currentRoom.getRoomName());
+                currentRoom.printSpace();
+                System.out.println("");
+            }
+
+            else if(actionMenuInput.equals("6")|| actionMenuInput.equalsIgnoreCase("Edit Room"))
+            {
                 // TODO: Edit Room
             } else if (menuInput.equals("7") || menuInput.equalsIgnoreCase("Add Sim")) {
                 // TODO: Add Sim
@@ -193,11 +474,63 @@ public class GameManager {
                 System.out.println("5. Bistik");
             } else if (menuInput.equals("10") || menuInput.equalsIgnoreCase("Go To Object")) {
                 // TODO : Go To Object
-            } else if (menuInput.equals("11") || menuInput.equalsIgnoreCase("Action")) {
+                HashMap<Items, Coordinate> listItemInRoom = currentRoom.getObject();
+                System.out.println("Berikut adalah List Object yang ada di " + currentRoom.getRoomName() + " : ");
+                int i = 1;
+                for(Items item : listItemInRoom.keySet())
+                {
+                    System.out.println(i + ". " + item.getName());
+                    i++;
+                }
+                System.out.println("");
+
+                Boolean inputbenar = false;
+                int itemindex;
+                while(!inputbenar)
+                {
+                    System.out.print("Masukkan nama object yang ingin dituju : ");
+                    String itemName = input.nextLine();
+                    for(Items item : listItemInRoom.keySet())
+                    {
+                        if(itemName.equalsIgnoreCase(item.getName()))
+                        {
+                            inputbenar = true;
+                            break;
+                            
+                        }
+                    }
+                    if(!inputbenar)
+                    {
+                        System.out.println("Object tidak ditemukan");
+                        System.out.println("Silakan masukan object ulang");
+                        System.out.println("");
+                    }
+                }
+
+
+                System.out.print("Apakah Anda ingin melakukan action pada object ini? (Y/N) : ");
+                String yesno = input.nextLine();
+                while(!(yesno.equals("Y") || yesno.equals("N")))
+                {
+                    System.out.println("Input tidak dikenali");
+                    System.out.println("Silakan masukan input ulang");
+                    System.out.println("");
+                    System.out.print("Apakah Anda ingin melakukan action pada object ini? (Y/N) : ");
+                    yesno = input.nextLine();
+                }
+
+                //Memanggil Action Object disini
+
+
+            }
+            else if(actionMenuInput.equals("11")|| actionMenuInput.equalsIgnoreCase("Action"))
+            {
                 // TODO: Action
             } else if (menuInput.equals("12") || menuInput.equalsIgnoreCase("Exit")) {
                 // TODO: Exit
-            } else if (menuInput.equals("13") || menuInput.equalsIgnoreCase("Beli barang")) {
+            }
+            else if(actionMenuInput.equals("13")|| actionMenuInput.equalsIgnoreCase("Beli barang"))
+            {
                 // TODO: Beli barang
                 System.out.println("Berikut adalah items yang tersedia beserta harganya:");
                 System.out.println("1. Kasur Single     | 50");

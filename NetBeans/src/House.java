@@ -4,7 +4,7 @@ public class House {
     private Point coordinate;
     private Room[] rooms;
     private int roomCapacity = 100; 
-    public static int roomsTotal = 0;
+    private int roomsTotal = 0;
 
     public House(Point coordinate) {
         this.coordinate = coordinate;
@@ -23,6 +23,10 @@ public class House {
 
     public Room[] getRooms() {
         return rooms;
+    }
+
+    public Room getRoom(int index) {
+        return rooms[index];
     }
 
     public void setRooms(Room[] rooms) {
@@ -53,26 +57,30 @@ public class House {
         roomsTotal++;
     }
 
+    public int getRoomsTotal() {
+        return roomsTotal;
+    }
+
     public int getRoomCapacity() {
         return roomCapacity;
     }
 
-    public static void main(String[] args) {
-        House house = new House(new Point(0, 0));
-        Room room2 = new Room("room2");
-        Room room3 = new Room("room3");
-        Room room4 = new Room("room4");
-        Room room5 = new Room("room5");
-        Room room6 = new Room("room6");
+    // public static void main(String[] args) {
+    //     House house = new House(new Point(0, 0));
+    //     Room room2 = new Room("room2");
+    //     Room room3 = new Room("room3");
+    //     Room room4 = new Room("room4");
+    //     Room room5 = new Room("room5");
+    //     Room room6 = new Room("room6");
 
-        house.addRooms(room2);
-        house.addRooms(room3);
-        house.addRooms(room4);
-        house.addRooms(room5);
-        house.addRooms(room6);
+    //     house.addRooms(room2);
+    //     house.addRooms(room3);
+    //     house.addRooms(room4);
+    //     house.addRooms(room5);
+    //     house.addRooms(room6);
 
-        System.out.println(Arrays.toString(house.getRooms()));
-        System.out.println(house.getRoomCapacity());
+    //     System.out.println(Arrays.toString(house.getRooms()));
+    //     System.out.println(house.getRoomCapacity());
 
-    }
+    // }
 }

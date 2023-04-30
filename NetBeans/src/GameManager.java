@@ -2,6 +2,7 @@ import java.util.Scanner;
 import java.util.Random;
 import java.lang.Math;
 import java.util.*;
+import java.util.Map.*;
 import java.util.Calendar;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -446,7 +447,60 @@ public class GameManager {
             else if(actionMenuInput.equals("6")|| actionMenuInput.equalsIgnoreCase("Edit Room"))
             {
                 // TODO: Edit Room
-            } else if (menuInput.equals("7") || menuInput.equalsIgnoreCase("Add Sim")) {
+                currentRoom.printSpace();
+                System.out.println("");
+
+                System.out.println("Berikut adalah List Object yang ada di " + currentRoom.getRoomName() + " : ");
+                HashMap<Coordinate, Items> listItemInRoom = currentRoom.getObject();
+                int i = 1;
+                for(Coordinate coordinate: listItemInRoom.keySet())
+                {
+                    System.out.println(i + ". " + listItemInRoom.get(coordinate).getName() + " | Coordinate = " +" (" + coordinate.getX1() + "," + coordinate.getY1() + ")" + " - (" + coordinate.getX2() + "," + coordinate.getY2() + ")");
+                    i++;
+                }
+                System.out.println("");
+
+                Boolean inputbenar = false;
+
+                Coordinate initialCoordinate;
+                Items theItems;
+
+                while(!inputbenar)
+                {
+                    System.out.print("Masukkan nama object yang ingin diubah : ");
+                    String objectName = input.nextLine();
+
+                    System.out.print("Masukan koordinat x1 : ");
+                    int x1 = input.nextInt();
+                    System.out.print("Masukan koordinat y1 : ");
+                    int y1 = input.nextInt();
+
+
+                    for(Coordinate coordinate: listItemInRoom.keySet())
+                    {
+                        if((objectName.equalsIgnoreCase(listItemInRoom.get(coordinate).getName())) && (x1 == coordinate.getX1()) && (y1 == coordinate.getY1()))
+                        {
+                            inputbenar = true;
+                            initialCoordinate = coordinate;
+                            theItems = listItemInRoom.get(coordinate);
+                            break;
+                        }
+                    }
+
+                    if(!inputbenar)
+                    {
+                        System.out.println("Object tidak ditemukan");
+                        System.out.println("Silakan masukan object dan coordinate ulang");
+                        System.out.println("");
+                    }
+                }
+
+                currentRoom.moveObject(theItems, initialCoordinate);
+
+                
+            }
+            else if(actionMenuInput.equals("7")|| actionMenuInput.equalsIgnoreCase("Add Sim"))
+            {
                 // TODO: Add Sim
             } else if (menuInput.equals("8") || menuInput.equalsIgnoreCase("Change Sim")) {
                 // TODO: Change Sim
@@ -484,7 +538,7 @@ public class GameManager {
                 System.out.println("5. Bistik");
             } else if (menuInput.equals("10") || menuInput.equalsIgnoreCase("Go To Object")) {
                 // TODO : Go To Object
-                HashMap<Items, Coordinate> listItemInRoom = currentRoom.getObject();
+                HashMap<Coordinate, Items> listItemInRoom = currentRoom.getObject();
                 System.out.println("Berikut adalah List Object yang ada di " + currentRoom.getRoomName() + " : ");
                 int i = 1;
                 for(Items item : listItemInRoom.keySet())
@@ -597,7 +651,60 @@ public class GameManager {
 
             } else if (menuInput.equals("14") || menuInput.equalsIgnoreCase("Memasang barang")) {
                 // TODO: Memasang barang
-            } else {
+                System.out.println("Sekarang Kamu berada di " + currentRoom.getRoomName());
+                currentRoom.printSpace();
+                System.out.println("");
+
+                Inventory<Items> itemsInventory = currentSim.getInventoryitems();
+                ArrayList<Items> listItems =  itemsInventory.getInventoryList();
+                if(listItems.isEmpty())
+                {
+                    System.out.println("Inventory is empty. Buy some stuff ?");
+                }
+                else
+                {
+                    System.out.println("Berikut adalah List Item yang dimiliki : ");
+                    for(int i = 0; i < listItems.size(); i++)
+                    {
+                        System.out.println((i+1) + ". " + listItems.get(i).getName());
+                    }
+                    System.out.println("");
+
+                    Boolean inputbenar = false;
+                    
+
+                    Items item = null;
+                    String itemName;
+                    while(!inputbenar)
+                    {
+                        System.out.print("Masukkan nama item yang ingin dipasang : ");
+                        itemName = input.nextLine();
+                        for(int i = 0; i < listItems.size(); i++)
+                        {
+                            if(itemName.equalsIgnoreCase(listItems.get(i).getName()))
+                            {
+                                inputbenar = true;
+                                item = listItems.get(i);
+                                break;
+                            }
+                        }
+                        if(!inputbenar)
+                        {
+                            System.out.println("Item tidak ditemukan");
+                            System.out.println("Silakan masukan item ulang");
+                            System.out.println("");
+                        }
+                    }
+
+                    Boolean isPlaced = currentRoom.placeObject(item);
+                    if(isPlaced)
+                    {
+                        itemsInventory.reduceInventory(itemName);
+                    }
+                }
+            }
+            else
+            {
                 // Invalid Input
                 System.out.println("Aksi tidak dikenali!");
                 System.out.println("");

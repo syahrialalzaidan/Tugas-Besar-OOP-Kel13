@@ -11,8 +11,8 @@ public class GameManager {
     private static List<Sim> simList = new ArrayList<>();
     private Sim sim;
 
-    public static void addSim(String nama, List<Sim> simList) {
-        Sim sim = new Sim(nama);
+    public static void addSim(String nama, List<Sim> simList , World world) {
+        Sim sim = new Sim(nama , world);
         simList.add(sim);
     }
 
@@ -63,10 +63,10 @@ public class GameManager {
 
     public static void main(String[] args) throws Exception {
         List<Sim> simList = new ArrayList<>();
-        Sim currentSim;
-        World world;
-        House currentHouse;
-        Room currentRoom;
+        Sim currentSim = null;
+        World world = null;
+        House currentHouse = null;
+        Room currentRoom = null;
         int upgradeHouse = 0;
 
         Scanner input = new Scanner(System.in);
@@ -83,7 +83,8 @@ public class GameManager {
         System.out.println("3. Exit");
 
         Boolean validInput = false;
-        while (!validInput) {
+        while(!validInput)
+        {
             // Masukan Pilihan
             System.out.print("Masukkan Pilihan Anda: ");
             String pilihan = input.nextLine();
@@ -104,10 +105,10 @@ public class GameManager {
                 House firstHouse = new House(coordinate);
 
                 // membuat Sim pertama
-                Sim firstSim = new Sim(namaSim);
+                Sim firstSim = new Sim(namaSim , world);
                 
                 // Memasukan Sim kedalam SimList
-                addSim(namaSim, simList);
+                addSim(namaSim, simList , world);
 
                 // currentSim mengacu ke firstSim
                 currentSim = simList.get(0);
@@ -115,7 +116,7 @@ public class GameManager {
                 // Memasukan House ke dalam World
                 world.addHouse(currentSim.getHouse());
                 currentHouse = currentSim.getHouse();
-                currentRoom = currentHouse.getRoom();
+                currentRoom = currentHouse.getRoom(0);
                 validInput = true;
             } else if (pilihan.equals("2") || pilihan.equalsIgnoreCase("Help")) {
                 // Help
@@ -157,9 +158,9 @@ public class GameManager {
             if(actionMenuInput.equals("1")|| actionMenuInput.equalsIgnoreCase("View Sim Info"))
             {
                 // TODO: View Sim Info
-            } else if (menuInput.equals("2") || menuInput.equalsIgnoreCase("View Current Location")) {
+            } else if (actionMenuInput.equals("2") || actionMenuInput.equalsIgnoreCase("View Current Location")) {
                 // TODO: View Current Location
-            } else if (menuInput.equals("3") || menuInput.equalsIgnoreCase("View Inventory")) {
+            } else if (actionMenuInput.equals("3") || actionMenuInput.equalsIgnoreCase("View Inventory")) {
                 // TODO: View Inventory
                 System.out.println("INVENTORY of " + currentSim.getName());
                 System.out.println("=============================");
@@ -171,7 +172,7 @@ public class GameManager {
                 System.out.println(" ");
                 currentSim.getInventoryitems().printInventory();
 
-            } else if (menuInput.equals("4") || menuInput.equalsIgnoreCase("Upgrade House")) {
+            } else if (actionMenuInput.equals("4") || actionMenuInput.equalsIgnoreCase("Upgrade House")) {
                 // TODO: Upgrade House
                 
                 //Validasi apakah Sims berada didalam Rumah
@@ -257,30 +258,30 @@ public class GameManager {
                                 }
                                 else
                                 {
-                                    Timer T = new Timer();
-                                    TimerTask UpgradeHouse = new TimerTask()
-                                    {
-                                        @Override
-                                        public void run()
-                                        {
-                                            if(upgradeHouse < 1080)
-                                            {
-                                                upgradeHouse++;
-                                            }
-                                            else
-                                            {
-                                                roomRoot.setUpperRoom(room);
-                                                room.setLowerRoom(roomRoot);
-                                                isRoomSet = true;
-                                                upgradeHouse = 0;
-                                                System.out.println("Ruangan berhasil ditambahkan");
-                                                T.cancel();
-                                            }
-                                        }
-                                    };
-                                    Calendar date = Calendar.getInstance();
-                                    date.set(2021, Calendar.OCTOBER, 30,23, 59, 54);
-                                    T.scheduleAtFixedRate(UpgradeHouse, date.getTime(), 1000);
+                                    // Timer T = new Timer();
+                                    // TimerTask UpgradeHouse = new TimerTask()
+                                    // {
+                                    //     @Override
+                                    //     public void run()
+                                    //     {
+                                    //         if(upgradeHouse < 1080)
+                                    //         {
+                                    //             upgradeHouse++;
+                                    //         }
+                                    //         else
+                                    //         {
+                                    //             roomRoot.setUpperRoom(room);
+                                    //             room.setLowerRoom(roomRoot);
+                                    //             isRoomSet = true;
+                                    //             upgradeHouse = 0;
+                                    //             System.out.println("Ruangan berhasil ditambahkan");
+                                    //             T.cancel();
+                                    //         }
+                                    //     }
+                                    // };
+                                    // Calendar date = Calendar.getInstance();
+                                    // date.set(2021, Calendar.OCTOBER, 30,23, 59, 54);
+                                    // T.scheduleAtFixedRate(UpgradeHouse, date.getTime(), 1000);
                                 }       
                                 
                             }
@@ -293,30 +294,30 @@ public class GameManager {
                                 }
                                 else
                                 {
-                                    Timer T = new Timer();
-                                    TimerTask UpgradeHouse = new TimerTask()
-                                    {
-                                        @Override
-                                        public void run()
-                                        {
-                                            if(upgradeHouse < 1080)
-                                            {
-                                                upgradeHouse++;
-                                            }
-                                            else
-                                            {
-                                                roomRoot.setLowerRoom(room);
-                                                room.setUpperRoom(roomRoot);
-                                                isRoomSet = true;
-                                                upgradeHouse = 0;
-                                                System.out.println("Ruangan berhasil ditambahkan");
-                                                T.cancel();
-                                            }
-                                        }
-                                    };
-                                    Calendar date = Calendar.getInstance();
-                                    date.set(2021, Calendar.OCTOBER, 30,23, 59, 54);
-                                    T.scheduleAtFixedRate(UpgradeHouse, date.getTime(), 1000);
+                                    // Timer T = new Timer();
+                                    // TimerTask UpgradeHouse = new TimerTask()
+                                    // {
+                                    //     @Override
+                                    //     public void run()
+                                    //     {
+                                    //         if(upgradeHouse < 1080)
+                                    //         {
+                                    //             upgradeHouse++;
+                                    //         }
+                                    //         else
+                                    //         {
+                                    //             roomRoot.setLowerRoom(room);
+                                    //             room.setUpperRoom(roomRoot);
+                                    //             isRoomSet = true;
+                                    //             upgradeHouse = 0;
+                                    //             System.out.println("Ruangan berhasil ditambahkan");
+                                    //             T.cancel();
+                                    //         }
+                                    //     }
+                                    // };
+                                    // Calendar date = Calendar.getInstance();
+                                    // date.set(2021, Calendar.OCTOBER, 30,23, 59, 54);
+                                    // T.scheduleAtFixedRate(UpgradeHouse, date.getTime(), 1000);
                                 }
                             }
                             else if(direction == "Left")
@@ -328,30 +329,30 @@ public class GameManager {
                                 }
                                 else
                                 {
-                                    Timer T = new Timer();
-                                    TimerTask UpgradeHouse = new TimerTask()
-                                    {
-                                        @Override
-                                        public void run()
-                                        {
-                                            if(upgradeHouse < 1080)
-                                            {
-                                                upgradeHouse++;
-                                            }
-                                            else
-                                            {
-                                                roomRoot.setLeftRoom(room);
-                                                room.setRightRoom(roomRoot);
-                                                isRoomSet = true;
-                                                upgradeHouse = 0;
-                                                System.out.println("Ruangan berhasil ditambahkan");
-                                                T.cancel();
-                                            }
-                                        }
-                                    };
-                                    Calendar date = Calendar.getInstance();
-                                    date.set(2021, Calendar.OCTOBER, 30,23, 59, 54);
-                                    T.scheduleAtFixedRate(UpgradeHouse, date.getTime(), 1000);
+                                    // Timer T = new Timer();
+                                    // TimerTask UpgradeHouse = new TimerTask()
+                                    // {
+                                    //     @Override
+                                    //     public void run()
+                                    //     {
+                                    //         if(upgradeHouse < 1080)
+                                    //         {
+                                    //             upgradeHouse++;
+                                    //         }
+                                    //         else
+                                    //         {
+                                    //             roomRoot.setLeftRoom(room);
+                                    //             room.setRightRoom(roomRoot);
+                                    //             isRoomSet = true;
+                                    //             upgradeHouse = 0;
+                                    //             System.out.println("Ruangan berhasil ditambahkan");
+                                    //             T.cancel();
+                                    //         }
+                                    //     }
+                                    // };
+                                    // Calendar date = Calendar.getInstance();
+                                    // date.set(2021, Calendar.OCTOBER, 30,23, 59, 54);
+                                    // T.scheduleAtFixedRate(UpgradeHouse, date.getTime(), 1000);
                                     
                                 }
                             }
@@ -364,30 +365,30 @@ public class GameManager {
                                 }
                                 else
                                 {
-                                    Timer T = new Timer();
-                                    TimerTask UpgradeHouse = new TimerTask()
-                                    {
-                                        @Override
-                                        public void run()
-                                        {
-                                            if(upgradeHouse < 1080)
-                                            {
-                                                upgradeHouse++;
-                                            }
-                                            else
-                                            {
-                                                roomRoot.setRightRoom(room);
-                                                room.setLeftRoom(roomRoot);
-                                                isRoomSet = true;
-                                                upgradeHouse = 0;
-                                                System.out.println("Ruangan berhasil ditambahkan");
-                                                T.cancel();
-                                            }
-                                        }
-                                    };
-                                    Calendar date = Calendar.getInstance();
-                                    date.set(2021, Calendar.OCTOBER, 30,23, 59, 54);
-                                    T.scheduleAtFixedRate(UpgradeHouse, date.getTime(), 1000);
+                                    // Timer T = new Timer();
+                                    // TimerTask UpgradeHouse = new TimerTask()
+                                    // {
+                                    //     @Override
+                                    //     public void run()
+                                    //     {
+                                    //         if(upgradeHouse < 1080)
+                                    //         {
+                                    //             upgradeHouse++;
+                                    //         }
+                                    //         else
+                                    //         {
+                                    //             roomRoot.setRightRoom(room);
+                                    //             room.setLeftRoom(roomRoot);
+                                    //             isRoomSet = true;
+                                    //             upgradeHouse = 0;
+                                    //             System.out.println("Ruangan berhasil ditambahkan");
+                                    //             T.cancel();
+                                    //         }
+                                    //     }
+                                    // };
+                                    // Calendar date = Calendar.getInstance();
+                                    // date.set(2021, Calendar.OCTOBER, 30,23, 59, 54);
+                                    // T.scheduleAtFixedRate(UpgradeHouse, date.getTime(), 1000);
                                 }
                             }
                             else
@@ -417,7 +418,7 @@ public class GameManager {
                 System.out.println("");
 
                 Boolean inputbenar = false;
-                int roomindex;
+                int roomindex = (-1);
                 while(!inputbenar)
                 {
                     System.out.print("Masukkan nama ruangan yang ingin dipindahkan : ");
@@ -466,8 +467,8 @@ public class GameManager {
 
                 Boolean inputbenar = false;
 
-                Coordinate initialCoordinate;
-                Items theItems;
+                Coordinate initialCoordinate = null;
+                Items theItems = null;
 
                 while(!inputbenar)
                 {
@@ -506,9 +507,9 @@ public class GameManager {
             else if(actionMenuInput.equals("7")|| actionMenuInput.equalsIgnoreCase("Add Sim"))
             {
                 // TODO: Add Sim
-            } else if (menuInput.equals("8") || menuInput.equalsIgnoreCase("Change Sim")) {
+            } else if (actionMenuInput.equals("8") || actionMenuInput.equalsIgnoreCase("Change Sim")) {
                 // TODO: Change Sim
-            } else if (menuInput.equals("9") || menuInput.equalsIgnoreCase("List Object")) {
+            } else if (actionMenuInput.equals("9") || actionMenuInput.equalsIgnoreCase("List Object")) {
                 System.out.println("List of objects:");
                 System.out.println("=====================");
 
@@ -540,14 +541,14 @@ public class GameManager {
                 System.out.println("3. Susu Kacang");
                 System.out.println("4. Tumis Sayur");
                 System.out.println("5. Bistik");
-            } else if (menuInput.equals("10") || menuInput.equalsIgnoreCase("Go To Object")) {
+            } else if (actionMenuInput.equals("10") || actionMenuInput.equalsIgnoreCase("Go To Object")) {
                 // TODO : Go To Object
                 HashMap<Coordinate, Items> listItemInRoom = currentRoom.getObject();
                 System.out.println("Berikut adalah List Object yang ada di " + currentRoom.getRoomName() + " : ");
                 int i = 1;
-                for(Items item : listItemInRoom.keySet())
+                for(Coordinate coordinate : listItemInRoom.keySet())
                 {
-                    System.out.println(i + ". " + item.getName());
+                    System.out.println(i + ". " + listItemInRoom.get(coordinate).getName());
                     i++;
                 }
                 System.out.println("");
@@ -558,9 +559,9 @@ public class GameManager {
                 {
                     System.out.print("Masukkan nama object yang ingin dituju : ");
                     String itemName = input.nextLine();
-                    for(Items item : listItemInRoom.keySet())
+                    for(Coordinate coordinate : listItemInRoom.keySet())
                     {
-                        if(itemName.equalsIgnoreCase(item.getName()))
+                        if(itemName.equalsIgnoreCase(listItemInRoom.get(coordinate).getName()))
                         {
                             inputbenar = true;
                             break;
@@ -743,7 +744,7 @@ public class GameManager {
             else if(actionMenuInput.equals("11")|| actionMenuInput.equalsIgnoreCase("Action"))
             {
                 // TODO: Action
-            } else if (menuInput.equals("12") || menuInput.equalsIgnoreCase("Exit")) {
+            } else if (actionMenuInput.equals("12") || actionMenuInput.equalsIgnoreCase("Exit")) {
                 // TODO: Exit
             }
             else if(actionMenuInput.equals("13")|| actionMenuInput.equalsIgnoreCase("Beli barang"))
@@ -802,7 +803,7 @@ public class GameManager {
                     currentSim.addInventoryitems(items);
                 }
 
-            } else if (menuInput.equals("14") || menuInput.equalsIgnoreCase("Memasang barang")) {
+            } else if (actionMenuInput.equals("14") || actionMenuInput.equalsIgnoreCase("Memasang barang")) {
                 // TODO: Memasang barang
                 System.out.println("Sekarang Kamu berada di " + currentRoom.getRoomName());
                 currentRoom.printSpace();
@@ -827,7 +828,7 @@ public class GameManager {
                     
 
                     Items item = null;
-                    String itemName;
+                    String itemName = "";
                     while(!inputbenar)
                     {
                         System.out.print("Masukkan nama item yang ingin dipasang : ");

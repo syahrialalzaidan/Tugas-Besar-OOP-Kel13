@@ -20,7 +20,7 @@ public class Sim{
 
 
 
-    public Sim(String name, World world){
+    public Sim(String name,House house, World world){
         this.name = name;
         this.job = new Job();
         this.world = world;
@@ -28,7 +28,7 @@ public class Sim{
         this.inventoryfood = new Inventory<Food>("Food", name);
         this.inventoryitems = new Inventory<Items>("Items", name);
         this.inventorydish = new Inventory<Dish>("Dish", name);
-        this.house = new House(new Point(0, 0));
+        this.house = house;
         this.mood = 80;
         this.health = 80;
         this.fullness = 80;
@@ -122,14 +122,23 @@ public class Sim{
 
     public void setMood(int mood){
         this.mood = mood;
+        if (this.mood>100){
+            this.mood = 100;
+        }
     }
 
     public void setHeath(int health){
         this.health =  health;
+        if (this.health>100){
+            this.health = 100;
+        }
     }
 
     public void setFullness(int fullness){
         this.fullness = fullness;
+        if (this.fullness>100){
+            this.fullness = 100;
+        }
     }
 
     public void setKebelet(int kebelet){
@@ -168,6 +177,8 @@ public class Sim{
     }
     //
 
+    
+
     public void work(int time){
         Thread T = new Thread(new Runnable(){
         
@@ -177,8 +188,8 @@ public class Sim{
                         try{
                         Thread.sleep(1000);
                         if (i%30==0){
-                            mood-=10;
-                            fullness-=10;
+                            setMood(mood-10);
+                            setFullness(fullness-10);
                         }
                         }catch(Exception e){
                             
@@ -193,19 +204,7 @@ public class Sim{
     
         });
 
-        try{
-            if (time%120!=0){
-                throw new InputActionException("Input waktu adalah kelipatan 120 detik");
-            }
-            if ((time/30)*10>fullness || (time/30)*10>mood){
-                throw new StatusException("Atribut kekenyangan anda tidak cukup untuk melakukan kerja selama " + time + " detik.");
-            }
-            else{
-                T.start();
-            }
-        }catch(StatusException | InputActionException e){
-            System.out.println(e.getMessage());
-        }
+        T.start();
     }
 
     //
@@ -218,9 +217,9 @@ public class Sim{
                         try{
                         Thread.sleep(1000);
                         if (i%20==0){
-                            health+=5;
-                            mood+=10;
-                            fullness-=5;
+                            setHeath(health+5);
+                            setMood(mood+10);
+                            setFullness(fullness-5);
                         }
                         }catch(Exception e){
                             
@@ -231,19 +230,7 @@ public class Sim{
     
         });
 
-        try{
-            if (time%20!=0){
-                throw new InputActionException("Input waktu adalah kelipatan 20 detik");
-            }
-            if ((time/20)*5>fullness){
-                throw new StatusException("Atribut kekenyangan anda tidak cukup untuk melakukan olahraga selama " + time + " detik.");
-            }
-            else{
-                T.start();
-            }
-        }catch(StatusException | InputActionException e){
-            System.out.println(e.getMessage());
-        }
+        T.start();
 
 
 
@@ -260,8 +247,8 @@ public class Sim{
                         Thread.sleep(1000);
                         dailySleep++;
                         if (dailySleep%240==0){
-                            mood+=30;
-                            health+=20;
+                            setMood(mood+30);
+                            setHeath(health+20);
                         }
                         }catch(Exception e){
                             
@@ -274,17 +261,7 @@ public class Sim{
     
         });
 
-        try{
-            if (time%180!=0){
-                throw new InputActionException("Input waktu adalah kelipatan 180 detik atau 3 menit");
-            }
-
-            else{
-                T.start();
-            }
-        }catch(InputActionException e){
-            System.out.println(e.getMessage());
-        }
+        T.start();
     }
 
     public void eat(Edible food,Inventory<Dish> inventorydish, Inventory<Food> inventoryfood){
@@ -295,29 +272,29 @@ public class Sim{
                 for (int i = 29; i >=0 ;i--){
                         try{
                         Thread.sleep(1000);
-                
+
                         }catch(Exception e){
                             
-                        }finally{
-                            fullness+=food.getFullness();
-                            afterEating = true;
+                        }
+                      
+                             
+                }
+                setFullness(fullness+food.getFullness());
+                afterEating = true;
 
-                            if (food.getClass().getName().equals("Dish")){
-                                Dish temp = (Dish) food;
-                                try {
-                                    inventorydish.reduceInventory(temp);
-                                } catch (Exception e) {
-                                    
-                                }
-                            }
-                            else{
-                                Food temp = (Food) food;
-                                inventoryfood.addInventory(temp);
+                        if (food.getClass().getName().equals("Dish")){
+                            Dish temp = (Dish) food;
+                            try {
+                                inventorydish.reduceInventory(temp);
+                            } catch (Exception e) {
+                                
                             }
                         }
-                        
-                }
-                
+                        else{
+                            Food temp = (Food) food;
+                            inventoryfood.addInventory(temp);
+                        }   
+
             }
     
         });
@@ -338,45 +315,24 @@ public class Sim{
                         
                         }catch(Exception e){
                             
-                        }finally{
-                            mood+=10;
-                            inventorydish.addInventory(food);
-                            for (String foods:food.getIngredient()){
-
-                                try {
-                                    inventoryfood.reduceInventory(new Food(foods));
-                                } catch (Exception e) {
-
-                                }
-                            }
                         }
-    
+
                     
                 }
-                Food temp = new Food("Susu");
-                try {
-                    inventoryfood.reduceInventory(temp);
-                } catch (Exception e) {
+                setMood(mood+10);
+                inventorydish.addInventory(food);
+                for (String foods:food.getIngredient()){
+                
+                    try {
+                        inventoryfood.reduceInventory(new Food(foods));
+                    } catch (Exception e) {
 
-                }
-
-
+                    }
+                }                
             }
     
         });
-        boolean check = true;
-        for (String foods: food.getIngredient()){
-            if (!inventoryfood.getInventory().containsKey(new Food(foods))){
-                check = false;
-            }
-        }
-        if (check){
-            T.start();
-        }
-        else {
-            System.out.println("Bahan makanan tidak cukup untuk memasak");
-        }
-
+        T.start();
 
     }
 
@@ -408,15 +364,173 @@ public class Sim{
             }
     
         });
-        try{
-            if (fullness<20){
-                throw new InputActionException("Anda terlalu lapar untuk buah air");
-            }
-            else{
-                T.start();
-            }
-        }catch(InputActionException e){
-            System.out.println(e.getMessage());
-        }
+        T.start();
     }
+
+
+//aksi tambahan 
+//Saran tambahan aksi
+//2. nonton tv (efek : +10 moood, -5 kesehatan, -5 kekenyanga/30 detik)
+//3. Scroll SimTok (efek: +10 mood/30 detik, -5 kekenyangan/30 detik)
+//4. Beribadah (efek: +5 mood/10 detik, -5 kekenyangan/10 detik)
+//6. Mandi (efek: +8 mood/15 detik, -10 kekenyangan/15 detik, +10 kesehatan/15 detik )
+//7. berenang (efek + 10 mood/30 detik , +10 healt/30detik, -15 fullnes/30 detik)
+//8. bermain game (efek +20mood -10 health -10 fullness/20 detik)
+
+    public void watchingTV(int time){
+        Thread T = new Thread(new Runnable(){
+        
+            @Override 
+            public void run(){
+                for (int i = time-1; i >=0 ;i--){
+                        try{
+                        Thread.sleep(1000);
+                        if (i%30==0){
+                            health-=5;
+                            mood+=10;
+                            fullness-=5;
+                        }
+                        }catch(Exception e){
+                            
+                        }
+    
+                }
+            }
+    
+        });
+
+        T.start();
+       
+    }
+
+    public void scrollTiktok(int time){
+        Thread T = new Thread(new Runnable(){
+        
+            @Override 
+            public void run(){
+                for (int i = time-1; i >=0 ;i--){
+                        try{
+                        Thread.sleep(1000);
+                        if (i%30==0){
+                            mood+=10;
+                            health-=5;
+                        }
+                        }catch(Exception e){
+                            
+                        }
+    
+                }
+            }
+    
+        });
+
+        T.start();
+    }
+
+    public void beribadah(int time){
+        Thread T = new Thread(new Runnable(){
+        
+            @Override 
+            public void run(){
+                for (int i = time-1; i >=0 ;i--){
+                        try{
+                        Thread.sleep(1000);
+                        if (i%10==0){
+                            mood+=5;
+                            fullness-=5;
+                        }
+                        }catch(Exception e){
+                            
+                        }
+    
+                }
+            }
+    
+        });
+
+        T.start();
+    }
+    
+    public void takeShower(int time){
+        Thread T = new Thread(new Runnable(){
+        
+            @Override 
+            public void run(){
+                for (int i = time-1; i >=0 ;i--){
+                        try{
+                        Thread.sleep(1000);
+                        if (i%15==0){
+                            mood+=10;
+                            fullness-=10;
+                            health+=10;
+                        }
+                        }catch(Exception e){
+                            
+                        }
+    
+                }
+            }
+    
+        });
+
+        T.start();
+    }
+
+
+    public void swiming(int time){
+        Thread T = new Thread(new Runnable(){
+        
+            @Override 
+            public void run(){
+                for (int i = time-1; i >=0 ;i--){
+                        try{
+                        Thread.sleep(1000);
+                        if (i%30==0){
+                            mood+=10;
+                            fullness-=15;
+                            health+=10;
+                        }
+                        }catch(Exception e){
+                            
+                        }
+    
+                }
+            }
+    
+        });
+
+        T.start();
+    }
+
+    public void playingGame(int time){
+        Thread T = new Thread(new Runnable(){
+        
+            @Override 
+            public void run(){
+                for (int i = time-1; i >=0 ;i--){
+                        try{
+                        Thread.sleep(1000);
+                        if (i%20==0){
+                            mood+=10;
+                            fullness-=15;
+                            health+=10;
+                        }
+                        }catch(Exception e){
+                            
+                        }
+    
+                }
+            }
+    
+        });
+
+        T.start();
+    }
+
+    public void viewClock(){
+        System.out.println("Sisa waktu hari ini adalah");
+        System.out.println(world.getTime());
+    }
+
+    
 }

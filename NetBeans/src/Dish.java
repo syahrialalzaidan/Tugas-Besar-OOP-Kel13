@@ -1,7 +1,7 @@
 import java.util.List;
 
 public class Dish extends Objects implements Edible {
-    private List<String> ingredients;
+    private List<String> ingredients = new ArrayList<>();
     private int fullness;
     private double time;
 

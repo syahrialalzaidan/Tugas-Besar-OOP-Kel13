@@ -149,6 +149,16 @@ public class GameManager {
                 // TODO: View Current Location
             } else if (menuInput.equals("3") || menuInput.equalsIgnoreCase("View Inventory")) {
                 // TODO: View Inventory
+                System.out.println("INVENTORY of " + currentSim.getName());
+                System.out.println("=============================");
+                currentSim.getInventoryfood().printInventory();
+                System.out.println(" ");
+                System.out.println(" ");
+                currentSim.getInventorydish().printInventory();
+                System.out.println(" ");
+                System.out.println(" ");
+                currentSim.getInventoryitems().printInventory();
+
             } else if (menuInput.equals("4") || menuInput.equalsIgnoreCase("Upgrade House")) {
                 // TODO: Upgrade House
             } else if (menuInput.equals("5") || menuInput.equalsIgnoreCase("Move Room")) {

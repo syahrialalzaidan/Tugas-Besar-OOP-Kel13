@@ -222,6 +222,7 @@ public class Inventory<T extends Objects> extends javax.swing.JFrame {
         * Kasur Single = 1
         */
         System.out.printf("List of %s in inventory\n", inventoryType);
+        System.out.println("---------------------------------------");
         if (inventory.isEmpty()) {
             System.out.println("Inventory is empty. Buy some stuff?");
         } else {

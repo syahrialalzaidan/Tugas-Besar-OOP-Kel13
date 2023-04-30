@@ -1,4 +1,4 @@
-import java.util.List;
+import java.util.*;
 
 public class Dish extends Objects implements Edible {
     private List<String> ingredients = new ArrayList<>();

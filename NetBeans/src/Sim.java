@@ -1,6 +1,3 @@
-import java.util.Random;
-
-
 public class Sim {
     private String name;
     private Job job;
@@ -17,13 +14,9 @@ public class Sim {
     private int dailyWork;
     private boolean dailyPay;
 
-    private static final String[] jobChoices = {"Badut Sulap", "Koki", "Polisi", "Programmer", "Dokter", "Mata-mata", "Pengacara"};
-
-
     public Sim(String name){
         this.name = name;
-        Random rand = new Random();
-        this.job = new Job(jobChoices[rand.nextInt(jobChoices.length)]);
+        this.job = new Job();
         this.money = 100;
         this.inventoryfood = new Inventory<Food>("Food", name);
         this.inventoryitems = new Inventory<Items>("Items", name);
@@ -62,6 +55,18 @@ public class Sim {
         return inventorydish;
     }
 
+    public void addInventoryfood(Food food){
+        inventoryfood.addInventory(food);
+    }
+
+    public void addInventoryitems(Items items){
+        inventoryitems.addInventory(items);
+    }
+
+    public void addInventorydish(Dish dish){
+        inventorydish.addInventory(dish);
+    }
+
     public House getHouse(){
         return house;
     }
@@ -90,8 +95,8 @@ public class Sim {
         this.name = name;
     }
 
-    public void setJob(Job job){
-        this.job = job;
+    public void setSimJob(String jobname) throws Exception{
+        this.job.setJob(jobname);
     }
 
     public void setMoney(int money){

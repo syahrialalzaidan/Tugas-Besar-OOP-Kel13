@@ -9,24 +9,23 @@ import java.util.TimerTask;
 public class GameManager {
     private static List<Sim> simList = new ArrayList<>();
     private Sim sim;
-    
-    public static void addSim(String nama , List<Sim> simList){
+
+    public static void addSim(String nama, List<Sim> simList) {
         Sim sim = new Sim(nama);
         simList.add(sim);
     }
 
-    public static void changeSim(String nama){
+    public static void changeSim(String nama) {
         Sim sim = null;
-        for(Sim s : simList){
-            if(s.getName().equals(nama)){
+        for (Sim s : simList) {
+            if (s.getName().equals(nama)) {
                 sim = s;
                 break;
             }
         }
     }
 
-    public static void printActionMenu()
-    {
+    public static void printActionMenu() {
         System.out.println("Menu: ");
         System.out.println("1.View Sim Info");
         System.out.println("2.View Current Location");
@@ -47,19 +46,17 @@ public class GameManager {
         System.out.println("");
     }
 
-    public static void help()
-    {
+    public static void help() {
         // Isi Help Disini
         // ---------------
     }
 
-    public static void exit()
-    {
+    public static void exit() {
         // Isi Exit Disini
         // ---------------
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         List<Sim> simList = new ArrayList<>();
         Sim currentSim;
         World world;
@@ -80,59 +77,50 @@ public class GameManager {
         System.out.println("2. Help");
         System.out.println("3. Exit");
 
-        
         Boolean validInput = false;
-        while(!validInput)
-        {
+        while (!validInput) {
             // Masukan Pilihan
             System.out.print("Masukkan Pilihan Anda: ");
             String pilihan = input.nextLine();
 
-            if(pilihan.equals("1") || pilihan.equalsIgnoreCase("Start New Game"))
-            {
+            if (pilihan.equals("1") || pilihan.equalsIgnoreCase("Start New Game")) {
                 // Start New Game
                 System.out.println("Masukkan Nama Sim: ");
                 String namaSim = input.nextLine();
                 world = new World();
-                
+
                 // Random Posisi Rumah Pertama
                 int max = 63;
                 int min = 0;
-                int x = (int)(Math.random()*(max-min+1)+min); 
-                int y = (int)(Math.random()*(max-min+1)+min);
-                
-                Point coordinate = new Point(x,y);
+                int x = (int) (Math.random() * (max - min + 1) + min);
+                int y = (int) (Math.random() * (max - min + 1) + min);
+
+                Point coordinate = new Point(x, y);
                 House firstHouse = new House(coordinate);
-                
+
                 // membuat Sim pertama
                 Sim firstSim = new Sim(namaSim);
                 
                 // Memasukan Sim kedalam SimList
-                addSim(namaSim , simList);
-                
+                addSim(namaSim, simList);
+
                 // currentSim mengacu ke firstSim
                 currentSim = simList.get(0);
-                
+
                 // Memasukan House ke dalam World
                 world.addHouse(currentSim.getHouse());
                 currentHouse = currentSim.getHouse();
                 currentRoom = currentHouse.getRoom();
                 validInput = true;
-            }
-            else if(pilihan.equals("2") || pilihan.equalsIgnoreCase("Help"))
-            {
+            } else if (pilihan.equals("2") || pilihan.equalsIgnoreCase("Help")) {
                 // Help
                 help();
                 validInput = true;
-            }
-            else if(pilihan.equals("3") || pilihan.equalsIgnoreCase("Exit"))
-            {
+            } else if (pilihan.equals("3") || pilihan.equalsIgnoreCase("Exit")) {
                 // Exit
                 exit();
                 validInput = true;
-            }
-            else
-            {
+            } else {
                 // Invalid Input
                 System.out.println("Invalid Input");
             }
@@ -141,7 +129,7 @@ public class GameManager {
         System.out.println("Selamat datang " + currentSim.getName() + "di dunia SIM!");
         System.out.println("");
 
-        for(int i=0; i<4; i++) {
+        for (int i = 0; i < 4; i++) {
             System.out.print("\rHold on , we are Generating Sims Map . . . . . ");
             Thread.sleep(1000);
             System.out.print("\r                                 ");
@@ -164,17 +152,11 @@ public class GameManager {
             if(actionMenuInput.equals("1")|| actionMenuInput.equalsIgnoreCase("View Sim Info"))
             {
                 // TODO: View Sim Info
-            }
-            else if(actionMenuInput.equals("2")|| actionMenuInput.equalsIgnoreCase("View Current Location"))
-            {
+            } else if (menuInput.equals("2") || menuInput.equalsIgnoreCase("View Current Location")) {
                 // TODO: View Current Location
-            }
-            else if(actionMenuInput.equals("3")|| actionMenuInput.equalsIgnoreCase("View Inventory"))
-            {
+            } else if (menuInput.equals("3") || menuInput.equalsIgnoreCase("View Inventory")) {
                 // TODO: View Inventory
-            }
-            else if(actionMenuInput.equals("4")|| actionMenuInput.equalsIgnoreCase("Upgrade House"))
-            {
+            } else if (menuInput.equals("4") || menuInput.equalsIgnoreCase("Upgrade House")) {
                 // TODO: Upgrade House
                 
                 //Validasi apakah Sims berada didalam Rumah
@@ -454,21 +436,43 @@ public class GameManager {
             else if(actionMenuInput.equals("6")|| actionMenuInput.equalsIgnoreCase("Edit Room"))
             {
                 // TODO: Edit Room
-            }
-            else if(actionMenuInput.equals("7")|| actionMenuInput.equalsIgnoreCase("Add Sim"))
-            {
+            } else if (menuInput.equals("7") || menuInput.equalsIgnoreCase("Add Sim")) {
                 // TODO: Add Sim
-            }
-            else if(actionMenuInput.equals("8")|| actionMenuInput.equalsIgnoreCase("Change Sim"))
-            {
+            } else if (menuInput.equals("8") || menuInput.equalsIgnoreCase("Change Sim")) {
                 // TODO: Change Sim
-            }
-            else if(actionMenuInput.equals("9")|| actionMenuInput.equalsIgnoreCase("List Object"))
-            {
-                // TODO: List Object
-            }
-            else if(actionMenuInput.equals("10")|| actionMenuInput.equalsIgnoreCase("Go To Object"))
-            {
+            } else if (menuInput.equals("9") || menuInput.equalsIgnoreCase("List Object")) {
+                System.out.println("List of objects:");
+                System.out.println("=====================");
+
+                System.out.println("Items");
+                System.out.println("1. Kasur Single");
+                System.out.println("2. Kasur Queen Size");
+                System.out.println("3. Kasur King Size");
+                System.out.println("4. Toilet");
+                System.out.println("5. Kompor Gas");
+                System.out.println("6. Kompor Listrik");
+                System.out.println("7. Meja dan Kursi");
+                System.out.println("8. Jam");
+                System.out.println("");
+
+                System.out.println("Food");
+                System.out.println("1. Nasi");
+                System.out.println("2. Kentang");
+                System.out.println("3. Ayam");
+                System.out.println("4. Sapi");
+                System.out.println("5. Wortel");
+                System.out.println("6. Bayam");
+                System.out.println("7. Kacang");
+                System.out.println("8. Susu");
+                System.out.println("");
+
+                System.out.println("Dish");
+                System.out.println("1. Nasi Ayam");
+                System.out.println("2. Nasi Kari");
+                System.out.println("3. Susu Kacang");
+                System.out.println("4. Tumis Sayur");
+                System.out.println("5. Bistik");
+            } else if (menuInput.equals("10") || menuInput.equalsIgnoreCase("Go To Object")) {
                 // TODO : Go To Object
                 HashMap<Items, Coordinate> listItemInRoom = currentRoom.getObject();
                 System.out.println("Berikut adalah List Object yang ada di " + currentRoom.getRoomName() + " : ");
@@ -522,21 +526,68 @@ public class GameManager {
             else if(actionMenuInput.equals("11")|| actionMenuInput.equalsIgnoreCase("Action"))
             {
                 // TODO: Action
-            }
-            else if(actionMenuInput.equals("12")|| actionMenuInput.equalsIgnoreCase("Exit"))
-            {
+            } else if (menuInput.equals("12") || menuInput.equalsIgnoreCase("Exit")) {
                 // TODO: Exit
             }
             else if(actionMenuInput.equals("13")|| actionMenuInput.equalsIgnoreCase("Beli barang"))
             {
                 // TODO: Beli barang
-            }
-            else if(actionMenuInput.equals("14")|| actionMenuInput.equalsIgnoreCase("Memasang barang"))
-            {
+                System.out.println("Berikut adalah items yang tersedia beserta harganya:");
+                System.out.println("1. Kasur Single     | 50");
+                System.out.println("2. Kasur Queen Size | 100");
+                System.out.println("3. Kasur King Size  | 150");
+                System.out.println("4. Toilet           | 50");
+                System.out.println("5. Kompor Gas       | 100");
+                System.out.println("6. Kompor Listrik   | 200");
+                System.out.println("7. Meja dan Kursi   | 50");
+                System.out.println("8. Jam              | 10");
+
+                System.out.print("Masukkan nomor item yang ingin dibeli: ");
+                int item = input.nextInt();
+                Items items;
+                switch (item) {
+                    case 1:
+                        items = new Items("Kasur Single");
+                        break;
+                    case 2:
+                        items = new Items("Kasur Queen Size");
+                        break;
+                    case 3:
+                        items = new Items("Kasur King Size");
+                        break;
+                    case 4:
+                        items = new Items("Toilet");
+                        break;
+                    case 5:
+                        items = new Items("Kompor Gas");
+                        break;
+                    case 6:
+                        items = new Items("Kompor Listrik");
+                        break;
+                    case 7:
+                        items = new Items("Meja dan Kursi");
+                        break;
+                    case 8:
+                        items = new Items("Jam");
+                        break;
+                    default:
+                        throw new IllegalArgumentException("Item tidak tersedia");
+                }
+
+                System.out.print("Masukkan jumlah item yang ingin dibeli: ");
+                int jumlah = input.nextInt();
+
+                if ((items.getPrice() * jumlah) > currentSim.getMoney()) {
+                    System.out.println("Maaf, uang anda tidak cukup untuk membeli item tersebut");
+                } else {
+                    System.out.println("Item berhasil dibeli");
+                    currentSim.setMoney(currentSim.getMoney() - (items.getPrice() * jumlah));
+                    currentSim.addInventoryitems(items);
+                }
+
+            } else if (menuInput.equals("14") || menuInput.equalsIgnoreCase("Memasang barang")) {
                 // TODO: Memasang barang
-            }
-            else
-            {
+            } else {
                 // Invalid Input
                 System.out.println("Aksi tidak dikenali!");
                 System.out.println("");

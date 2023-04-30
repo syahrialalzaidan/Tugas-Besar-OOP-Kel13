@@ -16,6 +16,10 @@ public class GameManager {
         simList.add(sim);
     }
 
+    public List<Sim> getSimList(){
+        return simList;
+    }
+
     public static void changeSim(String nama) {
         Sim sim = null;
         for (Sim s : simList) {
@@ -547,7 +551,7 @@ public class GameManager {
                     i++;
                 }
                 System.out.println("");
-
+                String currentObject; 
                 Boolean inputbenar = false;
                 int itemindex;
                 while(!inputbenar)
@@ -569,9 +573,10 @@ public class GameManager {
                         System.out.println("Silakan masukan object ulang");
                         System.out.println("");
                     }
+                    currentObject = itemName;
                 }
 
-
+                
                 System.out.print("Apakah Anda ingin melakukan action pada object ini? (Y/N) : ");
                 String yesno = input.nextLine();
                 while(!(yesno.equals("Y") || yesno.equals("N")))
@@ -582,8 +587,156 @@ public class GameManager {
                     System.out.print("Apakah Anda ingin melakukan action pada object ini? (Y/N) : ");
                     yesno = input.nextLine();
                 }
+                
+                switch(currentObject){
+                    case "Toilet" :
+                        
+                        currentSim.defecate();
+                        break;
+                    case "TV" : 
 
-                //Memanggil Action Object disini
+                            boolean check1 = false;
+                            while(!check1){
+                                int inputTime = input.nextInt();
+                                if (inputTime%30!=0){
+                                    check1 = false;
+                                    System.out.println("Masukkan waktu harus keliapatan 30 detik");
+                                }
+                                else{
+                                    check1 = true;
+                                    currentSim.watchingTV(inputTime);
+                                }
+                            }
+                        break;
+                    case "Komputer" :
+                            boolean check2 = false;
+                            while(!check2){
+                                int inputTime = input.nextInt();
+                                if (inputTime%20!=0){
+                                    check2 = false;
+                                    System.out.println("Masukkan waktu harus keliapatan 20 detik");
+                                }
+                                else{
+                                    check2 = true;
+                                    currentSim.playingGame(inputTime);
+                                }
+                            }
+                            
+                        
+                        break;
+                    case "Kolam Renang" :
+                            boolean check3 = false;
+                            while(!check3){
+                                int inputTime = input.nextInt();
+                                if (inputTime%30!=0){
+                                    check3 = false;
+                                    System.out.println("Masukkan waktu harus keliapatan 30 detik");
+                                }
+                                else{
+                                    check3 = true;
+                                    currentSim.swiming(inputTime);
+                                }
+                            }
+                        break;
+                    case "Shower" :
+                            boolean check4 = false;
+                            while(!check4){
+                                int inputTime = input.nextInt();
+                                if (inputTime%15!=0){
+                                    check4 = false;
+                                    System.out.println("Masukkan waktu harus keliapatan 15 detik");
+                                }
+                                else{
+                                    check4= true;
+                                    currentSim.swiming(inputTime);
+                                }
+                            }
+                        break;
+                                case "Jam" :
+                                    currentSim.viewClock();
+                                case "Meja dan Kursi" :
+                                    currentSim.getInventoryfood().printInventory();
+                                    currentSim.getInventorydish().printInventory();
+                                    System.out.println("Pilih makanan untuk dimakan");
+                                    boolean check = true;
+                                    boolean isFood = true;
+                                    while (check){
+                                        String inputMakanan = input.nextLine();
+                                        if (currentSim.getInventoryfood().getInventory().containsKey(new Food(inputMakanan))){
+                                            currentSim.eat(new Food(inputMakanan), currentSim.getInventorydish(), currentSim.getInventoryfood());
+                                            check = false;
+                                        }
+                                        else if(currentSim.getInventorydish().getInventory().containsKey(inputMakanan)){
+                                            currentSim.eat(new Dish(inputMakanan), currentSim.getInventorydish(), currentSim.getInventoryfood());
+                                        }
+                                        else{
+                                            System.out.println("Kamu tidak memiliki makanan tersebut di inventory, mohon masukkan kembali makanan yang ingin dimakan");
+                                        }
+                                    }
+                                    
+                                case "Kompor Gas" :
+                                boolean check6 = true;
+                                System.out.println("Pilih makanan yang ingin dimasak");
+                                System.out.println("1. Nasi Ayam");
+                                System.out.println("2. Nasi Kari");
+                                System.out.println("3. Susu Kacang");
+                                System.out.println("4. Tumis Sayur");
+                                System.out.println("5. Bistik");
+                                String makanan = input.nextLine();
+                                Dish dish = new Dish(makanan);
+                                for (String foods: dish.getIngredient()){
+                                    if (!currentSim.getInventoryfood().getInventory().containsKey(foods)){
+                                        check6 = false;
+                                    }
+                                }
+                                if (check6){
+                                    currentSim.cook(dish,currentSim.getInventorydish(),currentSim.getInventoryfood());
+                                }
+                                else {
+                                    System.out.println("Bahan makanan tidak cukup untuk memasak");
+                                }
+                                break;                                
+                                case "Kompor Listrik" :
+                                boolean check5 = true;
+                                System.out.println("Pilih makanan yang ingin dimasak");
+                                System.out.println("1. Nasi Ayam");
+                                System.out.println("2. Nasi Kari");
+                                System.out.println("3. Susu Kacang");
+                                System.out.println("4. Tumis Sayur");
+                                System.out.println("5. Bistik");
+                                String makanan1 = input.nextLine();
+                                Dish dish1 = new Dish(makanan1);
+                                for (String foods: dish1.getIngredient()){
+                                    if (!currentSim.getInventoryfood().getInventory().containsKey(foods)){
+                                        check5 = false;
+                                    }
+                                }
+                                if (check5){
+                                    currentSim.cook(dish1,currentSim.getInventorydish(),currentSim.getInventoryfood());
+                                }
+                                else {
+                                    System.out.println("Bahan makanan tidak cukup untuk memasak");
+                                }
+                                break;
+                                default : 
+                                int waktuTidur = input.nextInt();
+                                    try{
+                                        if (waktuTidur%180!=0){
+                                            throw new Exception("Input waktu adalah kelipatan 180 detik atau 3 menit");
+                                        }
+                        
+                                        else{
+                                            currentSim.sleep(waktuTidur);
+        
+                                        }
+                                    }catch(Exception e){
+                                        System.out.println(e.getMessage());
+                                    }
+                                
+                                    
+                            
+                        
+                }
 
 
             }

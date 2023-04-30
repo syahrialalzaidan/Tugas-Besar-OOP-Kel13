@@ -105,7 +105,7 @@ public class GameManager {
                 House firstHouse = new House(coordinate);
                 
                 // membuat Sim pertama
-                Sim firstSim = new Sim(namaSim , firstHouse);
+                Sim firstSim = new Sim(namaSim);
                 
                 // Memasukan Sim kedalam SimList
                 addSim(namaSim , simList);

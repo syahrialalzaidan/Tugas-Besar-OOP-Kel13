@@ -8,7 +8,7 @@ import java.util.*;
 public class Room { //implements ActionListener {
     
     private String roomName;
-    private HashMap<Items, Coordinate> object;
+    private HashMap<Coordinate, Items> object;
     //Buttons[][] space = new Buttons[6][6];
     private String[][] space = new String[6][6];
     private Room rigthRoom;
@@ -22,7 +22,7 @@ public class Room { //implements ActionListener {
     public Room(String roomName)
     {
         this.roomName = roomName;
-        this.object = new HashMap<Items, Coordinate>();
+        this.object = new HashMap<Coordinate, Items>();
         this.rigthRoom = null;
         this.leftRoom = null;
         this.upperRoom = null;
@@ -60,11 +60,11 @@ public class Room { //implements ActionListener {
         this.roomName = roomName;
     }
 
-    public HashMap<Items, Coordinate> getObject() {
+    public HashMap<Coordinate, Items> getObject() {
         return object;
     }
 
-    public void setObject(HashMap<Items, Coordinate> object) {
+    public void setObject(HashMap<Coordinate, Items> object) {
         this.object = object;
     }
 
@@ -100,7 +100,7 @@ public class Room { //implements ActionListener {
         this.lowerRoom = lowerRoom;
     }
 
-    public void placeObject(Items object)
+    public Boolean placeObject(Items object)
     {
         printSpace();
         System.out.print("\n");
@@ -210,7 +210,7 @@ public class Room { //implements ActionListener {
 
         if(checkAvailableSpace(coordinate))
         {
-            this.object.put(object, coordinate);
+            this.object.put(coordinate, object);
             System.out.println(coordinate.getX1() + " " + coordinate.getY1() + " " + coordinate.getX2() + " " + coordinate.getY2());
             for(int i = coordinate.getY1(); i < coordinate.getY2(); i++)
             {
@@ -260,11 +260,13 @@ public class Room { //implements ActionListener {
                 }
             }
             System.out.println("Berhasil memasukkan " + object.getName());
+            return true;
         }
         else
         {
             System.out.println(coordinate.getX1() + " " + coordinate.getY1() + " " + coordinate.getX2() + " " + coordinate.getY2());
             System.out.println("Tidak ada ruang untuk " + object.getName());
+            return false;
         }
         
     }
@@ -402,28 +404,52 @@ public class Room { //implements ActionListener {
     }
 
     public Boolean checkAroundRoom()
+    {
+        if(this.getUpperRoom() == null)
         {
-            if(this.getUpperRoom() == null)
-            {
-                return true;
-            }
-            else if(this.getlowerRoom() == null)
-            {
-                return true;
-            }
-            else if(this.getLeftRoom() == null)
-            {
-                return true;
-            }
-            else if(this.getRightRoom() == null)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            return true;
         }
+        else if(this.getLowerRoom() == null)
+        {
+            return true;
+        }
+        else if(this.getLeftRoom() == null)
+        {
+            return true;
+        }
+        else if(this.getRightRoom() == null)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    public void moveObject(Items object , Coordinate kordinat)
+    {
+        removeFromRoom(object , kordinat);
+        Boolean isPlaced = placeObject(object);
+        while(!isPlaced)
+        {
+            isPlaced = placeObject(object);
+        }
+    }
+
+    public void removeFromRoom(Items Object , Coordinate kordinat)
+    {
+        Coordinate coordinate = kordinat;
+        for(int i = coordinate.getY1(); i < coordinate.getY2(); i++)
+            {
+                //System.out.println(i);
+                for(int j = coordinate.getX1(); j < coordinate.getX2(); j++)
+                {
+                    
+                    this.space[i][j] = " ";
+                }
+            }
+    }
     // public void actionPerformed(ActionEvent e)
     // {   
     //     System.out.println("actionPlaceFurniture = " + frame.getActionPlaceFurniture());

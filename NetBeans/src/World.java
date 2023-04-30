@@ -2,7 +2,7 @@ import java.util.*;
 public class World {
     private List<House> house;
     private static int houseTotal = 0;
-    private int[][] pointHouse;
+    private int[][] pointHouse = new int[64][64];
     private int time;
     private int day; 
 
@@ -10,6 +10,11 @@ public class World {
         house = new ArrayList<House>();
         time = 0;
         day = 0;
+        for (int i = 0; i < 64; i++) {
+            for (int j = 0; j < 64; j++) {
+                pointHouse[i][j] = 0;
+            }
+        }
     }
     public List<House> getHouse(){
         return house;
@@ -19,10 +24,12 @@ public class World {
         return houseTotal;
     }
 
-    pub
-
     public int[][] getPointHouse(){
         return pointHouse;
+    }
+
+    public int getTime() {
+        return time;
     }
 
     public void setHouse(List<House> house){
@@ -42,8 +49,8 @@ public class World {
         }
         else{
             this.house.add(house);
-            pointHouse[houseTotal-1][0] = house.getCoordinate().getX();
-            pointHouse[houseTotal-1][1] = house.getCoordinate().getY();
+            pointHouse[houseTotal][0] = house.getCoordinate().getX();
+            pointHouse[houseTotal][1] = house.getCoordinate().getY();
             houseTotal++;
         }
     }

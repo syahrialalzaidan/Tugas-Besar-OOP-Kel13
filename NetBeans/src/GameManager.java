@@ -11,12 +11,12 @@ public class GameManager {
     private static List<Sim> simList = new ArrayList<>();
     private Sim sim;
 
-    public static void addSim(String nama, List<Sim> simList , World world) {
-        Sim sim = new Sim(nama , world);
+    public static void addSim(String nama, List<Sim> simList , World world, House house) {
+        Sim sim = new Sim(nama, house, world);
         simList.add(sim);
     }
 
-    public List<Sim> getSimList(){
+    public static List<Sim> getSimList(){
         return simList;
     }
 
@@ -105,10 +105,10 @@ public class GameManager {
                 House firstHouse = new House(coordinate);
 
                 // membuat Sim pertama
-                Sim firstSim = new Sim(namaSim , world);
+                Sim firstSim = new Sim(namaSim, firstHouse, world);
                 
                 // Memasukan Sim kedalam SimList
-                addSim(namaSim, simList , world);
+                addSim(namaSim, simList, world, firstHouse);
 
                 // currentSim mengacu ke firstSim
                 currentSim = simList.get(0);
@@ -552,7 +552,7 @@ public class GameManager {
                     i++;
                 }
                 System.out.println("");
-                String currentObject; 
+                String currentObject = null; 
                 Boolean inputbenar = false;
                 int itemindex;
                 while(!inputbenar)
@@ -794,6 +794,7 @@ public class GameManager {
 
                 System.out.print("Masukkan jumlah item yang ingin dibeli: ");
                 int jumlah = input.nextInt();
+                input.nextLine();
 
                 if ((items.getPrice() * jumlah) > currentSim.getMoney()) {
                     System.out.println("Maaf, uang anda tidak cukup untuk membeli item tersebut");

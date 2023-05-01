@@ -22,7 +22,7 @@ public class Sim{
 
     public Sim(String name,House house, World world){
         this.name = name;
-        this.job = new Job();
+        this.job = new Job("Badut Sulap");
         this.world = world;
         this.money = 100;
         this.inventoryfood = new Inventory<Food>("Food", name);

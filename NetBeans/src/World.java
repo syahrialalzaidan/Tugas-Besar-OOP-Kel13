@@ -42,8 +42,7 @@ public class World {
         }
         else{
             this.house.add(house);
-            pointHouse[houseTotal][0] = house.getCoordinate().getX();
-            pointHouse[houseTotal][1] = house.getCoordinate().getY();
+            pointHouse[house.getCoordinate().getX()][house.getCoordinate().getY()] = 1;
             houseTotal++;
         }
     }

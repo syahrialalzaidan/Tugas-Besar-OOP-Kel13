@@ -281,6 +281,30 @@ public class Room { //implements ActionListener {
                     {
                         this.space[i][j] = "J";
                     }
+                    else if(value.equalsIgnoreCase("HP"))
+                    {
+                        this.space[i][j] = "HP";
+                    }
+                    else if(value.equalsIgnoreCase("Sajadah"))
+                    {
+                        this.space[i][j] = "SJ";
+                    }
+                    else if(value.equalsIgnoreCase("Sapu"))
+                    {
+                        this.space[i][j] = "S";
+                    }
+                    else if(value.equalsIgnoreCase("TV"))
+                    {
+                        this.space[i][j] = "TV";
+                    }
+                    else if(value.equalsIgnoreCase("Laptop"))
+                    {
+                        this.space[i][j] = "L";
+                    }
+                    else if(value.equalsIgnoreCase("Shower"))
+                    {
+                        this.space[i][j] = "SHO";
+                    }
 
                     // space[i][j].setBackground(color);
                     // space[i][j].setText(name);
@@ -321,7 +345,7 @@ public class Room { //implements ActionListener {
             {
                 for(int j = coordinate.getX1(); j < coordinate.getX2(); j++)
                 {
-                    if(!this.space[i][j].equalsIgnoreCase(" "))
+                    if(!this.space[i][j].equalsIgnoreCase(" ") && !this.space[i][j].equalsIgnoreCase("o"))
                     {
                         //System.out.println("Masuk Sini");
                         return false;
@@ -479,6 +503,27 @@ public class Room { //implements ActionListener {
                 }
             }
     }
+
+    public void kamusItems()
+    {
+        System.out.println("Kamus Items : ");
+        System.out.println("1. KS : Kasur Single");
+        System.out.println("2. KQS : Kasur Queen Size");
+        System.out.println("3. KKS : Kasur King Size");
+        System.out.println("4. T : Toilet");
+        System.out.println("5. KG : Kompor Gas");
+        System.out.println("6. KL : Kompor Listrik");
+        System.out.println("7. MDK : Meja dan Kursi");
+        System.out.println("8. J : Jam");
+        System.out.println("9. HP : HP");
+        System.out.println("10. SJ : Sajadah");
+        System.out.println("11. S : Sapu");
+        System.out.println("12. TV : TV");
+        System.out.println("13. L : Laptop");
+        System.out.println("14. SHO : Shower");
+    }
+
+
     // public void actionPerformed(ActionEvent e)
     // {   
     //     System.out.println("actionPlaceFurniture = " + frame.getActionPlaceFurniture());

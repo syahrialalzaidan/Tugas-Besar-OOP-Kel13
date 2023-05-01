@@ -90,7 +90,7 @@ public class GameManager {
 
             if (pilihan.equals("1") || pilihan.equalsIgnoreCase("Start New Game")) {
                 // Start New Game
-                System.out.println("Masukkan Nama Sim: ");
+                System.out.print("Masukkan Nama Sim: ");
                 String namaSim = input.nextLine();
                 world = new World();
 
@@ -139,12 +139,12 @@ public class GameManager {
         System.out.println("Selamat datang SIM" + currentSim.getName() + " di dunia SIM!");
         System.out.println("");
 
-        for (int i = 0; i < 4; i++) {
-            System.out.print("\rHold on , we are Generating Sims Map . . . . . ");
-            Thread.sleep(1000);
-            System.out.print("\r                                 ");
-            Thread.sleep(1000);
-        }
+        // for (int i = 0; i < 4; i++) {
+        //     System.out.print("\rHold on , we are Generating Sims Map . . . . . ");
+        //     Thread.sleep(1000);
+        //     System.out.print("\r                                 ");
+        //     Thread.sleep(1000);
+        // }
 
         System.out.println("Map Generated!");
         System.out.println("Kamu Sekarang berada di " + currentSim.getCurrentRoom().getRoomName());

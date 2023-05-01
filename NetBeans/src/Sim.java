@@ -19,11 +19,12 @@ public class Sim {
     private int dailyWork;
     private int dailySleep;
     private int dailyPay;
-     private House currentHouse;
+    private House currentHouse;
     private boolean alive;
     private int berkunjung;
     private boolean isBerkunjung;
     private Room currentRoom;
+    private Items currentItems;
 
   
 
@@ -52,9 +53,11 @@ public class Sim {
         this.berkunjung=0;
         this.isBerkunjung = false;
         this.currentRoom = house.getRoom(0);
-
-        
+        this.currentItems = null;
+        // Items item = new Items("Kasur Single");
+        // inventoryitems.addInventory(item);
     }
+
     public String getName(){
         return name;
     }
@@ -145,6 +148,10 @@ public class Sim {
     public int getBerkunjung(){
         return berkunjung;
     }
+
+    public Items getCurrentItems(){
+        return currentItems;
+    }
     
     public void setBerkunjung(boolean isBerkunjung){
         this.isBerkunjung = isBerkunjung;
@@ -153,7 +160,7 @@ public class Sim {
     public void setCurrentRoom(Room room){
         currentRoom = room;
     }
-    
+
     public void setName(String name){
         this.name = name;
     }
@@ -213,6 +220,10 @@ public class Sim {
     
     public void setBerkunjung(int berkunjung){
         this.berkunjung = berkunjung;
+    }
+
+    public void setCurrentItems(Items items){
+        currentItems = items;
     }
 
     public void isAlive(){

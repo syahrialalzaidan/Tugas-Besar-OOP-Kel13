@@ -8,7 +8,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class GameManager {
-    private static List<Sim> simList = new ArrayList<>();
+    public static List<Sim> simList = new ArrayList<>();
     private Sim sim;
 
     public static void addSim(String nama, List<Sim> simList , World world, House house) {
@@ -62,7 +62,7 @@ public class GameManager {
     }
 
     public static void main(String[] args) throws Exception {
-        List<Sim> simList = new ArrayList<>();
+        //List<Sim> simList = new ArrayList<>();
         Sim currentSim = null;
         World world = null;
         House currentHouse = null;
@@ -102,7 +102,7 @@ public class GameManager {
                 int y = (int) (Math.random() * (max - min + 1) + min);
 
                 Point coordinate = new Point(x, y);
-                House firstHouse = new House(coordinate);
+                House firstHouse = new House(coordinate , namaSim);
 
                 // membuat Sim pertama
                 Sim firstSim = new Sim(namaSim, firstHouse, world);
@@ -191,6 +191,12 @@ public class GameManager {
                     System.out.println("Uang tidak cukup");
                 }
 
+                //Validasi apakah sedang Upgrade
+                else if(currentHouse.getUpgradeHouseTime() > 0)
+                {
+                    System.out.println("Anda sedang mengupgrade rumah");
+                }
+
                 else
                 {
                     System.out.print("Masukan Nama Ruangan Baru: ");
@@ -263,31 +269,11 @@ public class GameManager {
                                 }
                                 else
                                 {
-                                    Room roomRoot2 = roomRoot;
-                                    upgradeHouseTime.set(index, 1080);
-                                    Runnable upgradeHouseThread = () ->
-                                    {
-                                        try{
-                                            // Used to set custom name to the current thread
-                                            
-                                            Thread.currentThread().setName("UpgradeHouse");
-                                            
-                                            while(upgradeHouseTime.get(index) > 0)
-                                            {
-                                                Thread.sleep(100);
-                                                //System.out.println("Masuk");
-                                            }
-                                            roomRoot2.setUpperRoom(room);
-                                            room.setLowerRoom(roomRoot2);
-                                            
-                                        }
-                                        catch (InterruptedException e) {
-                            
-                                            e.printStackTrace();
-                                        }
-                                    };
-                                    Thread thread = new Thread(upgradeHouseThread);
-                                    thread.start();
+                                    currentHouse.setRoomRoot(roomRoot);
+                                    currentHouse.setNewRoom(room);
+                                    currentHouse.setUpgradeHouseTime(1080);
+                                    System.out.println("Upgrade Time = " + currentHouse.getUpgradeHouseTime());
+                                    isRoomSet = true;
                                 }       
                                 
                             }
@@ -300,30 +286,10 @@ public class GameManager {
                                 }
                                 else
                                 {
-                                    Room roomRoot2 = roomRoot;
-                                    upgradeHouseTime.set(index, 1080);
-                                    Runnable upgradeHouseThread = () ->
-                                    {
-                                        try{
-                                            // Used to set custom name to the current thread
-                                            
-                                            Thread.currentThread().setName("UpgradeHouse");
-                                            
-                                            while(upgradeHouseTime.get(index) > 0)
-                                            {
-                                                Thread.sleep(100);
-                                            }
-                                            roomRoot2.setLowerRoom(room);
-                                            room.setUpperRoom(roomRoot2);
-                                            
-                                        }
-                                        catch (InterruptedException e) {
-                            
-                                            e.printStackTrace();
-                                        }
-                                    };
-                                    Thread thread = new Thread(upgradeHouseThread);
-                                    thread.start();
+                                    currentHouse.setRoomRoot(roomRoot);
+                                    currentHouse.setNewRoom(room);
+                                    currentHouse.setUpgradeHouseTime(1080);
+                                    isRoomSet = true;
                                 }
                             }
                             else if(direction == "Left")
@@ -335,30 +301,10 @@ public class GameManager {
                                 }
                                 else
                                 {
-                                    Room roomRoot2 = roomRoot;
-                                    upgradeHouseTime.set(index, 1080);
-                                    Runnable upgradeHouseThread = () ->
-                                    {
-                                        try{
-                                            // Used to set custom name to the current thread
-                                            
-                                            Thread.currentThread().setName("UpgradeHouse");
-                                            
-                                            while(upgradeHouseTime.get(index) > 0)
-                                            {
-                                                Thread.sleep(100);
-                                            }
-                                            roomRoot2.setLeftRoom(room);
-                                            room.setRightRoom(roomRoot2);
-                                            
-                                        }
-                                        catch (InterruptedException e) {
-                            
-                                            e.printStackTrace();
-                                        }
-                                    };
-                                    Thread thread = new Thread(upgradeHouseThread);
-                                    thread.start();
+                                    currentHouse.setRoomRoot(roomRoot);
+                                    currentHouse.setNewRoom(room);
+                                    currentHouse.setUpgradeHouseTime(1080);
+                                    isRoomSet = true;
                                 }
                             }
                             else if(direction == "Right")
@@ -370,30 +316,10 @@ public class GameManager {
                                 }
                                 else
                                 {
-                                    Room roomRoot2 = roomRoot;
-                                    upgradeHouseTime.set(index, 1080);
-                                    Runnable upgradeHouseThread = () ->
-                                    {
-                                        try{
-                                            // Used to set custom name to the current thread
-                                            
-                                            Thread.currentThread().setName("UpgradeHouse");
-                                            
-                                            while(upgradeHouseTime.get(index) > 0)
-                                            {
-                                                Thread.sleep(100);
-                                            }
-                                            roomRoot2.setRightRoom(room);
-                                            room.setLeftRoom(roomRoot2);
-                                            
-                                        }
-                                        catch (InterruptedException e) {
-                            
-                                            e.printStackTrace();
-                                        }
-                                    };
-                                    Thread thread = new Thread(upgradeHouseThread);
-                                    thread.start();
+                                    currentHouse.setRoomRoot(roomRoot);
+                                    currentHouse.setNewRoom(room);
+                                    currentHouse.setUpgradeHouseTime(1080);
+                                    isRoomSet = true;
                                 }
                             }
                             else

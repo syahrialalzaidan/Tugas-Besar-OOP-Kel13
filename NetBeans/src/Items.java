@@ -54,6 +54,42 @@ public class Items extends Objects {
                 this.price = 10;
                 action = "Melihat waktu";
                 break;
+            case "HP":
+                this.dimension[0] = 1;
+                this.dimension[1] = 1;
+                this.price = 100;
+                action = "Scroll SimTok";
+                break;
+            case "Sajadah":
+                this.dimension[0] = 1;
+                this.dimension[1] = 1;
+                this.price = 10;
+                action = "Sholat";
+                break;
+            case "Sapu":
+                this.dimension[0] = 1;
+                this.dimension[1] = 1;
+                this.price = 10;
+                action = "Membersihkan";
+                break;
+            case "TV":
+                this.dimension[0] = 2;
+                this.dimension[1] = 2;
+                this.price = 100;
+                action = "Menonton";
+                break;
+            case "Laptop":
+                this.dimension[0] = 1;
+                this.dimension[1] = 1;
+                this.price = 200;
+                action = "Mengerjakan tubes";
+                break;
+            case "Shower":
+                this.dimension[0] = 1;
+                this.dimension[1] = 1;
+                this.price = 50;
+                action = "Mandi";
+                break;
             default:
                 this.dimension[0] = 1;
                 this.dimension[1] = 1;

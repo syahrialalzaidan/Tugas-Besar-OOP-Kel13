@@ -67,7 +67,7 @@ public class GameManager {
         World world = null;
         House currentHouse = null;
         Room currentRoom = null;
-        int upgradeHouse = 0;
+        List<Integer> upgradeHouseTime = new ArrayList<>();
 
         Scanner input = new Scanner(System.in);
 
@@ -106,6 +106,10 @@ public class GameManager {
 
                 // membuat Sim pertama
                 Sim firstSim = new Sim(namaSim, firstHouse, world);
+
+                // menset upgradeHouseTime baru untuk sim pertama
+                upgradeHouseTime.add(0);
+
                 
                 // Memasukan Sim kedalam SimList
                 addSim(namaSim, simList, world, firstHouse);
@@ -132,7 +136,7 @@ public class GameManager {
             }
         }
 
-        System.out.println("Selamat datang " + currentSim.getName() + "di dunia SIM!");
+        System.out.println("Selamat datang " + currentSim.getName() + " di dunia SIM!");
         System.out.println("");
 
         for (int i = 0; i < 4; i++) {
@@ -206,7 +210,7 @@ public class GameManager {
 
                     while(!roomRootSet)
                     {
-                        System.out.print("Masukan Ruangan yang akan dihubungkan: ");
+                        System.out.print("Masukan Nama Ruangan yang akan dihubungkan: ");
                         String roomRootName = input.nextLine();
 
                         for(int i = 0 ; i < currentHouse.getRoomsTotal() ; i++)
@@ -223,7 +227,7 @@ public class GameManager {
                         }
                         else
                         {
-                            validInput = true;
+                            roomRootSet = true;
                         }
                     }
 
@@ -246,6 +250,7 @@ public class GameManager {
                     
                     
                         Boolean isRoomSet = false;
+                        int index = simList.indexOf(currentSim);
 
                         while(!isRoomSet)
                         {                    
@@ -258,30 +263,31 @@ public class GameManager {
                                 }
                                 else
                                 {
-                                    // Timer T = new Timer();
-                                    // TimerTask UpgradeHouse = new TimerTask()
-                                    // {
-                                    //     @Override
-                                    //     public void run()
-                                    //     {
-                                    //         if(upgradeHouse < 1080)
-                                    //         {
-                                    //             upgradeHouse++;
-                                    //         }
-                                    //         else
-                                    //         {
-                                    //             roomRoot.setUpperRoom(room);
-                                    //             room.setLowerRoom(roomRoot);
-                                    //             isRoomSet = true;
-                                    //             upgradeHouse = 0;
-                                    //             System.out.println("Ruangan berhasil ditambahkan");
-                                    //             T.cancel();
-                                    //         }
-                                    //     }
-                                    // };
-                                    // Calendar date = Calendar.getInstance();
-                                    // date.set(2021, Calendar.OCTOBER, 30,23, 59, 54);
-                                    // T.scheduleAtFixedRate(UpgradeHouse, date.getTime(), 1000);
+                                    Room roomRoot2 = roomRoot;
+                                    upgradeHouseTime.set(index, 1080);
+                                    Runnable upgradeHouseThread = () ->
+                                    {
+                                        try{
+                                            // Used to set custom name to the current thread
+                                            
+                                            Thread.currentThread().setName("UpgradeHouse");
+                                            
+                                            while(upgradeHouseTime.get(index) > 0)
+                                            {
+                                                Thread.sleep(100);
+                                                //System.out.println("Masuk");
+                                            }
+                                            roomRoot2.setUpperRoom(room);
+                                            room.setLowerRoom(roomRoot2);
+                                            
+                                        }
+                                        catch (InterruptedException e) {
+                            
+                                            e.printStackTrace();
+                                        }
+                                    };
+                                    Thread thread = new Thread(upgradeHouseThread);
+                                    thread.start();
                                 }       
                                 
                             }
@@ -294,30 +300,30 @@ public class GameManager {
                                 }
                                 else
                                 {
-                                    // Timer T = new Timer();
-                                    // TimerTask UpgradeHouse = new TimerTask()
-                                    // {
-                                    //     @Override
-                                    //     public void run()
-                                    //     {
-                                    //         if(upgradeHouse < 1080)
-                                    //         {
-                                    //             upgradeHouse++;
-                                    //         }
-                                    //         else
-                                    //         {
-                                    //             roomRoot.setLowerRoom(room);
-                                    //             room.setUpperRoom(roomRoot);
-                                    //             isRoomSet = true;
-                                    //             upgradeHouse = 0;
-                                    //             System.out.println("Ruangan berhasil ditambahkan");
-                                    //             T.cancel();
-                                    //         }
-                                    //     }
-                                    // };
-                                    // Calendar date = Calendar.getInstance();
-                                    // date.set(2021, Calendar.OCTOBER, 30,23, 59, 54);
-                                    // T.scheduleAtFixedRate(UpgradeHouse, date.getTime(), 1000);
+                                    Room roomRoot2 = roomRoot;
+                                    upgradeHouseTime.set(index, 1080);
+                                    Runnable upgradeHouseThread = () ->
+                                    {
+                                        try{
+                                            // Used to set custom name to the current thread
+                                            
+                                            Thread.currentThread().setName("UpgradeHouse");
+                                            
+                                            while(upgradeHouseTime.get(index) > 0)
+                                            {
+                                                Thread.sleep(100);
+                                            }
+                                            roomRoot2.setLowerRoom(room);
+                                            room.setUpperRoom(roomRoot2);
+                                            
+                                        }
+                                        catch (InterruptedException e) {
+                            
+                                            e.printStackTrace();
+                                        }
+                                    };
+                                    Thread thread = new Thread(upgradeHouseThread);
+                                    thread.start();
                                 }
                             }
                             else if(direction == "Left")
@@ -329,31 +335,30 @@ public class GameManager {
                                 }
                                 else
                                 {
-                                    // Timer T = new Timer();
-                                    // TimerTask UpgradeHouse = new TimerTask()
-                                    // {
-                                    //     @Override
-                                    //     public void run()
-                                    //     {
-                                    //         if(upgradeHouse < 1080)
-                                    //         {
-                                    //             upgradeHouse++;
-                                    //         }
-                                    //         else
-                                    //         {
-                                    //             roomRoot.setLeftRoom(room);
-                                    //             room.setRightRoom(roomRoot);
-                                    //             isRoomSet = true;
-                                    //             upgradeHouse = 0;
-                                    //             System.out.println("Ruangan berhasil ditambahkan");
-                                    //             T.cancel();
-                                    //         }
-                                    //     }
-                                    // };
-                                    // Calendar date = Calendar.getInstance();
-                                    // date.set(2021, Calendar.OCTOBER, 30,23, 59, 54);
-                                    // T.scheduleAtFixedRate(UpgradeHouse, date.getTime(), 1000);
-                                    
+                                    Room roomRoot2 = roomRoot;
+                                    upgradeHouseTime.set(index, 1080);
+                                    Runnable upgradeHouseThread = () ->
+                                    {
+                                        try{
+                                            // Used to set custom name to the current thread
+                                            
+                                            Thread.currentThread().setName("UpgradeHouse");
+                                            
+                                            while(upgradeHouseTime.get(index) > 0)
+                                            {
+                                                Thread.sleep(100);
+                                            }
+                                            roomRoot2.setLeftRoom(room);
+                                            room.setRightRoom(roomRoot2);
+                                            
+                                        }
+                                        catch (InterruptedException e) {
+                            
+                                            e.printStackTrace();
+                                        }
+                                    };
+                                    Thread thread = new Thread(upgradeHouseThread);
+                                    thread.start();
                                 }
                             }
                             else if(direction == "Right")
@@ -365,30 +370,30 @@ public class GameManager {
                                 }
                                 else
                                 {
-                                    // Timer T = new Timer();
-                                    // TimerTask UpgradeHouse = new TimerTask()
-                                    // {
-                                    //     @Override
-                                    //     public void run()
-                                    //     {
-                                    //         if(upgradeHouse < 1080)
-                                    //         {
-                                    //             upgradeHouse++;
-                                    //         }
-                                    //         else
-                                    //         {
-                                    //             roomRoot.setRightRoom(room);
-                                    //             room.setLeftRoom(roomRoot);
-                                    //             isRoomSet = true;
-                                    //             upgradeHouse = 0;
-                                    //             System.out.println("Ruangan berhasil ditambahkan");
-                                    //             T.cancel();
-                                    //         }
-                                    //     }
-                                    // };
-                                    // Calendar date = Calendar.getInstance();
-                                    // date.set(2021, Calendar.OCTOBER, 30,23, 59, 54);
-                                    // T.scheduleAtFixedRate(UpgradeHouse, date.getTime(), 1000);
+                                    Room roomRoot2 = roomRoot;
+                                    upgradeHouseTime.set(index, 1080);
+                                    Runnable upgradeHouseThread = () ->
+                                    {
+                                        try{
+                                            // Used to set custom name to the current thread
+                                            
+                                            Thread.currentThread().setName("UpgradeHouse");
+                                            
+                                            while(upgradeHouseTime.get(index) > 0)
+                                            {
+                                                Thread.sleep(100);
+                                            }
+                                            roomRoot2.setRightRoom(room);
+                                            room.setLeftRoom(roomRoot2);
+                                            
+                                        }
+                                        catch (InterruptedException e) {
+                            
+                                            e.printStackTrace();
+                                        }
+                                    };
+                                    Thread thread = new Thread(upgradeHouseThread);
+                                    thread.start();
                                 }
                             }
                             else
@@ -396,6 +401,10 @@ public class GameManager {
                                 System.out.println("Invalid Direction");
                             }
                         }
+                    }
+                    else
+                    {
+                        System.out.println("Ruangan tidak bisa diupgrade karena kiri - kanan - atas - bawah sudah ada ruangan");
                     }
                 }
             }

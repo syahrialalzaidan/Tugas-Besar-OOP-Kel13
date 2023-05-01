@@ -11,6 +11,7 @@ public class Room { //implements ActionListener {
     private HashMap<Coordinate, Items> object;
     //Buttons[][] space = new Buttons[6][6];
     private String[][] space = new String[6][6];
+    private Point simPoint;
     private Room rigthRoom;
     private Room leftRoom;
     private Room upperRoom;
@@ -23,6 +24,7 @@ public class Room { //implements ActionListener {
     {
         this.roomName = roomName;
         this.object = new HashMap<Coordinate, Items>();
+        this.simPoint = new Point(0, 0);
         this.rigthRoom = null;
         this.leftRoom = null;
         this.upperRoom = null;
@@ -43,8 +45,14 @@ public class Room { //implements ActionListener {
             // // System.out.println("i = " + i + " j = " + j);
             // // System.out.println(buttons[i][j].getBounds());
             // frame.add(space[i][j]);
-            
-                this.space[i][j] = " ";
+                if((simPoint.getY() == i) && (simPoint.getX() == j))
+                {
+                    this.space[i][j] = "o";
+                }
+                else
+                {
+                    this.space[i][j] = " ";
+                }
             }
         }
 
@@ -66,6 +74,23 @@ public class Room { //implements ActionListener {
 
     public void setObject(HashMap<Coordinate, Items> object) {
         this.object = object;
+    }
+
+    public Point getSimPoint() {
+        return simPoint;
+    }
+
+    public void setSimPoint(int x, int y) {
+        
+        // remove old point
+        this.space[this.simPoint.getY()][this.simPoint.getX()] = " ";
+        
+        // create new point
+        Point newPoint = new Point(x, y);
+        
+        // set new point
+        this.space[y][x] = "o";
+        this.simPoint = newPoint;
     }
 
     public Room getRightRoom() {
@@ -220,35 +245,39 @@ public class Room { //implements ActionListener {
                     //System.out.println(i + " , " + j);
                     String value = object.getName();
                     
-                    if(value.equalsIgnoreCase("Kasur Single"))
+                    if((simPoint.getY() == i) && (simPoint.getX() == j))
+                    {
+                        this.space[i][j] = "o";
+                    }
+                    else if(value.equalsIgnoreCase("Kasur Single"))
                     {
                         this.space[i][j] = "KS";
                     }
-                    if(value.equalsIgnoreCase("Kasur Queen Size"))
+                    else if(value.equalsIgnoreCase("Kasur Queen Size"))
                     {
                         this.space[i][j] = "KQS";
                     }
-                    if(value.equalsIgnoreCase("Kasur King Size"))
+                    else if(value.equalsIgnoreCase("Kasur King Size"))
                     {
                         this.space[i][j] = "KKS";
                     }
-                    if(value.equalsIgnoreCase("Toilet"))
+                    else if(value.equalsIgnoreCase("Toilet"))
                     {
                         this.space[i][j] = "T";
                     }
-                    if(value.equalsIgnoreCase("Kompor Gas"))
+                    else if(value.equalsIgnoreCase("Kompor Gas"))
                     {
                         this.space[i][j] = "KG";
                     }
-                    if(value.equalsIgnoreCase("Kompor Listrik"))
+                    else if(value.equalsIgnoreCase("Kompor Listrik"))
                     {
                         this.space[i][j] = "KL";
                     }
-                    if(value.equalsIgnoreCase("Meja dan Kursi"))
+                    else if(value.equalsIgnoreCase("Meja dan Kursi"))
                     {
                         this.space[i][j] = "MDK";
                     }
-                    if(value.equalsIgnoreCase("Jam"))
+                    else if(value.equalsIgnoreCase("Jam"))
                     {
                         this.space[i][j] = "J";
                     }

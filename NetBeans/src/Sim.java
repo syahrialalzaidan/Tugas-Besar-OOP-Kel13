@@ -24,7 +24,7 @@ public class Sim{
         this.name = name;
         this.job = new Job("Badut Sulap");
         this.world = world;
-        this.money = 100;
+        this.money = 2000;
         this.inventoryfood = new Inventory<Food>("Food", name);
         this.inventoryitems = new Inventory<Items>("Items", name);
         this.inventorydish = new Inventory<Dish>("Dish", name);

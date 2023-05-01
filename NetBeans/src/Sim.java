@@ -17,7 +17,9 @@ public class Sim{
     private int dailyWork;
     private int dailySleep;
     private int dailyPay;
-
+    private House currentHouse;
+    private boolean alive;
+    private int berkunjung;
 
 
     public Sim(String name,House house, World world){
@@ -37,6 +39,11 @@ public class Sim{
         this.dailyWork = 0;
         this.dailySleep = 0;
         this.dailyPay = 1;
+        this.currentHouse = house;
+        this.alive = true;  
+        this.berkunjung=0;
+
+        
     }
     public String getName(){
         return name;
@@ -77,6 +84,10 @@ public class Sim{
         return house;
     }
 
+    public House getCurrHouse(){
+        return currentHouse;
+    }
+
     public int getMood(){
         return mood;
     }
@@ -108,6 +119,14 @@ public class Sim{
     public int getDailyWork(){
         return dailyWork;
     }
+
+    public boolean getAlive(){
+        return alive;
+    }
+
+    public int getBerkunjung(){
+        return berkunjung;
+    }
     
     public void setName(String name){
         this.name = name;
@@ -125,6 +144,9 @@ public class Sim{
         if (this.mood>100){
             this.mood = 100;
         }
+        if (this.mood<0){
+            alive = false;
+        }
     }
 
     public void setHeath(int health){
@@ -132,12 +154,18 @@ public class Sim{
         if (this.health>100){
             this.health = 100;
         }
+        if (this.health<0){
+            alive = false;
+        }
     }
 
     public void setFullness(int fullness){
         this.fullness = fullness;
         if (this.fullness>100){
             this.fullness = 100;
+        }
+        if (this.fullness<0){
+            alive = false;
         }
     }
 
@@ -149,8 +177,29 @@ public class Sim{
         this.house = house;
     }
 
+    public void setCurrentHouse(House house){
+        currentHouse = house;
+    }
+
+    public void setAlive(boolean alive){
+        this.alive = alive;
+    }
     
-    
+    public void setBerkunjung(int berkunjung){
+        this.berkunjung = berkunjung;
+    }
+
+    public void isAlive(){
+        if (mood<0){
+            System.out.println("Sim anda mati karena depresi");
+        }
+        else if(health<0){
+            System.out.println("Sim anda mati karena sakit");
+        }
+        else if(fullness<0){
+            System.out.println("Sim anda mati karena kelaparan");
+        }
+    }
 
     public void resetSim(){
         if (dailyPay<2){
@@ -200,6 +249,8 @@ public class Sim{
                     dailyWork=0;
                     dailyPay--;
                 }
+                world.runTime(time);
+                isAlive();
             }
     
         });
@@ -220,12 +271,16 @@ public class Sim{
                             setHeath(health+5);
                             setMood(mood+10);
                             setFullness(fullness-5);
+                            System.out.println("mood dan health bertambah masing-masing 10 dan 5");
+                            System.out.println("fullnes berkurang sebesar 5");
                         }
                         }catch(Exception e){
                             
                         }
     
                 }
+                world.runTime(time);
+                isAlive();
             }
     
         });
@@ -249,12 +304,15 @@ public class Sim{
                         if (dailySleep%240==0){
                             setMood(mood+30);
                             setHeath(health+20);
+                            System.out.println("mood dan health bertambah masing-masing sebesar 30 dan 20" );
                         }
                         }catch(Exception e){
                             
                         }
     
                 }
+                world.runTime(time);
+                isAlive();
 
 
             }
@@ -280,6 +338,7 @@ public class Sim{
                              
                 }
                 setFullness(fullness+food.getFullness());
+                System.out.println("fullness bertambah sebesar " + food.getFullness());
                 afterEating = true;
 
                         if (food.getClass().getName().equals("Dish")){
@@ -294,7 +353,8 @@ public class Sim{
                             Food temp = (Food) food;
                             inventoryfood.addInventory(temp);
                         }   
-
+                        world.runTime(30);
+                        isAlive();
             }
     
         });
@@ -309,7 +369,7 @@ public class Sim{
         
             @Override 
             public void run(){
-                for (double i = food.getTime(); i >=0 ;i--){
+                for (double i = food.getTime()-1; i >=0 ;i--){
                         try{
                         Thread.sleep(1000);
                         
@@ -320,6 +380,7 @@ public class Sim{
                     
                 }
                 setMood(mood+10);
+                System.out.println("mood bertambah sebesar 10 dan masakan ditambahkan kedalam inventory");
                 inventorydish.addInventory(food);
                 for (String foods:food.getIngredient()){
                 
@@ -328,7 +389,9 @@ public class Sim{
                     } catch (Exception e) {
 
                     }
-                }                
+                }
+                world.runTime((int)food.getTime());
+                isAlive();               
             }
     
         });
@@ -337,9 +400,52 @@ public class Sim{
     }
 
     public void visit(House house){
+        double jarak = Math.sqrt((house.getCoordinate().getX()-this.house.getCoordinate().getX())^2 + (house.getCoordinate().getY()-this.house.getCoordinate().getY())^2);
+        
+        Thread perjalanan = new Thread(new Runnable(){
+        
+            @Override 
+            public void run(){
+                System.out.println("Estimasi perjalanan adalah " + jarak + " detik");
+                        try{
+                        Thread.sleep((long)jarak*1000);
+                        
+                        }catch(Exception e){
+                            
+                        }
 
+                    currentHouse = house;
+                    berkunjung++;
+                    System.out.println("Sudah sampai di tujuan");
+                }
+        });
+        perjalanan.start();
+        isAlive();
     }
 
+    public void goHome(House house){
+        double jarak = Math.sqrt((house.getCoordinate().getX()-this.house.getCoordinate().getX())^2 + (house.getCoordinate().getY()-this.house.getCoordinate().getY())^2);
+        
+        Thread perjalanan = new Thread(new Runnable(){
+        
+            @Override 
+            public void run(){
+                System.out.println("Estimasi perjalanan adalah " + jarak + " detik");
+                        try{
+                        Thread.sleep((long)jarak*1000);
+                        
+                        }catch(Exception e){
+                            
+                        }
+
+                    currentHouse = house;
+                    berkunjung=0;
+                    System.out.println("Sudah sampai di tujuan");
+                }
+        });
+        perjalanan.start();
+        isAlive();
+    }
 
     public void defecate(){
         Thread T = new Thread(new Runnable(){
@@ -358,8 +464,11 @@ public class Sim{
                 }
                 mood+=10;
                 fullness-=20;
+                System.out.println("mood bertambah sebesar 10");
+                System.out.println("mood berkurang sebesar 20");
                 afterEating = false;
-
+                world.runTime(10);
+                isAlive();
 
             }
     
@@ -370,12 +479,12 @@ public class Sim{
 
 //aksi tambahan 
 //Saran tambahan aksi
-//2. nonton tv (efek : +10 moood, -5 kesehatan, -5 kekenyanga/30 detik)
-//3. Scroll SimTok (efek: +10 mood/30 detik, -5 kekenyangan/30 detik)
-//4. Beribadah (efek: +5 mood/10 detik, -5 kekenyangan/10 detik)
-//6. Mandi (efek: +8 mood/15 detik, -10 kekenyangan/15 detik, +10 kesehatan/15 detik )
-//7. berenang (efek + 10 mood/30 detik , +10 healt/30detik, -15 fullnes/30 detik)
-//8. bermain game (efek +20mood -10 health -10 fullness/20 detik)
+//1. nonton tv (efek : +10 moood, -5 kesehatan, -5 kekenyanga/30 detik)
+//2. Scroll SimTok (efek: +10 mood/30 detik, -5 kekenyangan/30 detik)
+//3. Beribadah (efek: +5 mood/10 detik, -5 kekenyangan/10 detik)
+//4. Mandi (efek: +10 mood/15 detik, -10 kekenyangan/15 detik, +10 kesehatan/15 detik )
+//5. berenang (efek + 10 mood/30 detik , +10 healt/30detik, -15 fullnes/30 detik)
+//6. bermain game (efek +20mood -10 health -10 fullness/20 detik)
 
     public void watchingTV(int time){
         Thread T = new Thread(new Runnable(){
@@ -389,12 +498,17 @@ public class Sim{
                             health-=5;
                             mood+=10;
                             fullness-=5;
+                            System.out.println("mood bertambah sebesar 10");
+                            System.out.println("health dan fullnes berkurang sebesar 5");
+
                         }
                         }catch(Exception e){
                             
                         }
     
                 }
+                world.runTime(time);
+                isAlive();
             }
     
         });
@@ -414,12 +528,16 @@ public class Sim{
                         if (i%30==0){
                             mood+=10;
                             health-=5;
+                            System.out.println("mood bertambah sebesar 10");
+                            System.out.println("health berkurang sebesar 5");
                         }
                         }catch(Exception e){
                             
                         }
     
                 }
+                world.runTime(time);
+                isAlive();
             }
     
         });
@@ -438,12 +556,16 @@ public class Sim{
                         if (i%10==0){
                             mood+=5;
                             fullness-=5;
+                            System.out.println("mood bertambah sebesar 5");
+                            System.out.println("fullness berkurang sebesar 5");
                         }
                         }catch(Exception e){
                             
                         }
     
                 }
+                world.runTime(time);
+                isAlive();
             }
     
         });
@@ -463,12 +585,16 @@ public class Sim{
                             mood+=10;
                             fullness-=10;
                             health+=10;
+                            System.out.println("mood dan health bertambah sebesar 10");
+                            System.out.println("fullness berkurang sebesar 10");
                         }
                         }catch(Exception e){
                             
                         }
     
                 }
+                world.runTime(time);
+                isAlive();
             }
     
         });
@@ -489,12 +615,16 @@ public class Sim{
                             mood+=10;
                             fullness-=15;
                             health+=10;
+                            System.out.println("mood dan health bertambah sebesar 10");
+                            System.out.println("fullness berkurang sebesar 15");
                         }
                         }catch(Exception e){
                             
                         }
     
                 }
+                world.runTime(time);
+                isAlive();
             }
     
         });
@@ -511,15 +641,48 @@ public class Sim{
                         try{
                         Thread.sleep(1000);
                         if (i%20==0){
-                            mood+=10;
-                            fullness-=15;
-                            health+=10;
+                            mood+=20;
+                            fullness-=10;
+                            health-=10;
+                            System.out.println("mood bertambah sebesar 20");
+                            System.out.println("fullness dan health berkurang sebesar 10");
                         }
                         }catch(Exception e){
                             
                         }
     
                 }
+                world.runTime(time);
+                isAlive();
+            }
+    
+        });
+
+        T.start();
+    }
+
+    public void cleaningHouse(){
+        Thread T = new Thread(new Runnable(){
+        
+            @Override 
+            public void run(){
+                for (int i = 20-1; i >=0 ;i--){
+                        try{
+                        Thread.sleep(1000);
+                        if (i%15==0){
+                            mood+=10;
+                            fullness-=10;
+                            health+=5;
+                            System.out.println("mood dan health bertambah sebesar masing-masing 10 dan 5");
+                            System.out.println("fullness berkurang sebesar 10");
+                        }
+                        }catch(Exception e){
+                            
+                        }
+    
+                }
+                world.runTime(20);
+                isAlive();
             }
     
         });
@@ -528,8 +691,19 @@ public class Sim{
     }
 
     public void viewClock(){
-        System.out.println("Sisa waktu hari ini adalah");
-        System.out.println(world.getTime());
+        System.out.print("Sisa waktu hari ini adalah ");
+        System.out.println(world.getTime() + " menit.");
+    }
+
+    public void viewSimInfo(){
+        System.out.println("        Info SIM");
+        System.out.println("============================");
+        System.out.println("Nama : " + name);
+        System.out.println("Pekerjaan : " + job);
+        System.out.println("Kesehatan : " + health);
+        System.out.println("Kekenyangan : " + fullness);
+        System.out.println("Mood : " + mood);
+        System.out.println("Uang : " + mood);
     }
 
     

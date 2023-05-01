@@ -37,14 +37,7 @@ public class World {
     }
 
     public void addHouse(House house){
-        boolean isExist = false;
-
-        for (int i = 0; i < pointHouse.length; i++) {
-                if (pointHouse[i][0] == house.getCoordinate().getX() && pointHouse[i][1] == house.getCoordinate().getY()) {
-                    isExist = true;
-        }
-    }
-        if(isExist){
+        if(pointHouse[house.getCoordinate().getX()][house.getCoordinate().getY()] != 0){
             throw new IllegalArgumentException("House already exist");
         }
         else{
@@ -62,6 +55,7 @@ public class World {
                     if (s.getDailySleep() < 180){
                         s.setHeath(s.getHeath()-5);
                         s.setMood(s.getMood()-5);
+                        System.out.println("Status mood dah health berkurang karena kurang tidur");
                 }}
                 if (s.getAfterEating()){
                     s.setKebelet(s.getKebelet()+time);
@@ -70,7 +64,21 @@ public class World {
                     s.setHeath(s.getHeath()-5);
                     s.setMood(s.getMood()-5);
                     s.setKebelet(s.getKebelet()-240);
+                    System.out.println("Status mood dah health aberkurang karena belum buang air");
                 }
+                if (s.getBerkunjung()!=0){
+                    s.setBerkunjung(s.getBerkunjung()+time);
+                    if ((s.getBerkunjung()-1)%30==0){
+                        int efek = (s.getBerkunjung()-1)/30;
+                        s.setMood(s.getMood()+10*efek);
+                        s.setFullness(s.getFullness()-10*efek);
+                        s.setBerkunjung(s.getBerkunjung()-30*efek);
+                        System.out.println("Akibat berkunjung status mood bertambah dan status health berkurang ");
+                    }
+                }
+
+                
+
             }
         
         this.time = now;

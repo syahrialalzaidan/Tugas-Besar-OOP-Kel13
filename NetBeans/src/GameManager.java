@@ -65,7 +65,7 @@ public class GameManager {
         //List<Sim> simList = new ArrayList<>();
         Sim currentSim = null;
         World world = null;
-        House currentHouse = null;
+        //House currentHouse = null;
         Room currentRoom = null;
         List<Integer> upgradeHouseTime = new ArrayList<>();
 
@@ -118,8 +118,9 @@ public class GameManager {
 
                 // Memasukan House ke dalam World
                 world.addHouse(currentSim.getHouse());
-                currentHouse = currentSim.getHouse();
-                currentRoom = currentHouse.getRoom(0);
+                //currentHouse = currentSim.getHouse();
+
+                //currentRoom = currentSim.getCurrHouse().getRoom(0);
                 validInput = true;
             } else if (pilihan.equals("2") || pilihan.equalsIgnoreCase("Help")) {
                 // Help
@@ -146,8 +147,8 @@ public class GameManager {
         }
 
         System.out.println("Map Generated!");
-        System.out.println("Kamu Sekarang berada di " + currentRoom.getRoomName());
-        currentRoom.printSpace();
+        System.out.println("Kamu Sekarang berada di " + currentSim.getCurrentRoom().getRoomName());
+        currentSim.getCurrentRoom().printSpace();
         System.out.println("");
 
         printActionMenu();
@@ -178,7 +179,7 @@ public class GameManager {
                 // TODO: Upgrade House
 
                 // Validasi apakah Sims berada didalam Rumah
-                if (!simInHouse) {
+                if (currentSim.getisBerkunjung()) {
                     System.out.println("Sim tidak berada didalam rumah");
                 }
 
@@ -188,20 +189,21 @@ public class GameManager {
                 }
 
                 //Validasi apakah sedang Upgrade
-                else if(currentHouse.getUpgradeHouseTime() > 0)
+                else if(currentSim.getCurrHouse().getUpgradeHouseTime() > 0)
                 {
                     System.out.println("Anda sedang mengupgrade rumah");
                 }
 
                 else
                 {
+                    // Memasukan Nama Ruangan Baru
                     System.out.print("Masukan Nama Ruangan Baru: ");
                     String namaRumah = input.nextLine();
 
                     Room room = new Room(namaRumah);
 
-                    Room[] rooms = currentHouse.getRooms();
-                    for (int i = 0; i < currentHouse.getRoomsTotal(); i++) {
+                    Room[] rooms = currentSim.getCurrHouse().getRooms();
+                    for (int i = 0; i < currentSim.getCurrHouse().getRoomsTotal(); i++) {
                         System.out.printf("%d. %s", i + 1, rooms[i].getRoomName());
                         System.out.println("");
                     }
@@ -214,7 +216,7 @@ public class GameManager {
                         System.out.print("Masukan Nama Ruangan yang akan dihubungkan: ");
                         String roomRootName = input.nextLine();
 
-                        for (int i = 0; i < currentHouse.getRoomsTotal(); i++) {
+                        for (int i = 0; i < currentSim.getCurrHouse().getRoomsTotal(); i++) {
                             if (rooms[i].getRoomName().equalsIgnoreCase(roomRootName)) {
                                 roomRoot = rooms[i];
                             }
@@ -257,10 +259,10 @@ public class GameManager {
                                 }
                                 else
                                 {
-                                    currentHouse.setRoomRoot(roomRoot);
-                                    currentHouse.setNewRoom(room);
-                                    currentHouse.setUpgradeHouseTime(1080);
-                                    System.out.println("Upgrade Time = " + currentHouse.getUpgradeHouseTime());
+                                    currentSim.getCurrHouse().setRoomRoot(roomRoot);
+                                    currentSim.getCurrHouse().setNewRoom(room);
+                                    currentSim.getCurrHouse().setUpgradeHouseTime(1080);
+                                    System.out.println("Upgrade Time = " + currentSim.getCurrHouse().getUpgradeHouseTime());
                                     isRoomSet = true;
                                 }       
                                 
@@ -274,9 +276,9 @@ public class GameManager {
                                 }
                                 else
                                 {
-                                    currentHouse.setRoomRoot(roomRoot);
-                                    currentHouse.setNewRoom(room);
-                                    currentHouse.setUpgradeHouseTime(1080);
+                                    currentSim.getCurrHouse().setRoomRoot(roomRoot);
+                                    currentSim.getCurrHouse().setNewRoom(room);
+                                    currentSim.getCurrHouse().setUpgradeHouseTime(1080);
                                     isRoomSet = true;
                                 }
                             } else if (direction == "Left") {
@@ -286,9 +288,9 @@ public class GameManager {
                                 }
                                 else
                                 {
-                                    currentHouse.setRoomRoot(roomRoot);
-                                    currentHouse.setNewRoom(room);
-                                    currentHouse.setUpgradeHouseTime(1080);
+                                    currentSim.getCurrHouse().setRoomRoot(roomRoot);
+                                    currentSim.getCurrHouse().setNewRoom(room);
+                                    currentSim.getCurrHouse().setUpgradeHouseTime(1080);
                                     isRoomSet = true;
                                 }
                             } else if (direction == "Right") {
@@ -298,9 +300,9 @@ public class GameManager {
                                 }
                                 else
                                 {
-                                    currentHouse.setRoomRoot(roomRoot);
-                                    currentHouse.setNewRoom(room);
-                                    currentHouse.setUpgradeHouseTime(1080);
+                                    currentSim.getCurrHouse().setRoomRoot(roomRoot);
+                                    currentSim.getCurrHouse().setNewRoom(room);
+                                    currentSim.getCurrHouse().setUpgradeHouseTime(1080);
                                     isRoomSet = true;
                                 }
                             } else {
@@ -317,13 +319,13 @@ public class GameManager {
                 // TODO: Move Room
 
                 // Validasi apakah Sims berada didalam Rumah
-                if (!simInHouse) {
+                if (currentSim.getisBerkunjung()) {
                     System.out.println("Sim tidak berada didalam rumah");
                 }
 
-                Room[] listRooms = currentHouse.getRooms();
+                Room[] listRooms = currentSim.getCurrHouse().getRooms();
                 System.out.println("Berikut adalah List Ruangan yang tersedia : ");
-                for (int i = 0; i < currentHouse.getRoomsTotal(); i++) {
+                for (int i = 0; i < currentSim.getCurrHouse().getRoomsTotal(); i++) {
                     System.out.println((i + 1) + ". " + listRooms[i].getRoomName());
                 }
                 System.out.println("");
@@ -333,7 +335,7 @@ public class GameManager {
                 while (!inputbenar) {
                     System.out.print("Masukkan nama ruangan yang ingin dipindahkan : ");
                     String roomName = input.nextLine();
-                    for (int i = 0; i < currentHouse.getRoomsTotal(); i++) {
+                    for (int i = 0; i < currentSim.getCurrHouse().getRoomsTotal(); i++) {
                         if (roomName.equalsIgnoreCase(listRooms[i].getRoomName())) {
                             inputbenar = true;
                             roomindex = i;
@@ -347,64 +349,77 @@ public class GameManager {
                     }
                 }
 
-                currentRoom = currentHouse.getRoom(roomindex);
-                System.out.println("Sim berhasil berpindah ke Ruangan " + currentRoom.getRoomName());
+                Room newcurrentRoom = currentSim.getCurrHouse().getRoom(roomindex);
+                System.out.println("Sim berhasil berpindah ke Ruangan " + newcurrentRoom.getRoomName());
                 System.out.println("");
 
-                System.out.println(currentRoom.getRoomName());
-                currentRoom.printSpace();
+                System.out.println(newcurrentRoom.getRoomName());
+                newcurrentRoom.printSpace();
                 System.out.println("");
+
+                currentSim.setCurrentRoom(currentRoom);
             }
 
             else if (actionMenuInput.equals("6") || actionMenuInput.equalsIgnoreCase("Edit Room")) {
                 // TODO: Edit Room
-                currentRoom.printSpace();
-                System.out.println("");
 
-                System.out.println("Berikut adalah List Object yang ada di " + currentRoom.getRoomName() + " : ");
-                HashMap<Coordinate, Items> listItemInRoom = currentRoom.getObject();
-                int i = 1;
-                for (Coordinate coordinate : listItemInRoom.keySet()) {
-                    System.out.println(i + ". " + listItemInRoom.get(coordinate).getName() + " | Coordinate = " + " ("
-                            + coordinate.getX1() + "," + coordinate.getY1() + ")" + " - (" + coordinate.getX2() + ","
-                            + coordinate.getY2() + ")");
-                    i++;
+                // Validasi Apakah Sim berada didalam Rumah
+                if(currentSim.getisBerkunjung())
+                {
+                    System.out.println("Sim tidak berada didalam rumah");
                 }
-                System.out.println("");
 
-                Boolean inputbenar = false;
+                else
+                {
+                    currentSim.getCurrentRoom().printSpace();
+                    System.out.println("");
 
-                Coordinate initialCoordinate = null;
-                Items theItems = null;
-
-                while (!inputbenar) {
-                    System.out.print("Masukkan nama object yang ingin diubah : ");
-                    String objectName = input.nextLine();
-
-                    System.out.print("Masukan koordinat x1 : ");
-                    int x1 = input.nextInt();
-                    System.out.print("Masukan koordinat y1 : ");
-                    int y1 = input.nextInt();
-
+                    // Menampilkan Object apa saja yang dipunyai
+                    System.out.println("Berikut adalah List Object yang ada di " + currentSim.getCurrentRoom().getRoomName() + " : ");
+                    HashMap<Coordinate, Items> listItemInRoom = currentSim.getCurrentRoom().getObject();
+                    int i = 1;
                     for (Coordinate coordinate : listItemInRoom.keySet()) {
-                        if ((objectName.equalsIgnoreCase(listItemInRoom.get(coordinate).getName()))
-                                && (x1 == coordinate.getX1()) && (y1 == coordinate.getY1())) {
-                            inputbenar = true;
-                            initialCoordinate = coordinate;
-                            theItems = listItemInRoom.get(coordinate);
-                            break;
+                        System.out.println(i + ". " + listItemInRoom.get(coordinate).getName() + " | Coordinate = " + " ("
+                                + coordinate.getX1() + "," + coordinate.getY1() + ")" + " - (" + coordinate.getX2() + ","
+                                + coordinate.getY2() + ")");
+                        i++;
+                    }
+                    System.out.println("");
+
+                    Boolean inputbenar = false;
+
+                    Coordinate initialCoordinate = null;
+                    Items theItems = null;
+
+                    // Memasukan Nama Object yang ingin dipindahkan
+                    while (!inputbenar) {
+                        System.out.print("Masukkan nama object yang ingin diubah : ");
+                        String objectName = input.nextLine();
+
+                        System.out.print("Masukan koordinat x1 : ");
+                        int x1 = input.nextInt();
+                        System.out.print("Masukan koordinat y1 : ");
+                        int y1 = input.nextInt();
+
+                        for (Coordinate coordinate : listItemInRoom.keySet()) {
+                            if ((objectName.equalsIgnoreCase(listItemInRoom.get(coordinate).getName()))
+                                    && (x1 == coordinate.getX1()) && (y1 == coordinate.getY1())) {
+                                inputbenar = true;
+                                initialCoordinate = coordinate;
+                                theItems = listItemInRoom.get(coordinate);
+                                break;
+                            }
+                        }
+
+                        if (!inputbenar) {
+                            System.out.println("Object tidak ditemukan");
+                            System.out.println("Silakan masukan object dan coordinate ulang");
+                            System.out.println("");
                         }
                     }
 
-                    if (!inputbenar) {
-                        System.out.println("Object tidak ditemukan");
-                        System.out.println("Silakan masukan object dan coordinate ulang");
-                        System.out.println("");
-                    }
+                    currentSim.getCurrentRoom().moveObject(theItems, initialCoordinate);
                 }
-
-                currentRoom.moveObject(theItems, initialCoordinate);
-
             } else if (actionMenuInput.equals("7") || actionMenuInput.equalsIgnoreCase("Add Sim")) {
                 // TODO: Add Sim
             } else if (actionMenuInput.equals("8") || actionMenuInput.equalsIgnoreCase("Change Sim")) {
@@ -443,8 +458,8 @@ public class GameManager {
                 System.out.println("5. Bistik");
             } else if (actionMenuInput.equals("10") || actionMenuInput.equalsIgnoreCase("Go To Object")) {
                 // TODO : Go To Object
-                HashMap<Coordinate, Items> listItemInRoom = currentRoom.getObject();
-                System.out.println("Berikut adalah List Object yang ada di " + currentRoom.getRoomName() + " : ");
+                HashMap<Coordinate, Items> listItemInRoom = currentSim.getCurrentRoom().getObject();
+                System.out.println("Berikut adalah List Object yang ada di " + currentSim.getCurrentRoom().getRoomName() + " : ");
                 int i = 1;
                 for (Coordinate coordinate : listItemInRoom.keySet()) {
                     System.out.println(i + ". " + listItemInRoom.get(coordinate).getName());
@@ -790,8 +805,8 @@ public class GameManager {
 
             } else if (actionMenuInput.equals("14") || actionMenuInput.equalsIgnoreCase("Memasang barang")) {
                 // TODO: Memasang barang
-                System.out.println("Sekarang Kamu berada di " + currentRoom.getRoomName());
-                currentRoom.printSpace();
+                System.out.println("Sekarang Kamu berada di " + currentSim.getCurrentRoom().getRoomName());
+                currentSim.getCurrentRoom().printSpace();
                 System.out.println("");
 
                 Inventory<Items> itemsInventory = currentSim.getInventoryitems();
@@ -826,7 +841,7 @@ public class GameManager {
                         }
                     }
 
-                    Boolean isPlaced = currentRoom.placeObject(item);
+                    Boolean isPlaced = currentSim.getCurrentRoom().placeObject(item);
                     if (isPlaced) {
                         itemsInventory.reduceInventory(itemName);
                     }

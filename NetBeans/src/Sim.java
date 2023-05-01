@@ -146,6 +146,14 @@ public class Sim {
         return berkunjung;
     }
     
+    public void setBerkunjung(boolean isBerkunjung){
+        this.isBerkunjung = isBerkunjung;
+    }
+
+    public void setCurrentRoom(Room room){
+        currentRoom = room;
+    }
+    
     public void setName(String name){
         this.name = name;
     }

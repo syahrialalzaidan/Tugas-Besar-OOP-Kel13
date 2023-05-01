@@ -1,6 +1,6 @@
+import java.util.Random;
 
-
-public class Sim{
+public class Sim {
     private String name;
     private Job job;
     private int money;
@@ -17,12 +17,11 @@ public class Sim{
     private int dailyWork;
     private int dailySleep;
     private int dailyPay;
-
-
+    Random rand = new Random();
 
     public Sim(String name,House house, World world){
         this.name = name;
-        this.job = new Job("Badut Sulap");
+        this.job = new Job(rand.nextInt(1, 8));
         this.world = world;
         this.money = 100;
         this.inventoryfood = new Inventory<Food>("Food", name);

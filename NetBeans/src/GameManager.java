@@ -132,7 +132,7 @@ public class GameManager {
             }
         }
 
-        System.out.println("Selamat datang " + currentSim.getName() + "di dunia SIM!");
+        System.out.println("Selamat datang SIM" + currentSim.getName() + " di dunia SIM!");
         System.out.println("");
 
         for (int i = 0; i < 4; i++) {
@@ -171,6 +171,7 @@ public class GameManager {
                 System.out.println(" ");
                 System.out.println(" ");
                 currentSim.getInventoryitems().printInventory();
+                System.out.println(" ");
 
             } else if (actionMenuInput.equals("4") || actionMenuInput.equalsIgnoreCase("Upgrade House")) {
                 // TODO: Upgrade House

@@ -1,9 +1,3 @@
-import java.util.HashMap;
-import java.util.Random;
-import java.util.Set;
-import java.util.List;
-import java.util.ArrayList;
-
 /**
  *
  * @author ilmag
@@ -14,37 +8,40 @@ import java.util.ArrayList;
  */
 
 public class Job {
-    private static HashMap<String, Integer> jobs = new HashMap<String, Integer>();
     private String name;
     private int dailyPay;
 
-    static {
-        jobs.put("Badut Sulap", 15);
-        jobs.put("Koki", 30);
-        jobs.put("Polisi", 35);
-        jobs.put("Programmer", 45);
-        jobs.put("Dokter", 50);
-        jobs.put("Mata-mata", 60);
-        jobs.put("Pengacara", 60);
-    }
-
-    public Job() {
-        int randomIndex = randomize();
-        List<String> jobKeys = new ArrayList<String>(jobs.keySet());
-        this.name = jobKeys.get(randomIndex);
-        this.dailyPay = jobs.get(name);
-
-    }
-
-    public Job(String name) {
-        if (jobs.containsKey(name)) {
-            this.name = name;
-            this.dailyPay = jobs.get(name);
+    public Job(int id) {
+        /* In the main class, don't forget to initialize a randomizer for integer
+         * with the bound (1, 8)
+        */
+        switch (id) {
+            case 1:
+                this.name = "Badut Sulap";
+                this.dailyPay = 15;
+                break;
+            case 2:
+                this.name = "Koki";
+                this.dailyPay = 30;
+                break;
+            case 3:
+                this.name = "Polisi";
+                this.dailyPay = 35;
+                break;
+            case 4:
+                this.name = "Programmer";
+                this.dailyPay = 45;
+                break;
+            case 5:
+                this.name = "Dokter";
+                this.dailyPay = 50;
+            case 6:
+                this.name = "Mata-mata";
+                this.dailyPay = 60;
+            case 7:
+                this.name = "Pengacara";
+                this.dailyPay = 60;
         }
-        // } else {
-        //     throw new Exception("Job name not in list of jobs!");
-        // }
-
     }
 
     public String getJobName() {
@@ -55,21 +52,66 @@ public class Job {
         return this.dailyPay;
     }
 
-    public void setJob(String name) throws Exception {
-        if (jobs.containsKey(name)) {
-            this.name = name;
-            this.dailyPay = jobs.get(name);
-        } else {
-            throw new Exception("Job name not in list of jobs!");
+    public void setJob(String name) throws IllegalArgumentException {
+        this.name = name;
+        switch (name) {
+            case "Badut Sulap":
+                dailyPay = 15;
+                break;
+            case "Koki":
+                dailyPay = 30;
+                break;
+            case "Polisi":
+                dailyPay = 35;
+                break;
+            case "Programmer":
+                dailyPay = 45;
+                break;
+            case "Dokter":
+                dailyPay = 50;
+                break;
+            case "Mata-mata":
+                dailyPay = 60;
+                break;
+            case "Pengacara":
+                dailyPay = 60;
+                break;
+            default:
+                throw new IllegalArgumentException("Job tidak ada");
         }
     }
 
-    public int randomize() {
-        long currentTime = System.currentTimeMillis();
-        Random random = new Random(currentTime);
-        Set<String> keySet = jobs.keySet();
-        String[] keyArray = keySet.toArray(new String[keySet.size()]);
-        int randomIndex = random.nextInt(keyArray.length);
-        return randomIndex;
+    public void setJob(int id) {
+        /* In the main class, don't forget to initialize a randomizer for integer
+         * with the bound (1, 8)
+        */
+        switch (id) {
+            case 1:
+                this.name = "Badut Sulap";
+                this.dailyPay = 15;
+                break;
+            case 2:
+                this.name = "Koki";
+                this.dailyPay = 30;
+                break;
+            case 3:
+                this.name = "Polisi";
+                this.dailyPay = 35;
+                break;
+            case 4:
+                this.name = "Programmer";
+                this.dailyPay = 45;
+                break;
+            case 5:
+                this.name = "Dokter";
+                this.dailyPay = 50;
+            case 6:
+                this.name = "Mata-mata";
+                this.dailyPay = 60;
+            case 7:
+                this.name = "Pengacara";
+                this.dailyPay = 60;
+        }
     }
+
 }

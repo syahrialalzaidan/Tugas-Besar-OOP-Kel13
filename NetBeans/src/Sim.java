@@ -1,4 +1,4 @@
-
+import java.util.Random;
 
 public class Sim{
     private String name;
@@ -21,10 +21,10 @@ public class Sim{
     private boolean alive;
     private int berkunjung;
 
-
+    Random rand = new Random();
     public Sim(String name,House house, World world){
         this.name = name;
-        this.job = new Job("Badut Sulap");
+        this.job = new Job(rand.nextInt(1, 8));
         this.world = world;
         this.money = 100;
         this.inventoryfood = new Inventory<Food>("Food", name);

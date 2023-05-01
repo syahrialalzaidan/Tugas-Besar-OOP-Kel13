@@ -3,7 +3,6 @@ public class World {
     private List<House> house;
     private static int houseTotal = 0;
     private int[][] pointHouse = new int[64][64];
-    private int[][] pointHouse = new int[64][64];
     private int time;
     private int day; 
 
@@ -32,10 +31,6 @@ public class World {
 
     public int[][] getPointHouse(){
         return pointHouse;
-    }
-
-    public int getTime() {
-        return time;
     }
 
     public int getTime() {

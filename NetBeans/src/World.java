@@ -81,10 +81,17 @@ public class World {
                     }
                 }
 
-                
 
             }
-        
+        for (House rumah : house){
+            if (rumah.getUpgradeHouseTime()!=0){
+                rumah.setUpgradeHouseTime(rumah.getUpgradeHouseTime()-time);
+                if (rumah.getUpgradeHouseTime()<=0){
+                    rumah.upgradeHouse(rumah.getRoomRoot(), rumah.getNewRoom(), rumah.getDirectionNewRoom());
+                    rumah.setUpgradeHouseTime(0);
+                }
+            }
+        }
         this.time = now;
         resetDay();
     }

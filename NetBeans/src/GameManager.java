@@ -11,7 +11,7 @@ public class GameManager {
     public static List<Sim> simList = new ArrayList<>();
     private Sim sim;
 
-    public static void addSim(String nama, List<Sim> simList, World world, House house) {
+    public static void addSim(String nama, World world, House house) {
         Sim sim = new Sim(nama, house, world);
         simList.add(sim);
     }
@@ -67,7 +67,6 @@ public class GameManager {
         World world = null;
         House currentHouse = null;
         Room currentRoom = null;
-        List<Integer> upgradeHouseTime = new ArrayList<>();
 
         Scanner input = new Scanner(System.in);
 
@@ -107,11 +106,11 @@ public class GameManager {
                 Sim firstSim = new Sim(namaSim, firstHouse, world);
 
                 // menset upgradeHouseTime baru untuk sim pertama
-                upgradeHouseTime.add(0);
+
 
                 
                 // Memasukan Sim kedalam SimList
-                addSim(namaSim, simList, world, firstHouse);
+                addSim(namaSim, world, firstHouse);
 
                 // currentSim mengacu ke firstSim
                 currentSim = simList.get(0);
@@ -158,7 +157,7 @@ public class GameManager {
             System.out.print("Masukan Pilihan Anda (Angka / Aksi): ");
             String actionMenuInput = input.nextLine();
             if (actionMenuInput.equals("1") || actionMenuInput.equalsIgnoreCase("View Sim Info")) {
-                // TODO: View Sim Info
+                currentSim.viewSimInfo();
             } else if (actionMenuInput.equals("2") || actionMenuInput.equalsIgnoreCase("View Current Location")) {
                 // TODO: View Current Location
             } else if (actionMenuInput.equals("3") || actionMenuInput.equalsIgnoreCase("View Inventory")) {
@@ -407,8 +406,68 @@ public class GameManager {
 
             } else if (actionMenuInput.equals("7") || actionMenuInput.equalsIgnoreCase("Add Sim")) {
                 // TODO: Add Sim
+                System.out.print("Masukkan nama : ");
+                
+                boolean check = false; 
+                while (!check){
+                    String inputNama = input.nextLine();
+                    boolean checkNama = false;
+                    for (Sim sim : GameManager.getSimList()){
+                        if (sim.getName().equals(inputNama)){
+                            checkNama = true;
+                        }
+                    }
+                    if (!checkNama){
+                        int max = 63;
+                        int min = 0;
+                        int x = (int) (Math.random() * (max - min + 1) + min);
+                        int y = (int) (Math.random() * (max - min + 1) + min);
+
+                        Point coordinate = new Point(x, y);
+                        House rumah = new House(coordinate , inputNama);
+
+
+                        Sim s = new Sim(inputNama, rumah, world);
+                        addSim(inputNama, world, rumah);
+                        check = true;
+                        }
+                    else{
+                        System.out.print("Nama yang dimasukkan sudah terpakai, silahkan memilih nama kembali : ");
+                    }
+                }
             } else if (actionMenuInput.equals("8") || actionMenuInput.equalsIgnoreCase("Change Sim")) {
                 // TODO: Change Sim
+                System.out.println("Pilih SIM ingin dimainkan");
+                for (Sim sim : GameManager.getSimList()){
+                    if (!currentSim.getName().equals(sim.getName())){
+                        System.out.println(sim.getName());
+                    }
+
+                }
+                System.out.print("Silahkan nama sim : ");
+                boolean check = false;
+                while (!check){
+                    String inputNama = input.nextLine();
+                    boolean checkNama = false;
+                    for (Sim sim : GameManager.getSimList()){
+                        if (sim.getName().equals(inputNama)){
+                            checkNama = true;
+                        }
+                    }
+                    if (inputNama.equals(currentSim.getName())){
+                        System.out.print("Anda sedang memainkan sim tersebut, silakan masukkan nama kembali :");
+                    }
+                    else if (checkNama){
+                        changeSim(inputNama);
+                        System.out.println("Sekarang anda sedang memainkan" + inputNama);
+                        check=true;
+                    }
+                    else {
+                        System.out.print("Input nama yang dimaksukan tidak ada dalam daftar sim : ");
+                    }
+                }
+                    
+
             } else if (actionMenuInput.equals("9") || actionMenuInput.equalsIgnoreCase("List Object")) {
                 System.out.println("List of objects:");
                 System.out.println("=====================");

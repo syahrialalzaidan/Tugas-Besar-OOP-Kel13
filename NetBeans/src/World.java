@@ -3,6 +3,7 @@ public class World {
     private List<House> house;
     private static int houseTotal = 0;
     private int[][] pointHouse = new int[64][64];
+    private int[][] pointHouse = new int[64][64];
     private int time;
     private int day; 
 
@@ -10,6 +11,11 @@ public class World {
         house = new ArrayList<House>();
         time = 0;
         day = 0;
+        for (int i = 0; i < 64; i++) {
+            for (int j = 0; j < 64; j++) {
+                pointHouse[i][j] = 0;
+            }
+        }
         for (int i = 0; i < 64; i++) {
             for (int j = 0; j < 64; j++) {
                 pointHouse[i][j] = 0;
@@ -32,19 +38,16 @@ public class World {
         return time;
     }
 
+    public int getTime() {
+        return time;
+    }
+
     public void setHouse(List<House> house){
         this.house = house;
     }
 
     public void addHouse(House house){
-        boolean isExist = false;
-
-        for (int i = 0; i < pointHouse.length; i++) {
-                if (pointHouse[i][0] == house.getCoordinate().getX() && pointHouse[i][1] == house.getCoordinate().getY()) {
-                    isExist = true;
-        }
-    }
-        if(isExist){
+        if(pointHouse[house.getCoordinate().getX()][house.getCoordinate().getY()] != 0){
             throw new IllegalArgumentException("House already exist");
         }
         else{

@@ -20,6 +20,8 @@ public class Sim{
     private House currentHouse;
     private boolean alive;
     private int berkunjung;
+    private boolean isBerkunjung;
+    private Room currentRoom;
 
     Random rand = new Random();
     public Sim(String name,House house, World world){
@@ -42,6 +44,8 @@ public class Sim{
         this.currentHouse = house;
         this.alive = true;  
         this.berkunjung=0;
+        this.isBerkunjung = false;
+        this.currentRoom = house.getRoom(0);
 
         
     }
@@ -51,6 +55,14 @@ public class Sim{
 
     public Job getJob(){
         return job;
+    }
+    
+    public boolean getisBerkunjung(){
+        return isBerkunjung;
+    }
+    
+    public Room getCurrentRoom(){
+        return currentRoom;
     }
 
     public int getMoney(){

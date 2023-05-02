@@ -1028,6 +1028,7 @@ public class GameManager {
                         itemsInventory.reduceInventory(itemName);
                     }
                 }
+            }
             else if(actionMenuInput.equals("14") || actionMenuInput.equalsIgnoreCase("Help")){
                 help();
             } else {

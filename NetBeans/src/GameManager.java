@@ -160,7 +160,7 @@ public class GameManager {
             if (actionMenuInput.equals("1") || actionMenuInput.equalsIgnoreCase("View Sim Info")) {
                 currentSim.viewSimInfo();
             } else if (actionMenuInput.equals("2") || actionMenuInput.equalsIgnoreCase("View Current Location")) {
-                // TODO: View Current Location
+                currentSim.viewCurrentLocation();
             } else if (actionMenuInput.equals("3") || actionMenuInput.equalsIgnoreCase("View Inventory")) {
                 // TODO: View Inventory
                 System.out.println("INVENTORY of " + currentSim.getName());

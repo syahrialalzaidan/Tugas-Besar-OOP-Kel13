@@ -736,7 +736,8 @@ public class Sim {
         System.out.println("        Info SIM");
         System.out.println("============================");
         System.out.println("Nama         : " + name);
-        System.out.println("Pekerjaan    : " + job);
+        System.out.println("Pekerjaan    : " + job.getJobName());
+        System.out.println("Gaji         : " + job.getDailyPay() + "/hari");
         System.out.println("Kesehatan    : " + health);
         System.out.println("Kekenyangan  : " + fullness);
         System.out.println("Mood         : " + mood);

@@ -559,7 +559,10 @@ public class GameManager {
                     }
 
                     // Masukan inisial akhir objek ke simPoint
-                    currentSim.getCurrentRoom().setLastItem(currentSim.getCurrentItems().getName());
+                    if(currentSim.getCurrentRoom().getLastItem() != null)
+                    {
+                        currentSim.getCurrentRoom().setLastItem(currentSim.getCurrentItems().getName());
+                    }
 
                     // Pidahkan simPoint ke Object
                     currentSim.getCurrentRoom().setSimPoint(targetCoordinate.getX1(), targetCoordinate.getY1());

@@ -735,13 +735,22 @@ public class Sim {
     public void viewSimInfo(){
         System.out.println("        Info SIM");
         System.out.println("============================");
-        System.out.println("Nama : " + name);
-        System.out.println("Pekerjaan : " + job);
-        System.out.println("Kesehatan : " + health);
-        System.out.println("Kekenyangan : " + fullness);
-        System.out.println("Mood : " + mood);
-        System.out.println("Uang : " + mood);
+        System.out.println("Nama         : " + name);
+        System.out.println("Pekerjaan    : " + job);
+        System.out.println("Kesehatan    : " + health);
+        System.out.println("Kekenyangan  : " + fullness);
+        System.out.println("Mood         : " + mood);
+        System.out.println("Uang         : " + mood);
     }
 
-    
+    public void viewCurrentLocation(){
+        if (isBerkunjung){
+        System.out.print("Anda sedang berada di rumah " + currentHouse.getSimName() + ", ");
+    }   else{
+        System.out.print("Anda sedang berada di rumah anda sendiri, ");
+    }
+    System.out.println("di ruangan " + currentRoom.getRoomName());
+    currentRoom.printSpace();
+
+    }
 }

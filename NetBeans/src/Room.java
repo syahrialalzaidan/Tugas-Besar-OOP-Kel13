@@ -303,73 +303,88 @@ public class Room { //implements ActionListener {
         {
             this.object.put(coordinate, object);
             System.out.println(coordinate.getX1() + " " + coordinate.getY1() + " " + coordinate.getX2() + " " + coordinate.getY2());
+            String value = object.getName();
+            String initial = "";
+
+            // Check Object and create initial
+
+            if(value.equalsIgnoreCase("Kasur Single"))
+            {
+                initial = "KS";
+            }
+            else if(value.equalsIgnoreCase("Kasur Queen Size"))
+            {
+                initial = "KQS";
+            }
+            else if(value.equalsIgnoreCase("Kasur King Size"))
+            {
+                initial = "KKS";
+            }
+            else if(value.equalsIgnoreCase("Toilet"))
+            {
+                initial = "T";
+            }
+            else if(value.equalsIgnoreCase("Kompor Gas"))
+            {
+                initial = "KG";
+            }
+            else if(value.equalsIgnoreCase("Kompor Listrik"))
+            {
+                initial = "KL";
+            }
+            else if(value.equalsIgnoreCase("Meja dan Kursi"))
+            {
+                initial = "MDK";
+            }
+            else if(value.equalsIgnoreCase("Jam"))
+            {
+                initial = "J";
+            }
+            else if(value.equalsIgnoreCase("HP"))
+            {
+                initial = "HP";
+            }
+            else if(value.equalsIgnoreCase("Sajadah"))
+            {
+                initial = "SJ";
+            }
+            else if(value.equalsIgnoreCase("Sapu"))
+            {
+                initial = "S";
+            }
+            else if(value.equalsIgnoreCase("TV"))
+            {
+                initial = "TV";
+            }
+            else if(value.equalsIgnoreCase("Laptop"))
+            {
+                initial = "L";
+            }
+            else if(value.equalsIgnoreCase("Shower"))
+            {
+                initial = "SHO";
+            }
+
+            // Input to Matriks
             for(int i = coordinate.getY1(); i < coordinate.getY2(); i++)
             {
                 //System.out.println(i);
                 for(int j = coordinate.getX1(); j < coordinate.getX2(); j++)
                 {
                     //System.out.println(i + " , " + j);
-                    String value = object.getName();
+                    //String value = object.getName();
                     
                     if((simPoint.getY() == i) && (simPoint.getX() == j))
                     {
                         this.space[i][j] = "o";
+                        if(lastItem == "")
+                        {
+                            lastItem = initial;
+                        } 
                     }
-                    else if(value.equalsIgnoreCase("Kasur Single"))
+                    else
                     {
-                        this.space[i][j] = "KS";
-                    }
-                    else if(value.equalsIgnoreCase("Kasur Queen Size"))
-                    {
-                        this.space[i][j] = "KQS";
-                    }
-                    else if(value.equalsIgnoreCase("Kasur King Size"))
-                    {
-                        this.space[i][j] = "KKS";
-                    }
-                    else if(value.equalsIgnoreCase("Toilet"))
-                    {
-                        this.space[i][j] = "T";
-                    }
-                    else if(value.equalsIgnoreCase("Kompor Gas"))
-                    {
-                        this.space[i][j] = "KG";
-                    }
-                    else if(value.equalsIgnoreCase("Kompor Listrik"))
-                    {
-                        this.space[i][j] = "KL";
-                    }
-                    else if(value.equalsIgnoreCase("Meja dan Kursi"))
-                    {
-                        this.space[i][j] = "MDK";
-                    }
-                    else if(value.equalsIgnoreCase("Jam"))
-                    {
-                        this.space[i][j] = "J";
-                    }
-                    else if(value.equalsIgnoreCase("HP"))
-                    {
-                        this.space[i][j] = "HP";
-                    }
-                    else if(value.equalsIgnoreCase("Sajadah"))
-                    {
-                        this.space[i][j] = "SJ";
-                    }
-                    else if(value.equalsIgnoreCase("Sapu"))
-                    {
-                        this.space[i][j] = "S";
-                    }
-                    else if(value.equalsIgnoreCase("TV"))
-                    {
-                        this.space[i][j] = "TV";
-                    }
-                    else if(value.equalsIgnoreCase("Laptop"))
-                    {
-                        this.space[i][j] = "L";
-                    }
-                    else if(value.equalsIgnoreCase("Shower"))
-                    {
-                        this.space[i][j] = "SHO";
+                        this.space[i][j] = initial;
                     }
 
                     // space[i][j].setBackground(color);
@@ -378,6 +393,8 @@ public class Room { //implements ActionListener {
                     // space[i][j].setIsOccupied(true);
                 }
             }
+
+            // Check if lastItem = null
             System.out.println("Berhasil memasukkan " + object.getName());
             return true;
         }

@@ -53,17 +53,111 @@ public class GameManager {
         System.out.println("");
     }
 
+    public static void Welcome(){
+        String welcome2 =
+                        "        ██╗    ███████████╗     ██████╗██████╗███╗   ██████████╗    ████████╗██████╗     ████████████╗   ██████████╗\n"+
+                        "        ██║    ████╔════██║    ██╔════██╔═══██████╗ ██████╔════╝    ╚══██╔══██╔═══██╗    ██╔════██████╗ ██████╔════╝\n"+
+                        "        ██║ █╗ ███████╗ ██║    ██║    ██║   ████╔████╔███████╗         ██║  ██║   ██║    ███████████╔████╔█████████╗\n"+
+                        "        ██║███╗████╔══╝ ██║    ██║    ██║   ████║╚██╔╝████╔══╝         ██║  ██║   ██║    ╚════██████║╚██╔╝██╚════██║\n"+
+                        "        ╚███╔███╔██████████████╚██████╚██████╔██║ ╚═╝ █████████╗       ██║  ╚██████╔╝    ███████████║ ╚═╝ █████████║\n"+
+                        "         ╚══╝╚══╝╚══════╚══════╝╚═════╝╚═════╝╚═╝     ╚═╚══════╝       ╚═╝   ╚═════╝     ╚══════╚═╚═╝     ╚═╚══════╝\n";
+
+        System.out.println(welcome2);
+
+
+    }
+
     public static void help() {
-        // Isi Help Disini
-        // ---------------
+        Scanner input = new Scanner(System.in);
+        System.out.println("Pilih Deskripsi Game yang ingin dipilih: ");
+        System.out.println("1.View Sim Info");
+        System.out.println("2.View Current Location");
+        System.out.println("3.View Inventory");
+        System.out.println("4.Upgrade House");
+        System.out.println("5.Move Room");
+        System.out.println("6.Edit Room");
+        System.out.println("7.Add Sim");
+        System.out.println("8.Change Sim");
+        System.out.println("9.List Object");
+        System.out.println("10.Go To Object");
+        System.out.println("11.Action");
+        System.out.println("12.Exit");
+        System.out.println("99.Help");
+        System.out.println("");
+        System.out.println("action: ");
+        System.out.println("13.Beli barang");
+        System.out.println("14.Memasang barang");
+        System.out.println("");
+        System.out.print("Masukkan Pilihan :");
+        String inputhelp = input.nextLine();
+        boolean valid = false;
+
+        while(!valid){
+            if (inputhelp.equals("1")){
+                System.out.println("Menampilkan informasi Sim tentang nama, Pekerjaan, Kesehatan, Kekenyangan, Mood, Uang ");
+                valid = true;
+            }else if (inputhelp.equals("2")){
+                System.out.println("Menampilkan lokasi dari Sim berupa Rumah dan Ruangan");
+                valid = true;
+            }else if (inputhelp.equals("3")){
+                System.out.println("Menampilkan isi inventory milik sebuah Sim");
+                valid = true;
+            }else if (inputhelp.equals("4")){
+                System.out.println("Melakukan upgrade rumah pada currentSim");
+                valid = true;
+            }else if (inputhelp.equals("5")){
+                System.out.println("Mengganti ruangan yang ada pada rumah yang sedang ditempati Sim");
+                valid = true;
+            }else if (inputhelp.equals("6")){
+                System.out.println("Pembelian barang baru atau pemindahan barang");
+                valid = true;
+            }else if (inputhelp.equals("7")){
+                System.out.println("Menambahkan Sim baru");
+                valid = true;
+            }else if (inputhelp.equals("8")){
+                System.out.println("Mengganti current Sim");
+                valid = true;
+            }else if (inputhelp.equals("9")){
+                System.out.println("Menampilkan List Objek");
+                valid = true;
+            }else if (inputhelp.equals("10")){
+                System.out.println("Sim berjalan menuju ke suatu objek");
+                valid = true;
+            }else if (inputhelp.equals("11")){
+                System.out.println("Melakukan sebuah aksi");
+                valid = true;
+            }else if (inputhelp.equals("12")){
+                System.out.println("Keluar dari game");
+                valid = true;
+            }else if (inputhelp.equals("13")){
+                System.out.println("Membeli suatu barang");
+                valid = true;
+            }else if (inputhelp.equals("14")){
+                System.out.println("Memasang barang di suatu ruangan");
+                valid = true;
+            }else{
+                System.out.print("Input anda salah silahkan masukkan ulang!! :");
+                inputhelp = input.nextLine();
+            }
+        }
+
     }
 
     public static void exit() {
         // Isi Exit Disini
         // ---------------
+        String exit =
+                        "        ██████╗██╗   █████████╗    ██████╗██╗   █████████╗    ██╗\n"+
+                        "        ██╔══██╚██╗ ██╔██╔════╝    ██╔══██╚██╗ ██╔██╔════╝    ██║\n"+
+                        "        ██████╔╝╚████╔╝█████╗      ██████╔╝╚████╔╝█████╗      ██║\n"+
+                        "        ██╔══██╗ ╚██╔╝ ██╔══╝      ██╔══██╗ ╚██╔╝ ██╔══╝      ╚═╝\n"+
+                        "        ██████╔╝  ██║  ███████╗    ██████╔╝  ██║  ███████╗    ██╗\n"+
+                        "        ╚═════╝   ╚═╝  ╚══════╝    ╚═════╝   ╚═╝  ╚══════╝    ╚═╝\n";
+
     }
 
     public static void main(String[] args) throws Exception {
+        Welcome();
         //List<Sim> simList = new ArrayList<>();
         Sim currentSim = null;
         World world = null;
@@ -559,7 +653,10 @@ public class GameManager {
                     }
 
                     // Masukan inisial akhir objek ke simPoint
-                    currentSim.getCurrentRoom().setLastItem(currentSim.getCurrentItems().getName());
+                    if(currentSim.getCurrentRoom().getLastItem() != null)
+                    {
+                        currentSim.getCurrentRoom().setLastItem(currentSim.getCurrentItems().getName());
+                    }
 
                     // Pidahkan simPoint ke Object
                     currentSim.getCurrentRoom().setSimPoint(targetCoordinate.getX1(), targetCoordinate.getY1());
@@ -726,6 +823,7 @@ public class GameManager {
                 // TODO: Action
             } else if (actionMenuInput.equals("12") || actionMenuInput.equalsIgnoreCase("Exit")) {
                 // TODO: Exit
+                exit();
             } else if (actionMenuInput.equals("13") || actionMenuInput.equalsIgnoreCase("Beli barang")) {
                 // TODO: Beli barang
                 System.out.println("Berikut adalah items yang tersedia beserta harganya:");
@@ -930,6 +1028,8 @@ public class GameManager {
                         itemsInventory.reduceInventory(itemName);
                     }
                 }
+            else if(actionMenuInput.equals("14") || actionMenuInput.equalsIgnoreCase("Help")){
+                help();
             } else {
                 // Invalid Input
                 System.out.println("Aksi tidak dikenali!");

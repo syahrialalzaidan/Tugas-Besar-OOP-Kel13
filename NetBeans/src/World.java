@@ -47,6 +47,15 @@ public class World {
         }
     }
 
+    public boolean isHouseExist(int x, int y){
+        if(pointHouse[x][y] == 1){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
     public void runTime(int time){
         int now = this.time + time;
             for (Sim s : GameManager.getSimList()){

@@ -104,12 +104,12 @@ public class House {
         this.newRoom = room;
     }
 
-    public Room getRoomRoot(Room room)
+    public Room getRoomRoot()
     {
         return this.roomRoot;
     }
 
-    public Room getNewRoom(Room room)
+    public Room getNewRoom()
     {
         return this.newRoom;
     }

@@ -533,7 +533,8 @@ public class GameManager {
                         i++;
                     }
                     System.out.println("");
-                    String currentObject = null;
+                    Items targetObject = null;
+                    Coordinate targetCoordinate = null;
                     Boolean inputbenar = false;
                     int itemindex;
                     while (!inputbenar) {
@@ -547,15 +548,21 @@ public class GameManager {
                         else
                         {
                             inputbenar = true;
-                            currentObject = listItemInRoom.get(tempListCoordinate.get(inputAngka - 1)).getName();
+                            targetObject = listItemInRoom.get(tempListCoordinate.get(inputAngka - 1));
+                            targetCoordinate = tempListCoordinate.get(inputAngka - 1);
                         }
                     }
 
                     // Masukan inisial akhir objek ke simPoint
+                    currentSim.getCurrentRoom().setLastItem(currentSim.getCurrentItems().getName());
 
                     // Pidahkan simPoint ke Object
+                    currentSim.getCurrentRoom().setSimPoint(targetCoordinate.getX1(), targetCoordinate.getY1());
 
                     // Simpan inisial Objek yang ingin dituju ke variabel inisial
+                    currentSim.setCurrentItems(targetObject);
+
+                    currentSim.getCurrentRoom().setLastItem(targetObject.getName());
 
                     // Print Map
 
@@ -569,7 +576,7 @@ public class GameManager {
                         yesno = input.nextLine();
                     }
 
-                    switch (currentObject) {
+                    switch (currentSim.getCurrentItems().getName()) {
                         case "Toilet":
 
                             currentSim.defecate();

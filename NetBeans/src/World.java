@@ -68,7 +68,7 @@ public class World {
                     s.setHeath(s.getHeath()-5);
                     s.setMood(s.getMood()-5);
                     s.setKebelet(s.getKebelet()-240);
-                    System.out.println("Status mood dah health aberkurang karena belum buang air");
+                    System.out.println("Status mood dah health berkurang karena belum buang air");
                 }
                 if (s.getBerkunjung()!=0){
                     s.setBerkunjung(s.getBerkunjung()+time);

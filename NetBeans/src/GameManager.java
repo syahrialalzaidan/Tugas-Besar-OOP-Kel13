@@ -881,7 +881,7 @@ public class GameManager {
                     } else {
                         System.out.println("Item berhasil dibeli");
                         currentSim.setMoney(currentSim.getMoney() - (items.getPrice() * jumlah));
-                        currentSim.addInventoryitems(items);
+                        for(int i =0; i < jumlah; i++) currentSim.addInventoryitems(items);
                         check = true;
                     }
                 }

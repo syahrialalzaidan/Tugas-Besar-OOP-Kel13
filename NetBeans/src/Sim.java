@@ -25,6 +25,7 @@ public class Sim {
     private boolean isBerkunjung;
     private Room currentRoom;
     private Items currentItems;
+    private Pair<String,Integer,Integer> orderItems;
 
   
 
@@ -523,7 +524,7 @@ public class Sim {
 //5. berenang (efek + 10 mood/30 detik , +10 healt/30detik, -15 fullnes/30 detik)
 //6. bermain game (efek +20mood -10 health -10 fullness/20 detik)
 
-    public void watchingTV(int time){
+    public void watchingTV(int time) throws InterruptedException{
         Thread T = new Thread(new Runnable(){
         
             @Override 
@@ -551,6 +552,9 @@ public class Sim {
         });
 
         T.start();
+        T.join();
+        System.out.println("asdd");
+        
        
     }
 
@@ -742,6 +746,7 @@ public class Sim {
         System.out.println("Kekenyangan  : " + fullness);
         System.out.println("Mood         : " + mood);
         System.out.println("Uang         : " + mood);
+        System.out.println("asd");
     }
 
     public void viewCurrentLocation(){

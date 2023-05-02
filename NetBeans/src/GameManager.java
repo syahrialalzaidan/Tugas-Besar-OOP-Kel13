@@ -10,6 +10,7 @@ import java.util.TimerTask;
 public class GameManager {
     public static List<Sim> simList = new ArrayList<>();
     private Sim sim;
+    
 
     public static void addSim(String nama, World world, House house) {
         Sim sim = new Sim(nama, house, world);
@@ -195,6 +196,10 @@ public class GameManager {
                 int min = 0;
                 int x = (int) (Math.random() * (max - min + 1) + min);
                 int y = (int) (Math.random() * (max - min + 1) + min);
+                while(!world.isHouseExist(x, y)){
+                    x = (int) (Math.random() * (max - min + 1) + min);
+                    y = (int) (Math.random() * (max - min + 1) + min);
+                }
 
                 Point coordinate = new Point(x, y);
                 House firstHouse = new House(coordinate , namaSim);
@@ -1028,6 +1033,7 @@ public class GameManager {
                         itemsInventory.reduceInventory(itemName);
                     }
                 }
+            }
             else if(actionMenuInput.equals("14") || actionMenuInput.equalsIgnoreCase("Help")){
                 help();
             } else {

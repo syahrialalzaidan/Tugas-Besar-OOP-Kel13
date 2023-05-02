@@ -230,11 +230,17 @@ public class GameManager {
                 Items item3 = new Items("Kompor Gas");
                 Items item4 = new Items("Jam");
                 Items item5 = new Items("Meja dan Kursi");
-                currentSim.getCurrentRoom().setSpaceImmediate(0,2,item1,"KS" ,"Down");
-                currentSim.getCurrentRoom().setSpaceImmediate(5,5,item2,"T" , "Right");
-                currentSim.getCurrentRoom().setSpaceImmediate(2,5,item3,"KG","Right");
-                currentSim.getCurrentRoom().setSpaceImmediate(5,0,item4,"J","Right");
-                currentSim.getCurrentRoom().setSpaceImmediate(2,1,item5,"MDK","Right");
+                currentSim.addInventoryitems(item1);
+                currentSim.addInventoryitems(item2);
+                currentSim.addInventoryitems(item3);
+                currentSim.addInventoryitems(item4);
+                currentSim.addInventoryitems(item5);
+
+                // currentSim.getCurrentRoom().setSpaceImmediate(0,2,item1,"KS" ,"Down");
+                // currentSim.getCurrentRoom().setSpaceImmediate(5,5,item2,"T" , "Right");
+                // currentSim.getCurrentRoom().setSpaceImmediate(2,5,item3,"KG","Right");
+                // currentSim.getCurrentRoom().setSpaceImmediate(5,0,item4,"J","Right");
+                // currentSim.getCurrentRoom().setSpaceImmediate(2,1,item5,"MDK","Right");
   
                 validInput = true;
             } else if (pilihan.equals("2") || pilihan.equalsIgnoreCase("Help")) {

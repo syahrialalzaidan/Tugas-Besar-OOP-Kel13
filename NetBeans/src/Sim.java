@@ -1,4 +1,7 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
+import java.util.Scanner;
 
 
 public class Sim {
@@ -25,8 +28,9 @@ public class Sim {
     private boolean isBerkunjung;
     private Room currentRoom;
     private Items currentItems;
-    private Pair<String,Integer,Integer> orderItems;
-
+    private List<Pair<String,Integer,Integer>> itemOrder = new ArrayList<Pair<String,Integer,Integer>>();
+    private List<Pair<String,Integer,Integer>> foodOrder = new ArrayList<Pair<String,Integer,Integer>>();
+    Scanner input = new Scanner(System.in);
   
 
     Random rand = new Random();
@@ -227,6 +231,24 @@ public class Sim {
         currentItems = items;
     }
 
+    public void addItemOrder(String A, int B, int C){
+        itemOrder.add(new Pair<>(A,B,C));
+
+    }
+
+    public void addFoodOrder(String A, int B, int C){
+        foodOrder.add(new Pair<>(A,B,C));
+
+    }
+
+    public List<Pair<String,Integer,Integer>> getFoodOrder(){
+        return foodOrder;
+    }
+
+    public List<Pair<String,Integer,Integer>> getItemOrder(){
+        return itemOrder;
+    }
+
     public void isAlive(){
         if (mood<0){
             System.out.println("Sim anda mati karena depresi");
@@ -266,7 +288,7 @@ public class Sim {
 
     
 
-    public void work(int time){
+    public void work(int time) throws InterruptedException{
         Thread T = new Thread(new Runnable(){
         
             @Override 
@@ -294,10 +316,11 @@ public class Sim {
         });
 
         T.start();
+        T.join();
     }
 
     //
-    public void workout(int time){
+    public void workout(int time) throws InterruptedException{
         Thread T = new Thread(new Runnable(){
         
             @Override 
@@ -324,13 +347,13 @@ public class Sim {
         });
 
         T.start();
-
+        T.join();
 
 
         
     }
 
-    public void sleep(int time){
+    public void sleep(int time) throws InterruptedException{
         Thread T = new Thread(new Runnable(){
         
             @Override 
@@ -358,9 +381,10 @@ public class Sim {
         });
 
         T.start();
+        T.join();
     }
 
-    public void eat(Edible food,Inventory<Dish> inventorydish, Inventory<Food> inventoryfood){
+    public void eat(Edible food,Inventory<Dish> inventorydish, Inventory<Food> inventoryfood) throws InterruptedException{
         Thread T = new Thread(new Runnable(){
         
             @Override 
@@ -398,11 +422,12 @@ public class Sim {
         });
 
         T.start();
+        T.join();
 
          
     }
 
-    public void cook(Dish food,Inventory<Dish> inventorydish, Inventory<Food> inventoryfood){
+    public void cook(Dish food,Inventory<Dish> inventorydish, Inventory<Food> inventoryfood) throws InterruptedException{
         Thread T = new Thread(new Runnable(){
         
             @Override 
@@ -434,10 +459,11 @@ public class Sim {
     
         });
         T.start();
+        T.join();
 
     }
 
-    public void visit(House house){
+    public void visit(House house) throws InterruptedException{
         double jarak = Math.sqrt((house.getCoordinate().getX()-this.house.getCoordinate().getX())^2 + (house.getCoordinate().getY()-this.house.getCoordinate().getY())^2);
         
         Thread perjalanan = new Thread(new Runnable(){
@@ -458,10 +484,11 @@ public class Sim {
                 }
         });
         perjalanan.start();
+        perjalanan.join();
         isAlive();
     }
 
-    public void goHome(House house){
+    public void goHome(House house) throws InterruptedException{
         double jarak = Math.sqrt((house.getCoordinate().getX()-this.house.getCoordinate().getX())^2 + (house.getCoordinate().getY()-this.house.getCoordinate().getY())^2);
         
         Thread perjalanan = new Thread(new Runnable(){
@@ -482,10 +509,11 @@ public class Sim {
                 }
         });
         perjalanan.start();
+        perjalanan.join();
         isAlive();
     }
 
-    public void defecate(){
+    public void defecate() throws InterruptedException{
         Thread T = new Thread(new Runnable(){
         
             @Override 
@@ -512,6 +540,7 @@ public class Sim {
     
         });
         T.start();
+        T.join();
     }
 
 
@@ -553,12 +582,12 @@ public class Sim {
 
         T.start();
         T.join();
-        System.out.println("asdd");
+
         
        
     }
 
-    public void scrollTiktok(int time){
+    public void scrollTiktok(int time) throws InterruptedException{
         Thread T = new Thread(new Runnable(){
         
             @Override 
@@ -584,9 +613,10 @@ public class Sim {
         });
 
         T.start();
+        T.join();
     }
 
-    public void beribadah(int time){
+    public void beribadah(int time) throws InterruptedException{
         Thread T = new Thread(new Runnable(){
         
             @Override 
@@ -612,9 +642,10 @@ public class Sim {
         });
 
         T.start();
+        T.join();
     }
     
-    public void takeShower(int time){
+    public void takeShower(int time) throws InterruptedException{
         Thread T = new Thread(new Runnable(){
         
             @Override 
@@ -641,10 +672,11 @@ public class Sim {
         });
 
         T.start();
+        T.join();
     }
 
 
-    public void swiming(int time){
+    public void swiming(int time) throws InterruptedException{
         Thread T = new Thread(new Runnable(){
         
             @Override 
@@ -671,9 +703,10 @@ public class Sim {
         });
 
         T.start();
+        T.join();
     }
 
-    public void playingGame(int time){
+    public void playingGame(int time) throws InterruptedException{
         Thread T = new Thread(new Runnable(){
         
             @Override 
@@ -700,9 +733,10 @@ public class Sim {
         });
 
         T.start();
+        T.join();
     }
 
-    public void cleaningHouse(){
+    public void cleaningHouse() throws InterruptedException{
         Thread T = new Thread(new Runnable(){
         
             @Override 
@@ -729,6 +763,7 @@ public class Sim {
         });
 
         T.start();
+        T.join();
     }
 
     public void viewClock(){
@@ -759,4 +794,6 @@ public class Sim {
     currentRoom.printSpace();
 
     }
+
+    
 }

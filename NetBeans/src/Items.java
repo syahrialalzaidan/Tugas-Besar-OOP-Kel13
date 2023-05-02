@@ -90,6 +90,9 @@ public class Items extends Objects {
                 this.price = 50;
                 action = "Mandi";
                 break;
+            case "Kolam Renang" :
+                this.dimension[0]= 3;
+                this.dimension[1]= 3;
             default:
                 this.dimension[0] = 1;
                 this.dimension[1] = 1;

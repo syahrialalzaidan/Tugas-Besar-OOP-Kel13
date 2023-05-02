@@ -75,7 +75,18 @@ public class World {
                         System.out.println("Akibat berkunjung status mood bertambah dan status health berkurang ");
                     }
                 }
-
+                for (Pair<String,Integer,Integer> pair : s.getItemOrder()){
+                    pair.setC(pair.getC()-time);
+                    if (pair.getC()<=0){
+                        s.addInventoryitems(new Items(pair.getA()));
+                    }
+                }
+                for (Pair<String,Integer,Integer> pair : s.getFoodOrder()){
+                    pair.setC(pair.getC()-time);
+                    if (pair.getC()<=0){
+                        s.addInventoryfood(new Food(pair.getA()));
+                    }
+                }
 
             }
         for (House rumah : house){
@@ -87,6 +98,7 @@ public class World {
                 }
             }
         }
+
         this.time = now;
         resetDay();
     }

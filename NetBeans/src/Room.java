@@ -191,6 +191,63 @@ public class Room { //implements ActionListener {
         this.lowerRoom = lowerRoom;
     }
 
+    public void setSpaceImmediate(int x, int y, Items item , String symbol, String direction)
+    {
+        if(!(direction.equalsIgnoreCase("Right") || direction.equalsIgnoreCase("Left") || direction.equalsIgnoreCase("Up") || direction.equalsIgnoreCase("Down")))
+        {
+            System.out.println("Invalid Direction");
+            
+        }
+
+        else
+        {
+            Coordinate coordinate = new Coordinate(0, 0, 0, 0);
+            if(direction.equalsIgnoreCase("Right"))
+            {
+                int x2 = x + item.getX();
+                int y2 = y + item.getY();
+                coordinate = new Coordinate(x, y, x2, y2);
+            }
+
+            // Orientasi Kiri
+            else if(direction.equalsIgnoreCase("Left"))
+            {
+                int x2 = x + 1;
+                int y2 = y + item.getY();
+                x = x2 - item.getX();
+                coordinate = new Coordinate(x, y, x2, y2);
+            }
+
+            // Orientasi atas
+            else if(direction.equalsIgnoreCase("Up"))
+            {
+                int x2 = x + item.getY();
+                int y2 = y + 1;
+                y = y2 - item.getX();
+                coordinate = new Coordinate(x, y, x2, y2);
+                //System.out.println(coordinate.getx() + " " + coordinate.gety() + " " + coordinate.getX2() + " " + coordinate.getY2());
+            }
+
+            // Orientasi bawah
+            else if(direction.equalsIgnoreCase("Down"))
+            {
+                int x2 = x + item.getY();
+                int y2 = y + item.getX();
+                coordinate = new Coordinate(x, y, x2, y2);
+            }
+        
+            for(int i = coordinate.getY1(); i < coordinate.getY2(); i++)
+            {
+                //System.out.println(i);
+                for(int j = coordinate.getX1(); j < coordinate.getX2(); j++)
+                {
+                    this.space[i][j] = symbol;
+                }
+            }
+            this.object.put(coordinate, item);
+        }
+    }
+
     public Boolean placeObject(Items object) throws Exception
     {
         printSpace();

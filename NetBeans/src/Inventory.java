@@ -221,10 +221,10 @@ public class Inventory<T extends Objects> extends javax.swing.JFrame {
         * Kasur Queen Size = 2
         * Kasur Single = 1
         */
-        System.out.printf("List of %s in inventory\n", inventoryType);
+        System.out.printf("List of %s in Inventory\n", inventoryType);
         System.out.println("---------------------------------------");
         if (inventory.isEmpty()) {
-            System.out.println("Inventory is empty. Buy some stuff?");
+            System.out.printf("Inventory %s kosong. Ayo beli %s baru!\n", inventoryType, inventoryType);
         } else {
             for (String item : inventory.keySet()) {
                 int count = inventory.get(item);

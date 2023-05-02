@@ -50,6 +50,7 @@ public class BeliItems {
         System.out.print("Masukkan jumlah item yang ingin dibeli: ");
         int jumlah = input.nextInt();
 
+        System.out.println("");
         if ((price*jumlah) > 150) {
             System.out.println("Maaf, uang anda tidak cukup untuk membeli item tersebut");
         } else {

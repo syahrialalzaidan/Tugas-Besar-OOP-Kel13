@@ -17,6 +17,7 @@ public class Room { //implements ActionListener {
     private Room upperRoom;
     private Room lowerRoom;
     private Scanner input;
+    private String lastItem;
 
     //MainGUI frame = new MainGUI();
     //MainGUI frame;
@@ -29,6 +30,7 @@ public class Room { //implements ActionListener {
         this.leftRoom = null;
         this.upperRoom = null;
         this.lowerRoom = null;
+        this.lastItem = "";
         this.input = new Scanner(System.in);
         for(int i = 0; i < 6; i++) 
         {
@@ -91,6 +93,70 @@ public class Room { //implements ActionListener {
         // set new point
         this.space[y][x] = "o";
         this.simPoint = newPoint;
+    }
+
+    public void setLastItem(String lastItem) {
+        if(lastItem.equalsIgnoreCase("Kasur Single"))
+        {
+            this.lastItem = "KS";
+        }
+        else if(lastItem.equalsIgnoreCase("Kasur Queen Size"))
+        {
+            this.lastItem = "KQS";
+        }
+        else if(lastItem.equalsIgnoreCase("Kasur King Size"))
+        {
+            this.lastItem = "KKS";
+        }
+        else if(lastItem.equalsIgnoreCase("Toilet"))
+        {
+            this.lastItem = "T";
+        }
+        else if(lastItem.equalsIgnoreCase("Kompor Gas"))
+        {
+            this.lastItem = "KG";
+        }
+        else if(lastItem.equalsIgnoreCase("Kompor Listrik"))
+        {
+            this.lastItem = "KL";
+        }
+        else if(lastItem.equalsIgnoreCase("Meja dan Kursi"))
+        {
+            this.lastItem = "MDK";
+        }
+        else if(lastItem.equalsIgnoreCase("Jam"))
+        {
+            this.lastItem = "J";
+        }
+        else if(lastItem.equalsIgnoreCase("HP"))
+        {
+            this.lastItem = "HP";
+        }
+        else if(lastItem.equalsIgnoreCase("Sajadah"))
+        {
+            this.lastItem = "SJ";
+        }
+        else if(lastItem.equalsIgnoreCase("Sapu"))
+        {
+            this.lastItem = "S";
+        }
+        else if(lastItem.equalsIgnoreCase("TV"))
+        {
+            this.lastItem = "TV";
+        }
+        else if(lastItem.equalsIgnoreCase("Laptop"))
+        {
+            this.lastItem = "L";
+        }
+        else if(lastItem.equalsIgnoreCase("Shower"))
+        {
+            this.lastItem = "SHO";
+        }
+        
+    }
+
+    public String getLastItem() {
+        return lastItem;
     }
 
     public Room getRightRoom() {

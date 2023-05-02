@@ -454,7 +454,7 @@ public class GameManager {
                 newcurrentRoom.printSpace();
                 System.out.println("");
 
-                currentSim.setCurrentRoom(currentRoom);
+                currentSim.setCurrentRoom(newcurrentRoom);
             }
 
             else if (actionMenuInput.equals("6") || actionMenuInput.equalsIgnoreCase("Edit Room")) {
@@ -650,12 +650,6 @@ public class GameManager {
                             targetObject = listItemInRoom.get(tempListCoordinate.get(inputAngka - 1));
                             targetCoordinate = tempListCoordinate.get(inputAngka - 1);
                         }
-                    }
-
-                    // Masukan inisial akhir objek ke simPoint
-                    if(currentSim.getCurrentRoom().getLastItem() != null)
-                    {
-                        currentSim.getCurrentRoom().setLastItem(currentSim.getCurrentItems().getName());
                     }
 
                     // Pidahkan simPoint ke Object
@@ -1028,6 +1022,7 @@ public class GameManager {
                         itemsInventory.reduceInventory(itemName);
                     }
                 }
+            }
             else if(actionMenuInput.equals("14") || actionMenuInput.equalsIgnoreCase("Help")){
                 help();
             } else {

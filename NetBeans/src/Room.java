@@ -85,8 +85,8 @@ public class Room { //implements ActionListener {
     public void setSimPoint(int x, int y) {
         
         // remove old point
-        this.space[this.simPoint.getY()][this.simPoint.getX()] = " ";
-        
+        this.space[this.simPoint.getY()][this.simPoint.getX()] = this.lastItem;
+
         // create new point
         Point newPoint = new Point(x, y);
         

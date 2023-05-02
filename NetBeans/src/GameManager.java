@@ -196,7 +196,7 @@ public class GameManager {
                 int min = 0;
                 int x = (int) (Math.random() * (max - min + 1) + min);
                 int y = (int) (Math.random() * (max - min + 1) + min);
-                while(!world.isHouseExist(x, y)){
+                while(world.isHouseExist(x, y)){
                     x = (int) (Math.random() * (max - min + 1) + min);
                     y = (int) (Math.random() * (max - min + 1) + min);
                 }

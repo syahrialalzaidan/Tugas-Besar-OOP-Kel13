@@ -157,6 +157,7 @@ public class GameManager {
     }
 
     public static void main(String[] args) throws Exception {
+        Welcome();
         //List<Sim> simList = new ArrayList<>();
         Sim currentSim = null;
         World world = null;

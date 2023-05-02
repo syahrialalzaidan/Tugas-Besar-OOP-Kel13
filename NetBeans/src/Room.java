@@ -191,7 +191,7 @@ public class Room { //implements ActionListener {
         this.lowerRoom = lowerRoom;
     }
 
-    public Boolean placeObject(Items object)
+    public Boolean placeObject(Items object) throws Exception
     {
         printSpace();
         System.out.print("\n");
@@ -563,7 +563,7 @@ public class Room { //implements ActionListener {
         }
     }
 
-    public void moveObject(Items object , Coordinate kordinat)
+    public void moveObject(Items object , Coordinate kordinat) throws Exception
     {
         removeFromRoom(object , kordinat);
         Boolean isPlaced = placeObject(object);
@@ -689,7 +689,7 @@ public class Room { //implements ActionListener {
     //     }
     // }
 
-    public static void main(String[] args)
+    public static void main(String[] args) throws Exception
     {
         // MainGUI mainGUI = new MainGUI(); // Create an instance of MainGUI
         // Room room = new Room(null);

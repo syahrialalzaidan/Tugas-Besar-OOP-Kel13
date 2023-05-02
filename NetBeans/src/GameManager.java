@@ -504,11 +504,22 @@ public class GameManager {
                     while (!inputbenar) {
                         System.out.print("Masukkan nama object yang ingin diubah : ");
                         String objectName = input.nextLine();
-
-                        System.out.print("Masukkan koordinat x1 : ");
-                        int x1 = input.nextInt();
-                        System.out.print("Masukkan koordinat y1 : ");
-                        int y1 = input.nextInt();
+                        int x1;
+                        int y1;
+                        try{
+                            System.out.print("Masukkan koordinat x1 : ");
+                            x1 = input.nextInt();
+                            System.out.print("Masukkan koordinat y1 : ");
+                            y1 = input.nextInt();
+                        }
+                        catch(Exception e)
+                        {
+                            System.out.println("Koordinat harus berupa angka");
+                            System.out.println("Silakan masukkan nama object dan koordinat ulang");
+                            System.out.println("");
+                            continue;
+                        }
+                        
 
                         for (Coordinate coordinate : listItemInRoom.keySet()) {
                             if ((objectName.equalsIgnoreCase(listItemInRoom.get(coordinate).getName()))
@@ -647,21 +658,30 @@ public class GameManager {
                     Items targetObject = null;
                     Coordinate targetCoordinate = null;
                     Boolean inputbenar = false;
-                    int itemindex;
                     while (!inputbenar) {
                         System.out.print("Masukkan nama object yang ingin dituju (Angka): ");
-                        int inputAngka = input.nextInt();
-                        if(inputAngka > listItemInRoom.size() || inputAngka < 1){
-                            System.out.println("Input out of index");
+                        int inputAngka;
+                        try{
+                            inputAngka = input.nextInt();
+                            if(inputAngka > listItemInRoom.size() || inputAngka < 1){
+                                System.out.println("Input out of index");
+                                System.out.println("Silakan masukan input ulang");
+                                System.out.println("");
+                            }
+                            else
+                            {
+                                inputbenar = true;
+                                targetObject = listItemInRoom.get(tempListCoordinate.get(inputAngka - 1));
+                                targetCoordinate = tempListCoordinate.get(inputAngka - 1);
+                                input.nextLine();
+                            }
+                        }
+                        catch (Exception e){
+                            System.out.println("Input harus berupa angka");
                             System.out.println("Silakan masukan input ulang");
                             System.out.println("");
-                        }
-                        else
-                        {
-                            inputbenar = true;
-                            targetObject = listItemInRoom.get(tempListCoordinate.get(inputAngka - 1));
-                            targetCoordinate = tempListCoordinate.get(inputAngka - 1);
-                        }
+                            
+                        }  
                     }
 
                     // Masukan inisial akhir objek ke simPoint
@@ -699,26 +719,43 @@ public class GameManager {
 
                             boolean check1 = false;
                             while (!check1) {
-                                int inputTime = input.nextInt();
-                                if (inputTime % 30 != 0) {
-                                    check1 = false;
-                                    System.out.println("Masukkan waktu harus keliapatan 30 detik");
-                                } else {
-                                    check1 = true;
-                                    currentSim.watchingTV(inputTime);
+                                try{
+                                    int inputTime = input.nextInt();
+                                    if (inputTime % 30 != 0) {
+                                        check1 = false;
+                                        System.out.println("Masukkan waktu harus keliapatan 30 detik");
+                                    } else {
+                                        check1 = true;
+                                        currentSim.watchingTV(inputTime);
+                                    }
+                                }
+                                catch (Exception e){
+                                    System.out.println("Input harus berupa angka");
+                                    System.out.println("Silakan masukan input ulang");
+                                    System.out.println("");
+                                    input.nextLine();
                                 }
                             }
                             break;
                         case "Komputer":
                             boolean check2 = false;
                             while (!check2) {
-                                int inputTime = input.nextInt();
-                                if (inputTime % 20 != 0) {
-                                    check2 = false;
-                                    System.out.println("Masukkan waktu harus keliapatan 20 detik");
-                                } else {
-                                    check2 = true;
-                                    currentSim.playingGame(inputTime);
+                                try{
+                                    int inputTime = input.nextInt();
+                                    if (inputTime % 20 != 0) {
+                                        check2 = false;
+                                        System.out.println("Masukkan waktu harus keliapatan 20 detik");
+                                    } else {
+                                        check2 = true;
+                                        currentSim.playingGame(inputTime);
+                                        
+                                    }
+                                }
+                                catch (Exception e){
+                                    System.out.println("Input harus berupa angka");
+                                    System.out.println("Silakan masukan input ulang");
+                                    System.out.println("");
+                                    input.nextLine();
                                 }
                             }
 
@@ -726,26 +763,44 @@ public class GameManager {
                         case "Kolam Renang":
                             boolean check3 = false;
                             while (!check3) {
-                                int inputTime = input.nextInt();
-                                if (inputTime % 30 != 0) {
-                                    check3 = false;
-                                    System.out.println("Masukkan waktu harus keliapatan 30 detik");
-                                } else {
-                                    check3 = true;
-                                    currentSim.swiming(inputTime);
+                                try{
+                                    int inputTime = input.nextInt();
+                                    if (inputTime % 30 != 0) {
+                                        check3 = false;
+                                        System.out.println("Masukkan waktu harus keliapatan 30 detik");
+                                    } else {
+                                        check3 = true;
+                                        currentSim.swiming(inputTime);
+                                        
+                                    }
+                                }
+                                catch (Exception e){
+                                    System.out.println("Input harus berupa angka");
+                                    System.out.println("Silakan masukan input ulang");
+                                    System.out.println("");
+                                    input.nextLine();
                                 }
                             }
                             break;
                         case "Shower":
                             boolean check4 = false;
                             while (!check4) {
-                                int inputTime = input.nextInt();
-                                if (inputTime % 15 != 0) {
-                                    check4 = false;
-                                    System.out.println("Masukkan waktu harus keliapatan 15 detik");
-                                } else {
-                                    check4 = true;
-                                    currentSim.swiming(inputTime);
+                                try{
+                                    int inputTime = input.nextInt();
+                                    if (inputTime % 15 != 0) {
+                                        check4 = false;
+                                        System.out.println("Masukkan waktu harus keliapatan 15 detik");
+                                    } else {
+                                        check4 = true;
+                                        currentSim.swiming(inputTime);
+                                        
+                                    }
+                                }
+                                catch (Exception e){
+                                    System.out.println("Input harus berupa angka");
+                                    System.out.println("Silakan masukan input ulang");
+                                    System.out.println("");
+                                    input.nextLine();
                                 }
                             }
                             break;
@@ -815,19 +870,16 @@ public class GameManager {
                             }
                             break;
                         default:
-                            int waktuTidur = input.nextInt();
-                            try {
-                                if (waktuTidur % 180 != 0) {
-                                    throw new Exception("Input waktu adalah kelipatan 180 detik atau 3 menit");
-                                }
-
-                                else {
+                            if (input.hasNextInt()) { // Cek apakah input merupakan angka
+                                int waktuTidur = input.nextInt();
+                                if (waktuTidur % 180 == 0) { // Cek apakah angka merupakan kelipatan 180
                                     currentSim.sleep(waktuTidur);
-
+                                } else {
+                                    System.out.println("Input harus kelipatan 180.");
                                 }
-                            } catch (Exception e) {
-                                System.out.println(e.getMessage());
-                            }
+                            } else {
+                                System.out.println("Input harus berupa angka.");
+                        }
                     }
                 }
 
@@ -862,6 +914,14 @@ public class GameManager {
                 while (!check) {
                     System.out.print("Masukkan nomor item yang ingin dibeli: ");
                     int item = input.nextInt();
+                    try{
+                        if (item < 1 || item > 14) {
+                            throw new Exception("Input harus berupa angka antara 1-14");
+                        }
+                    } catch (Exception e) {
+                        System.out.println(e.getMessage());
+                        continue;
+                    }
                     switch (item) {
                         case 1:
                             items = new Items("Kasur Single");
@@ -983,9 +1043,16 @@ public class GameManager {
                 check = false;
                 while (!check) {
                     System.out.print("Masukkan jumlah item yang ingin dibeli: ");
-                    int jumlah = input.nextInt();
-                    input.nextLine();
+                    int jumlah = 0;
+                    try{
+                        jumlah = input.nextInt();
+                        
+                    } catch (Exception e) {
+                        System.out.println("Input harus berupa angka");
+                        input.nextLine();
+                    }
 
+                    input.nextLine();
                     if ((items.getPrice() * jumlah) > currentSim.getMoney()) {
                         System.out.println("Uang anda tidak cukup untuk membeli item sebanyak itu");
                     } else {

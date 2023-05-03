@@ -59,17 +59,7 @@ public class Sim {
         this.isBerkunjung = false;
         this.currentRoom = house.getRoom(0);
         this.currentItems = null;
-        /* Adding first objects to inventory */
-        Items ks = new Items("Kasur Single");
-        Items to = new Items("Toilet");
-        Items kom = new Items("Kompor Gas");
-        Items jam = new Items("Jam");
-        Items mej = new Items("Meja dan Kursi");
-        inventoryitems.addInventory(ks);
-        inventoryitems.addInventory(to);
-        inventoryitems.addInventory(kom);
-        inventoryitems.addInventory(jam);
-        inventoryitems.addInventory(mej);
+
     }
 
     public String getName(){

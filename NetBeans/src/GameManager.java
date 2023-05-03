@@ -10,7 +10,6 @@ import java.util.TimerTask;
 public class GameManager {
     public static List<Sim> simList = new ArrayList<>();
     private Sim sim;
-    
 
     public static void addSim(String nama, World world, House house) {
         Sim sim = new Sim(nama, house, world);
@@ -54,18 +53,21 @@ public class GameManager {
         System.out.println("");
     }
 
-    public static void Welcome(){
-        String welcome2 =
-                        "        ██╗    ███████████╗     ██████╗██████╗███╗   ██████████╗    ████████╗██████╗     ████████████╗   ██████████╗\n"+
-                        "        ██║    ████╔════██║    ██╔════██╔═══██████╗ ██████╔════╝    ╚══██╔══██╔═══██╗    ██╔════██████╗ ██████╔════╝\n"+
-                        "        ██║ █╗ ███████╗ ██║    ██║    ██║   ████╔████╔███████╗         ██║  ██║   ██║    ███████████╔████╔█████████╗\n"+
-                        "        ██║███╗████╔══╝ ██║    ██║    ██║   ████║╚██╔╝████╔══╝         ██║  ██║   ██║    ╚════██████║╚██╔╝██╚════██║\n"+
-                        "        ╚███╔███╔██████████████╚██████╚██████╔██║ ╚═╝ █████████╗       ██║  ╚██████╔╝    ███████████║ ╚═╝ █████████║\n"+
-                        "         ╚══╝╚══╝╚══════╚══════╝╚═════╝╚═════╝╚═╝     ╚═╚══════╝       ╚═╝   ╚═════╝     ╚══════╚═╚═╝     ╚═╚══════╝\n";
+    public static void Welcome() {
+        String welcome2 = "        ██╗    ███████████╗     ██████╗██████╗███╗   ██████████╗    ████████╗██████╗     ████████████╗   ██████████╗\n"
+                +
+                "        ██║    ████╔════██║    ██╔════██╔═══██████╗ ██████╔════╝    ╚══██╔══██╔═══██╗    ██╔════██████╗ ██████╔════╝\n"
+                +
+                "        ██║ █╗ ███████╗ ██║    ██║    ██║   ████╔████╔███████╗         ██║  ██║   ██║    ███████████╔████╔█████████╗\n"
+                +
+                "        ██║███╗████╔══╝ ██║    ██║    ██║   ████║╚██╔╝████╔══╝         ██║  ██║   ██║    ╚════██████║╚██╔╝██╚════██║\n"
+                +
+                "        ╚███╔███╔██████████████╚██████╚██████╔██║ ╚═╝ █████████╗       ██║  ╚██████╔╝    ███████████║ ╚═╝ █████████║\n"
+                +
+                "         ╚══╝╚══╝╚══════╚══════╝╚═════╝╚═════╝╚═╝     ╚═╚══════╝       ╚═╝   ╚═════╝     ╚══════╚═╚═╝     ╚═╚══════╝\n";
 
         System.out.println("");
         System.out.println(welcome2);
-
 
     }
 
@@ -94,50 +96,51 @@ public class GameManager {
         String inputhelp = input.nextLine();
         boolean valid = false;
 
-        while(!valid){
-            if (inputhelp.equals("1")){
-                System.out.println("Menampilkan informasi Sim tentang nama, Pekerjaan, Kesehatan, Kekenyangan, Mood, Uang ");
+        while (!valid) {
+            if (inputhelp.equals("1")) {
+                System.out.println(
+                        "Menampilkan informasi Sim tentang nama, Pekerjaan, Kesehatan, Kekenyangan, Mood, Uang ");
                 valid = true;
-            }else if (inputhelp.equals("2")){
+            } else if (inputhelp.equals("2")) {
                 System.out.println("Menampilkan lokasi dari Sim berupa Rumah dan Ruangan");
                 valid = true;
-            }else if (inputhelp.equals("3")){
+            } else if (inputhelp.equals("3")) {
                 System.out.println("Menampilkan isi inventory milik sebuah Sim");
                 valid = true;
-            }else if (inputhelp.equals("4")){
+            } else if (inputhelp.equals("4")) {
                 System.out.println("Melakukan upgrade rumah pada currentSim");
                 valid = true;
-            }else if (inputhelp.equals("5")){
+            } else if (inputhelp.equals("5")) {
                 System.out.println("Mengganti ruangan yang ada pada rumah yang sedang ditempati Sim");
                 valid = true;
-            }else if (inputhelp.equals("6")){
+            } else if (inputhelp.equals("6")) {
                 System.out.println("Pembelian barang baru atau pemindahan barang");
                 valid = true;
-            }else if (inputhelp.equals("7")){
+            } else if (inputhelp.equals("7")) {
                 System.out.println("Menambahkan Sim baru");
                 valid = true;
-            }else if (inputhelp.equals("8")){
+            } else if (inputhelp.equals("8")) {
                 System.out.println("Mengganti current Sim");
                 valid = true;
-            }else if (inputhelp.equals("9")){
+            } else if (inputhelp.equals("9")) {
                 System.out.println("Menampilkan List Objek");
                 valid = true;
-            }else if (inputhelp.equals("10")){
+            } else if (inputhelp.equals("10")) {
                 System.out.println("Sim berjalan menuju ke suatu objek");
                 valid = true;
-            }else if (inputhelp.equals("11")){
+            } else if (inputhelp.equals("11")) {
                 System.out.println("Melakukan sebuah aksi");
                 valid = true;
-            }else if (inputhelp.equals("12")){
+            } else if (inputhelp.equals("12")) {
                 System.out.println("Keluar dari game");
                 valid = true;
-            }else if (inputhelp.equals("13")){
+            } else if (inputhelp.equals("13")) {
                 System.out.println("Membeli suatu barang");
                 valid = true;
-            }else if (inputhelp.equals("14")){
+            } else if (inputhelp.equals("14")) {
                 System.out.println("Memasang barang di suatu ruangan");
                 valid = true;
-            }else{
+            } else {
                 System.out.print("Input anda salah silahkan masukkan ulang!! :");
                 inputhelp = input.nextLine();
             }
@@ -148,24 +151,21 @@ public class GameManager {
     public static void exit() {
         // Isi Exit Disini
         // ---------------
-        String exit =
-                        "        ██████╗██╗   █████████╗    ██████╗██╗   █████████╗    ██╗\n"+
-                        "        ██╔══██╚██╗ ██╔██╔════╝    ██╔══██╚██╗ ██╔██╔════╝    ██║\n"+
-                        "        ██████╔╝╚████╔╝█████╗      ██████╔╝╚████╔╝█████╗      ██║\n"+
-                        "        ██╔══██╗ ╚██╔╝ ██╔══╝      ██╔══██╗ ╚██╔╝ ██╔══╝      ╚═╝\n"+
-                        "        ██████╔╝  ██║  ███████╗    ██████╔╝  ██║  ███████╗    ██╗\n"+
-                        "        ╚═════╝   ╚═╝  ╚══════╝    ╚═════╝   ╚═╝  ╚══════╝    ╚═╝\n";
-        
-        System.out.println("");
-        System.out.println(exit);
+        String exit = "        ██████╗██╗   █████████╗    ██████╗██╗   █████████╗    ██╗\n" +
+                "        ██╔══██╚██╗ ██╔██╔════╝    ██╔══██╚██╗ ██╔██╔════╝    ██║\n" +
+                "        ██████╔╝╚████╔╝█████╗      ██████╔╝╚████╔╝█████╗      ██║\n" +
+                "        ██╔══██╗ ╚██╔╝ ██╔══╝      ██╔══██╗ ╚██╔╝ ██╔══╝      ╚═╝\n" +
+                "        ██████╔╝  ██║  ███████╗    ██████╔╝  ██║  ███████╗    ██╗\n" +
+                "        ╚═════╝   ╚═╝  ╚══════╝    ╚═════╝   ╚═╝  ╚══════╝    ╚═╝\n";
+
     }
 
     public static void main(String[] args) throws Exception {
         Welcome();
-        //List<Sim> simList = new ArrayList<>();
+        // List<Sim> simList = new ArrayList<>();
         Sim currentSim = null;
         World world = null;
-        //House currentHouse = null;
+        // House currentHouse = null;
         Room currentRoom = null;
 
         Scanner input = new Scanner(System.in);
@@ -200,21 +200,19 @@ public class GameManager {
                 int min = 0;
                 int x = (int) (Math.random() * (max - min + 1) + min);
                 int y = (int) (Math.random() * (max - min + 1) + min);
-                while(world.isHouseExist(x, y)){
+                while (world.isHouseExist(x, y)) {
                     x = (int) (Math.random() * (max - min + 1) + min);
                     y = (int) (Math.random() * (max - min + 1) + min);
                 }
 
                 Point coordinate = new Point(x, y);
-                House firstHouse = new House(coordinate , namaSim);
+                House firstHouse = new House(coordinate, namaSim);
 
                 // membuat Sim pertama
                 Sim firstSim = new Sim(namaSim, firstHouse, world);
 
                 // menset upgradeHouseTime baru untuk sim pertama
 
-
-                
                 // Memasukan Sim kedalam SimList
                 addSim(namaSim, world, firstHouse);
 
@@ -241,7 +239,7 @@ public class GameManager {
                 // currentSim.getCurrentRoom().setSpaceImmediate(2,5,item3,"KG","Right");
                 // currentSim.getCurrentRoom().setSpaceImmediate(5,0,item4,"J","Right");
                 // currentSim.getCurrentRoom().setSpaceImmediate(2,1,item5,"MDK","Right");
-  
+
                 validInput = true;
             } else if (pilihan.equals("2") || pilihan.equalsIgnoreCase("Help")) {
                 // Help
@@ -258,16 +256,15 @@ public class GameManager {
             }
         }
 
-        if(!exit)
-        {
+        if (!exit) {
             System.out.println("Selamat datang " + currentSim.getName() + " di dunia Sim-Plicity!");
             System.out.println("");
 
             // for (int i = 0; i < 4; i++) {
-            //     System.out.print("\rHold on , we are Generating Sims Map . . . . . ");
-            //     Thread.sleep(1000);
-            //     System.out.print("\r                                 ");
-            //     Thread.sleep(1000);
+            // System.out.print("\rHold on , we are Generating Sims Map . . . . . ");
+            // Thread.sleep(1000);
+            // System.out.print("\r ");
+            // Thread.sleep(1000);
             // }
 
             System.out.println("Map Generated!");
@@ -312,14 +309,12 @@ public class GameManager {
                         System.out.println("Uang tidak cukup");
                     }
 
-                    //Validasi apakah sedang Upgrade
-                    else if(currentSim.getCurrHouse().getUpgradeHouseTime() > 0)
-                    {
+                    // Validasi apakah sedang Upgrade
+                    else if (currentSim.getCurrHouse().getUpgradeHouseTime() > 0) {
                         System.out.println("Anda sedang mengupgrade Rumah");
                     }
 
-                    else
-                    {
+                    else {
                         // Memasukan Nama Ruangan Baru
                         System.out.print("Masukkan nama Ruangan baru: ");
                         String namaRumah = input.nextLine();
@@ -335,8 +330,7 @@ public class GameManager {
                         Boolean roomRootSet = false;
                         Room roomRoot = null;
 
-                        while(!roomRootSet)
-                        {
+                        while (!roomRootSet) {
                             System.out.print("Masukkan nama Ruangan yang akan dihubungkan: ");
                             String roomRootName = input.nextLine();
 
@@ -348,15 +342,14 @@ public class GameManager {
 
                             if (roomRoot == null) {
                                 System.out.println("Ruangan tidak ditemukan");
-                            }
-                            else
-                            {
+                            } else {
                                 roomRootSet = true;
                             }
                         }
 
                         System.out
-                                .println("Berikut adalah Ruangan yang terkoneksi dengan Ruangan " + roomRoot.getRoomName());
+                                .println("Berikut adalah Ruangan yang terkoneksi dengan Ruangan "
+                                        + roomRoot.getRoomName());
                         roomRoot.printAroundRoom();
                         System.out.println("");
 
@@ -380,70 +373,62 @@ public class GameManager {
                                     if (roomRoot.getUpperRoom() != null) {
                                         System.out.println("Room sudah ada");
                                         System.out.println("The Room is : " + roomRoot.getUpperRoom().getRoomName());
-                                    }
-                                    else
-                                    {
+                                    } else {
                                         currentSim.getCurrHouse().setRoomRoot(roomRoot);
                                         currentSim.getCurrHouse().setNewRoom(room);
                                         currentSim.getCurrHouse().setDirectionNewRoom(direction);
                                         currentSim.getCurrHouse().setUpgradeHouseTime(1080);
-                                        System.out.println("Upgrade Time = " + currentSim.getCurrHouse().getUpgradeHouseTime());
+                                        System.out.println(
+                                                "Upgrade Time = " + currentSim.getCurrHouse().getUpgradeHouseTime());
                                         isRoomSet = true;
-                                    }       
-                                    
-                                }
-                                else if(direction.equalsIgnoreCase("Down"))
-                                {
-                                    if(roomRoot.getLowerRoom() != null)
-                                    {
+                                    }
+
+                                } else if (direction == "Down") {
+                                    if (roomRoot.getLowerRoom() != null) {
                                         System.out.println("Room Sudah ada");
                                         System.out.println("The Room is : " + roomRoot.getLowerRoom().getRoomName());
-                                    }
-                                    else
-                                    {
+                                    } else {
                                         currentSim.getCurrHouse().setRoomRoot(roomRoot);
                                         currentSim.getCurrHouse().setNewRoom(room);
                                         currentSim.getCurrHouse().setDirectionNewRoom(direction);
                                         currentSim.getCurrHouse().setUpgradeHouseTime(1080);
-                                        System.out.println("Upgrade Time = " + currentSim.getCurrHouse().getUpgradeHouseTime());
+                                        System.out.println(
+                                                "Upgrade Time = " + currentSim.getCurrHouse().getUpgradeHouseTime());
                                         isRoomSet = true;
                                     }
-                                } else if (direction.equalsIgnoreCase("Left")) {
+                                } else if (direction == "Left") {
                                     if (roomRoot.getLeftRoom() != null) {
                                         System.out.println("Room Sudah ada");
                                         System.out.println("The Room is : " + roomRoot.getLeftRoom().getRoomName());
-                                    }
-                                    else
-                                    {
+                                    } else {
                                         currentSim.getCurrHouse().setRoomRoot(roomRoot);
                                         currentSim.getCurrHouse().setNewRoom(room);
                                         currentSim.getCurrHouse().setDirectionNewRoom(direction);
                                         currentSim.getCurrHouse().setUpgradeHouseTime(1080);
-                                        System.out.println("Upgrade Time = " + currentSim.getCurrHouse().getUpgradeHouseTime());
+                                        System.out.println(
+                                                "Upgrade Time = " + currentSim.getCurrHouse().getUpgradeHouseTime());
                                         isRoomSet = true;
                                     }
-                                } else if (direction.equalsIgnoreCase("Right")) {
+                                } else if (direction == "Right") {
                                     if (roomRoot.getRightRoom() != null) {
                                         System.out.println("Room sudah ada");
                                         System.out.println("The Room is : " + roomRoot.getRightRoom().getRoomName());
-                                    }
-                                    else
-                                    {
+                                    } else {
                                         currentSim.getCurrHouse().setRoomRoot(roomRoot);
                                         currentSim.getCurrHouse().setNewRoom(room);
                                         currentSim.getCurrHouse().setDirectionNewRoom(direction);
                                         currentSim.getCurrHouse().setUpgradeHouseTime(1080);
-                                        System.out.println("Upgrade Time = " + currentSim.getCurrHouse().getUpgradeHouseTime());
+                                        System.out.println(
+                                                "Upgrade Time = " + currentSim.getCurrHouse().getUpgradeHouseTime());
                                         isRoomSet = true;
                                     }
                                 } else {
                                     System.out.println("Invalid Direction");
                                 }
                             }
-                        }
-                        else
-                        {
-                            System.out.println("Ruangan tidak bisa diupgrade karena kiri - kanan - atas - bawah sudah ada ruangan");
+                        } else {
+                            System.out.println(
+                                    "Ruangan tidak bisa diupgrade karena kiri - kanan - atas - bawah sudah ada ruangan");
                         }
                     }
                 } else if (actionMenuInput.equals("5") || actionMenuInput.equalsIgnoreCase("Move Room")) {
@@ -495,24 +480,25 @@ public class GameManager {
                     // TODO: Edit Room
 
                     // Validasi Apakah Sim berada didalam Rumah
-                    if(currentSim.getisBerkunjung())
-                    {
+                    if (currentSim.getisBerkunjung()) {
                         System.out.println("Sim tidak berada di dalam rumah");
                     }
 
-                    else
-                    {
+                    else {
                         currentSim.getCurrentRoom().printSpace();
                         System.out.println("");
 
                         // Menampilkan Object apa saja yang dipunyai
-                        System.out.println("Berikut adalah List Object yang ada di " + currentSim.getCurrentRoom().getRoomName() + " : ");
+                        System.out.println("Berikut adalah List Object yang ada di "
+                                + currentSim.getCurrentRoom().getRoomName() + " : ");
                         HashMap<Coordinate, Items> listItemInRoom = currentSim.getCurrentRoom().getObject();
                         int i = 1;
                         for (Coordinate coordinate : listItemInRoom.keySet()) {
-                            System.out.println(i + ". " + listItemInRoom.get(coordinate).getName() + " | Coordinate = " + " ("
-                                    + coordinate.getX1() + "," + coordinate.getY1() + ")" + " - (" + coordinate.getX2() + ","
-                                    + coordinate.getY2() + ")");
+                            System.out.println(
+                                    i + ". " + listItemInRoom.get(coordinate).getName() + " | Coordinate = " + " ("
+                                            + coordinate.getX1() + "," + coordinate.getY1() + ")" + " - ("
+                                            + coordinate.getX2() + ","
+                                            + coordinate.getY2() + ")");
                             i++;
                         }
                         System.out.println("");
@@ -526,11 +512,19 @@ public class GameManager {
                         while (!inputbenar) {
                             System.out.print("Masukkan nama object yang ingin diubah : ");
                             String objectName = input.nextLine();
-
-                            System.out.print("Masukkan koordinat x1 : ");
-                            int x1 = input.nextInt();
-                            System.out.print("Masukkan koordinat y1 : ");
-                            int y1 = input.nextInt();
+                            int x1;
+                            int y1;
+                            try {
+                                System.out.print("Masukkan koordinat x1 : ");
+                                x1 = input.nextInt();
+                                System.out.print("Masukkan koordinat y1 : ");
+                                y1 = input.nextInt();
+                            } catch (Exception e) {
+                                System.out.println("Koordinat harus berupa angka");
+                                System.out.println("Silakan masukkan nama object dan koordinat ulang");
+                                System.out.println("");
+                                continue;
+                            }
 
                             for (Coordinate coordinate : listItemInRoom.keySet()) {
                                 if ((objectName.equalsIgnoreCase(listItemInRoom.get(coordinate).getName()))
@@ -554,39 +548,37 @@ public class GameManager {
                 } else if (actionMenuInput.equals("7") || actionMenuInput.equalsIgnoreCase("Add Sim")) {
                     // TODO: Add Sim
                     System.out.print("Masukkan nama : ");
-                    
-                    boolean check = false; 
-                    while (!check){
+
+                    boolean check = false;
+                    while (!check) {
                         String inputNama = input.nextLine();
                         boolean checkNama = false;
-                        for (Sim sim : GameManager.getSimList()){
-                            if (sim.getName().equals(inputNama)){
+                        for (Sim sim : GameManager.getSimList()) {
+                            if (sim.getName().equals(inputNama)) {
                                 checkNama = true;
                             }
                         }
-                        if (!checkNama){
+                        if (!checkNama) {
                             int max = 63;
                             int min = 0;
                             int x = (int) (Math.random() * (max - min + 1) + min);
                             int y = (int) (Math.random() * (max - min + 1) + min);
 
                             Point coordinate = new Point(x, y);
-                            House rumah = new House(coordinate , inputNama);
-
+                            House rumah = new House(coordinate, inputNama);
 
                             Sim s = new Sim(inputNama, rumah, world);
                             addSim(inputNama, world, rumah);
                             check = true;
-                            }
-                        else{
+                        } else {
                             System.out.print("Nama yang dimasukkan sudah terpakai, silahkan memilih nama kembali : ");
                         }
                     }
                 } else if (actionMenuInput.equals("8") || actionMenuInput.equalsIgnoreCase("Change Sim")) {
                     // TODO: Change Sim
                     System.out.println("Pilih Sim yang ingin dimainkan:");
-                    for (Sim sim : GameManager.getSimList()){
-                        if (!currentSim.getName().equals(sim.getName())){
+                    for (Sim sim : GameManager.getSimList()) {
+                        if (!currentSim.getName().equals(sim.getName())) {
                             System.out.println(sim.getName());
                         }
 
@@ -594,27 +586,24 @@ public class GameManager {
                     System.out.println(" ");
                     System.out.print("Masukkan nama Sim yang ingin dimainkan: ");
                     boolean check = false;
-                    while (!check){
+                    while (!check) {
                         String inputNama = input.nextLine();
                         boolean checkNama = false;
-                        for (Sim sim : GameManager.getSimList()){
-                            if (sim.getName().equals(inputNama)){
+                        for (Sim sim : GameManager.getSimList()) {
+                            if (sim.getName().equals(inputNama)) {
                                 checkNama = true;
                             }
                         }
-                        if (inputNama.equals(currentSim.getName())){
+                        if (inputNama.equals(currentSim.getName())) {
                             System.out.print("Anda sedang memainkan Sim tersebut, silakan masukkan nama kembali :");
-                        }
-                        else if (checkNama){
+                        } else if (checkNama) {
                             changeSim(inputNama);
                             System.out.println("Sekarang anda sedang memainkan" + inputNama);
-                            check=true;
-                        }
-                        else {
+                            check = true;
+                        } else {
                             System.out.print("Input nama yang dimaksukan tidak ada dalam daftar sim : ");
                         }
                     }
-                        
 
                 } else if (actionMenuInput.equals("9") || actionMenuInput.equalsIgnoreCase("List Object")) {
                     System.out.println("List of objects:");
@@ -651,17 +640,17 @@ public class GameManager {
                 } else if (actionMenuInput.equals("10") || actionMenuInput.equalsIgnoreCase("Go To Object")) {
                     // TODO : Go To Object
                     HashMap<Coordinate, Items> listItemInRoom = currentSim.getCurrentRoom().getObject();
-                    if(listItemInRoom.isEmpty()){
-                        System.out.println("Tidak ada object di ruangan ini , Silahkan Menempatkan Object terlebih dahulu");
+                    if (listItemInRoom.isEmpty()) {
+                        System.out.println(
+                                "Tidak ada object di ruangan ini , Silahkan Menempatkan Object terlebih dahulu");
                         System.out.println("");
-                    }
-                    else
-                    {
+                    } else {
                         ArrayList<Coordinate> tempListCoordinate = new ArrayList<Coordinate>();
-                        System.out.println("Berikut adalah List Object yang ada di " + currentSim.getCurrentRoom().getRoomName() + " : ");
+                        System.out.println("Berikut adalah List Object yang ada di "
+                                + currentSim.getCurrentRoom().getRoomName() + " : ");
                         int i = 1;
                         for (Coordinate coordinate : listItemInRoom.keySet()) {
-                            System.out.println(i + ". " + listItemInRoom.get(coordinate).getName() + " (" + coordinate.getX1() + "," + coordinate.getY1() + ")");
+                            System.out.println(i + ". " + listItemInRoom.get(coordinate).getName());
                             tempListCoordinate.add(coordinate);
                             i++;
                         }
@@ -669,25 +658,34 @@ public class GameManager {
                         Items targetObject = null;
                         Coordinate targetCoordinate = null;
                         Boolean inputbenar = false;
-                        int itemindex;
                         while (!inputbenar) {
-                            System.out.print("Masukkan Angka Object yang ingin dituju: ");
-                            int inputAngka = input.nextInt();
-                            if(inputAngka > listItemInRoom.size() || inputAngka < 1){
-                                System.out.println("Input out of index");
+                            System.out.print("Masukkan nama object yang ingin dituju (Angka): ");
+                            int inputAngka;
+                            try {
+                                inputAngka = input.nextInt();
+                                if (inputAngka > listItemInRoom.size() || inputAngka < 1) {
+                                    System.out.println("Input out of index");
+                                    System.out.println("Silakan masukan input ulang");
+                                    System.out.println("");
+                                } else {
+                                    inputbenar = true;
+                                    targetObject = listItemInRoom.get(tempListCoordinate.get(inputAngka - 1));
+                                    targetCoordinate = tempListCoordinate.get(inputAngka - 1);
+                                    input.nextLine();
+                                }
+                            } catch (Exception e) {
+                                System.out.println("Input harus berupa angka");
                                 System.out.println("Silakan masukan input ulang");
                                 System.out.println("");
-                            }
-                            else
-                            {
-                                inputbenar = true;
-                                targetObject = listItemInRoom.get(tempListCoordinate.get(inputAngka - 1));
-                                targetCoordinate = tempListCoordinate.get(inputAngka - 1);
+
                             }
                         }
 
-                        input.nextLine();
-                        
+                        // Masukan inisial akhir objek ke simPoint
+                        if (currentSim.getCurrentRoom().getLastItem() != null) {
+                            currentSim.getCurrentRoom().setLastItem(currentSim.getCurrentItems().getName());
+                        }
+
                         // Pidahkan simPoint ke Object
                         currentSim.getCurrentRoom().setSimPoint(targetCoordinate.getX1(), targetCoordinate.getY1());
 
@@ -707,156 +705,243 @@ public class GameManager {
                             System.out.print("Apakah Anda ingin melakukan action pada object ini? (Y/N) : ");
                             yesno = input.nextLine();
                         }
-                        if(yesno == "Y")
-                        {
-                        switch (currentSim.getCurrentItems().getName()) {
-                            case "Toilet":
+                        if (yesno == "Y") {
+                            switch (currentSim.getCurrentItems().getName()) {
+                                case "Toilet":
 
-                                currentSim.defecate();
-                                break;
-                            case "TV":
+                                    currentSim.defecate();
+                                    break;
+                                case "TV":
 
-                                boolean check1 = false;
-                                while (!check1) {
-                                    int inputTime = input.nextInt();
-                                    if (inputTime % 30 != 0) {
-                                        check1 = false;
-                                        System.out.println("Masukkan waktu harus keliapatan 30 detik");
-                                    } else {
-                                        check1 = true;
-                                        currentSim.watchingTV(inputTime);
+                                    boolean check1 = false;
+                                    while (!check1) {
+                                        try {
+                                            int inputTime = input.nextInt();
+                                            if (inputTime % 30 != 0) {
+                                                check1 = false;
+                                                System.out.println("Masukkan waktu harus keliapatan 30 detik");
+                                            } else {
+                                                check1 = true;
+                                                currentSim.watchingTV(inputTime);
+                                            }
+                                        } catch (Exception e) {
+                                            System.out.println("Input harus berupa angka");
+                                            System.out.println("Silakan masukan input ulang");
+                                            System.out.println("");
+                                            input.nextLine();
+                                        }
                                     }
-                                }
-                                break;
-                            case "Komputer":
-                                boolean check2 = false;
-                                while (!check2) {
-                                    int inputTime = input.nextInt();
-                                    if (inputTime % 20 != 0) {
-                                        check2 = false;
-                                        System.out.println("Masukkan waktu harus keliapatan 20 detik");
-                                    } else {
-                                        check2 = true;
-                                        currentSim.playingGame(inputTime);
-                                    }
-                                }
+                                    break;
+                                case "Komputer":
+                                    boolean check2 = false;
+                                    while (!check2) {
+                                        try {
+                                            int inputTime = input.nextInt();
+                                            if (inputTime % 20 != 0) {
+                                                check2 = false;
+                                                System.out.println("Masukkan waktu harus keliapatan 20 detik");
+                                            } else {
+                                                check2 = true;
+                                                currentSim.playingGame(inputTime);
 
-                                break;
-                            case "Kolam Renang":
-                                boolean check3 = false;
-                                while (!check3) {
-                                    int inputTime = input.nextInt();
-                                    if (inputTime % 30 != 0) {
-                                        check3 = false;
-                                        System.out.println("Masukkan waktu harus keliapatan 30 detik");
-                                    } else {
-                                        check3 = true;
-                                        currentSim.swiming(inputTime);
+                                            }
+                                        } catch (Exception e) {
+                                            System.out.println("Input harus berupa angka");
+                                            System.out.println("Silakan masukan input ulang");
+                                            System.out.println("");
+                                            input.nextLine();
+                                        }
                                     }
-                                }
-                                break;
-                            case "Shower":
-                                boolean check4 = false;
-                                while (!check4) {
-                                    int inputTime = input.nextInt();
-                                    if (inputTime % 15 != 0) {
-                                        check4 = false;
-                                        System.out.println("Masukkan waktu harus keliapatan 15 detik");
-                                    } else {
-                                        check4 = true;
-                                        currentSim.swiming(inputTime);
+
+                                    break;
+                                case "Kolam Renang":
+                                    boolean check3 = false;
+                                    while (!check3) {
+                                        try {
+                                            int inputTime = input.nextInt();
+                                            if (inputTime % 30 != 0) {
+                                                check3 = false;
+                                                System.out.println("Masukkan waktu harus keliapatan 30 detik");
+                                            } else {
+                                                check3 = true;
+                                                currentSim.swiming(inputTime);
+
+                                            }
+                                        } catch (Exception e) {
+                                            System.out.println("Input harus berupa angka");
+                                            System.out.println("Silakan masukan input ulang");
+                                            System.out.println("");
+                                            input.nextLine();
+                                        }
                                     }
-                                }
-                                break;
-                            case "Jam":
-                                currentSim.viewClock();
-                            case "Meja dan Kursi":
-                                currentSim.getInventoryfood().printInventory();
-                                currentSim.getInventorydish().printInventory();
-                                System.out.println("Pilih makanan untuk dimakan");
-                                boolean check = true;
-                                boolean isFood = true;
-                                while (check) {
-                                    String inputMakanan = input.nextLine();
-                                    if (currentSim.getInventoryfood().getInventory().containsKey(new Food(inputMakanan))) {
-                                        currentSim.eat(new Food(inputMakanan), currentSim.getInventorydish(),
+                                    break;
+                                case "Shower":
+                                    boolean check4 = false;
+                                    while (!check4) {
+                                        try {
+                                            int inputTime = input.nextInt();
+                                            if (inputTime % 15 != 0) {
+                                                check4 = false;
+                                                System.out.println("Masukkan waktu harus keliapatan 15 detik");
+                                            } else {
+                                                check4 = true;
+                                                currentSim.swiming(inputTime);
+
+                                            }
+                                        } catch (Exception e) {
+                                            System.out.println("Input harus berupa angka");
+                                            System.out.println("Silakan masukan input ulang");
+                                            System.out.println("");
+                                            input.nextLine();
+                                        }
+                                    }
+                                    break;
+                                case "Jam":
+                                    currentSim.viewClock();
+                                case "Meja dan Kursi":
+                                    currentSim.getInventoryfood().printInventory();
+                                    currentSim.getInventorydish().printInventory();
+                                    System.out.println("Pilih makanan untuk dimakan");
+                                    boolean check = true;
+                                    boolean isFood = true;
+                                    while (check) {
+                                        String inputMakanan = input.nextLine();
+                                        if (currentSim.getInventoryfood().getInventory()
+                                                .containsKey(new Food(inputMakanan))) {
+                                            currentSim.eat(new Food(inputMakanan), currentSim.getInventorydish(),
+                                                    currentSim.getInventoryfood());
+                                            check = false;
+                                        } else if (currentSim.getInventorydish().getInventory()
+                                                .containsKey(inputMakanan)) {
+                                            currentSim.eat(new Dish(inputMakanan), currentSim.getInventorydish(),
+                                                    currentSim.getInventoryfood());
+                                        } else {
+                                            System.out.println(
+                                                    "Kamu tidak memiliki makanan tersebut di inventory, mohon masukkan kembali makanan yang ingin dimakan");
+                                        }
+                                    }
+
+                                case "Kompor Gas":
+                                    boolean check6 = true;
+                                    System.out.println("Pilih makanan yang ingin dimasak");
+                                    System.out.println("1. Nasi Ayam");
+                                    System.out.println("2. Nasi Kari");
+                                    System.out.println("3. Susu Kacang");
+                                    System.out.println("4. Tumis Sayur");
+                                    System.out.println("5. Bistik");
+                                    String makanan = input.nextLine();
+                                    Dish dish = new Dish(makanan);
+                                    for (String foods : dish.getIngredient()) {
+                                        if (!currentSim.getInventoryfood().getInventory().containsKey(foods)) {
+                                            check6 = false;
+                                        }
+                                    }
+                                    if (check6) {
+                                        currentSim.cook(dish, currentSim.getInventorydish(),
                                                 currentSim.getInventoryfood());
-                                        check = false;
-                                    } else if (currentSim.getInventorydish().getInventory().containsKey(inputMakanan)) {
-                                        currentSim.eat(new Dish(inputMakanan), currentSim.getInventorydish(),
+                                    } else {
+                                        System.out.println("Bahan makanan tidak cukup untuk memasak");
+                                    }
+                                    break;
+                                case "Kompor Listrik":
+                                    boolean check5 = true;
+                                    System.out.println("Pilih makanan yang ingin dimasak");
+                                    System.out.println("1. Nasi Ayam");
+                                    System.out.println("2. Nasi Kari");
+                                    System.out.println("3. Susu Kacang");
+                                    System.out.println("4. Tumis Sayur");
+                                    System.out.println("5. Bistik");
+                                    String makanan1 = input.nextLine();
+                                    Dish dish1 = new Dish(makanan1);
+                                    for (String foods : dish1.getIngredient()) {
+                                        if (!currentSim.getInventoryfood().getInventory().containsKey(foods)) {
+                                            check5 = false;
+                                        }
+                                    }
+                                    if (check5) {
+                                        currentSim.cook(dish1, currentSim.getInventorydish(),
                                                 currentSim.getInventoryfood());
                                     } else {
-                                        System.out.println(
-                                                "Kamu tidak memiliki makanan tersebut di inventory, mohon masukkan kembali makanan yang ingin dimakan");
+                                        System.out.println("Bahan makanan tidak cukup untuk memasak");
                                     }
-                                }
-
-                            case "Kompor Gas":
-                                boolean check6 = true;
-                                System.out.println("Pilih makanan yang ingin dimasak");
-                                System.out.println("1. Nasi Ayam");
-                                System.out.println("2. Nasi Kari");
-                                System.out.println("3. Susu Kacang");
-                                System.out.println("4. Tumis Sayur");
-                                System.out.println("5. Bistik");
-                                String makanan = input.nextLine();
-                                Dish dish = new Dish(makanan);
-                                for (String foods : dish.getIngredient()) {
-                                    if (!currentSim.getInventoryfood().getInventory().containsKey(foods)) {
-                                        check6 = false;
+                                    break;
+                                default:
+                                    if (input.hasNextInt()) { // Cek apakah input merupakan angka
+                                        int waktuTidur = input.nextInt();
+                                        if (waktuTidur % 180 == 0) { // Cek apakah angka merupakan kelipatan 180
+                                            currentSim.sleep(waktuTidur);
+                                        } else {
+                                            System.out.println("Input harus kelipatan 180.");
+                                        }
+                                    } else {
+                                        System.out.println("Input harus berupa angka.");
                                     }
-                                }
-                                if (check6) {
-                                    currentSim.cook(dish, currentSim.getInventorydish(), currentSim.getInventoryfood());
-                                } else {
-                                    System.out.println("Bahan makanan tidak cukup untuk memasak");
-                                }
-                                break;
-                            case "Kompor Listrik":
-                                boolean check5 = true;
-                                System.out.println("Pilih makanan yang ingin dimasak");
-                                System.out.println("1. Nasi Ayam");
-                                System.out.println("2. Nasi Kari");
-                                System.out.println("3. Susu Kacang");
-                                System.out.println("4. Tumis Sayur");
-                                System.out.println("5. Bistik");
-                                String makanan1 = input.nextLine();
-                                Dish dish1 = new Dish(makanan1);
-                                for (String foods : dish1.getIngredient()) {
-                                    if (!currentSim.getInventoryfood().getInventory().containsKey(foods)) {
-                                        check5 = false;
-                                    }
-                                }
-                                if (check5) {
-                                    currentSim.cook(dish1, currentSim.getInventorydish(), currentSim.getInventoryfood());
-                                } else {
-                                    System.out.println("Bahan makanan tidak cukup untuk memasak");
-                                }
-                                break;
-                            default:
-                                int waktuTidur = input.nextInt();
-                                try {
-                                    if (waktuTidur % 180 != 0) {
-                                        throw new Exception("Input waktu adalah kelipatan 180 detik atau 3 menit");
-                                    }
-
-                                    else {
-                                        currentSim.sleep(waktuTidur);
-
-                                    }
-                                } catch (Exception e) {
-                                    System.out.println(e.getMessage());
-                                }
                             }
                         }
                     }
 
                 } else if (actionMenuInput.equals("11") || actionMenuInput.equalsIgnoreCase("Action")) {
                     // TODO: Action
+                    System.out.println("Pilih action untuk dilakukan");
+                    System.out.println("1. Kerja");
+                    System.out.println("2. Olahraga");
+                    System.out.println("3. Berkunjung");
+                    System.out.println("4. Pulang");
+                    boolean check = false;
+                    while (!check) {
+                        String ActionInput = input.nextLine();
+                        if (ActionInput.equals("1") || ActionInput.equals("Kerja")) {
+                            boolean check1 = false;
+                            while (!check1) {
+                                int TimeInput = input.nextInt();
+                                input.nextLine();
+                                if (TimeInput % 120 == 0) {
+                                    currentSim.work(TimeInput);
+                                    check = true;
+                                    check1 = true;
+                                } else {
+                                    System.out.println("Input yang dimasukkan harus berkelipatan 120 detik");
+                                }
+                            }
+                        } else if (ActionInput.equals("2") || ActionInput.equals("Olahraga")) {
+                            boolean check1 = false;
+                            while (!check1) {
+                                int TimeInput = input.nextInt();
+                                input.nextLine();
+                                if (TimeInput % 20 == 0) {
+                                    currentSim.workout(TimeInput);
+                                    check = true;
+                                    check1 = true;
+                                } else {
+                                    System.out.println("Input yang dimasukkan harus berkelipatan 20 detik");
+                                }
+                            }
+                        } else if (ActionInput.equals("3") || ActionInput.equals("Berkunjung")) {
+                            boolean check1 = false;
+                            int TimeInput = input.nextInt();
+                            input.nextLine();
+                            while (!check1) {
+                                if (currentSim.getHouse() == currentSim.getCurrHouse()) {
+
+                                } else {
+                                    System.out.println("Sim sedang berkunjung");
+                                }
+                            }
+                        } else if (ActionInput.equals("4") || ActionInput.equals("Pulang")) {
+                            if (currentSim.getBerkunjung() != 0) {
+                                currentSim.goHome();
+                                check = true;
+                            } else {
+                                System.out.println("Sim sedang berada di rumah sendiri");
+                            }
+                        } else {
+                            System.out.println("Tidak ada action yang dimaksud silahkan masukkan input kembali");
+                        }
+
+                    }
                 } else if (actionMenuInput.equals("12") || actionMenuInput.equalsIgnoreCase("Exit")) {
                     // TODO: Exit
                     exit();
-                    exit = true;
                 } else if (actionMenuInput.equals("13") || actionMenuInput.equalsIgnoreCase("Beli barang")) {
                     // TODO: Beli barang
                     System.out.println("Berikut adalah items yang tersedia beserta harganya:");
@@ -874,149 +959,255 @@ public class GameManager {
                     System.out.println("12. TV              | 50");
                     System.out.println("13. Laptop          | 200");
                     System.out.println("14. Shower          | 50");
+                    System.out.println("15. Nasi            | 5");
+                    System.out.println("16. Kentang         | 3");
+                    System.out.println("17. Ayam            | 10");
+                    System.out.println("18. Sapi            | 12");
+                    System.out.println("19. Wortel          | 3");
+                    System.out.println("20. Bayam           | 3");
+                    System.out.println("21. Kacang          | 2");
+                    System.out.println("22. Susu            | 2");
                     boolean check = false;
+                    Food foods = null;
                     Items items = null;
 
-                    if (currentSim.getMoney() < 10){
+                    if (currentSim.getMoney() < 10) {
                         System.out.println("Uang tidak cukup untuk membeli item");
                     } else {
-                    while (!check) {
-                        System.out.print("Masukkan nomor item yang ingin dibeli: ");
-                        int item = input.nextInt();
-                        switch (item) {
-                            case 1:
-                                items = new Items("Kasur Single");
-                                if (items.getPrice() > currentSim.getMoney()) {
-                                    System.out.println("Uang tidak cukup untuk membeli item ini");
+                        while (!check) {
+                            System.out.print("Masukkan nomor item yang ingin dibeli: ");
+                            int item = input.nextInt();
+                            try {
+                                if (item < 1 || item > 22) {
+                                    throw new Exception("Input harus berupa angka antara 1-22");
+                                }
+                            } catch (Exception e) {
+                                System.out.println(e.getMessage());
+                                continue;
+                            }
+                            switch (item) {
+                                case 1:
+                                    items = new Items("Kasur Single");
+                                    if (items.getPrice() > currentSim.getMoney()) {
+                                        System.out.println("Uang tidak cukup untuk membeli item ini");
+                                    } else {
+                                        check = true;
+                                    }
+                                    break;
+                                case 2:
+                                    items = new Items("Kasur Queen Size");
+                                    if (items.getPrice() > currentSim.getMoney()) {
+                                        System.out.println("Uang tidak cukup untuk membeli item ini");
+                                    } else {
+                                        check = true;
+                                    }
+                                    break;
+                                case 3:
+                                    items = new Items("Kasur King Size");
+                                    if (items.getPrice() > currentSim.getMoney()) {
+                                        System.out.println("Uang tidak cukup untuk membeli item ini");
+                                    } else {
+                                        check = true;
+                                    }
+                                    break;
+                                case 4:
+                                    items = new Items("Toilet");
+                                    if (items.getPrice() > currentSim.getMoney()) {
+                                        System.out.println("Uang tidak cukup untuk membeli item ini");
+                                    } else {
+                                        check = true;
+                                    }
+                                    break;
+                                case 5:
+                                    items = new Items("Kompor Gas");
+                                    if (items.getPrice() > currentSim.getMoney()) {
+                                        System.out.println("Uang tidak cukup untuk membeli item ini");
+                                    } else {
+                                        check = true;
+                                    }
+                                    break;
+                                case 6:
+                                    items = new Items("Kompor Listrik");
+                                    if (items.getPrice() > currentSim.getMoney()) {
+                                        System.out.println("Uang tidak cukup untuk membeli item ini");
+                                    } else {
+                                        check = true;
+                                    }
+                                    break;
+                                case 7:
+                                    items = new Items("Meja dan Kursi");
+                                    if (items.getPrice() > currentSim.getMoney()) {
+                                        System.out.println("Uang tidak cukup untuk membeli item ini");
+                                    } else {
+                                        check = true;
+                                    }
+                                    break;
+                                case 8:
+                                    items = new Items("Jam");
+                                    if (items.getPrice() > currentSim.getMoney()) {
+                                        System.out.println("Uang tidak cukup untuk membeli item ini");
+                                    } else {
+                                        check = true;
+                                    }
+                                    break;
+                                case 9:
+                                    items = new Items("HP");
+                                    if (items.getPrice() > currentSim.getMoney()) {
+                                        System.out.println("Uang tidak cukup untuk membeli item ini");
+                                    } else {
+                                        check = true;
+                                    }
+                                    break;
+                                case 10:
+                                    items = new Items("Sajadah");
+                                    if (items.getPrice() > currentSim.getMoney()) {
+                                        System.out.println("Uang tidak cukup untuk membeli item ini");
+                                    } else {
+                                        check = true;
+                                    }
+                                    break;
+                                case 11:
+                                    items = new Items("Sapu");
+                                    if (items.getPrice() > currentSim.getMoney()) {
+                                        System.out.println("Uang tidak cukup untuk membeli item ini");
+                                    } else {
+                                        check = true;
+                                    }
+                                    break;
+                                case 12:
+                                    items = new Items("TV");
+                                    if (items.getPrice() > currentSim.getMoney()) {
+                                        System.out.println("Uang tidak cukup untuk membeli item ini");
+                                    } else {
+                                        check = true;
+                                    }
+                                    break;
+                                case 13:
+                                    items = new Items("Laptop");
+                                    if (items.getPrice() > currentSim.getMoney()) {
+                                        System.out.println("Uang tidak cukup untuk membeli item ini");
+                                    } else {
+                                        check = true;
+                                    }
+                                    break;
+                                case 14:
+                                    items = new Items("Shower");
+                                    if (items.getPrice() > currentSim.getMoney()) {
+                                        System.out.println("Uang tidak cukup untuk membeli item ini");
+                                    } else {
+                                        check = true;
+                                    }
+                                    break;
+                                case 15:
+                                    foods = new Food("Nasi");
+                                    if (foods.getPrice() > currentSim.getMoney()) {
+                                        System.out.println("Uang tidak cukup untuk membeli item ini");
+                                    } else {
+                                        check = true;
+                                    }
+                                    break;
+                                case 16:
+                                    foods = new Food("Kentang");
+                                    if (foods.getPrice() > currentSim.getMoney()) {
+                                        System.out.println("Uang tidak cukup untuk membeli item ini");
+                                    } else {
+                                        check = true;
+                                    }
+                                    break;
+                                case 17:
+                                    foods = new Food("Ayam");
+                                    if (foods.getPrice() > currentSim.getMoney()) {
+                                        System.out.println("Uang tidak cukup untuk membeli item ini");
+                                    } else {
+                                        check = true;
+                                    }
+                                    break;
+                                case 18:
+                                    foods = new Food("Sapi");
+                                    if (foods.getPrice() > currentSim.getMoney()) {
+                                        System.out.println("Uang tidak cukup untuk membeli item ini");
+                                    } else {
+                                        check = true;
+                                    }
+                                    break;
+                                case 19:
+                                    foods = new Food("Wortel");
+                                    if (foods.getPrice() > currentSim.getMoney()) {
+                                        System.out.println("Uang tidak cukup untuk membeli item ini");
+                                    } else {
+                                        check = true;
+                                    }
+                                    break;
+                                case 20:
+                                    foods = new Food("Bayam");
+                                    if (foods.getPrice() > currentSim.getMoney()) {
+                                        System.out.println("Uang tidak cukup untuk membeli item ini");
+                                    } else {
+                                        check = true;
+                                    }
+                                    break;
+                                case 21:
+                                    foods = new Food("Kacang");
+                                    if (foods.getPrice() > currentSim.getMoney()) {
+                                        System.out.println("Uang tidak cukup untuk membeli item ini");
+                                    } else {
+                                        check = true;
+                                    }
+                                    break;
+                                case 22:
+                                    foods = new Food("Susu");
+                                    if (foods.getPrice() > currentSim.getMoney()) {
+                                        System.out.println("Uang tidak cukup untuk membeli item ini");
+                                    } else {
+                                        check = true;
+                                    }
+                                    break;
+
+                                default:
+                                    System.out.println("Invalid Input, Masukkan input yang benar!");
+                            }
+                        }
+
+                        check = false;
+                        while (!check) {
+                            System.out.print("Masukkan jumlah item yang ingin dibeli: ");
+                            int jumlah = 0;
+                            try {
+                                jumlah = input.nextInt();
+
+                            } catch (Exception e) {
+                                System.out.println("Input harus berupa angka");
+                                input.nextLine();
+                            }
+
+                            input.nextLine();
+                            if (items != null) {
+                                if ((items.getPrice() * jumlah) > currentSim.getMoney()) {
+                                    System.out.println("Uang anda tidak cukup untuk membeli item sebanyak itu");
                                 } else {
-                                    check = true;
-                                } 
-                                break;
-                            case 2:
-                                items = new Items("Kasur Queen Size");
-                                if (items.getPrice() > currentSim.getMoney()) {
-                                    System.out.println("Uang tidak cukup untuk membeli item ini");
-                                } else {
-                                    check = true;
-                                } 
-                                break;
-                            case 3:
-                                items = new Items("Kasur King Size");
-                                if (items.getPrice() > currentSim.getMoney()) {
-                                    System.out.println("Uang tidak cukup untuk membeli item ini");
-                                } else {
-                                    check = true;
-                                } 
-                                break;
-                            case 4:
-                                items = new Items("Toilet");
-                                if (items.getPrice() > currentSim.getMoney()) {
-                                    System.out.println("Uang tidak cukup untuk membeli item ini");
-                                } else {
-                                    check = true;
-                                } 
-                                break;
-                            case 5:
-                                items = new Items("Kompor Gas");
-                                if (items.getPrice() > currentSim.getMoney()) {
-                                    System.out.println("Uang tidak cukup untuk membeli item ini");
-                                } else {
-                                    check = true;
-                                } 
-                                break;
-                            case 6:
-                                items = new Items("Kompor Listrik");
-                                if (items.getPrice() > currentSim.getMoney()) {
-                                    System.out.println("Uang tidak cukup untuk membeli item ini");
-                                } else {
-                                    check = true;
-                                } 
-                                break;
-                            case 7:
-                                items = new Items("Meja dan Kursi");
-                                if (items.getPrice() > currentSim.getMoney()) {
-                                    System.out.println("Uang tidak cukup untuk membeli item ini");
-                                } else {
-                                    check = true;
-                                } 
-                                break;
-                            case 8:
-                                items = new Items("Jam");
-                                if (items.getPrice() > currentSim.getMoney()) {
-                                    System.out.println("Uang tidak cukup untuk membeli item ini");
-                                } else {
-                                    check = true;
-                                } 
-                                break;
-                            case 9:
-                                items = new Items("HP");
-                                if (items.getPrice() > currentSim.getMoney()) {
-                                    System.out.println("Uang tidak cukup untuk membeli item ini");
-                                } else {
+                                    System.out.println("Item berhasil dibeli");
+                                    System.out.println("");
+                                    System.out.println("Tunggu ya, Item sedang diantar...");
+                                    currentSim.setMoney(currentSim.getMoney() - (items.getPrice() * jumlah));
+                                    for (int i = 0; i < jumlah; i++)
+                                        currentSim.addItemOrder(items.getName(), jumlah, items.getPrice());
                                     check = true;
                                 }
-                                break;
-                            case 10:
-                                items = new Items("Sajadah");
-                                if (items.getPrice() > currentSim.getMoney()) {
-                                    System.out.println("Uang tidak cukup untuk membeli item ini");
+                            } else {
+                                if ((foods.getPrice() * jumlah) > currentSim.getMoney()) {
+                                    System.out.println("Uang anda tidak cukup untuk membeli item sebanyak itu");
                                 } else {
+                                    System.out.println("Makanan berhasil dibeli");
+                                    System.out.println("");
+                                    System.out.println("Tunggu ya, Makanan sedang diantar...");
+                                    currentSim.setMoney(currentSim.getMoney() - (foods.getPrice() * jumlah));
+                                    for (int i = 0; i < jumlah; i++)
+                                        currentSim.addFoodOrder(foods.getName(), jumlah, foods.getPrice());
                                     check = true;
                                 }
-                                break;
-                            case 11:
-                                items = new Items("Sapu");
-                                if (items.getPrice() > currentSim.getMoney()) {
-                                    System.out.println("Uang tidak cukup untuk membeli item ini");
-                                } else {
-                                    check = true;
-                                }
-                                break;
-                            case 12:
-                                items = new Items("TV");
-                                if (items.getPrice() > currentSim.getMoney()) {
-                                    System.out.println("Uang tidak cukup untuk membeli item ini");
-                                } else {
-                                    check = true;
-                                }
-                                break;
-                            case 13:
-                                items = new Items("Laptop");
-                                if (items.getPrice() > currentSim.getMoney()) {
-                                    System.out.println("Uang tidak cukup untuk membeli item ini");
-                                } else {
-                                    check = true;
-                                }
-                                break;
-                            case 14:
-                                items = new Items("Shower");
-                                if (items.getPrice() > currentSim.getMoney()) {
-                                    System.out.println("Uang tidak cukup untuk membeli item ini");
-                                } else { 
-                                    check = true;
-                                }
-                                break;
-                            default:
-                                System.out.println("Invalid Input, Masukkan input yang benar!");
+                            }
                         }
                     }
-
-                    check = false;
-                    while (!check) {
-                        System.out.print("Masukkan jumlah item yang ingin dibeli: ");
-                        int jumlah = input.nextInt();
-                        input.nextLine();
-
-                        if ((items.getPrice() * jumlah) > currentSim.getMoney()) {
-                            System.out.println("Uang anda tidak cukup untuk membeli item sebanyak itu");
-                        } else {
-                            System.out.println("Item berhasil dibeli");
-                            currentSim.setMoney(currentSim.getMoney() - (items.getPrice() * jumlah));
-                            for(int i =0; i < jumlah; i++) currentSim.addInventoryitems(items);
-                            check = true;
-                        }
-                    }
-                }
 
                 } else if (actionMenuInput.equals("14") || actionMenuInput.equalsIgnoreCase("Memasang barang")) {
                     // TODO: Memasang barang
@@ -1061,8 +1252,7 @@ public class GameManager {
                             itemsInventory.reduceInventory(itemName);
                         }
                     }
-                }
-                else if(actionMenuInput.equals("14") || actionMenuInput.equalsIgnoreCase("Help")){
+                } else if (actionMenuInput.equals("14") || actionMenuInput.equalsIgnoreCase("Help")) {
                     help();
                 } else {
                     // Invalid Input

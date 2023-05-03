@@ -833,6 +833,71 @@ public class GameManager {
 
             } else if (actionMenuInput.equals("11") || actionMenuInput.equalsIgnoreCase("Action")) {
                 // TODO: Action
+                System.out.println("Pilih action untuk dilakukan");
+                System.out.println("1. Kerja");
+                System.out.println("2. Olahraga");
+                System.out.println("3. Berkunjung");
+                System.out.println("4. Pulang");
+                boolean check = false;
+                while(!check){
+                    String ActionInput = input.nextLine();
+                    if (ActionInput.equals("1")||ActionInput.equals("Kerja")){
+                        boolean check1 = false;
+                        while (!check1){
+                            int TimeInput = input.nextInt();
+                            input.nextLine();
+                            if (TimeInput%120==0){
+                                currentSim.work(TimeInput);
+                                check = true;
+                                check1 = true;
+                            }
+                            else {
+                                System.out.println("Input yang dimasukkan harus berkelipatan 120 detik");
+                            }
+                        }
+                    }
+                    else if (ActionInput.equals("2")||ActionInput.equals("Olahraga")){
+                        boolean check1 = false;
+                        while (!check1){
+                            int TimeInput = input.nextInt();
+                            input.nextLine();
+                            if (TimeInput%20==0){
+                                currentSim.workout(TimeInput);
+                                check = true;
+                                check1 = true;
+                            }
+                            else {
+                                System.out.println("Input yang dimasukkan harus berkelipatan 20 detik");
+                            }
+                        }
+                    }
+                    else if (ActionInput.equals("3")||ActionInput.equals("Berkunjung")){
+                        boolean check1 = false;
+                        int TimeInput = input.nextInt();
+                        input.nextLine();
+                        while (!check1){
+                            if (currentSim.getHouse()== currentSim.getCurrHouse()){
+                                
+                            }
+                            else {
+                                System.out.println("Sim sedang berkunjung");
+                            }
+                        }
+                    }
+                    else if (ActionInput.equals("4")||ActionInput.equals("Pulang")){
+                        if (currentSim.getBerkunjung()!=0){
+                            currentSim.goHome();
+                            check = true;
+                        }
+                        else{
+                            System.out.println("Sim sedang berada di rumah sendiri");
+                        }
+                    }
+                    else{
+                        System.out.println("Tidak ada action yang dimaksud silahkan masukkan input kembali");
+                    }
+
+                }
             } else if (actionMenuInput.equals("12") || actionMenuInput.equalsIgnoreCase("Exit")) {
                 // TODO: Exit
                 exit();
@@ -991,7 +1056,7 @@ public class GameManager {
                     } else {
                         System.out.println("Item berhasil dibeli");
                         currentSim.setMoney(currentSim.getMoney() - (items.getPrice() * jumlah));
-                        for(int i =0; i < jumlah; i++) currentSim.addInventoryitems(items);
+                        for(int i =0; i < jumlah; i++) currentSim.addItemOrder(items.getName(), jumlah, items.getPrice());
                         check = true;
                     }
                 }

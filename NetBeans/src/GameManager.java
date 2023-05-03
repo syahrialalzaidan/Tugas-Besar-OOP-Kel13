@@ -302,6 +302,22 @@ public class GameManager {
                     System.out.print("Masukkan nama Ruangan baru: ");
                     String namaRumah = input.nextLine();
 
+                    // Cek Apakah Nama Ruangan sudah ada
+                    Boolean namaRumahValid = false;
+                    while (!namaRumahValid) 
+                    {
+                        if (currentSim.getCurrHouse().isRoomExist(namaRumah)) 
+                        {
+                            //System.out.println("Nama Ruangan sudah ada");
+                            System.out.print("Masukkan nama Ruangan baru: ");
+                            namaRumah = input.nextLine();
+                        } 
+                        else 
+                        {
+                            namaRumahValid = true;
+                        }
+                    }
+
                     Room room = new Room(namaRumah);
 
                     Room[] rooms = currentSim.getCurrHouse().getRooms();
@@ -333,91 +349,66 @@ public class GameManager {
                         }
                     }
 
-                    System.out
-                            .println("Berikut adalah Ruangan yang terkoneksi dengan Ruangan " + roomRoot.getRoomName());
-                    roomRoot.printAroundRoom();
+                    System.out.println("Berikut adalah Ruangan yang terkoneksi dengan Ruangan " + roomRoot.getRoomName());
+                    currentSim.getCurrHouse().printAroundRoom(roomRoot);
+                    //roomRoot.printAroundRoom();
                     System.out.println("");
 
                     // Check Apakah masih ada ruang yang bisa ditambahkan disekitar RoomRoot
-                    if (roomRoot.checkAroundRoom()) {
-                        System.out.print("Masukkan Posisi Ruangan Baru (Up, Down, Right, Left): ");
-                        String direction = input.nextLine();
-
-                        while (!(direction.equalsIgnoreCase("Up") || direction.equalsIgnoreCase("Down")
-                                || direction.equalsIgnoreCase("Right") || direction.equalsIgnoreCase("Left"))) {
-                            System.out.println("Posisi Ruangan tidak valid");
-                            System.out.print("Masukkan Posisi Ruangan Baru (Up, Down, Right, Left): ");
-                            direction = input.nextLine();
-                        }
+                    if (currentSim.getCurrHouse().isAvailableAroundRoom(roomRoot)) 
+                    {
 
                         Boolean isRoomSet = false;
-                        int index = simList.indexOf(currentSim);
+                        
+                        while(!isRoomSet)
+                        {
+                            System.out.print("Masukkan Posisi Ruangan Baru (Up, Down, Right, Left): ");
+                            String direction = input.nextLine();
 
-                        while (!isRoomSet) {
-                            if (direction.equalsIgnoreCase("Up")) {
-                                if (roomRoot.getUpperRoom() != null) {
-                                    System.out.println("Room sudah ada");
-                                    System.out.println("The Room is : " + roomRoot.getUpperRoom().getRoomName());
-                                }
-                                else
-                                {
-                                    currentSim.getCurrHouse().setRoomRoot(roomRoot);
-                                    currentSim.getCurrHouse().setNewRoom(room);
-                                    currentSim.getCurrHouse().setDirectionNewRoom(direction);
-                                    currentSim.getCurrHouse().setUpgradeHouseTime(1080);
-                                    System.out.println("Upgrade Time = " + currentSim.getCurrHouse().getUpgradeHouseTime());
-                                    isRoomSet = true;
-                                }       
-                                
-                            }
-                            else if(direction == "Down")
+                            // Check inputnya Up Down Right Left
+                            while (!(direction.equalsIgnoreCase("Up") || direction.equalsIgnoreCase("Down")
+                                || direction.equalsIgnoreCase("Right") || direction.equalsIgnoreCase("Left"))) 
                             {
-                                if(roomRoot.getLowerRoom() != null)
-                                {
-                                    System.out.println("Room Sudah ada");
-                                    System.out.println("The Room is : " + roomRoot.getLowerRoom().getRoomName());
-                                }
-                                else
-                                {
-                                    currentSim.getCurrHouse().setRoomRoot(roomRoot);
-                                    currentSim.getCurrHouse().setNewRoom(room);
-                                    currentSim.getCurrHouse().setDirectionNewRoom(direction);
-                                    currentSim.getCurrHouse().setUpgradeHouseTime(1080);
-                                    System.out.println("Upgrade Time = " + currentSim.getCurrHouse().getUpgradeHouseTime());
-                                    isRoomSet = true;
-                                }
-                            } else if (direction == "Left") {
-                                if (roomRoot.getLeftRoom() != null) {
-                                    System.out.println("Room Sudah ada");
-                                    System.out.println("The Room is : " + roomRoot.getLeftRoom().getRoomName());
-                                }
-                                else
-                                {
-                                    currentSim.getCurrHouse().setRoomRoot(roomRoot);
-                                    currentSim.getCurrHouse().setNewRoom(room);
-                                    currentSim.getCurrHouse().setDirectionNewRoom(direction);
-                                    currentSim.getCurrHouse().setUpgradeHouseTime(1080);
-                                    System.out.println("Upgrade Time = " + currentSim.getCurrHouse().getUpgradeHouseTime());
-                                    isRoomSet = true;
-                                }
-                            } else if (direction == "Right") {
-                                if (roomRoot.getRightRoom() != null) {
-                                    System.out.println("Room sudah ada");
-                                    System.out.println("The Room is : " + roomRoot.getRightRoom().getRoomName());
-                                }
-                                else
-                                {
-                                    currentSim.getCurrHouse().setRoomRoot(roomRoot);
-                                    currentSim.getCurrHouse().setNewRoom(room);
-                                    currentSim.getCurrHouse().setDirectionNewRoom(direction);
-                                    currentSim.getCurrHouse().setUpgradeHouseTime(1080);
-                                    System.out.println("Upgrade Time = " + currentSim.getCurrHouse().getUpgradeHouseTime());
-                                    isRoomSet = true;
-                                }
-                            } else {
-                                System.out.println("Invalid Direction");
+                                System.out.println("Posisi Ruangan tidak valid");
+                                System.out.print("Masukkan Posisi Ruangan Baru (Up, Down, Right, Left): ");
+                                direction = input.nextLine();
+                            }
+
+                            // Check Apakah Ruangan yang dimasukan sudah ditempatkan atau belom
+                            if (direction.equalsIgnoreCase("Up") && currentSim.getCurrHouse().upperRoomExist(roomRoot))
+                            {
+                                System.out.println("Room is Exist");
+                                System.out.println("The Room is : " + currentSim.getCurrHouse().getUpperRoom(roomRoot).getRoomName());
+                            }
+
+                            else if(direction.equalsIgnoreCase("Down") && currentSim.getCurrHouse().lowerRoomExist(roomRoot))
+                            {
+                                System.out.println("Room is Exist");
+                                System.out.println("The Room is : " + currentSim.getCurrHouse().getLowerRoom(roomRoot).getRoomName());
+                            }
+
+                            else if(direction.equalsIgnoreCase("Right") && currentSim.getCurrHouse().rightRoomExist(roomRoot))
+                            {
+                                System.out.println("Room is Exist");
+                                System.out.println("The Room is : " + currentSim.getCurrHouse().getRightRoom(roomRoot).getRoomName());
+                            }
+
+                            else if(direction.equalsIgnoreCase("Left"))
+                            {
+                                System.out.println("Room is Exist");
+                                System.out.println("The Room is : " + currentSim.getCurrHouse().getLeftRoom(roomRoot).getRoomName());
+                            }
+                            else
+                            {
+                                currentSim.getCurrHouse().setRoomRoot(roomRoot);
+                                currentSim.getCurrHouse().setNewRoom(room);
+                                currentSim.getCurrHouse().setDirectionNewRoom(direction);
+                                currentSim.getCurrHouse().setUpgradeHouseTime(1080);
+                                System.out.println("Upgrade Time = " + currentSim.getCurrHouse().getUpgradeHouseTime());
+                                isRoomSet = true;
                             }
                         }
+
                     }
                     else
                     {
@@ -442,7 +433,7 @@ public class GameManager {
                 Boolean inputbenar = false;
                 int roomindex = (-1);
                 while (!inputbenar) {
-                    System.out.print("Masukkan nama Ruangan yang ingin dipindahkan : ");
+                    System.out.print("Masukkan nama Ruangan tempat Berpindah : ");
                     String roomName = input.nextLine();
                     for (int i = 0; i < currentSim.getCurrHouse().getRoomsTotal(); i++) {
                         if (roomName.equalsIgnoreCase(listRooms[i].getRoomName())) {

@@ -410,7 +410,7 @@ public class Sim {
                             try {
                                 inventorydish.reduceInventory(temp);
                             } catch (Exception e) {
-                                
+
                             }
                         }
                         else{
@@ -466,12 +466,13 @@ public class Sim {
     }
 
     public void visit(House house) throws InterruptedException{
-        double jarak = Math.sqrt((house.getCoordinate().getX()-this.house.getCoordinate().getX())^2 + (house.getCoordinate().getY()-this.house.getCoordinate().getY())^2);
+        double jarak = Math.sqrt(Math.abs((house.getCoordinate().getX()-this.house.getCoordinate().getX())^2 + (house.getCoordinate().getY()-this.house.getCoordinate().getY())^2));
         
         Thread perjalanan = new Thread(new Runnable(){
         
             @Override 
             public void run(){
+                
                 System.out.println("Estimasi perjalanan adalah " + jarak + " detik");
                         try{
                         Thread.sleep((long)jarak*1000);
@@ -491,7 +492,7 @@ public class Sim {
     }
 
     public void goHome() throws InterruptedException{
-        double jarak = Math.sqrt((house.getCoordinate().getX()-this.house.getCoordinate().getX())^2 + (house.getCoordinate().getY()-this.house.getCoordinate().getY())^2);
+        double jarak = Math.sqrt(Math.abs((house.getCoordinate().getX()-this.house.getCoordinate().getX())^2 + (house.getCoordinate().getY()-this.house.getCoordinate().getY())^2));
         
         Thread perjalanan = new Thread(new Runnable(){
         

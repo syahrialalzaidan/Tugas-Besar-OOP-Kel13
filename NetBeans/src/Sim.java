@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.Scanner;
 
 
 public class Sim {
@@ -849,6 +850,7 @@ public class Sim {
     }
 
     public void chooseAction(String aksi) throws InterruptedException {
+        Scanner input = new Scanner(System.in);
         switch (aksi) {
             case "Toilet":
 
@@ -1012,6 +1014,7 @@ public class Sim {
             System.out.println("4. Tumis Sayur");
             System.out.println("5. Bistik");
             boolean Makanan1 = false;
+            input.close();
             while(!Makanan1){
                 System.out.print("Masukkan nama masakan yang ingin dimasak : ");
                 String masakan = input.nextLine();  

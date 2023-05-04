@@ -70,7 +70,7 @@ public class Items extends Objects {
                 this.dimension[0] = 1;
                 this.dimension[1] = 1;
                 this.price = 10;
-                action = "Membersihkan";
+                action = "Membersihkan Rumah";
                 break;
             case "TV":
                 this.dimension[0] = 2;
@@ -82,7 +82,7 @@ public class Items extends Objects {
                 this.dimension[0] = 1;
                 this.dimension[1] = 1;
                 this.price = 200;
-                action = "Mengerjakan tubes";
+                action = "Main game";
                 break;
             case "Shower":
                 this.dimension[0] = 1;
@@ -93,6 +93,8 @@ public class Items extends Objects {
             case "Kolam Renang" :
                 this.dimension[0]= 3;
                 this.dimension[1]= 3;
+                this.price = 200;
+                action = "Berenang";
             default:
                 this.dimension[0] = 1;
                 this.dimension[1] = 1;

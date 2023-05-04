@@ -24,7 +24,7 @@ public class Room { //implements ActionListener {
         this.object = new HashMap<Coordinate, Items>();
         this.simPoint = new Point(0, 0);
         this.roomPoint = new Point(0,0);
-        this.lastItem = "";
+        this.lastItem = null;
         this.input = new Scanner(System.in);
         for(int i = 0; i < 6; i++) 
         {

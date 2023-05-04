@@ -12,10 +12,7 @@ public class Room { //implements ActionListener {
     //Buttons[][] space = new Buttons[6][6];
     private String[][] space = new String[6][6];
     private Point simPoint;
-    private Room rigthRoom;
-    private Room leftRoom;
-    private Room upperRoom;
-    private Room lowerRoom;
+    private Point roomPoint;
     private Scanner input;
     private String lastItem;
 
@@ -26,10 +23,7 @@ public class Room { //implements ActionListener {
         this.roomName = roomName;
         this.object = new HashMap<Coordinate, Items>();
         this.simPoint = new Point(0, 0);
-        this.rigthRoom = null;
-        this.leftRoom = null;
-        this.upperRoom = null;
-        this.lowerRoom = null;
+        this.roomPoint = new Point(0,0);
         this.lastItem = "";
         this.input = new Scanner(System.in);
         for(int i = 0; i < 6; i++) 
@@ -60,6 +54,15 @@ public class Room { //implements ActionListener {
 
         // frame.setVisible(true);
         // frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    }
+
+    public Point getRoomPoint() {
+        return roomPoint;
+    }
+
+    public void setRoomPoint(int x, int y) {
+        Point newPoint = new Point(x, y);
+        this.roomPoint = newPoint;
     }
 
     public String getRoomName() {
@@ -157,95 +160,6 @@ public class Room { //implements ActionListener {
 
     public String getLastItem() {
         return lastItem;
-    }
-
-    public Room getRightRoom() {
-        return rigthRoom;
-    }
-
-    public void setRightRoom(Room rigthRoom) {
-        this.rigthRoom = rigthRoom;
-    }
-
-    public Room getLeftRoom() {
-        return leftRoom;
-    }
-
-    public void setLeftRoom(Room leftRoom) {
-        this.leftRoom = leftRoom;
-    }
-
-    public Room getUpperRoom() {
-        return upperRoom;
-    }
-
-    public void setUpperRoom(Room upperRoom) {
-        this.upperRoom = upperRoom;
-    }
-
-    public Room getLowerRoom() {
-        return lowerRoom;
-    }
-
-    public void setLowerRoom(Room lowerRoom) {
-        this.lowerRoom = lowerRoom;
-    }
-
-    public void setSpaceImmediate(int x, int y, Items item , String symbol, String direction)
-    {
-        if(!(direction.equalsIgnoreCase("Right") || direction.equalsIgnoreCase("Left") || direction.equalsIgnoreCase("Up") || direction.equalsIgnoreCase("Down")))
-        {
-            System.out.println("Invalid Direction");
-            
-        }
-
-        else
-        {
-            Coordinate coordinate = new Coordinate(0, 0, 0, 0);
-            if(direction.equalsIgnoreCase("Right"))
-            {
-                int x2 = x + item.getX();
-                int y2 = y + item.getY();
-                coordinate = new Coordinate(x, y, x2, y2);
-            }
-
-            // Orientasi Kiri
-            else if(direction.equalsIgnoreCase("Left"))
-            {
-                int x2 = x + 1;
-                int y2 = y + item.getY();
-                x = x2 - item.getX();
-                coordinate = new Coordinate(x, y, x2, y2);
-            }
-
-            // Orientasi atas
-            else if(direction.equalsIgnoreCase("Up"))
-            {
-                int x2 = x + item.getY();
-                int y2 = y + 1;
-                y = y2 - item.getX();
-                coordinate = new Coordinate(x, y, x2, y2);
-                //System.out.println(coordinate.getx() + " " + coordinate.gety() + " " + coordinate.getX2() + " " + coordinate.getY2());
-            }
-
-            // Orientasi bawah
-            else if(direction.equalsIgnoreCase("Down"))
-            {
-                int x2 = x + item.getY();
-                int y2 = y + item.getX();
-                coordinate = new Coordinate(x, y, x2, y2);
-            }
-        
-            for(int i = coordinate.getY1(); i < coordinate.getY2(); i++)
-            {
-                //System.out.println(i);
-                for(int j = coordinate.getX1(); j < coordinate.getX2(); j++)
-                {
-                    this.space[i][j] = symbol;
-                }
-            }
-            this.object.put(coordinate, item);
-        }
     }
 
     public Boolean placeObject(Items object) throws Exception
@@ -556,67 +470,6 @@ public class Room { //implements ActionListener {
                 ascii = '-';
                 System.out.print(ascii);
             }
-        }
-    }
-
-    public void printAroundRoom()
-    {
-        if(this.getUpperRoom() != null)
-        {
-            System.out.println("Up : " + this.getUpperRoom().getRoomName());
-        }
-        else
-        {
-            System.out.println("Up : -");
-        }
-        if(this.getLowerRoom() != null)
-        {
-            System.out.println("Down : " + this.getLowerRoom().getRoomName());
-        }
-        else
-        {
-            System.out.println("Down : -");
-        }
-        if(this.getLeftRoom() != null)
-        {
-            System.out.println("Left : " + this.getLeftRoom().getRoomName());
-        }
-        else
-        {
-            System.out.println("Left : -");
-        }
-        if(this.getRightRoom() != null)
-        {
-            System.out.println("Right : " + this.getRightRoom().getRoomName());
-        }
-        else
-        {
-            System.out.println("Right : -");
-        }
-        
-    }
-
-    public Boolean checkAroundRoom()
-    {
-        if(this.getUpperRoom() == null)
-        {
-            return true;
-        }
-        else if(this.getLowerRoom() == null)
-        {
-            return true;
-        }
-        else if(this.getLeftRoom() == null)
-        {
-            return true;
-        }
-        else if(this.getRightRoom() == null)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
         }
     }
 

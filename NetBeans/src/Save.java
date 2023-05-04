@@ -20,7 +20,7 @@ public class Save {
             JsonElement tree = gson.toJsonTree(sim);
             gson.toJson(tree, writer);
 
-            System.out.println("Data saved to " + fileName + " successfully.");
+            System.out.println("Game Saved!");
         } catch (Exception e) {
             System.out.println("Gagal melakukan save. Pesan error: " + e.getMessage());
         }

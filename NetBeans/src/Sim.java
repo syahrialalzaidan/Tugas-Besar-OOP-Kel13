@@ -299,6 +299,8 @@ public class Sim {
                         if (i%30==0){
                             setMood(mood-10);
                             setFullness(fullness-10);
+                            System.out.println("mood berkurang sebesar 10");
+                            System.out.println("fullnes berkurang sebesar 10");
                         }
                         }catch(Exception e){
                             
@@ -308,6 +310,7 @@ public class Sim {
                 if (dailyWork>=240 && dailyPay > 0){
                     dailyWork=0;
                     dailyPay--;
+                    System.out.println("uang bertambah sebesar " + job.getDailyPay());
                 }
                 world.runTime(time);
                 isAlive();
@@ -766,9 +769,28 @@ public class Sim {
         T.join();
     }
 
+    public void timeFormat(int time){
+        int menit = (time/60);
+        int detik = (time)%60;
+        if (menit<10 && detik<10){
+            System.out.println("0" + menit + ":0" + detik );
+        }
+        else if (menit<10){
+            System.out.println("0" + menit + ":" + detik );
+        }
+        else if (detik<10){
+            System.out.println(menit + ":0" + detik );
+        }
+        else {
+            System.out.println(menit + ":" + detik );
+        }
+    }
+
     public void viewClock(){
-        System.out.print("Sisa waktu hari ini adalah ");
-        System.out.println(world.getTime() + " menit.");
+        System.out.print("Sisa waktu hari ini : ");
+        timeFormat(720-world.getTime());
+        
+        
     }
 
     public void viewSimInfo(){
@@ -781,7 +803,21 @@ public class Sim {
         System.out.println("Kekenyangan  : " + fullness);
         System.out.println("Mood         : " + mood);
         System.out.println("Uang         : " + mood);
-        System.out.println("asd");
+        if (house.getUpgradeHouseTime()!=0){
+            System.out.println("Sisa Waktu upgrade rumah : ");
+            timeFormat(house.getUpgradeHouseTime());
+        }
+            System.out.println("Sisa Waktu pengantaran barang : ");
+            for (Pair<String,Integer,Integer> pair : itemOrder){
+                System.out.println("asd");
+                System.out.println(pair.getB() + " buah " + pair.getA() + " : ");
+                timeFormat(pair.getC());
+            }
+            for (Pair<String,Integer,Integer> pair : foodOrder){
+                System.out.println(pair.getB() + " buah " + pair.getA() + " : ");
+                timeFormat(pair.getC());
+            
+        }
     }
 
     public void viewCurrentLocation(){

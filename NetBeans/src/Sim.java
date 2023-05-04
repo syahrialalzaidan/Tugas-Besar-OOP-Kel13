@@ -28,15 +28,12 @@ public class Sim {
     private boolean isBerkunjung;
     private Room currentRoom;
     private Items currentItems;
-    private List<Pair<String,Integer,Integer>> itemOrder = new ArrayList<Pair<String,Integer,Integer>>();
-    private List<Pair<String,Integer,Integer>> foodOrder = new ArrayList<Pair<String,Integer,Integer>>();
-    Scanner input = new Scanner(System.in);
-  
-
-    Random rand = new Random();
+    private transient List<Pair<String,Integer,Integer>> itemOrder = new ArrayList<Pair<String,Integer,Integer>>();
+    private transient List<Pair<String,Integer,Integer>> foodOrder = new ArrayList<Pair<String,Integer,Integer>>();
 
 
     public Sim(String name,House house, World world){
+        Random rand = new Random();
         this.name = name;
         this.job = new Job(rand.nextInt(1, 8));
         this.world = world;
@@ -853,6 +850,7 @@ public class Sim {
     }
 
     public void chooseAction(String aksi) throws InterruptedException {
+        Scanner input = new Scanner(System.in);
         switch (aksi) {
             case "Toilet":
 
@@ -1016,6 +1014,7 @@ public class Sim {
             System.out.println("4. Tumis Sayur");
             System.out.println("5. Bistik");
             boolean Makanan1 = false;
+            input.close();
             while(!Makanan1){
                 System.out.print("Masukkan nama masakan yang ingin dimasak : ");
                 String masakan = input.nextLine();  

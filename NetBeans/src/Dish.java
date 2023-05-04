@@ -1,7 +1,7 @@
 import java.util.*;
 
 public class Dish extends Objects implements Edible {
-    private List<String> ingredients = new ArrayList<>();
+    private transient List<String> ingredients = new ArrayList<>();
     private int fullness;
     private double time;
 

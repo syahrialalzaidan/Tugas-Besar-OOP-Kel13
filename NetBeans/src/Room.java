@@ -1,8 +1,3 @@
-import java.awt.*;
-
-import javax.naming.directory.DirContext;
-import javax.swing.*;
-import java.awt.event.*;
 import java.util.*;
 
 public class Room { //implements ActionListener {
@@ -13,7 +8,6 @@ public class Room { //implements ActionListener {
     private String[][] space = new String[6][6];
     private Point simPoint;
     private Point roomPoint;
-    private Scanner input;
     private String lastItem;
 
     //MainGUI frame = new MainGUI();
@@ -25,7 +19,6 @@ public class Room { //implements ActionListener {
         this.simPoint = new Point(0, 0);
         this.roomPoint = new Point(0,0);
         this.lastItem = null;
-        this.input = new Scanner(System.in);
         for(int i = 0; i < 6; i++) 
         {
             for(int j = 0; j < 6; j++)
@@ -164,6 +157,7 @@ public class Room { //implements ActionListener {
 
     public Boolean placeObject(Items object) throws Exception
     {
+        Scanner input = new Scanner(System.in);
         printSpace();
         System.out.print("\n");
         System.out.println("Dimensi Objek : " + object.getX() + " x " + object.getY());
@@ -191,7 +185,7 @@ public class Room { //implements ActionListener {
             direction = input.nextLine();
         }
         Coordinate coordinate = new Coordinate(0, 0, 0, 0);
-        
+        input.close();
 
         // persegi panjang orientasi kanan
         if(object.getX() >= object.getY())
@@ -375,7 +369,6 @@ public class Room { //implements ActionListener {
             System.out.println("Tidak ada ruang untuk " + object.getName());
             return false;
         }
-        
     }
 
     public Boolean checkAvailableSpace(Coordinate coordinate)
@@ -620,4 +613,3 @@ public class Room { //implements ActionListener {
     }
        
 }
-    

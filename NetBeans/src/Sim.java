@@ -105,6 +105,7 @@ public class Sim {
     public void addInventorydish(Dish dish){
         inventorydish.addInventory(dish);
     }
+    
     public House getHouse(){
         return house;
     }
@@ -240,6 +241,13 @@ public class Sim {
 
     }
 
+    public void removeItemOrder(int i){
+        itemOrder.remove(i);
+    }
+
+    public void removeFoodOrder(int i){
+        foodOrder.remove(i);
+    }
     public List<Pair<String,Integer,Integer>> getFoodOrder(){
         return foodOrder;
     }
@@ -292,6 +300,7 @@ public class Sim {
         
             @Override 
             public void run(){
+                System.out.println("SIM sedang bekerja....");
                 for (int i = time-1; i >=0 ;i--){
                         try{
                         Thread.sleep(1000);
@@ -327,6 +336,7 @@ public class Sim {
         
             @Override 
             public void run(){
+                System.out.println("SIM sedang berolahraga....");
                 for (int i = time-1; i >=0 ;i--){
                         try{
                         Thread.sleep(1000);
@@ -360,6 +370,7 @@ public class Sim {
         
             @Override 
             public void run(){
+                System.out.println("SIM sedang tidur....");
                 for (int i = time-1; i >=0 ;i--){
                         try{
                         Thread.sleep(1000);
@@ -391,6 +402,7 @@ public class Sim {
         
             @Override 
             public void run(){
+                System.out.println("SIM sedang makan....");
                 for (int i = 29; i >=0 ;i--){
                         try{
                         Thread.sleep(1000);
@@ -434,6 +446,7 @@ public class Sim {
         
             @Override 
             public void run(){
+                System.out.println("SIM sedang memasak....");
                 for (double i = food.getTime()-1; i >=0 ;i--){
                         try{
                         Thread.sleep(1000);
@@ -521,6 +534,7 @@ public class Sim {
         
             @Override 
             public void run(){
+                System.out.println("SIM sedang baung air....");
                 for (int i = 10-1; i >=0 ;i--){
                         try{
                         Thread.sleep(1000);
@@ -561,6 +575,7 @@ public class Sim {
         
             @Override 
             public void run(){
+                System.out.println("SIM sedang nonton tv....");
                 for (int i = time-1; i >=0 ;i--){
                         try{
                         Thread.sleep(1000);
@@ -595,6 +610,7 @@ public class Sim {
         
             @Override 
             public void run(){
+                System.out.println("SIM sedang scroll tiktok....");
                 for (int i = time-1; i >=0 ;i--){
                         try{
                         Thread.sleep(1000);
@@ -624,6 +640,7 @@ public class Sim {
         
             @Override 
             public void run(){
+                System.out.println("SIM sedang solat....");
                 for (int i = time-1; i >=0 ;i--){
                         try{
                         Thread.sleep(1000);
@@ -653,6 +670,7 @@ public class Sim {
         
             @Override 
             public void run(){
+                System.out.println("SIM sedang mandi....");
                 for (int i = time-1; i >=0 ;i--){
                         try{
                         Thread.sleep(1000);
@@ -684,6 +702,7 @@ public class Sim {
         
             @Override 
             public void run(){
+                System.out.println("SIM sedang berenang....");
                 for (int i = time-1; i >=0 ;i--){
                         try{
                         Thread.sleep(1000);
@@ -714,6 +733,7 @@ public class Sim {
         
             @Override 
             public void run(){
+                System.out.println("SIM sedang bermain valorant....");
                 for (int i = time-1; i >=0 ;i--){
                         try{
                         Thread.sleep(1000);
@@ -744,6 +764,7 @@ public class Sim {
         
             @Override 
             public void run(){
+                System.out.println("SIM sedang beres-beres rumah....");
                 for (int i = 20-1; i >=0 ;i--){
                         try{
                         Thread.sleep(1000);
@@ -829,6 +850,256 @@ public class Sim {
     System.out.println("di ruangan " + currentRoom.getRoomName());
     currentRoom.printSpace();
 
+    }
+
+    public void chooseAction(String aksi) throws InterruptedException {
+        switch (aksi) {
+            case "Toilet":
+
+                defecate();
+                break;
+            case "TV":
+
+                boolean check1 = false;
+                while (!check1) {
+                    try {
+                        System.out.print("Masukkan waktu input : ");
+                        int inputTime = input.nextInt();
+                        if (inputTime % 30 != 0) {
+                            check1 = false;
+                            System.out.println("Masukkan waktu harus keliapatan 30 detik");
+                        } else {
+                            check1 = true;
+                            watchingTV(inputTime);
+                        }
+                    } catch (Exception e) {
+                        System.out.println("Input harus berupa angka");
+                        System.out.println("Silakan masukan input ulang");
+                        System.out.println("");
+                        input.nextLine();
+                    }
+                }
+                break;
+            case "Komputer":
+                boolean check2 = false;
+                while (!check2) {
+                    try {
+                        System.out.print("Masukkan waktu input : ");
+                        int inputTime = input.nextInt();
+                        if (inputTime % 20 != 0) {
+                            check2 = false;
+                            System.out.println("Masukkan waktu harus keliapatan 20 detik");
+                        } else {
+                            check2 = true;
+                            playingGame(inputTime);
+
+                        }
+                    } catch (Exception e) {
+                        System.out.println("Input harus berupa angka");
+                        System.out.println("Silakan masukan input ulang");
+                        System.out.println("");
+                        input.nextLine();
+                    }
+                }
+
+                break;
+            case "Kolam Renang":
+                boolean check3 = false;
+                while (!check3) {
+                    try {
+                        System.out.print("Masukkan waktu input : ");
+                        int inputTime = input.nextInt();
+                        if (inputTime % 30 != 0) {
+                            check3 = false;
+                            System.out.println("Masukkan waktu harus keliapatan 30 detik");
+                        } else {
+                            check3 = true;
+                            swiming(inputTime);
+
+                        }
+                    } catch (Exception e) {
+                        System.out.println("Input harus berupa angka");
+                        System.out.println("Silakan masukan input ulang");
+                        System.out.println("");
+                        input.nextLine();
+                    }
+                }
+                break;
+            case "Shower":
+                boolean check4 = false;
+                while (!check4) {
+                    try {
+                        System.out.print("Masukkan waktu input : ");
+                        int inputTime = input.nextInt();
+                        if (inputTime % 15 != 0) {
+                            check4 = false;
+                            System.out.println("Masukkan waktu harus keliapatan 15 detik");
+                        } else {
+                            check4 = true;
+                            takeShower(inputTime);
+
+                        }
+                    } catch (Exception e) {
+                        System.out.println("Input harus berupa angka");
+                        System.out.println("Silakan masukan input ulang");
+                        System.out.println("");
+                        input.nextLine();
+                    }
+                }
+                break;
+            case "Jam":
+                viewClock();
+            case "Meja dan Kursi":
+
+                if (inventorydish.getInventory().size()!=0 || inventoryfood.getInventory().size()!=0){
+                getInventoryfood().printInventory();
+                getInventorydish().printInventory();
+                boolean check = true;
+                while (check) {
+                    System.out.println("Pilih makanan untuk dimakan : ");
+                    String inputMakanan = input.nextLine();
+                    if (getInventoryfood().getInventory()
+                            .containsKey(inputMakanan)) {
+                        eat(new Food(inputMakanan), getInventorydish(),
+                                getInventoryfood());
+                        check = false;
+                    } else if (getInventorydish().getInventory()
+                            .containsKey(inputMakanan)) {
+                        eat(new Dish(inputMakanan), getInventorydish(),
+                                getInventoryfood());
+                    } else {
+                        System.out.println(
+                                "Kamu tidak memiliki makanan tersebut di inventory, mohon masukkan kembali makanan yang ingin dimakan");
+                    }
+                }}
+                break;
+            case "Kompor Gas":
+                boolean check6 = true;
+                System.out.println("Pilih makanan yang ingin dimasak");
+                System.out.println("1. Nasi Ayam");
+                System.out.println("2. Nasi Kari");
+                System.out.println("3. Susu Kacang");
+                System.out.println("4. Tumis Sayur");
+                System.out.println("5. Bistik");
+                boolean Makanan = false;
+                while(!Makanan){
+                    System.out.print("Masukkan nama masakan yang ingin dimasak : ");
+                    String masakan = input.nextLine();  
+                    if (masakan.equals("Nasi Ayam")||masakan.equals("Nasi Kari")||
+                    masakan.equals("Susu Kacang")||masakan.equals("Tumis Sayur")||masakan.equals("Bistik")) {
+                        Dish dish = new Dish(masakan);
+                        for (String foods : dish.getIngredient()) {
+                            if (!getInventoryfood().getInventory().containsKey(foods)) {
+                                check6 = false;
+                            }
+                        }
+                        if (check6) {
+                            cook(dish, getInventorydish(),
+                                    getInventoryfood());
+                        } else {
+                            System.out.println("Bahan makanan tidak cukup untuk memasak");
+                        }
+                        Makanan = true;
+                    }                  
+                    else{
+                        System.out.println("Input masakan salah, masukkan nama masakan kembali");
+                    }               
+                }
+
+                break;
+            case "Kompor Listrik":
+            boolean check5 = true;
+            System.out.println("Pilih makanan yang ingin dimasak");
+            System.out.println("1. Nasi Ayam");
+            System.out.println("2. Nasi Kari");
+            System.out.println("3. Susu Kacang");
+            System.out.println("4. Tumis Sayur");
+            System.out.println("5. Bistik");
+            boolean Makanan1 = false;
+            while(!Makanan1){
+                System.out.print("Masukkan nama masakan yang ingin dimasak : ");
+                String masakan = input.nextLine();  
+                if (masakan.equals("Nasi Ayam")||masakan.equals("Nasi Kari")||
+                masakan.equals("Susu Kacang")||masakan.equals("Tumis Sayur")||masakan.equals("Bistik")) {
+                    Dish dish = new Dish(masakan);
+                    for (String foods : dish.getIngredient()) {
+                        if (!getInventoryfood().getInventory().containsKey(foods)) {
+                            check5 = false;
+                        }
+                    }
+                    if (check5) {
+                        cook(dish, getInventorydish(),
+                                getInventoryfood());
+                    } else {
+                        System.out.println("Bahan makanan tidak cukup untuk memasak");
+                    }
+                    Makanan1 = true;
+                }                  
+                else{
+                    System.out.println("Input masakan salah, masukkan nama masakan kembali");
+                }               
+            }
+
+            break;
+            case "Sapu":
+                cleaningHouse();
+                break;
+            case "Sajadah":
+            boolean checkSajadah = false;
+            while (!checkSajadah) {
+                try {
+                    System.out.print("Masukkan waktu input : ");
+                    int inputTime = input.nextInt();
+                    if (inputTime % 10 != 0) {
+                        checkSajadah = false;
+                        System.out.println("Masukkan waktu harus keliapatan 10 detik");
+                    } else {
+                        checkSajadah = true;
+                        beribadah(inputTime);
+
+                    }
+                } catch (Exception e) {
+                    System.out.println("Input harus berupa angka");
+                    System.out.println("Silakan masukan input ulang");
+                    System.out.println("");
+                    input.nextLine();
+                }
+            }
+            break;
+            case "HP":
+            boolean checkHP = false;
+            while (!checkHP) {
+                try {
+                    System.out.print("Masukkan waktu input : ");
+                    int inputTime = input.nextInt();
+                    if (inputTime % 30 != 0) {
+                        checkHP = false;
+                        System.out.println("Masukkan waktu harus keliapatan 30 detik");
+                    } else {
+                        checkHP = true;
+                        scrollTiktok(inputTime);
+
+                    }
+                } catch (Exception e) {
+                    System.out.println("Input harus berupa angka");
+                    System.out.println("Silakan masukan input ulang");
+                    System.out.println("");
+                    input.nextLine();
+                }
+            }
+            break;
+            default:
+                if (input.hasNextInt()) { // Cek apakah input merupakan angka
+                    int waktuTidur = input.nextInt();
+                    if (waktuTidur % 180 == 0) { // Cek apakah angka merupakan kelipatan 180
+                        sleep(waktuTidur);
+                    } else {
+                        System.out.println("Input harus kelipatan 180.");
+                    }
+                } else {
+                    System.out.println("Input harus berupa angka.");
+                }
+        }
     }
 
     

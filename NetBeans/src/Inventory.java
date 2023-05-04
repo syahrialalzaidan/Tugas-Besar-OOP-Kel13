@@ -161,6 +161,10 @@ public class Inventory<T extends Objects> {
         }
     }
 
+    public void addInventoryList(T item) {
+        inventoryList.add(item);
+    }
+
     public void reduceInventory(T item) throws Exception {
         /* Decrements from inventory if item exists 
          * If not, then an error is thrown
@@ -229,6 +233,19 @@ public class Inventory<T extends Objects> {
             for (String item : inventory.keySet()) {
                 int count = inventory.get(item);
                 System.out.println(item + " = " + count);
+            }
+        }
+    }
+
+    public void printInventoryList() {
+        /* Prints items in ArrayList */
+        System.out.printf("List of %s in InventoryList\n", inventoryType);
+        System.out.println("================================");
+        if (inventoryList.isEmpty()) {
+            System.out.println("InventoryList kosong");
+        } else {
+            for (int i = 0; i < inventoryList.size(); i++) {
+                System.out.println(inventoryList.get(i));
             }
         }
     }

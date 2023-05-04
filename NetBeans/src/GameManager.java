@@ -161,16 +161,17 @@ public class GameManager {
                 "        ╚═════╝   ╚═╝  ╚══════╝    ╚═════╝   ╚═╝  ╚══════╝    ╚═╝\n";
 
     }
+
     public static void save(Sim sim) {
         Save.save(sim);
     }
+
     public static Sim load() {
         return Load.load("data/data.json");
     }
 
     public static void main(String[] args) throws Exception {
         Welcome();
-
 
         Scanner input = new Scanner(System.in);
 
@@ -195,56 +196,74 @@ public class GameManager {
 
             if (pilihan.equals("1") || pilihan.equalsIgnoreCase("Start New Game")) {
                 // Start New Game
-                System.out.print("Masukkan Nama Sim: ");
-                String namaSim = input.nextLine();
-                world = new World();
 
-                // Random Posisi Rumah Pertama
-                int max = 63;
-                int min = 0;
-                int x = (int) (Math.random() * (max - min + 1) + min);
-                int y = (int) (Math.random() * (max - min + 1) + min);
-                while (world.isHouseExist(x, y)) {
-                    x = (int) (Math.random() * (max - min + 1) + min);
-                    y = (int) (Math.random() * (max - min + 1) + min);
+                System.out.println("New Game/Load Game ?    (1/2) ");
+                int pilihan2 = input.nextInt();
+                input.nextLine();
+
+                if (pilihan2 == 1) {
+                    System.out.print("Masukkan Nama Sim: ");
+                    String namaSim = input.nextLine();
+                    world = new World();
+
+                    // Random Posisi Rumah Pertama
+                    int max = 63;
+                    int min = 0;
+                    int x = (int) (Math.random() * (max - min + 1) + min);
+                    int y = (int) (Math.random() * (max - min + 1) + min);
+                    while (world.isHouseExist(x, y)) {
+                        x = (int) (Math.random() * (max - min + 1) + min);
+                        y = (int) (Math.random() * (max - min + 1) + min);
+                    }
+
+                    Point coordinate = new Point(x, y);
+                    House firstHouse = new House(coordinate, namaSim);
+
+                    // membuat Sim pertama
+                    Sim firstSim = new Sim(namaSim, firstHouse, world);
+
+                    // menset upgradeHouseTime baru untuk sim pertama
+
+                    // Memasukan Sim kedalam SimList
+                    addSim(namaSim, world, firstHouse);
+
+                    // currentSim mengacu ke firstSim
+                    currentSim = simList.get(0);
+
+                    // Memasukan House ke dalam World
+                    world.addHouse(currentSim.getHouse());
+
+                    // Menambahkan Item Default kedalam first-room
+                    Items item1 = new Items("Kasur Single");
+                    Items item2 = new Items("Toilet");
+                    Items item3 = new Items("Kompor Gas");
+                    Items item4 = new Items("Jam");
+                    Items item5 = new Items("Meja dan Kursi");
+                    currentSim.addInventoryitems(item1);
+                    currentSim.addInventoryitems(item2);
+                    currentSim.addInventoryitems(item3);
+                    currentSim.addInventoryitems(item4);
+                    currentSim.addInventoryitems(item5);
+
+                    // currentSim.getCurrentRoom().setSpaceImmediate(0,2,item1,"KS" ,"Down");
+                    // currentSim.getCurrentRoom().setSpaceImmediate(5,5,item2,"T" , "Right");
+                    // currentSim.getCurrentRoom().setSpaceImmediate(2,5,item3,"KG","Right");
+                    // currentSim.getCurrentRoom().setSpaceImmediate(5,0,item4,"J","Right");
+                    // currentSim.getCurrentRoom().setSpaceImmediate(2,1,item5,"MDK","Right");
+
+                    validInput = true;
+                } else if (pilihan2 == 2) {
+                    // Load Game
+                    // System.out.println("Masukkan nama file yang ingin di load: ");
+                    // String namaFile = input.nextLine();
+                    // currentSim = load();
+                    // world = currentSim.getWorld();
+                    // validInput = true;
+                    currentSim = Load.load("data.json");
+                    
+                } else {
+                    System.out.println("Input anda salah, silahkan masukkan ulang!");
                 }
-
-                Point coordinate = new Point(x, y);
-                House firstHouse = new House(coordinate, namaSim);
-
-                // membuat Sim pertama
-                Sim firstSim = new Sim(namaSim, firstHouse, world);
-
-                // menset upgradeHouseTime baru untuk sim pertama
-
-                // Memasukan Sim kedalam SimList
-                addSim(namaSim, world, firstHouse);
-
-                // currentSim mengacu ke firstSim
-                currentSim = simList.get(0);
-
-                // Memasukan House ke dalam World
-                world.addHouse(currentSim.getHouse());
-
-                // Menambahkan Item Default kedalam first-room
-                Items item1 = new Items("Kasur Single");
-                Items item2 = new Items("Toilet");
-                Items item3 = new Items("Kompor Gas");
-                Items item4 = new Items("Jam");
-                Items item5 = new Items("Meja dan Kursi");
-                currentSim.addInventoryitems(item1);
-                currentSim.addInventoryitems(item2);
-                currentSim.addInventoryitems(item3);
-                currentSim.addInventoryitems(item4);
-                currentSim.addInventoryitems(item5);
-
-                // currentSim.getCurrentRoom().setSpaceImmediate(0,2,item1,"KS" ,"Down");
-                // currentSim.getCurrentRoom().setSpaceImmediate(5,5,item2,"T" , "Right");
-                // currentSim.getCurrentRoom().setSpaceImmediate(2,5,item3,"KG","Right");
-                // currentSim.getCurrentRoom().setSpaceImmediate(5,0,item4,"J","Right");
-                // currentSim.getCurrentRoom().setSpaceImmediate(2,1,item5,"MDK","Right");
-
-                validInput = true;
             } else if (pilihan.equals("2") || pilihan.equalsIgnoreCase("Help")) {
                 // Help
                 help();
@@ -681,8 +700,9 @@ public class GameManager {
                         }
 
                         // Masukan inisial akhir objek ke simPoint
-                        // if ((currentSim.getCurrentRoom().getLastItem() != "") && (currentSim.getCurrentItems() != null) ) {
-                        //     currentSim.getCurrentRoom().setLastItem(currentSim.getCurrentItems().getName());
+                        // if ((currentSim.getCurrentRoom().getLastItem() != "") &&
+                        // (currentSim.getCurrentItems() != null) ) {
+                        // currentSim.getCurrentRoom().setLastItem(currentSim.getCurrentItems().getName());
                         // }
 
                         // Pidahkan simPoint ke Object
@@ -718,8 +738,9 @@ public class GameManager {
                     System.out.println("2. Olahraga");
                     System.out.println("3. Berkunjung");
                     System.out.println("4. Pulang");
-                    if (currentSim.getCurrentItems()!=null){
-                    System.out.println("5. " +currentSim.getCurrentItems().getAction());}
+                    if (currentSim.getCurrentItems() != null) {
+                        System.out.println("5. " + currentSim.getCurrentItems().getAction());
+                    }
                     boolean check = false;
                     while (!check) {
                         System.out.print("Silahkan pilih action yang ingin dilakukan : ");
@@ -727,59 +748,60 @@ public class GameManager {
                         if (ActionInput.equals("1") || ActionInput.equals("Kerja")) {
                             boolean check1 = false;
                             while (!check1) {
-                                try{
-                                System.out.print("Masukkan waktu input : ");
-                                int TimeInput = input.nextInt();
-                                input.nextLine();
-                                if (TimeInput % 120 == 0) {
-                                    currentSim.work(TimeInput);
-                                    check = true;
-                                    check1 = true;
-                                } else {
-                                    System.out.println("Input yang dimasukkan harus berkelipatan 120 detik");
-                                }}catch(Exception e){
+                                try {
+                                    System.out.print("Masukkan waktu input : ");
+                                    int TimeInput = input.nextInt();
+                                    input.nextLine();
+                                    if (TimeInput % 120 == 0) {
+                                        currentSim.work(TimeInput);
+                                        check = true;
+                                        check1 = true;
+                                    } else {
+                                        System.out.println("Input yang dimasukkan harus berkelipatan 120 detik");
+                                    }
+                                } catch (Exception e) {
                                     System.out.println("Input harus berupa angka");
-                        System.out.println("Silakan masukan input ulang");
-                        System.out.println("");
-                        input.nextLine();
+                                    System.out.println("Silakan masukan input ulang");
+                                    System.out.println("");
+                                    input.nextLine();
                                 }
                             }
                         } else if (ActionInput.equals("2") || ActionInput.equals("Olahraga")) {
                             boolean check1 = false;
                             while (!check1) {
-                                try{
-                                System.out.print("Masukkan waktu input : ");
-                                int TimeInput = input.nextInt();
-                                input.nextLine();
-                                if (TimeInput % 20 == 0) {
-                                    currentSim.workout(TimeInput);
-                                    check = true;
-                                    check1 = true;
-                                } else {
-                                    System.out.println("Input yang dimasukkan harus berkelipatan 20 detik");
-                                }
-                            }catch(Exception e){
-                                System.out.println("Input harus berupa angka");
-                        System.out.println("Silakan masukan input ulang");
-                        System.out.println("");
-                        input.nextLine();
-                                
-                            }}
-                        } else if (ActionInput.equals("3") || ActionInput.equals("Berkunjung")) {
-                                if (currentSim.getHouse() == currentSim.getCurrHouse()) {
-                    
-                                    int i =0;
-                                    for (Sim sim : GameManager.getSimList()) {
-                                        if (!currentSim.getName().equals(sim.getName())) {
-                                            System.out.println(sim.getName());
-                                            i++;
-                                        }
+                                try {
+                                    System.out.print("Masukkan waktu input : ");
+                                    int TimeInput = input.nextInt();
+                                    input.nextLine();
+                                    if (TimeInput % 20 == 0) {
+                                        currentSim.workout(TimeInput);
+                                        check = true;
+                                        check1 = true;
+                                    } else {
+                                        System.out.println("Input yang dimasukkan harus berkelipatan 20 detik");
+                                    }
+                                } catch (Exception e) {
+                                    System.out.println("Input harus berupa angka");
+                                    System.out.println("Silakan masukan input ulang");
+                                    System.out.println("");
+                                    input.nextLine();
 
+                                }
+                            }
+                        } else if (ActionInput.equals("3") || ActionInput.equals("Berkunjung")) {
+                            if (currentSim.getHouse() == currentSim.getCurrHouse()) {
+
+                                int i = 0;
+                                for (Sim sim : GameManager.getSimList()) {
+                                    if (!currentSim.getName().equals(sim.getName())) {
+                                        System.out.println(sim.getName());
+                                        i++;
                                     }
-                                    if (i==0){
-                                        System.out.println("Tidak ada rumah lain untuk di kunjungi");
-                                    }
-                                    else{
+
+                                }
+                                if (i == 0) {
+                                    System.out.println("Tidak ada rumah lain untuk di kunjungi");
+                                } else {
                                     System.out.println(" ");
                                     System.out.print("Masukkan nama sim yang ingin dikunjungi : ");
                                     boolean check1 = false;
@@ -792,24 +814,26 @@ public class GameManager {
                                             }
                                         }
                                         if (inputNama.equals(currentSim.getName())) {
-                                            System.out.print("Tidak bisa mengunjungi rumah sendiri, silakan masukkan nama kembali :");
+                                            System.out.print(
+                                                    "Tidak bisa mengunjungi rumah sendiri, silakan masukkan nama kembali :");
                                         } else if (checkNama) {
                                             for (Sim sim : GameManager.getSimList()) {
                                                 if (inputNama.equals(sim.getName())) {
                                                     currentSim.visit(sim.getHouse());
                                                     check = true;
                                                 }
-        
+
                                             }
                                         } else {
                                             System.out
                                                     .print("Input nama yang dimaksukan tidak ada dalam daftar sim : ");
                                         }
-                                    }}
-                                } else {
-                                    System.out.println("Sim sedang berkunjung");
+                                    }
                                 }
-                        
+                            } else {
+                                System.out.println("Sim sedang berkunjung");
+                            }
+
                         } else if (ActionInput.equals("4") || ActionInput.equals("Pulang")) {
                             if (currentSim.getBerkunjung() != 0) {
                                 currentSim.goHome();
@@ -819,20 +843,30 @@ public class GameManager {
                                 check = true;
                             }
 
-                        }else if(currentSim.getCurrentItems()!=null){
-                            if(ActionInput.equals("5")|| ActionInput.equals(currentSim.getCurrentItems().getAction())){
-                            if (currentSim.getCurrentItems()!=null){
-                                currentSim.chooseAction(currentSim.getCurrentItems().getName());
-                                check = true;
+                        } else if (currentSim.getCurrentItems() != null) {
+                            if (ActionInput.equals("5")
+                                    || ActionInput.equals(currentSim.getCurrentItems().getAction())) {
+                                if (currentSim.getCurrentItems() != null) {
+                                    currentSim.chooseAction(currentSim.getCurrentItems().getName());
+                                    check = true;
+                                }
                             }
-                        }}else {
+                        } else {
                             System.out.println("Tidak ada action yang dimaksud silahkan masukkan input kembali");
                         }
 
                     }
                 } else if (actionMenuInput.equals("12") || actionMenuInput.equalsIgnoreCase("Exit")) {
                     // TODO: Exit
-                    save(currentSim);
+                    System.out.println("Ingin disave? (yes/no))");
+                    String yesno = input.nextLine();
+                    if (yesno.equals("yes")) {
+                        save(currentSim);
+                        System.out.println("Game Saved!");
+                    } else {
+                        System.out.println("Have a nice day!");
+                    }
+
                     System.exit(0);
                     exit();
                 } else if (actionMenuInput.equals("13") || actionMenuInput.equalsIgnoreCase("Beli barang")) {

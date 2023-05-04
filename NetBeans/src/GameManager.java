@@ -159,6 +159,12 @@ public class GameManager {
                 "        ╚═════╝   ╚═╝  ╚══════╝    ╚═════╝   ╚═╝  ╚══════╝    ╚═╝\n";
 
     }
+    public static void save(Sim sim) {
+        Save.save(sim);
+    }
+    public static Sim load() {
+        return Load.load("data/data.json");
+    }
 
     public static void main(String[] args) throws Exception {
         Welcome();
@@ -941,6 +947,8 @@ public class GameManager {
                     }
                 } else if (actionMenuInput.equals("12") || actionMenuInput.equalsIgnoreCase("Exit")) {
                     // TODO: Exit
+                    save(currentSim);
+                    System.exit(0);
                     exit();
                 } else if (actionMenuInput.equals("13") || actionMenuInput.equalsIgnoreCase("Beli barang")) {
                     // TODO: Beli barang

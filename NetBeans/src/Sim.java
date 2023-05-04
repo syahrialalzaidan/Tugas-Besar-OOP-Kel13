@@ -804,19 +804,19 @@ public class Sim {
         System.out.println("Mood         : " + mood);
         System.out.println("Uang         : " + mood);
         if (house.getUpgradeHouseTime()!=0){
-            System.out.println("Sisa Waktu upgrade rumah : ");
+            System.out.println("\n\nSisa Waktu upgrade rumah : ");
             timeFormat(house.getUpgradeHouseTime());
         }
-            System.out.println("Sisa Waktu pengantaran barang : ");
+        if (foodOrder!=null || itemOrder!= null){
+            System.out.println("\n\nPesanan barang : ");
             for (Pair<String,Integer,Integer> pair : itemOrder){
-                System.out.println("asd");
-                System.out.println(pair.getB() + " buah " + pair.getA() + " : ");
+                System.out.print(pair.getB() + " buah " + pair.getA() + " : ");
                 timeFormat(pair.getC());
             }
             for (Pair<String,Integer,Integer> pair : foodOrder){
-                System.out.println(pair.getB() + " buah " + pair.getA() + " : ");
+                System.out.print(pair.getB() + " buah " + pair.getA() + " : ");
                 timeFormat(pair.getC());
-            
+            }
         }
     }
 

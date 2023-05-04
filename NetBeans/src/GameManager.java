@@ -421,7 +421,7 @@ public class GameManager {
                                     currentSim.getCurrHouse().setRoomRoot(roomRoot);
                                     currentSim.getCurrHouse().setNewRoom(room);
                                     currentSim.getCurrHouse().setDirectionNewRoom(direction);
-                                    currentSim.getCurrHouse().setUpgradeHouseTime(1080);
+                                    currentSim.getCurrHouse().setUpgradeHouseTime(10);
                                     System.out.println("Upgrade Time = " + currentSim.getCurrHouse().getUpgradeHouseTime());
                                     isRoomSet = true;
                                 }
@@ -684,9 +684,9 @@ public class GameManager {
                         }
 
                         // Masukan inisial akhir objek ke simPoint
-                        if (currentSim.getCurrentRoom().getLastItem() != null) {
-                            currentSim.getCurrentRoom().setLastItem(currentSim.getCurrentItems().getName());
-                        }
+                        // if ((currentSim.getCurrentRoom().getLastItem() != "") && (currentSim.getCurrentItems() != null) ) {
+                        //     currentSim.getCurrentRoom().setLastItem(currentSim.getCurrentItems().getName());
+                        // }
 
                         // Pidahkan simPoint ke Object
                         currentSim.getCurrentRoom().setSimPoint(targetCoordinate.getX1(), targetCoordinate.getY1());
@@ -707,7 +707,7 @@ public class GameManager {
                             System.out.print("Apakah Anda ingin melakukan action pada object ini? (Y/N) : ");
                             yesno = input.nextLine();
                         }
-                        if (yesno == "Y") {
+                        if (yesno.equalsIgnoreCase("Y")) {
                             switch (currentSim.getCurrentItems().getName()) {
                                 case "Toilet":
 
@@ -1234,7 +1234,7 @@ public class GameManager {
                             System.out.print("Masukkan nama item yang ingin dipasang : ");
                             itemName = input.nextLine();
                             for (int i = 0; i < listItems.size(); i++) {
-                                if (itemName.equalsIgnoreCase(listItems.get(i).getName())) {
+                                if (itemName.equals(listItems.get(i).getName())) {
                                     inputbenar = true;
                                     item = listItems.get(i);
                                     break;

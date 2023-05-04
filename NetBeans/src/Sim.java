@@ -59,8 +59,7 @@ public class Sim {
         this.isBerkunjung = false;
         this.currentRoom = house.getRoom(0);
         this.currentItems = null;
-        // Items item = new Items("Kasur Single");
-        // inventoryitems.addInventory(item);
+
     }
 
     public String getName(){

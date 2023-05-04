@@ -51,6 +51,15 @@ public class Room { // implements ActionListener {
         // frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
+    public Point getRoomPoint() {
+        return roomPoint;
+    }
+
+    public void setRoomPoint(int x, int y) {
+        Point newPoint = new Point(x, y);
+        this.roomPoint = newPoint;
+    }
+
     public String getRoomName() {
         return roomName;
     }

@@ -1,7 +1,9 @@
 import java.util.Arrays;
+import java.util.*;
 
 public class House {
     private Point coordinate;
+    private HashMap<Point,Room> listRoom;
     private Room[] rooms;
     private int roomCapacity = 100; 
     private int roomsTotal = 0;
@@ -13,6 +15,7 @@ public class House {
 
     public House(Point coordinate , String simName) {
         this.coordinate = coordinate;
+        this.listRoom = new HashMap<Point, Room>();
         this.rooms = new Room[100];
         this.simName = simName;
         this.roomRoot = null;
@@ -21,7 +24,191 @@ public class House {
         this.upgradeHouseTime = 0;
         Room firstroom = new Room("first-room");
         addRooms(firstroom);
+        addToListRoom(firstroom.getRoomPoint(), firstroom);
     }
+
+    public HashMap<Point,Room> getListRoom()
+    {
+        return this.listRoom;
+    }
+
+    public Point getPointFromRoom(Room room)
+    {
+        for(Point point : this.listRoom.keySet())
+        {
+            if(this.listRoom.get(point) == room)
+            {
+                return point;
+            }
+        }
+        System.out.println("Room not found");
+        return null;
+    }
+
+    public Room getRoomFromPoint(Point point)
+    {
+        return this.listRoom.get(point);
+    }
+
+    public void addToListRoom(Point point, Room room)
+    {
+        this.listRoom.put(point, room);
+    }
+
+
+    public Boolean upperRoomExist(Room rootRoom)
+    {
+        Point point = new Point(rootRoom.getRoomPoint().getX(), rootRoom.getRoomPoint().getY() + 1);
+        if(this.listRoom.containsKey(point))
+        {
+            return true;
+        }
+        return false;
+    }
+
+    public Boolean lowerRoomExist(Room rootRoom)
+    {
+        Point point = new Point(rootRoom.getRoomPoint().getX(), rootRoom.getRoomPoint().getY() - 1);
+        if(this.listRoom.containsKey(point))
+        {
+            return true;
+        }
+        return false;
+    }
+
+    public Boolean rightRoomExist(Room rootRoom)
+    {
+        Point point = new Point(rootRoom.getRoomPoint().getX() + 1, rootRoom.getRoomPoint().getY());
+        if(this.listRoom.containsKey(point))
+        {
+            return true;
+        }
+        return false;
+    }
+
+    public Boolean leftRoomExist(Room rootRoom)
+    {
+        Point point = new Point(rootRoom.getRoomPoint().getX() - 1, rootRoom.getRoomPoint().getY());
+        if(this.listRoom.containsKey(point))
+        {
+            return true;
+        }
+        return false;
+    }
+
+    public Boolean isRoomExist(String roomName)
+    {
+        for(Point point : this.listRoom.keySet())
+        {
+            if(this.listRoom.get(point).getRoomName().equalsIgnoreCase(roomName))
+            {
+                System.out.println("Room Sudah Ada");
+                System.out.println("Silahkan Pilih Room Lain");
+                return true;
+            }
+        }
+        return false;
+        //System.out.println("Room Not Exist");
+    }
+
+    public Room getUpperRoom(Room rootRoom)
+    {
+        Point point = new Point(rootRoom.getRoomPoint().getX(), rootRoom.getRoomPoint().getY() + 1);
+        return this.listRoom.get(point);
+    }
+
+    public Room getLowerRoom(Room rootRoom)
+    {
+        Point point = new Point(rootRoom.getRoomPoint().getX(), rootRoom.getRoomPoint().getY() - 1);
+        return this.listRoom.get(point);
+    }
+
+    public Room getRightRoom(Room rootRoom)
+    {
+        Point point = new Point(rootRoom.getRoomPoint().getX() + 1, rootRoom.getRoomPoint().getY());
+        return this.listRoom.get(point);
+    }
+
+    public Room getLeftRoom(Room rootRoom)
+    {
+        Point point = new Point(rootRoom.getRoomPoint().getX() - 1, rootRoom.getRoomPoint().getY());
+        return this.listRoom.get(point);
+    }
+
+    
+    public Boolean isAvailableAroundRoom(Room roomRoot)
+    {
+        /* Mengecek Apakah Ada Ruang Tersedia disekitar Room */
+
+        Point up = new Point(roomRoot.getRoomPoint().getX(), roomRoot.getRoomPoint().getY() + 1);
+        Point down = new Point(roomRoot.getRoomPoint().getX(), roomRoot.getRoomPoint().getY() - 1);
+        Point right = new Point(roomRoot.getRoomPoint().getX() + 1, roomRoot.getRoomPoint().getY());
+        Point left = new Point(roomRoot.getRoomPoint().getX() - 1, roomRoot.getRoomPoint().getY());
+
+        if(this.listRoom.containsKey(up) && this.listRoom.containsKey(down) && this.listRoom.containsKey(right) && this.listRoom.containsKey(left))
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    }
+
+    public void printAroundRoom(Room room)
+    {
+        for(Point point : this.listRoom.keySet())
+        {
+            if(this.listRoom.get(point) == room)
+            {
+                // Cek Room Atas
+                if(upperRoomExist(room))
+                {
+                    Point up = new Point(point.getX(), point.getY() + 1);
+                    System.out.println("Up : " + this.listRoom.get(up).getRoomName());
+                }
+                else
+                {
+                    System.out.println("Up : -");
+                }
+
+                // Cek Room Bawah
+                if(lowerRoomExist(room))
+                {
+                    Point down = new Point(point.getX(), point.getY() - 1);
+                    System.out.println("Down : " + this.listRoom.get(down).getRoomName());
+                }
+                else
+                {
+                    System.out.println("Down : -");
+                }
+
+                // Cek Room Kanan
+                if(rightRoomExist(room))
+                {
+                    Point right = new Point(point.getX() + 1, point.getY());
+                    System.out.println("Right : " + this.listRoom.get(right).getRoomName());
+                }
+                else
+                {
+                    System.out.println("Right : -");
+                }
+
+                // Cek Room Kiri
+                if(leftRoomExist(room))
+                {
+                    Point left = new Point(point.getX() - 1, point.getY());
+                    System.out.println("Left : " + this.listRoom.get(left).getRoomName());
+                }
+                else
+                {
+                    System.out.println("Left : -");
+                }
+            }
+        }
+        System.out.println("");
+    }
+
 
     public Point getCoordinate() {
         return coordinate;
@@ -121,7 +308,7 @@ public class House {
 
     public void setDirectionNewRoom(String direction)
     {
-        if(direction == "Up" || direction == "Down" || direction == "Right" || direction == "Left")
+        if(direction.equalsIgnoreCase("Up") || direction.equalsIgnoreCase("Down") || direction.equalsIgnoreCase("Right") || direction.equalsIgnoreCase("Left"))
         {
             this.directionNewRoom = direction;
         }
@@ -135,23 +322,31 @@ public class House {
     {
         if(direction.equals("Up"))
         {
-            roomRoot.setUpperRoom(newRoom);
-            newRoom.setLowerRoom(roomRoot);
+            Point newRoomPoint = new Point(roomRoot.getRoomPoint().getX(), roomRoot.getRoomPoint().getY() + 1);
+            newRoom.setRoomPoint(newRoomPoint.getX() , newRoomPoint.getY());
+            this.listRoom.put(newRoomPoint, newRoom);
+            addRooms(newRoom);
         }
         else if(direction.equals("Down"))
         {
-            roomRoot.setLowerRoom(newRoom);
-            newRoom.setUpperRoom(roomRoot);
+            Point newRoomPoint = new Point(roomRoot.getRoomPoint().getX(), roomRoot.getRoomPoint().getY() - 1);
+            newRoom.setRoomPoint(newRoomPoint.getX() , newRoomPoint.getY());
+            this.listRoom.put(newRoomPoint, newRoom);
+            addRooms(newRoom);
         }
         else if(direction.equals("Left"))
         {
-            roomRoot.setLeftRoom(newRoom);
-            newRoom.setRightRoom(roomRoot);
+            Point newRoomPoint = new Point(roomRoot.getRoomPoint().getX() - 1, roomRoot.getRoomPoint().getY());
+            newRoom.setRoomPoint(newRoomPoint.getX() , newRoomPoint.getY());
+            this.listRoom.put(newRoomPoint, newRoom);
+            addRooms(newRoom);
         }
         else if(direction.equals("Right"))
         {
-            roomRoot.setRightRoom(newRoom);
-            newRoom.setLeftRoom(roomRoot);
+            Point newRoomPoint = new Point(roomRoot.getRoomPoint().getX() + 1, roomRoot.getRoomPoint().getY());
+            newRoom.setRoomPoint(newRoomPoint.getX() , newRoomPoint.getY());
+            this.listRoom.put(newRoomPoint, newRoom);
+            addRooms(newRoom);
         }
         else
         {

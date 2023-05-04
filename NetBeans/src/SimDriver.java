@@ -35,14 +35,12 @@ public class SimDriver {
 
         // Memasukan House ke dalam World
         world.addHouse(currentSim.getHouse());
-        currentSim.watchingTV(0);
+        currentSim.watchingTV(30);
         //Thread.sleep(10000);
         currentSim.viewSimInfo();
-        System.out.println("Berhasil");
-        Scanner input = new Scanner(System.in);
-        System.out.print("Masukan Stringg : ");
-        String asd=  input.nextLine();
-        Thread.sleep(1000);
+        currentSim.viewClock();
+
+
 
 
 

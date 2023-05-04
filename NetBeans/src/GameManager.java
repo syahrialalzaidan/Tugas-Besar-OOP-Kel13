@@ -1191,8 +1191,7 @@ public class GameManager {
                                     System.out.println("");
                                     System.out.println("Tunggu ya, Item sedang diantar...");
                                     currentSim.setMoney(currentSim.getMoney() - (items.getPrice() * jumlah));
-                                    for (int i = 0; i < jumlah; i++)
-                                        currentSim.addItemOrder(items.getName(), jumlah, items.getPrice());
+                                    currentSim.addItemOrder(items.getName(), jumlah, items.getPrice());
                                     check = true;
                                 }
                             } else {
@@ -1203,8 +1202,7 @@ public class GameManager {
                                     System.out.println("");
                                     System.out.println("Tunggu ya, Makanan sedang diantar...");
                                     currentSim.setMoney(currentSim.getMoney() - (foods.getPrice() * jumlah));
-                                    for (int i = 0; i < jumlah; i++)
-                                        currentSim.addFoodOrder(foods.getName(), jumlah, foods.getPrice());
+                                    currentSim.addFoodOrder(foods.getName(), jumlah, foods.getPrice());
                                     check = true;
                                 }
                             }

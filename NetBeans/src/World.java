@@ -87,17 +87,23 @@ public class World {
                 for (Pair<String,Integer,Integer> pair : s.getItemOrder()){
                     pair.setC(pair.getC()-time);
                     if (pair.getC()<=0){
+                        for (int i= pair.getB() ; i>0 ; i--){
                         s.addInventoryitems(new Items(pair.getA()));
+                    }
                     }
                 }
                 for (Pair<String,Integer,Integer> pair : s.getFoodOrder()){
                     pair.setC(pair.getC()-time);
                     if (pair.getC()<=0){
-                        s.addInventoryfood(new Food(pair.getA()));
+                        for (int i= pair.getB() ; i>0 ; i--){
+                            s.addInventoryfood(new Food(pair.getA()));
+                        }
+                        }
+                        
                     }
                 }
 
-            }
+            
         for (House rumah : house){
             if (rumah.getUpgradeHouseTime()!=0){
                 rumah.setUpgradeHouseTime(rumah.getUpgradeHouseTime()-time);

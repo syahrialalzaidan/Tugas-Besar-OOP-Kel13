@@ -421,7 +421,7 @@ public class GameManager {
                                     currentSim.getCurrHouse().setRoomRoot(roomRoot);
                                     currentSim.getCurrHouse().setNewRoom(room);
                                     currentSim.getCurrHouse().setDirectionNewRoom(direction);
-                                    currentSim.getCurrHouse().setUpgradeHouseTime(10);
+                                    currentSim.getCurrHouse().setUpgradeHouseTime(1080);
                                     System.out.println("Upgrade Time = " + currentSim.getCurrHouse().getUpgradeHouseTime());
                                     isRoomSet = true;
                                 }

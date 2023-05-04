@@ -675,9 +675,9 @@ public class GameManager {
                         }
 
                         // Masukan inisial akhir objek ke simPoint
-                        if (currentSim.getCurrentRoom().getLastItem() != null) {
-                            currentSim.getCurrentRoom().setLastItem(currentSim.getCurrentItems().getName());
-                        }
+                        // if ((currentSim.getCurrentRoom().getLastItem() != "") && (currentSim.getCurrentItems() != null) ) {
+                        //     currentSim.getCurrentRoom().setLastItem(currentSim.getCurrentItems().getName());
+                        // }
 
                         // Pidahkan simPoint ke Object
                         currentSim.getCurrentRoom().setSimPoint(targetCoordinate.getX1(), targetCoordinate.getY1());
@@ -1117,7 +1117,7 @@ public class GameManager {
                             System.out.print("Masukkan nama item yang ingin dipasang : ");
                             itemName = input.nextLine();
                             for (int i = 0; i < listItems.size(); i++) {
-                                if (itemName.equalsIgnoreCase(listItems.get(i).getName())) {
+                                if (itemName.equals(listItems.get(i).getName())) {
                                     inputbenar = true;
                                     item = listItems.get(i);
                                     break;

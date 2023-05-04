@@ -858,11 +858,11 @@ public class GameManager {
                     }
                 } else if (actionMenuInput.equals("12") || actionMenuInput.equalsIgnoreCase("Exit")) {
                     // TODO: Exit
-                    System.out.println("Ingin disave? (yes/no))");
+                    System.out.println("Ingin disave? (yes/no)");
                     String yesno = input.nextLine();
                     if (yesno.equals("yes")) {
                         save(currentSim);
-                        System.out.println("Game Saved!");
+                        
                     } else {
                         System.out.println("Have a nice day!");
                     }

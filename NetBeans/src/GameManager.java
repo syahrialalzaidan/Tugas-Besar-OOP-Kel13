@@ -1053,18 +1053,24 @@ public class GameManager {
                             }
                         }
 
-                        check = false;
-                        while (!check) {
+                        boolean checkInt = false;
+                        int jumlah = 0;
+                        while (!checkInt) {
                             System.out.print("Masukkan jumlah item yang ingin dibeli: ");
-                            int jumlah = 0;
                             try {
                                 jumlah = input.nextInt();
-
                             } catch (Exception e) {
                                 System.out.println("Input harus berupa angka");
+                                currentSim.getInventoryitems().addInventoryList(items);
                                 input.nextLine();
                             }
+                            if (jumlah != 0) {
+                                checkInt = true;
+                            }
+                        }
 
+                        check = false;
+                        while (!check) {
                             input.nextLine();
                             if (items != null) {
                                 if ((items.getPrice() * jumlah) > currentSim.getMoney()) {
@@ -1101,11 +1107,13 @@ public class GameManager {
                     Inventory<Items> itemsInventory = currentSim.getInventoryitems();
                     ArrayList<Items> listItems = itemsInventory.getInventoryList();
                     if (listItems.isEmpty()) {
-                        System.out.println("Inventory is empty. Buy some stuff ?");
+                        System.out.println("Inventory is empty. Buy some stuff?");
                     } else {
-                        System.out.println("Berikut adalah List Item yang dimiliki : ");
+                        System.out.println("Berikut adalah List Item yang dimiliki: ");
                         for (int i = 0; i < listItems.size(); i++) {
-                            System.out.println((i + 1) + ". " + listItems.get(i).getName());
+                            if (listItems.get(i) != null) {
+                                System.out.println((i + 1) + ". " + listItems.get(i).getName());
+                            }
                         }
                         System.out.println("");
 
@@ -1117,10 +1125,12 @@ public class GameManager {
                             System.out.print("Masukkan nama item yang ingin dipasang : ");
                             itemName = input.nextLine();
                             for (int i = 0; i < listItems.size(); i++) {
-                                if (itemName.equals(listItems.get(i).getName())) {
-                                    inputbenar = true;
-                                    item = listItems.get(i);
-                                    break;
+                                if (listItems.get(i) != null) {
+                                    if (itemName.equals(listItems.get(i).getName())) {
+                                        inputbenar = true;
+                                        item = listItems.get(i);
+                                        break;
+                                    }
                                 }
                             }
                             if (!inputbenar) {

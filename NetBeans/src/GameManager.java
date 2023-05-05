@@ -48,12 +48,13 @@ public class GameManager {
         System.out.println("9.  List Object");
         System.out.println("10. Go To Object");
         System.out.println("11. Action");
-        System.out.println("12. Exit");
+        System.out.println("12. Ganti job");
+        System.out.println("13. Exit");
         System.out.println("99. Help");
         System.out.println("");
         System.out.println("Action: ");
-        System.out.println("13. Beli barang");
-        System.out.println("14. Memasang barang");
+        System.out.println("14. Beli barang");
+        System.out.println("15. Memasang barang");
         System.out.println("");
     }
 
@@ -101,13 +102,15 @@ public class GameManager {
         System.out.println("Melakukan sebuah aksi");
         System.out.print("12.Exit");
         System.out.println("Keluar dari game");
+        System.out.println("13. Ganti Job");
+        System.out.println("Mengganti job lain");
         System.out.print("99.Help: ");
         System.out.println("Menampilkan deskripsi pilihan menu");
         System.out.println("");
         System.out.println("action: ");
-        System.out.print("13.Beli barang: ");
+        System.out.print("14.Beli barang: ");
         System.out.println("Membeli suatu barang");
-        System.out.println("14.Memasang barang: ");
+        System.out.println("15.Memasang barang: ");
         System.out.println("Memasang barang di suatu ruangan");
         System.out.println("");
 
@@ -800,6 +803,8 @@ public class GameManager {
                                 }
                             } else {
                                 System.out.println("Sim sedang berkunjung");
+                                
+                                
                             }
 
                         } else if (ActionInput.equals("4") || ActionInput.equals("Pulang")) {
@@ -1228,6 +1233,12 @@ public class GameManager {
                     // Invalid Input
                     System.out.println("Aksi tidak dikenali!");
                     System.out.println("");
+                }
+
+                if (!currentSim.getAlive()){
+                    if (simList.size()==1){
+                        
+                    }
                 }
             }
         }

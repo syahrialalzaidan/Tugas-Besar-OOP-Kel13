@@ -162,14 +162,6 @@ public class GameManager {
 
     }
 
-    public static void save(Sim sim) {
-        Save.save(sim);
-    }
-
-    public static Sim load() {
-        return Load.load("data/data.json");
-    }
-
     public static void main(String[] args) throws Exception {
         Welcome();
 
@@ -258,9 +250,9 @@ public class GameManager {
                     // String namaFile = input.nextLine();
                     // currentSim = load();
                     // world = currentSim.getWorld();
-                    // validInput = true;
+                    validInput = true;
                     currentSim = Load.load("data.json");
-                    
+
                 } else {
                     System.out.println("Input anda salah, silahkan masukkan ulang!");
                 }
@@ -861,8 +853,7 @@ public class GameManager {
                     System.out.println("Ingin disave? (yes/no)");
                     String yesno = input.nextLine();
                     if (yesno.equals("yes")) {
-                        save(currentSim);
-                        
+                        Save.save(currentSim);
                     } else {
                         System.out.println("Have a nice day!");
                     }

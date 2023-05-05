@@ -1,5 +1,6 @@
+import java.io.Serializable;
 
-public class Pair<A, B, C> {
+public class Pair<A, B, C> implements Serializable{
     private A A;
     private B B;
     private C C;

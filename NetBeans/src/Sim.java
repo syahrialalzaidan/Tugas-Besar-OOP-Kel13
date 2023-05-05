@@ -28,8 +28,8 @@ public class Sim {
     private boolean isBerkunjung;
     private Room currentRoom;
     private Items currentItems;
-    private transient List<Pair<String,Integer,Integer>> itemOrder = new ArrayList<Pair<String,Integer,Integer>>();
-    private transient List<Pair<String,Integer,Integer>> foodOrder = new ArrayList<Pair<String,Integer,Integer>>();
+    private List<Pair<String,Integer,Integer>> itemOrder = new ArrayList<Pair<String,Integer,Integer>>();
+    private List<Pair<String,Integer,Integer>> foodOrder = new ArrayList<Pair<String,Integer,Integer>>();
 
 
     public Sim(String name,House house, World world){

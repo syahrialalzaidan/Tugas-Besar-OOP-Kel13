@@ -12,8 +12,6 @@ public class Load {
             Gson gson = new Gson();
             Reader reader = Files.newBufferedReader(Paths.get(pathreal));
             world = gson.fromJson(reader, Sim.class);
-        
-            System.out.println("Data loaded from " + path + " successfully.");
         }
         catch (Exception e) {
             System.out.println("Gagal melakukan load file " + path + ". Pesan error: " + e.getMessage());

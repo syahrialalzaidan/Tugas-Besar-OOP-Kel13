@@ -840,8 +840,10 @@ public class GameManager {
                     // TODO: Exit
                     System.out.println("Ingin disave? (yes/no)");
                     String yesno = input.nextLine();
+                    System.out.print("Masukkan username: ");
+                    String username = input.nextLine();
                     if (yesno.equals("yes")) {
-                        Save.save(currentSim.getName(), currentSim);
+                        Save.save(username, currentSim);
                     } else {
                         System.out.println("Have a nice day!");
                     }

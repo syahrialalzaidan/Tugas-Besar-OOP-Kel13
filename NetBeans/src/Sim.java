@@ -58,6 +58,17 @@ public class Sim {
         this.currentRoom = house.getRoom(0);
         this.currentItems = null;
 
+        Items item1 = new Items("Kasur Single");
+        Items item2 = new Items("Toilet");
+        Items item3 = new Items("Kompor Gas");
+        Items item4 = new Items("Jam");
+        Items item5 = new Items("Meja dan Kursi");
+
+        addInventoryitems(item1);
+        addInventoryitems(item2);
+        addInventoryitems(item3);
+        addInventoryitems(item4);
+        addInventoryitems(item5);
     }
 
     public String getName(){
@@ -1069,7 +1080,7 @@ public class Sim {
             boolean checkSajadah = false;
             while (!checkSajadah) {
                 try {
-                    System.out.print("Masukkan waktu input : ");
+                    System.out.print("Masukkan waktu input (Kelipatan 10) : ");
                     int inputTime = input.nextInt();
                     if (inputTime % 10 != 0) {
                         checkSajadah = false;
@@ -1091,11 +1102,11 @@ public class Sim {
             boolean checkHP = false;
             while (!checkHP) {
                 try {
-                    System.out.print("Masukkan waktu input : ");
+                    System.out.print("Masukkan waktu input (Kelipatan 30) : ");
                     int inputTime = input.nextInt();
                     if (inputTime % 30 != 0) {
                         checkHP = false;
-                        System.out.println("Masukkan waktu harus keliapatan 30 detik");
+                        System.out.println("Masukkan waktu harus kelipatan 30 detik");
                     } else {
                         checkHP = true;
                         scrollTiktok(inputTime);
@@ -1111,6 +1122,7 @@ public class Sim {
             break;
             default:
                 if (input.hasNextInt()) { // Cek apakah input merupakan angka
+                    System.out.println("Masukan waktu input (Kelipatan 180) : ");
                     int waktuTidur = input.nextInt();
                     if (waktuTidur % 180 == 0) { // Cek apakah angka merupakan kelipatan 180
                         sleep(waktuTidur);

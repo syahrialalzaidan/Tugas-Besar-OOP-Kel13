@@ -826,6 +826,8 @@ public class GameManager {
                                 }
                             } else {
                                 System.out.println("Sim sedang berkunjung");
+                                
+                                
                             }
 
                         } else if (ActionInput.equals("4") || ActionInput.equals("Pulang")) {
@@ -850,73 +852,79 @@ public class GameManager {
                         }
 
                     }
-                }else if(actionMenuInput.equals("12") || actionMenuInput.equalsIgnoreCase("Ubah pekerjaan")){ 
-                if (currentSim.getWorkTime()>=720){
-                boolean check = false;
+                } else if (actionMenuInput.equals("12") || actionMenuInput.equalsIgnoreCase("Ubah pekerjaan")) {
+                    if (currentSim.getWorkTime() >= 120) {
+                        boolean check = false;
 
-                System.out.println("Pilih pekerjaan baru : \n1. Badut Sulap\n2. Koki\n3. Polisi\n4. Programer\n5. Dokter\n6. Mata-mata\n7. Pengacara");
-                while(!check){
-                try{
-                    System.out.print("Masukkan nama pekerjaan : ");
-                    String pekerjaan = input.nextLine();
-                    if (pekerjaan.equals(currentSim.getJob().getJobName())){
-                    switch (pekerjaan) {
-                        case "Badut Sulap":
-                            currentSim.setJob(new Job(1));
-                            currentSim.setWorkTime(0);
-                            currentSim.setDailyWork(0);
-                        break;
-                        case "Koki":
-                        currentSim.setJob(new Job(2));
-                        currentSim.setWorkTime(0);
-                        currentSim.setDailyWork(0);
-                        break;
-                        case "Polisi":
-                        currentSim.setJob(new Job(3));
-                        currentSim.setWorkTime(0);
-                        currentSim.setDailyWork(0);
-                        break;
-                        case "Programmer":
-                        currentSim.setJob(new Job(4));
-                        currentSim.setWorkTime(0);
-                        currentSim.setDailyWork(0);
-                        break;
-                        case "Dokter":
-                        currentSim.setJob(new Job(5));
-                        currentSim.setWorkTime(0);
-                        currentSim.setDailyWork(0);
-                        break;
-                        case "Mata-mata":
-                        currentSim.setJob(new Job(6));
-                        currentSim.setWorkTime(0);
-                        currentSim.setDailyWork(0);
-                        break;
-                        case "Pengacara":
-                        currentSim.setJob(new Job(7));
-                        currentSim.setWorkTime(0);
-                        currentSim.setDailyWork(0);
-                        break;
-                        default :
-                            System.out.println("Tidak ada pekerjaan yang dimaksud.");
+                        System.out.println(
+                                "Pilih pekerjaan baru : \n1. Badut Sulap\n2. Koki\n3. Polisi\n4. Programer\n5. Dokter\n6. Mata-mata\n7. Pengacara");
+                        while (!check) {
+                            try {
+                                System.out.print("Masukkan nama pekerjaan : ");
+                                String pekerjaan = input.nextLine();
+                                if (!pekerjaan.equals(currentSim.getJob().getJobName())) {
+                                    switch (pekerjaan) {
+                                        case "Badut Sulap":
+                                            currentSim.setJob(new Job(1));
+                                            currentSim.setWorkTime(0);
+                                            currentSim.setDailyWork(0);
+                                            check = true;
+                                            break;
+                                        case "Koki":
+                                            currentSim.setJob(new Job(2));
+                                            currentSim.setWorkTime(0);
+                                            currentSim.setDailyWork(0);
+                                            check = true;
+                                            break;
+                                        case "Polisi":
+                                            currentSim.setJob(new Job(3));
+                                            currentSim.setWorkTime(0);
+                                            currentSim.setDailyWork(0);
+                                            check = true;
+                                            break;
+                                        case "Programmer":
+                                            currentSim.setJob(new Job(4));
+                                            currentSim.setWorkTime(0);
+                                            currentSim.setDailyWork(0);
+                                            check = true;
+                                            break;
+                                        case "Dokter":
+                                            currentSim.setJob(new Job(5));
+                                            currentSim.setWorkTime(0);
+                                            currentSim.setDailyWork(0);
+                                            check = true;
+                                            break;
+                                        case "Mata-mata":
+                                            currentSim.setJob(new Job(6));
+                                            currentSim.setWorkTime(0);
+                                            currentSim.setDailyWork(0);
+                                            check = true;
+                                            break;
+                                        case "Pengacara":
+                                            currentSim.setJob(new Job(7));
+                                            currentSim.setWorkTime(0);
+                                            currentSim.setDailyWork(0);
+                                            check = true;
+                                            break;
+                                        default:
+                                            System.out.println("Tidak ada pekerjaan yang dimaksud.");
 
-                    }}
-                    else{
-                        System.out.println("Perkerjaan yang dipilih adalah pekerjaan anda sekarang");
+                                    }
+                                } else {
+                                    System.out.println("Perkerjaan yang dipilih adalah pekerjaan anda sekarang");
+                                }
+                            } catch (Exception e) {
+                                System.out.println("Input harus berupa angka");
+                                System.out.println("Silakan masukan input ulang");
+                                System.out.println("");
+                                input.nextLine();
+                            }
+                        }
+                    } else {
+                        System.out.println("Anda harus bekerja minimal 12 menit");
                     }
-                }
-                catch(Exception e){
-                    System.out.println("Input harus berupa angka");
-                    System.out.println("Silakan masukan input ulang");
-                    System.out.println("");
-                    input.nextLine();
-                }}
-                }
-                else{
-                    System.out.println("Anda harus bekerja minimal 12 menit");
-                }
 
-            }
-                else if (actionMenuInput.equals("13") || actionMenuInput.equalsIgnoreCase("Exit")) {
+                } else if (actionMenuInput.equals("13") || actionMenuInput.equalsIgnoreCase("Exit")) {
                     // TODO: Exit
                     System.out.println("Ingin disave? (yes/no)");
                     String yesno = input.nextLine();

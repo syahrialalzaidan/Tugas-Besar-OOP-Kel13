@@ -48,7 +48,8 @@ public class GameManager {
         System.out.println("9.  List Object");
         System.out.println("10. Go To Object");
         System.out.println("11. Action");
-        System.out.println("12. Exit");
+        System.out.println("12. Ganti job");
+        System.out.println("13. Exit");
         System.out.println("99. Help");
         System.out.println("");
         System.out.println("Action: ");
@@ -101,6 +102,8 @@ public class GameManager {
         System.out.println("Melakukan sebuah aksi");
         System.out.print("12.Exit");
         System.out.println("Keluar dari game");
+        System.out.println("13. Ganti Job");
+        System.out.println("Mengganti job lain");
         System.out.print("99.Help: ");
         System.out.println("Menampilkan deskripsi pilihan menu");
         System.out.println("");

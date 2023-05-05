@@ -185,7 +185,6 @@ public class Room { //implements ActionListener {
             direction = input.nextLine();
         }
         Coordinate coordinate = new Coordinate(0, 0, 0, 0);
-        input.close();
 
         // persegi panjang orientasi kanan
         if(object.getX() >= object.getY())

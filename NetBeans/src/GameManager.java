@@ -53,8 +53,8 @@ public class GameManager {
         System.out.println("99. Help");
         System.out.println("");
         System.out.println("Action: ");
-        System.out.println("13. Beli barang");
-        System.out.println("14. Memasang barang");
+        System.out.println("14. Beli barang");
+        System.out.println("15. Memasang barang");
         System.out.println("");
     }
 
@@ -108,9 +108,9 @@ public class GameManager {
         System.out.println("Menampilkan deskripsi pilihan menu");
         System.out.println("");
         System.out.println("action: ");
-        System.out.print("13.Beli barang: ");
+        System.out.print("14.Beli barang: ");
         System.out.println("Membeli suatu barang");
-        System.out.println("14.Memasang barang: ");
+        System.out.println("15.Memasang barang: ");
         System.out.println("Memasang barang di suatu ruangan");
         System.out.println("");
 
@@ -1227,6 +1227,12 @@ public class GameManager {
                     // Invalid Input
                     System.out.println("Aksi tidak dikenali!");
                     System.out.println("");
+                }
+
+                if (!currentSim.getAlive()){
+                    if (simList.size()==1){
+                        
+                    }
                 }
             }
         }

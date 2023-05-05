@@ -779,13 +779,13 @@ public class GameManager {
                                             for (Sim sim : GameManager.getSimList()) {
                                                 if (inputNama.equals(sim.getName())) {
                                                     currentSim.visit(sim.getHouse());
+                                                    check1 = true;
                                                     check = true;
                                                 }
 
                                             }
                                         } else {
-                                            System.out
-                                                    .print("Input nama yang dimaksukan tidak ada dalam daftar sim : ");
+                                            System.out.print("Input nama yang dimaksukan tidak ada dalam daftar sim : ");
                                         }
                                     }
                                 }
@@ -1231,7 +1231,13 @@ public class GameManager {
 
                 if (!currentSim.getAlive()){
                     if (simList.size()==1){
-                        
+                        exit = true;
+                        System.out.println("GAME OVER");
+                    }
+                    else{
+                        simList.remove(currentSim);
+                        currentSim = simList.get(0);
+                        System.err.println("Sekarang anda memainkan " + simList.get(0).getName());
                     }
                 }
             }

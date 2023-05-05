@@ -185,7 +185,7 @@ public class Sim {
         if (this.mood>100){
             this.mood = 100;
         }
-        if (this.mood<0){
+        if (this.mood<=0){
             alive = false;
         }
     }
@@ -195,7 +195,7 @@ public class Sim {
         if (this.health>100){
             this.health = 100;
         }
-        if (this.health<0){
+        if (this.health<=0){
             alive = false;
         }
     }
@@ -205,7 +205,7 @@ public class Sim {
         if (this.fullness>100){
             this.fullness = 100;
         }
-        if (this.fullness<0){
+        if (this.fullness<=0){
             alive = false;
         }
     }
@@ -405,6 +405,9 @@ public class Sim {
     
                 }
                 world.runTime(time);
+                if (time>world.getTime()){
+                    dailySleep=(time-world.getTime());
+                }
                 isAlive();
 
 

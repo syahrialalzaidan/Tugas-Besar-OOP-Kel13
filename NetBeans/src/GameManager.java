@@ -254,7 +254,8 @@ public class GameManager {
                         username = input.nextLine();
                     }
                 }
-                currentSim = Load.load(username);
+                simList = Load.load(username);
+                currentSim = simList.get(0);
                 validInput = true;
 
             } else if (pilihan.equals("3") || pilihan.equalsIgnoreCase("Help")) {
@@ -856,7 +857,7 @@ public class GameManager {
                     System.out.print("Masukkan username: ");
                     String username = input.nextLine();
                     if (yesno.equals("yes")) {
-                        Save.save(username, currentSim);
+                        Save.save(username, simList );
                     } else {
                         System.out.println("Have a nice day!");
                     }

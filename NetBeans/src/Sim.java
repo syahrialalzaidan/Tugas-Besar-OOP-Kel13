@@ -820,7 +820,7 @@ public class Sim {
         System.out.println("Kesehatan    : " + health);
         System.out.println("Kekenyangan  : " + fullness);
         System.out.println("Mood         : " + mood);
-        System.out.println("Uang         : " + mood);
+        System.out.println("Uang         : " + money);
         if (house.getUpgradeHouseTime()!=0){
             System.out.println("\n\nSisa Waktu upgrade rumah : ");
             timeFormat(house.getUpgradeHouseTime());

@@ -1,15 +1,15 @@
 {
-  "name": "rian",
+  "name": "iyal",
   "job": {
-    "name": "Koki",
-    "dailyPay": 30
+    "name": "Polisi",
+    "dailyPay": 35
   },
-  "money": 2000,
+  "money": 1998,
   "inventoryfood": {
     "inventory": {},
     "inventoryList": [],
     "inventoryType": "Food",
-    "simOwner": "rian"
+    "simOwner": "iyal"
   },
   "inventoryitems": {
     "inventory": {
@@ -67,18 +67,18 @@
       }
     ],
     "inventoryType": "Items",
-    "simOwner": "rian"
+    "simOwner": "iyal"
   },
   "inventorydish": {
     "inventory": {},
     "inventoryList": [],
     "inventoryType": "Dish",
-    "simOwner": "rian"
+    "simOwner": "iyal"
   },
   "house": {
     "coordinate": {
-      "x": 54,
-      "y": 16
+      "x": 53,
+      "y": 53
     },
     "listRoom": [
       [
@@ -315,7 +315,7 @@
     ],
     "roomCapacity": 100,
     "roomsTotal": 1,
-    "simName": "rian",
+    "simName": "iyal",
     "upgradeHouseTime": 0,
     "directionNewRoom": ""
   },
@@ -3873,7 +3873,7 @@
         0,
         0,
         0,
-        0,
+        1,
         0,
         0,
         0,
@@ -3902,7 +3902,7 @@
         0,
         0,
         0,
-        1,
+        0,
         0,
         0,
         0,
@@ -4559,8 +4559,8 @@
   "dailyPay": 1,
   "currentHouse": {
     "coordinate": {
-      "x": 54,
-      "y": 16
+      "x": 53,
+      "y": 53
     },
     "listRoom": [
       [
@@ -4797,7 +4797,7 @@
     ],
     "roomCapacity": 100,
     "roomsTotal": 1,
-    "simName": "rian",
+    "simName": "iyal",
     "upgradeHouseTime": 0,
     "directionNewRoom": ""
   },
@@ -4865,5 +4865,13 @@
       "x": 0,
       "y": 0
     }
-  }
+  },
+  "itemOrder": [],
+  "foodOrder": [
+    {
+      "A": "Susu",
+      "B": 1,
+      "C": 2
+    }
+  ]
 }

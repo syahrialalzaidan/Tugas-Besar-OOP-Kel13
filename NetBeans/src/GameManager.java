@@ -174,9 +174,9 @@ public class GameManager {
         System.out.println("");
         System.out.println("Pilihlah salah satu menu di bawah ini: ");
         System.out.println("1. Start New Game");
-        /* System.out.println("2. Load Game"); */
-        System.out.println("2. Help");
-        System.out.println("3. Exit");
+        System.out.println("2. Load Game");
+        System.out.println("3. Help");
+        System.out.println("4. Exit");
 
         Boolean validInput = false;
         Boolean exit = false;
@@ -187,13 +187,7 @@ public class GameManager {
             String pilihan = input.nextLine();
 
             if (pilihan.equals("1") || pilihan.equalsIgnoreCase("Start New Game")) {
-                // Start New Game
 
-                System.out.println("New Game/Load Game ?    (1/2) ");
-                int pilihan2 = input.nextInt();
-                input.nextLine();
-
-                if (pilihan2 == 1) {
                     System.out.print("Masukkan Nama Sim: ");
                     String namaSim = input.nextLine();
                     world = new World();
@@ -244,23 +238,14 @@ public class GameManager {
                     // currentSim.getCurrentRoom().setSpaceImmediate(2,1,item5,"MDK","Right");
 
                     validInput = true;
-                } else if (pilihan2 == 2) {
-                    // Load Game
-                    // System.out.println("Masukkan nama file yang ingin di load: ");
-                    // String namaFile = input.nextLine();
-                    // currentSim = load();
-                    // world = currentSim.getWorld();
-                    validInput = true;
-                    currentSim = Load.load("data.json");
-
-                } else {
-                    System.out.println("Input anda salah, silahkan masukkan ulang!");
-                }
-            } else if (pilihan.equals("2") || pilihan.equalsIgnoreCase("Help")) {
+            } else if (pilihan.equals("2") || pilihan.equalsIgnoreCase("Load Game")) {
+                validInput = true;
+                currentSim = Load.load("data.json");
+            } else if (pilihan.equals("3") || pilihan.equalsIgnoreCase("Help")) {
                 // Help
                 help();
                 validInput = true;
-            } else if (pilihan.equals("3") || pilihan.equalsIgnoreCase("Exit")) {
+            } else if (pilihan.equals("4") || pilihan.equalsIgnoreCase("Exit")) {
                 // Exit
                 validInput = true;
                 exit = true;

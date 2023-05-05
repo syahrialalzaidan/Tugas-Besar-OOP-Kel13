@@ -1,5 +1,6 @@
 import java.util.Scanner;
 import java.util.Random;
+import java.io.File;
 import java.lang.Math;
 import java.util.*;
 import java.util.Map.*;
@@ -189,61 +190,73 @@ public class GameManager {
 
             if (pilihan.equals("1") || pilihan.equalsIgnoreCase("Start New Game")) {
 
-                    System.out.print("Masukkan Nama Sim: ");
-                    String namaSim = input.nextLine();
-                    world = new World();
+                System.out.print("Masukkan Nama Sim: ");
+                String namaSim = input.nextLine();
+                world = new World();
 
-                    // Random Posisi Rumah Pertama
-                    int max = 63;
-                    int min = 0;
-                    int x = (int) (Math.random() * (max - min + 1) + min);
-                    int y = (int) (Math.random() * (max - min + 1) + min);
-                    while (world.isHouseExist(x, y)) {
-                        x = (int) (Math.random() * (max - min + 1) + min);
-                        y = (int) (Math.random() * (max - min + 1) + min);
-                    }
+                // Random Posisi Rumah Pertama
+                int max = 63;
+                int min = 0;
+                int x = (int) (Math.random() * (max - min + 1) + min);
+                int y = (int) (Math.random() * (max - min + 1) + min);
+                while (world.isHouseExist(x, y)) {
+                    x = (int) (Math.random() * (max - min + 1) + min);
+                    y = (int) (Math.random() * (max - min + 1) + min);
+                }
 
-                    Point coordinate = new Point(x, y);
-                    House firstHouse = new House(coordinate, namaSim);
+                Point coordinate = new Point(x, y);
+                House firstHouse = new House(coordinate, namaSim);
 
-                    // membuat Sim pertama
-                    Sim firstSim = new Sim(namaSim, firstHouse, world);
+                // membuat Sim pertama
+                Sim firstSim = new Sim(namaSim, firstHouse, world);
 
-                    // menset upgradeHouseTime baru untuk sim pertama
+                // menset upgradeHouseTime baru untuk sim pertama
 
-                    // Memasukan Sim kedalam SimList
-                    addSim(namaSim, world, firstHouse);
+                // Memasukan Sim kedalam SimList
+                addSim(namaSim, world, firstHouse);
 
-                    // currentSim mengacu ke firstSim
-                    currentSim = simList.get(0);
+                // currentSim mengacu ke firstSim
+                currentSim = simList.get(0);
 
-                    // Memasukan House ke dalam World
-                    world.addHouse(currentSim.getHouse());
+                // Memasukan House ke dalam World
+                world.addHouse(currentSim.getHouse());
 
-                    // Menambahkan Item Default kedalam first-room
-                    Items item1 = new Items("Kasur Single");
-                    Items item2 = new Items("Toilet");
-                    Items item3 = new Items("Kompor Gas");
-                    Items item4 = new Items("Jam");
-                    Items item5 = new Items("Meja dan Kursi");
-                    currentSim.addInventoryitems(item1);
-                    currentSim.addInventoryitems(item2);
-                    currentSim.addInventoryitems(item3);
-                    currentSim.addInventoryitems(item4);
-                    currentSim.addInventoryitems(item5);
+                // Menambahkan Item Default kedalam first-room
+                Items item1 = new Items("Kasur Single");
+                Items item2 = new Items("Toilet");
+                Items item3 = new Items("Kompor Gas");
+                Items item4 = new Items("Jam");
+                Items item5 = new Items("Meja dan Kursi");
+                currentSim.addInventoryitems(item1);
+                currentSim.addInventoryitems(item2);
+                currentSim.addInventoryitems(item3);
+                currentSim.addInventoryitems(item4);
+                currentSim.addInventoryitems(item5);
 
-                    // currentSim.getCurrentRoom().setSpaceImmediate(0,2,item1,"KS" ,"Down");
-                    // currentSim.getCurrentRoom().setSpaceImmediate(5,5,item2,"T" , "Right");
-                    // currentSim.getCurrentRoom().setSpaceImmediate(2,5,item3,"KG","Right");
-                    // currentSim.getCurrentRoom().setSpaceImmediate(5,0,item4,"J","Right");
-                    // currentSim.getCurrentRoom().setSpaceImmediate(2,1,item5,"MDK","Right");
+                // currentSim.getCurrentRoom().setSpaceImmediate(0,2,item1,"KS" ,"Down");
+                // currentSim.getCurrentRoom().setSpaceImmediate(5,5,item2,"T" , "Right");
+                // currentSim.getCurrentRoom().setSpaceImmediate(2,5,item3,"KG","Right");
+                // currentSim.getCurrentRoom().setSpaceImmediate(5,0,item4,"J","Right");
+                // currentSim.getCurrentRoom().setSpaceImmediate(2,1,item5,"MDK","Right");
 
-                    validInput = true;
-            } else if (pilihan.equals("2") || pilihan.equalsIgnoreCase("Load Game")) {
                 validInput = true;
-                System.out.print("Masukkan Nama Kamu : ");
-                String loadFile = input.nextLine();
-                currentSim = Load.load(loadFile);
+            } else if (pilihan.equals("2") || pilihan.equalsIgnoreCase("Load Game")) {
+                boolean valid = false;
+                System.out.print("Masukkan username: ");
+                String username = input.nextLine();
+                while (!valid) {
+                    File file = new File(username + ".json");
+                    if (file.exists()) {
+                        valid = true;
+                    } else {
+                        System.out.println("Username not found!! Please enter a valid username!");
+                        System.out.print("Masukkan username: ");
+                        username = input.nextLine();
+                    }
+                }
+                currentSim = Load.load(username);
+                validInput = true;
+
             } else if (pilihan.equals("3") || pilihan.equalsIgnoreCase("Help")) {
                 // Help
                 help();
@@ -840,8 +853,10 @@ public class GameManager {
                     // TODO: Exit
                     System.out.println("Ingin disave? (yes/no)");
                     String yesno = input.nextLine();
+                    System.out.println("Masukkan username: ");
+                    String username = input.nextLine();
                     if (yesno.equals("yes")) {
-                        Save.save(currentSim.getName(), currentSim);
+                        Save.save(username, currentSim);
                     } else {
                         System.out.println("Have a nice day!");
                     }

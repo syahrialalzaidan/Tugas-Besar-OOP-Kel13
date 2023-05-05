@@ -31,7 +31,7 @@ public class SimDriver {
         GameManager.addSim(namaSim, world, firstHouse);
 
         // currentSim mengacu ke firstSim
-        currentSim = GameManager.simList.get(0);
+        currentSim = GameManager.getSimList().get(0);
 
         // Memasukan House ke dalam World
         world.addHouse(currentSim.getHouse());

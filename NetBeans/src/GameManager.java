@@ -206,21 +206,33 @@ public class GameManager {
                 validInput = true;
             } else if (pilihan.equals("2") || pilihan.equalsIgnoreCase("Load Game")) {
                 boolean valid = false;
-                System.out.print("Masukkan username: ");
-                String username = input.nextLine();
-                while (!valid) {
-                    File file = new File(username + ".json");
-                    if (file.exists()) {
-                        valid = true;
-                    } else {
-                        System.out.println("Username not found!! Please enter a valid username!");
-                        System.out.print("Masukkan username: ");
-                        username = input.nextLine();
+                File dir = new File(".");
+                File[] files = dir.listFiles((dir1, name) -> name.endsWith(".json"));
+
+                if (files.length == 0) {
+                    System.out.println("Kamu belum pernah menyimpan game sebelumnya!");
+                } else {
+                    System.out.println("Berikut daftar username yang tersedia: ");
+                    for (File file : files) {
+                        System.out.print("- ");
+                        System.out.println(file.getName().substring(0, file.getName().length() - 5));
                     }
+                    System.out.print("Masukkan username: ");
+                    String username = input.nextLine();
+                    while (!valid) {
+                        File file = new File(username + ".json");
+                        if (file.exists()) {
+                            valid = true;
+                        } else {
+                            System.out.println("Username not found!! Please enter a valid username!");
+                            System.out.print("Masukkan username: ");
+                            username = input.nextLine();
+                        }
+                    }
+                    simList = Load.load(username);
+                    currentSim = simList.get(0);
+                    validInput = true;
                 }
-                simList = Load.load(username);
-                currentSim = simList.get(0);
-                validInput = true;
 
             } else if (pilihan.equals("3") || pilihan.equalsIgnoreCase("Help")) {
                 // Help
@@ -818,7 +830,7 @@ public class GameManager {
 
                     }
                 } else if (actionMenuInput.equals("12") || actionMenuInput.equalsIgnoreCase("Ubah pekerjaan")) {
-                    if (currentSim.getWorkTime() >= 120) {
+                    if (currentSim.getWorkTime() >= 720) {
                         boolean check = false;
 
                         System.out.println(
@@ -827,49 +839,42 @@ public class GameManager {
                             try {
                                 System.out.print("Masukkan nama pekerjaan : ");
                                 String pekerjaan = input.nextLine();
-                                if (!pekerjaan.equals(currentSim.getJob().getJobName())) {
+                                if (pekerjaan.equals(currentSim.getJob().getJobName())) {
                                     switch (pekerjaan) {
                                         case "Badut Sulap":
                                             currentSim.setJob(new Job(1));
                                             currentSim.setWorkTime(0);
                                             currentSim.setDailyWork(0);
-                                            check = true;
                                             break;
                                         case "Koki":
                                             currentSim.setJob(new Job(2));
                                             currentSim.setWorkTime(0);
                                             currentSim.setDailyWork(0);
-                                            check = true;
                                             break;
                                         case "Polisi":
                                             currentSim.setJob(new Job(3));
                                             currentSim.setWorkTime(0);
                                             currentSim.setDailyWork(0);
-                                            check = true;
                                             break;
                                         case "Programmer":
                                             currentSim.setJob(new Job(4));
                                             currentSim.setWorkTime(0);
                                             currentSim.setDailyWork(0);
-                                            check = true;
                                             break;
                                         case "Dokter":
                                             currentSim.setJob(new Job(5));
                                             currentSim.setWorkTime(0);
                                             currentSim.setDailyWork(0);
-                                            check = true;
                                             break;
                                         case "Mata-mata":
                                             currentSim.setJob(new Job(6));
                                             currentSim.setWorkTime(0);
                                             currentSim.setDailyWork(0);
-                                            check = true;
                                             break;
                                         case "Pengacara":
                                             currentSim.setJob(new Job(7));
                                             currentSim.setWorkTime(0);
                                             currentSim.setDailyWork(0);
-                                            check = true;
                                             break;
                                         default:
                                             System.out.println("Tidak ada pekerjaan yang dimaksud.");
@@ -893,10 +898,11 @@ public class GameManager {
                     // TODO: Exit
                     System.out.println("Ingin disave? (yes/no)");
                     String yesno = input.nextLine();
-                    System.out.print("Masukkan username: ");
-                    String username = input.nextLine();
+
                     if (yesno.equals("yes")) {
-                        Save.save(username, simList );
+                        System.out.print("Masukkan username: ");
+                        String username = input.nextLine();
+                        Save.save(username, simList);
                     } else {
                         System.out.println("Have a nice day!");
                     }

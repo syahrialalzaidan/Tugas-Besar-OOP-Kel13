@@ -22,6 +22,7 @@ public class Sim {
     private int dailyWork;
     private int dailySleep;
     private int dailyPay;
+    private int workTime;
     private House currentHouse;
     private boolean alive;
     private int berkunjung;
@@ -119,6 +120,8 @@ public class Sim {
         return health;
     }
 
+
+
     public int getFullness(){
         return fullness;
     }
@@ -155,6 +158,9 @@ public class Sim {
         return currentItems;
     }
     
+    public int getWorkTime(){
+        return workTime;
+    }
     public void setBerkunjung(boolean isBerkunjung){
         this.isBerkunjung = isBerkunjung;
     }
@@ -219,6 +225,14 @@ public class Sim {
     public void setAlive(boolean alive){
         this.alive = alive;
     }
+
+    public void setWorkTime(int time){
+        workTime = time;
+    }
+
+    public void setDailyWork(int time){
+        this.dailyWork = time;
+    }
     
     public void setBerkunjung(int berkunjung){
         this.berkunjung = berkunjung;
@@ -227,6 +241,11 @@ public class Sim {
     public void setCurrentItems(Items items){
         currentItems = items;
     }
+    
+    public void setJob(Job job){
+        this.job = job;
+    }
+
 
     public void addItemOrder(String A, int B, int C){
         itemOrder.add(new Pair<>(A,B,C));
@@ -306,6 +325,8 @@ public class Sim {
                             setFullness(fullness-10);
                             System.out.println("mood berkurang sebesar 10");
                             System.out.println("fullnes berkurang sebesar 10");
+                            dailyWork+=30;
+                            workTime+=30;
                         }
                         }catch(Exception e){
                             
@@ -316,6 +337,7 @@ public class Sim {
                     dailyWork=0;
                     dailyPay--;
                     System.out.println("uang bertambah sebesar " + job.getDailyPay());
+                    money+= job.getDailyPay();
                 }
                 world.runTime(time);
                 isAlive();
@@ -820,7 +842,7 @@ public class Sim {
         System.out.println("Kesehatan    : " + health);
         System.out.println("Kekenyangan  : " + fullness);
         System.out.println("Mood         : " + mood);
-        System.out.println("Uang         : " + mood);
+        System.out.println("Uang         : " + money);
         if (house.getUpgradeHouseTime()!=0){
             System.out.println("\n\nSisa Waktu upgrade rumah : ");
             timeFormat(house.getUpgradeHouseTime());
@@ -1100,6 +1122,8 @@ public class Sim {
                 }
         }
     }
+
+
 
     
 }

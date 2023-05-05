@@ -1,5 +1,6 @@
 import java.util.Scanner;
 import java.util.Random;
+import java.io.File;
 import java.lang.Math;
 import java.util.*;
 import java.util.Map.*;
@@ -109,7 +110,6 @@ public class GameManager {
         System.out.println("14.Memasang barang: ");
         System.out.println("Memasang barang di suatu ruangan");
         System.out.println("");
-        
 
     }
 
@@ -151,61 +151,74 @@ public class GameManager {
 
             if (pilihan.equals("1") || pilihan.equalsIgnoreCase("Start New Game")) {
 
-                    System.out.print("Masukkan Nama Sim: ");
-                    String namaSim = input.nextLine();
-                    world = new World();
+                System.out.print("Masukkan Nama Sim: ");
+                String namaSim = input.nextLine();
+                world = new World();
 
-                    // Random Posisi Rumah Pertama
-                    int max = 63;
-                    int min = 0;
-                    int x = (int) (Math.random() * (max - min + 1) + min);
-                    int y = (int) (Math.random() * (max - min + 1) + min);
-                    while (world.isHouseExist(x, y)) {
-                        x = (int) (Math.random() * (max - min + 1) + min);
-                        y = (int) (Math.random() * (max - min + 1) + min);
-                    }
+                // Random Posisi Rumah Pertama
+                int max = 63;
+                int min = 0;
+                int x = (int) (Math.random() * (max - min + 1) + min);
+                int y = (int) (Math.random() * (max - min + 1) + min);
+                while (world.isHouseExist(x, y)) {
+                    x = (int) (Math.random() * (max - min + 1) + min);
+                    y = (int) (Math.random() * (max - min + 1) + min);
+                }
 
-                    Point coordinate = new Point(x, y);
-                    House firstHouse = new House(coordinate, namaSim);
+                Point coordinate = new Point(x, y);
+                House firstHouse = new House(coordinate, namaSim);
 
-                    // membuat Sim pertama
-                    Sim firstSim = new Sim(namaSim, firstHouse, world);
+                // membuat Sim pertama
+                Sim firstSim = new Sim(namaSim, firstHouse, world);
 
-                    // menset upgradeHouseTime baru untuk sim pertama
+                // menset upgradeHouseTime baru untuk sim pertama
 
-                    // Memasukan Sim kedalam SimList
-                    addSim(namaSim, world, firstHouse);
+                // Memasukan Sim kedalam SimList
+                addSim(namaSim, world, firstHouse);
 
-                    // currentSim mengacu ke firstSim
-                    currentSim = simList.get(0);
+                // currentSim mengacu ke firstSim
+                currentSim = simList.get(0);
 
-                    // Memasukan House ke dalam World
-                    world.addHouse(currentSim.getHouse());
+                // Memasukan House ke dalam World
+                world.addHouse(currentSim.getHouse());
 
-                    // Menambahkan Item Default kedalam first-room
-                    Items item1 = new Items("Kasur Single");
-                    Items item2 = new Items("Toilet");
-                    Items item3 = new Items("Kompor Gas");
-                    Items item4 = new Items("Jam");
-                    Items item5 = new Items("Meja dan Kursi");
-                    currentSim.addInventoryitems(item1);
-                    currentSim.addInventoryitems(item2);
-                    currentSim.addInventoryitems(item3);
-                    currentSim.addInventoryitems(item4);
-                    currentSim.addInventoryitems(item5);
+                // Menambahkan Item Default kedalam first-room
+                Items item1 = new Items("Kasur Single");
+                Items item2 = new Items("Toilet");
+                Items item3 = new Items("Kompor Gas");
+                Items item4 = new Items("Jam");
+                Items item5 = new Items("Meja dan Kursi");
+                currentSim.addInventoryitems(item1);
+                currentSim.addInventoryitems(item2);
+                currentSim.addInventoryitems(item3);
+                currentSim.addInventoryitems(item4);
+                currentSim.addInventoryitems(item5);
 
-                    // currentSim.getCurrentRoom().setSpaceImmediate(0,2,item1,"KS" ,"Down");
-                    // currentSim.getCurrentRoom().setSpaceImmediate(5,5,item2,"T" , "Right");
-                    // currentSim.getCurrentRoom().setSpaceImmediate(2,5,item3,"KG","Right");
-                    // currentSim.getCurrentRoom().setSpaceImmediate(5,0,item4,"J","Right");
-                    // currentSim.getCurrentRoom().setSpaceImmediate(2,1,item5,"MDK","Right");
+                // currentSim.getCurrentRoom().setSpaceImmediate(0,2,item1,"KS" ,"Down");
+                // currentSim.getCurrentRoom().setSpaceImmediate(5,5,item2,"T" , "Right");
+                // currentSim.getCurrentRoom().setSpaceImmediate(2,5,item3,"KG","Right");
+                // currentSim.getCurrentRoom().setSpaceImmediate(5,0,item4,"J","Right");
+                // currentSim.getCurrentRoom().setSpaceImmediate(2,1,item5,"MDK","Right");
 
-                    validInput = true;
-            } else if (pilihan.equals("2") || pilihan.equalsIgnoreCase("Load Game")) {
                 validInput = true;
-                System.out.print("Masukkan Nama Kamu : ");
-                String loadFile = input.nextLine();
-                currentSim = Load.load(loadFile);
+            } else if (pilihan.equals("2") || pilihan.equalsIgnoreCase("Load Game")) {
+                boolean valid = false;
+                System.out.print("Masukkan username: ");
+                String username = input.nextLine();
+                while (!valid) {
+                    File file = new File(username + ".json");
+                    if (file.exists()) {
+                        valid = true;
+                    } else {
+                        System.out.println("Username not found!! Please enter a valid username!");
+                        System.out.print("Masukkan username: ");
+                        username = input.nextLine();
+                    }
+                }
+                simList = Load.load(username);
+                currentSim = simList.get(0);
+                validInput = true;
+
             } else if (pilihan.equals("3") || pilihan.equalsIgnoreCase("Help")) {
                 // Help
                 System.out.println("1.Start Game : Memulai Game");
@@ -799,19 +812,87 @@ public class GameManager {
                         }
 
                     }
-                } else if (actionMenuInput.equals("12") || actionMenuInput.equalsIgnoreCase("Exit")) {
+                }else if(actionMenuInput.equals("12") || actionMenuInput.equalsIgnoreCase("Ubah pekerjaan")){ 
+                if (currentSim.getWorkTime()>=720){
+                boolean check = false;
+
+                System.out.println("Pilih pekerjaan baru : \n1. Badut Sulap\n2. Koki\n3. Polisi\n4. Programer\n5. Dokter\n6. Mata-mata\n7. Pengacara");
+                while(!check){
+                try{
+                    System.out.print("Masukkan nama pekerjaan : ");
+                    String pekerjaan = input.nextLine();
+                    if (pekerjaan.equals(currentSim.getJob().getJobName())){
+                    switch (pekerjaan) {
+                        case "Badut Sulap":
+                            currentSim.setJob(new Job(1));
+                            currentSim.setWorkTime(0);
+                            currentSim.setDailyWork(0);
+                        break;
+                        case "Koki":
+                        currentSim.setJob(new Job(2));
+                        currentSim.setWorkTime(0);
+                        currentSim.setDailyWork(0);
+                        break;
+                        case "Polisi":
+                        currentSim.setJob(new Job(3));
+                        currentSim.setWorkTime(0);
+                        currentSim.setDailyWork(0);
+                        break;
+                        case "Programmer":
+                        currentSim.setJob(new Job(4));
+                        currentSim.setWorkTime(0);
+                        currentSim.setDailyWork(0);
+                        break;
+                        case "Dokter":
+                        currentSim.setJob(new Job(5));
+                        currentSim.setWorkTime(0);
+                        currentSim.setDailyWork(0);
+                        break;
+                        case "Mata-mata":
+                        currentSim.setJob(new Job(6));
+                        currentSim.setWorkTime(0);
+                        currentSim.setDailyWork(0);
+                        break;
+                        case "Pengacara":
+                        currentSim.setJob(new Job(7));
+                        currentSim.setWorkTime(0);
+                        currentSim.setDailyWork(0);
+                        break;
+                        default :
+                            System.out.println("Tidak ada pekerjaan yang dimaksud.");
+
+                    }}
+                    else{
+                        System.out.println("Perkerjaan yang dipilih adalah pekerjaan anda sekarang");
+                    }
+                }
+                catch(Exception e){
+                    System.out.println("Input harus berupa angka");
+                    System.out.println("Silakan masukan input ulang");
+                    System.out.println("");
+                    input.nextLine();
+                }}
+                }
+                else{
+                    System.out.println("Anda harus bekerja minimal 12 menit");
+                }
+
+            }
+                else if (actionMenuInput.equals("13") || actionMenuInput.equalsIgnoreCase("Exit")) {
                     // TODO: Exit
                     System.out.println("Ingin disave? (yes/no)");
                     String yesno = input.nextLine();
+                    System.out.print("Masukkan username: ");
+                    String username = input.nextLine();
                     if (yesno.equals("yes")) {
-                        Save.save(currentSim.getName(), currentSim);
+                        Save.save(username, simList );
                     } else {
                         System.out.println("Have a nice day!");
                     }
 
                     System.exit(0);
                     exit();
-                } else if (actionMenuInput.equals("13") || actionMenuInput.equalsIgnoreCase("Beli barang")) {
+                } else if (actionMenuInput.equals("14") || actionMenuInput.equalsIgnoreCase("Beli barang")) {
                     // TODO: Beli barang
                     System.out.println("Berikut adalah items yang tersedia beserta harganya:");
                     System.out.println("1. Kasur Single     | 50");
@@ -1082,7 +1163,7 @@ public class GameManager {
                         }
                     }
 
-                } else if (actionMenuInput.equals("14") || actionMenuInput.equalsIgnoreCase("Memasang barang")) {
+                } else if (actionMenuInput.equals("15") || actionMenuInput.equalsIgnoreCase("Memasang barang")) {
                     // TODO: Memasang barang
                     System.out.println("Sekarang Kamu berada di " + currentSim.getCurrentRoom().getRoomName());
                     currentSim.getCurrentRoom().printSpace();

@@ -1,23 +1,25 @@
 import java.io.Reader;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.List;
+import java.lang.reflect.Type;
+import com.google.gson.reflect.TypeToken;
 
 import com.google.gson.Gson;
 
 public class Load {
-    public static Sim load(String path) {
+    public static List<Sim> load(String path) {
         String pathreal = String.format(path+ ".json");
-        Sim world = null;
+        List<Sim> listsim = null;
         try {
             Gson gson = new Gson();
             Reader reader = Files.newBufferedReader(Paths.get(pathreal));
-            world = gson.fromJson(reader, Sim.class);
-        
-            System.out.println("Data loaded from " + path + " successfully.");
+            Type tipe = new TypeToken<List<Sim>>(){}.getType();
+            listsim = gson.fromJson(reader, tipe);
         }
         catch (Exception e) {
             System.out.println("Gagal melakukan load file " + path + ". Pesan error: " + e.getMessage());
         }
-        return world;
+        return listsim;
     }
 }

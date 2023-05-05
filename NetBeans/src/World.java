@@ -90,19 +90,29 @@ public class World implements Serializable {
                     System.out.println("Akibat berkunjung status mood bertambah dan status health berkurang ");
                 }
             }
-            for (Pair<String, Integer, Integer> pair : s.getItemOrder()) {
-                pair.setC(pair.getC() - time);
-                if (pair.getC() <= 0) {
-                    s.addInventoryitems(new Items(pair.getA()));
+            for (int i = 0; i<s.getItemOrder().size() ; i++){
+                s.getItemOrder().get(i).setC(s.getItemOrder().get(i).getC()-time);
+                if (s.getItemOrder().get(i).getC()<=0){
+                    for (int j= s.getItemOrder().get(i).getB() ; j>0 ; j--){
+                        s.addInventoryitems(new Items(s.getItemOrder().get(i).getA()));
+                        s.removeItemOrder(i);
+                    }
+                    i--;
+                    }
+                    
                 }
-            }
-            for (Pair<String, Integer, Integer> pair : s.getFoodOrder()) {
-                pair.setC(pair.getC() - time);
-                if (pair.getC() <= 0) {
-                    s.addInventoryfood(new Food(pair.getA()));
+            
+            for (int i = 0; i<s.getFoodOrder().size() ; i++){
+                s.getFoodOrder().get(i).setC(s.getFoodOrder().get(i).getC()-time);
+                if (s.getFoodOrder().get(i).getC()<=0){
+                    for (int j= s.getFoodOrder().get(i).getB() ; j>0 ; j--){
+                        s.addInventoryfood(new Food(s.getFoodOrder().get(i).getA()));
+                        s.removeFoodOrder(i);
+                    }
+                    i--;
+                    }
+                    
                 }
-            }
-
         }
         for (House rumah : house) {
             if (rumah.getUpgradeHouseTime() != 0) {

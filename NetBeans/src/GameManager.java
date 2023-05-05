@@ -75,79 +75,41 @@ public class GameManager {
     }
 
     public static void help() {
-        Scanner input = new Scanner(System.in);
-        System.out.println("Pilih Deskripsi Game yang ingin dipilih: ");
-        System.out.println("1.View Sim Info");
-        System.out.println("2.View Current Location");
-        System.out.println("3.View Inventory");
-        System.out.println("4.Upgrade House");
-        System.out.println("5.Move Room");
-        System.out.println("6.Edit Room");
-        System.out.println("7.Add Sim");
-        System.out.println("8.Change Sim");
-        System.out.println("9.List Object");
-        System.out.println("10.Go To Object");
-        System.out.println("11.Action");
-        System.out.println("12.Exit");
-        System.out.println("99.Help");
+        System.out.println("Deskripsi Game sebagai berikut: ");
+        System.out.print("1.View Sim Info");
+        System.out.println("Menampilkan informasi Sim tentang nama, Pekerjaan, Kesehatan, Kekenyangan, Mood, Uang ");
+        System.out.print("2.View Current Location: ");
+        System.out.println("Menampilkan lokasi dari Sim berupa Rumah dan Ruangan");
+        System.out.print("3.View Inventory: ");
+        System.out.println("Menampilkan isi inventory milik sebuah Sim");
+        System.out.print("4.Upgrade House: ");
+        System.out.println("Melakukan upgrade rumah pada currentSim");
+        System.out.print("5.Move Room: ");
+        System.out.println("Mengganti ruangan yang ada pada rumah yang sedang ditempati Sim");
+        System.out.print("6.Edit Room: ");
+        System.out.println("Pembelian barang baru atau pemindahan barang");
+        System.out.print("7.Add Sim: ");
+        System.out.println("Menambahkan Sim baru");
+        System.out.print("8.Change Sim: ");
+        System.out.println("Mengganti current Sim");
+        System.out.print("9.List Object: ");
+        System.out.println("Menampilkan List Objek");
+        System.out.print("10.Go To Object: ");
+        System.out.println("Sim berjalan menuju ke suatu objek");
+        System.out.print("11.Action: ");
+        System.out.println("Melakukan sebuah aksi");
+        System.out.print("12.Exit");
+        System.out.println("Keluar dari game");
+        System.out.print("99.Help: ");
+        System.out.println("Menampilkan deskripsi pilihan menu");
         System.out.println("");
         System.out.println("action: ");
-        System.out.println("13.Beli barang");
-        System.out.println("14.Memasang barang");
+        System.out.print("13.Beli barang: ");
+        System.out.println("Membeli suatu barang");
+        System.out.println("14.Memasang barang: ");
+        System.out.println("Memasang barang di suatu ruangan");
         System.out.println("");
-        System.out.print("Masukkan Pilihan :");
-        String inputhelp = input.nextLine();
-        boolean valid = false;
-
-        while (!valid) {
-            if (inputhelp.equals("1")) {
-                System.out.println(
-                        "Menampilkan informasi Sim tentang nama, Pekerjaan, Kesehatan, Kekenyangan, Mood, Uang ");
-                valid = true;
-            } else if (inputhelp.equals("2")) {
-                System.out.println("Menampilkan lokasi dari Sim berupa Rumah dan Ruangan");
-                valid = true;
-            } else if (inputhelp.equals("3")) {
-                System.out.println("Menampilkan isi inventory milik sebuah Sim");
-                valid = true;
-            } else if (inputhelp.equals("4")) {
-                System.out.println("Melakukan upgrade rumah pada currentSim");
-                valid = true;
-            } else if (inputhelp.equals("5")) {
-                System.out.println("Mengganti ruangan yang ada pada rumah yang sedang ditempati Sim");
-                valid = true;
-            } else if (inputhelp.equals("6")) {
-                System.out.println("Pembelian barang baru atau pemindahan barang");
-                valid = true;
-            } else if (inputhelp.equals("7")) {
-                System.out.println("Menambahkan Sim baru");
-                valid = true;
-            } else if (inputhelp.equals("8")) {
-                System.out.println("Mengganti current Sim");
-                valid = true;
-            } else if (inputhelp.equals("9")) {
-                System.out.println("Menampilkan List Objek");
-                valid = true;
-            } else if (inputhelp.equals("10")) {
-                System.out.println("Sim berjalan menuju ke suatu objek");
-                valid = true;
-            } else if (inputhelp.equals("11")) {
-                System.out.println("Melakukan sebuah aksi");
-                valid = true;
-            } else if (inputhelp.equals("12")) {
-                System.out.println("Keluar dari game");
-                valid = true;
-            } else if (inputhelp.equals("13")) {
-                System.out.println("Membeli suatu barang");
-                valid = true;
-            } else if (inputhelp.equals("14")) {
-                System.out.println("Memasang barang di suatu ruangan");
-                valid = true;
-            } else {
-                System.out.print("Input anda salah silahkan masukkan ulang!! :");
-                inputhelp = input.nextLine();
-            }
-        }
+        
 
     }
 
@@ -246,8 +208,9 @@ public class GameManager {
                 currentSim = Load.load(loadFile);
             } else if (pilihan.equals("3") || pilihan.equalsIgnoreCase("Help")) {
                 // Help
-                help();
-                validInput = true;
+                System.out.println("1.Start Game : Memulai Game");
+                System.out.println("2.Load Game : Memuat data Sim ");
+                System.out.println("3.Exit : Keluar Game");
             } else if (pilihan.equals("4") || pilihan.equalsIgnoreCase("Exit")) {
                 // Exit
                 validInput = true;

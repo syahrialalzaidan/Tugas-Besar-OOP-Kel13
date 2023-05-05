@@ -48,6 +48,7 @@ public class GameManager {
         System.out.println("10. Go To Object");
         System.out.println("11. Action");
         System.out.println("12. Exit");
+        System.out.println("99. Help");
         System.out.println("");
         System.out.println("Action: ");
         System.out.println("13. Beli barang");
@@ -1165,7 +1166,7 @@ public class GameManager {
                             itemsInventory.reduceInventory(itemName);
                         }
                     }
-                } else if (actionMenuInput.equals("14") || actionMenuInput.equalsIgnoreCase("Help")) {
+                } else if (actionMenuInput.equals("99") || actionMenuInput.equalsIgnoreCase("Help")) {
                     help();
                 } else {
                     // Invalid Input

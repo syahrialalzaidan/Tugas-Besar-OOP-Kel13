@@ -9,8 +9,8 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
 
 public class Save {
-    public static void save(Sim sim) {
-        String fileName = "data.json";
+    public static void save(String filename, Sim sim) {
+        String fileName = String.format(filename+ ".json");
         Path path = Paths.get(fileName);
 
         try (Writer writer = Files.newBufferedWriter(path, StandardCharsets.UTF_8)) {

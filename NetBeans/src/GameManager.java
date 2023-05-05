@@ -240,7 +240,9 @@ public class GameManager {
                     validInput = true;
             } else if (pilihan.equals("2") || pilihan.equalsIgnoreCase("Load Game")) {
                 validInput = true;
-                currentSim = Load.load("data.json");
+                System.out.print("Masukkan Nama Kamu : ");
+                String loadFile = input.nextLine();
+                currentSim = Load.load(loadFile);
             } else if (pilihan.equals("3") || pilihan.equalsIgnoreCase("Help")) {
                 // Help
                 help();
@@ -838,7 +840,7 @@ public class GameManager {
                     System.out.println("Ingin disave? (yes/no)");
                     String yesno = input.nextLine();
                     if (yesno.equals("yes")) {
-                        Save.save(currentSim);
+                        Save.save(currentSim.getName(), currentSim);
                     } else {
                         System.out.println("Have a nice day!");
                     }

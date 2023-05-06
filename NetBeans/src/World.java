@@ -114,7 +114,7 @@ public class World implements Serializable {
                     }
                     
                 }
-                System.out.println(s.getKebelet());
+
         }
         for (House rumah : house) {
             if (rumah.getUpgradeHouseTime() != 0) {

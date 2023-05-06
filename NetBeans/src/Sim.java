@@ -539,7 +539,7 @@ public class Sim {
         perjalanan.start();
         perjalanan.join();
         isAlive();
-    }
+    } 
 
     public void goHome() throws InterruptedException{
         double jarak = Math.sqrt(Math.abs((house.getCoordinate().getX()-this.house.getCoordinate().getX())^2 + (house.getCoordinate().getY()-this.house.getCoordinate().getY())^2));

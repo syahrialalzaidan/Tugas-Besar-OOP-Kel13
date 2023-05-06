@@ -1,28 +1,49 @@
-# GAME SIMPLICITY
-Game untuk melakukan kehidupan sehari - hari seperti bekerja, makan, olahraga dan lain - lain.
+# Tugas Besar IF2212 Pemrograman Berorientasikan Objek 2023 - SIMPLICITY
 
-## SetUp
-Untuk menjalankan gamenya kita membutuhkan: 
+## Anggota Kelompok
+| NIM | Nama |
+| --- | ---- |
+| 18221055 | Mochammad Syahrial Alzaidan |
+| 18221063 | Timothy Subekti             |
+| 18221077 | Riandra Diva Auzan          |
+| 18221085 | Nalendro N. U. A. R. F.     |
+| 18221101 | Ilmagita Nariswari          |
+| 18221159 | Gabriel P. Halomoan Panjaitan |
+
+Game Simplicity adalah game simulasi untuk melakukan kehidupan sehari-hari seperti bekerja, makan, olahraga dan lain-lain.
+
+## Set Up
+Untuk menjalankan gamenya, pastikan di PC telah ter-install:
+
 1. JDK SE Compiler
 2. Text Editor
 3. Git
 4. CLI
 
-Sebelum memainkan Game Simplicity kita memerlukan pull dari folder git :
-1. Membuat folder tempat menyimpan folder game
-2. Inisialisasi git di folder tersebut
-`git init`
-3. Kemudian 
-`git remote add origin https://github.com/syahrialalzaidan/Tugas-Besar-OOP-Kel13.git `
-4. Kemudian melakukan pull dari main
-`git pull origin main`
-5. Kemudian dilakukan setting di JAVA PROJECTS untuk menambahkan depedency <br>![image](https://user-images.githubusercontent.com/99486521/236618050-c3bf99f7-07c0-4655-89d4-8eb8192ad111.png)
-6. Tambahkan file jar gson pada folder dependencies
+Sebelum memainkan Game Simplicity kita perlu melakukan:
+1. Buat folder untuk menyimpan Game
+2. Inisialisasi dan clone repository di folder tersebut
 
+```
+git clone https://github.com/syahrialalzaidan/Tugas-Besar-OOP-Kel13.git
+```
 
+3. Atur setting di JAVA PROJECTS untuk menambahkan depedency.
+
+   ![Atur Java Dependency](https://user-images.githubusercontent.com/52821168/236621781-1c8161bd-2de4-40c1-95d7-2be24d8edd9d.png)
+
+4. Tambahkan file `.jar` `gson` pada folder dependencies
 
 ## Cara Menjalankan Program
+<<<<<<< HEAD
 ini untuk compile file java : 
 ` javac -d bin -cp dependency/gson-2.8.6.jar NetBeans/src/*.java `
 
 
+=======
+Untuk compile file di Java, ketikkan di Command Line:
+
+```
+javac -d bin -cp dependency/gson-2.8.6.jar NetBeans/src/*.java
+```
+>>>>>>> aea93d417e11f78f81312160599d47750583b0c3

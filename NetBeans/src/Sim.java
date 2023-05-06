@@ -29,6 +29,7 @@ public class Sim {
     private boolean isBerkunjung;
     private Room currentRoom;
     private Items currentItems;
+    private Point simPoint;
     private List<Pair<String,Integer,Integer>> itemOrder = new ArrayList<Pair<String,Integer,Integer>>();
     private List<Pair<String,Integer,Integer>> foodOrder = new ArrayList<Pair<String,Integer,Integer>>();
 
@@ -57,6 +58,7 @@ public class Sim {
         this.isBerkunjung = false;
         this.currentRoom = house.getRoom(0);
         this.currentItems = null;
+        this.simPoint = new Point(0,0);
 
         Items item1 = new Items("Kasur Single");
         Items item2 = new Items("Toilet");
@@ -175,6 +177,16 @@ public class Sim {
     public int getWorkTime(){
         return workTime;
     }
+
+    public Point getSimPoint(){
+        return simPoint;
+    }
+
+    public void setSimPoint(int x , int y){
+        simPoint.setX(x);
+        simPoint.setY(y);
+    }
+
     public void setBerkunjung(boolean isBerkunjung){
         this.isBerkunjung = isBerkunjung;
     }
@@ -334,6 +346,7 @@ public class Sim {
                 for (int i = time-1; i >=0 ;i--){
                         try{
                         Thread.sleep(1000);
+                        System.out.println("Countdown = " + i);
                         if (i%30==0){
                             setMood(mood-10);
                             setFullness(fullness-10);
@@ -373,6 +386,7 @@ public class Sim {
                 for (int i = time-1; i >=0 ;i--){
                         try{
                         Thread.sleep(1000);
+                        System.out.println("Countdown = " + i);
                         if (i%20==0){
                             setHeath(health+5);
                             setMood(mood+10);
@@ -407,6 +421,7 @@ public class Sim {
                 for (int i = time-1; i >=0 ;i--){
                         try{
                         Thread.sleep(1000);
+                        System.out.println("Countdown = " + i);
                         dailySleep++;
                         if (dailySleep%240==0){
                             setMood(mood+30);
@@ -442,6 +457,7 @@ public class Sim {
                 for (int i = 29; i >=0 ;i--){
                         try{
                         Thread.sleep(1000);
+                        System.out.println("Countdown = " + i);
 
                         }catch(Exception e){
                             
@@ -490,6 +506,7 @@ public class Sim {
                 for (double i = food.getTime()-1; i >=0 ;i--){
                         try{
                         Thread.sleep(1000);
+                        System.out.println("Countdown = " + i);
                         
                         }catch(Exception e){
                             
@@ -529,6 +546,7 @@ public class Sim {
                 System.out.println("Estimasi perjalanan adalah " + jarak + " detik");
                         try{
                         Thread.sleep((long)jarak*1000);
+                        System.out.println("Countdown = " + jarak);
                         
                         }catch(Exception e){
                             
@@ -557,6 +575,7 @@ public class Sim {
                 System.out.println("Estimasi perjalanan adalah " + jarak + " detik");
                         try{
                         Thread.sleep((long)jarak*1000);
+                        System.out.println("Countdown = " + jarak);
                         
                         }catch(Exception e){
                             
@@ -584,6 +603,7 @@ public class Sim {
                 for (int i = 10-1; i >=0 ;i--){
                         try{
                         Thread.sleep(1000);
+                        System.out.println("Countdown = " + i);
                         
                         }catch(Exception e){
                             
@@ -625,10 +645,11 @@ public class Sim {
                 for (int i = time-1; i >=0 ;i--){
                         try{
                         Thread.sleep(1000);
+                        System.out.println("Countdown = " + i);
                         if (i%30==0){
                             setHeath(health-5);
                             setMood(mood+10);
-                            fullness-=5;
+                            setFullness(fullness-5); ;
                             System.out.println("mood bertambah sebesar 10");
                             System.out.println("health dan fullnes berkurang sebesar 5");
 
@@ -660,6 +681,7 @@ public class Sim {
                 for (int i = time-1; i >=0 ;i--){
                         try{
                         Thread.sleep(1000);
+                        System.out.println("Countdown = " + i);
                         if (i%30==0){
                             setMood(mood+10);
                             setHeath(health-5);
@@ -690,9 +712,10 @@ public class Sim {
                 for (int i = time-1; i >=0 ;i--){
                         try{
                         Thread.sleep(1000);
+                        System.out.println("Countdown = " + i);
                         if (i%10==0){
                             setMood(mood+5);
-                            setFullness(fullness-=5);
+                            setFullness(fullness-5);
                             System.out.println("mood bertambah sebesar 5");
                             System.out.println("fullness berkurang sebesar 5");
                         }
@@ -720,6 +743,7 @@ public class Sim {
                 for (int i = time-1; i >=0 ;i--){
                         try{
                         Thread.sleep(1000);
+                        System.out.println("Countdown = " + i);
                         if (i%15==0){
                             setMood(mood+10);
                             setFullness(fullness-10); 
@@ -752,6 +776,7 @@ public class Sim {
                 for (int i = time-1; i >=0 ;i--){
                         try{
                         Thread.sleep(1000);
+                        System.out.println("Countdown = " + i);
                         if (i%30==0){
                             setMood(mood+10);
                             setFullness(fullness-15); 
@@ -783,6 +808,7 @@ public class Sim {
                 for (int i = time-1; i >=0 ;i--){
                         try{
                         Thread.sleep(1000);
+                        System.out.println("Countdown = " + i);
                         if (i%20==0){
                             setMood(mood+20);   
                             setFullness(fullness-10); 
@@ -814,6 +840,7 @@ public class Sim {
                 for (int i = 20-1; i >=0 ;i--){
                         try{
                         Thread.sleep(1000);
+                        System.out.println("Countdown = " + i);
                         if (i%15==0){
                             setMood(mood+10); 
                             setFullness(fullness-10); 
@@ -1025,11 +1052,11 @@ public class Sim {
             case "Kompor Gas":
                 boolean check6 = true;
                 System.out.println("Pilih makanan yang ingin dimasak");
-                System.out.println("1. Nasi Ayam");
-                System.out.println("2. Nasi Kari");
-                System.out.println("3. Susu Kacang");
-                System.out.println("4. Tumis Sayur");
-                System.out.println("5. Bistik");
+                System.out.println("1. Nasi Ayam      | Membutuhkan Nasi dan Ayam");
+                System.out.println("2. Nasi Kari      | Membutuhkan Nasi, Kentang, Wortel, dan Sapi");
+                System.out.println("3. Susu Kacang    | Membutuhkan Susu dan Kacang");
+                System.out.println("4. Tumis Sayur    | Membutuhkan Wortel dan Bayam");
+                System.out.println("5. Bistik         | Membutuhkan Sapi dan Kentang");
                 boolean Makanan = false;
                 while(!Makanan){
                     System.out.print("Masukkan nama masakan yang ingin dimasak : ");
@@ -1059,11 +1086,11 @@ public class Sim {
             case "Kompor Listrik":
             boolean check5 = true;
             System.out.println("Pilih makanan yang ingin dimasak");
-            System.out.println("1. Nasi Ayam");
-            System.out.println("2. Nasi Kari");
-            System.out.println("3. Susu Kacang");
-            System.out.println("4. Tumis Sayur");
-            System.out.println("5. Bistik");
+            System.out.println("1. Nasi Ayam      | Membutuhkan Nasi dan Ayam");
+            System.out.println("2. Nasi Kari      | Membutuhkan Nasi, Kentang, Wortel, dan Sapi");
+            System.out.println("3. Susu Kacang    | Membutuhkan Susu dan Kacang");
+            System.out.println("4. Tumis Sayur    | Membutuhkan Wortel dan Bayam");
+            System.out.println("5. Bistik         | Membutuhkan Sapi dan Kentang");
             boolean Makanan1 = false;
             input.close();
             while(!Makanan1){
@@ -1146,6 +1173,7 @@ public class Sim {
                     int waktuTidur = input.nextInt();
                     if (waktuTidur % 180 == 0) { // Cek apakah angka merupakan kelipatan 180
                         sleep(waktuTidur);
+                        checkTidur = true;
                     } else {
                         System.out.println("Input harus kelipatan 180.");
                     }

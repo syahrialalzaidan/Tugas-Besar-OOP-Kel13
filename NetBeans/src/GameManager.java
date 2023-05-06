@@ -1079,7 +1079,6 @@ public class GameManager {
                                             for (Sim sim : GameManager.getSimList()) {
                                                 if (inputNama.equals(sim.getName())) {
                                                     currentSim.visit(sim.getHouse());
-                                                    currentSim.setCurrentHouse(sim.getHouse());
                                                     check1 = true;
                                                     check = true;
                                                 }

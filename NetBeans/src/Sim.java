@@ -337,12 +337,13 @@ public class Sim {
                 for (int i = time - 1; i >= 0; i--) {
                     try {
                         Thread.sleep(1000);
-                        System.out.println("Countdown = " + i);
+                        System.out.println("Countdown = " + (i+1));
                         if (i%30==0){
                             setMood(mood-10);
                             setFullness(fullness-10);
                             System.out.println("mood berkurang sebesar 10");
                             System.out.println("fullnes berkurang sebesar 10");
+                            System.out.println("");
                             dailyWork += 30;
                             workTime += 30;
                         }
@@ -377,13 +378,14 @@ public class Sim {
                 for (int i = time - 1; i >= 0; i--) {
                     try {
                         Thread.sleep(1000);
-                        System.out.println("Countdown = " + i);
+                        System.out.println("Countdown = " + (i+1));
                         if (i%20==0){
                             setHeath(health+5);
                             setMood(mood+10);
                             setFullness(fullness-5);
                             System.out.println("mood dan health bertambah masing-masing 10 dan 5");
                             System.out.println("fullnes berkurang sebesar 5");
+                            System.out.println("");
                         }
                     } catch (Exception e) {
 
@@ -410,7 +412,7 @@ public class Sim {
                 for (int i = time - 1; i >= 0; i--) {
                     try {
                         Thread.sleep(1000);
-                        System.out.println("Countdown = " + i);
+                        System.out.println("Countdown = " + (i+1));
                         dailySleep++;
                         if (dailySleep % 240 == 0) {
                             setMood(mood + 30);
@@ -446,7 +448,7 @@ public class Sim {
                 for (int i = 29; i >= 0; i--) {
                     try {
                         Thread.sleep(1000);
-                        System.out.println("Countdown = " + i);
+                        System.out.println("Countdown = " + (i+1));
 
                     } catch (Exception e) {
 
@@ -494,7 +496,7 @@ public class Sim {
                 for (double i = food.getTime() - 1; i >= 0; i--) {
                     try {
                         Thread.sleep(1000);
-                        System.out.println("Countdown = " + i);
+                        System.out.println("Countdown = " + (i+1));
                         
                         }catch(Exception e){
                             
@@ -523,19 +525,17 @@ public class Sim {
 
     }
 
-    public void visit(House house) throws InterruptedException {
-        double jarak = Math.sqrt(Math.abs((house.getCoordinate().getX() - this.house.getCoordinate().getX())
-                ^ 2 + (house.getCoordinate().getY() - this.house.getCoordinate().getY()) ^ 2));
-
-        Thread perjalanan = new Thread(new Runnable() {
-
-            @Override
-            public void run() {
-
+    public void visit(House house) throws InterruptedException{
+        double jarak = Math.sqrt(Math.abs((house.getCoordinate().getX()-this.currentHouse.getCoordinate().getX())^2 + (house.getCoordinate().getY()-this.currentHouse.getCoordinate().getY())^2));
+        
+        Thread perjalanan = new Thread(new Runnable(){
+        
+            @Override 
+            public void run(){
+                
                 System.out.println("Estimasi perjalanan adalah " + jarak + " detik");
                         try{
                         Thread.sleep((long)jarak*1000);
-                        System.out.println("Countdown = " + jarak);
                         
                         }catch(Exception e){
                             
@@ -554,18 +554,16 @@ public class Sim {
         isAlive();
     } 
 
-    public void goHome() throws InterruptedException {
-        double jarak = Math.sqrt(Math.abs((house.getCoordinate().getX() - this.house.getCoordinate().getX())
-                ^ 2 + (house.getCoordinate().getY() - this.house.getCoordinate().getY()) ^ 2));
-
-        Thread perjalanan = new Thread(new Runnable() {
-
-            @Override
-            public void run() {
+    public void goHome() throws InterruptedException{
+        double jarak = Math.sqrt(Math.abs((house.getCoordinate().getX()-this.currentHouse.getCoordinate().getX())^2 + (house.getCoordinate().getY()-this.currentHouse.getCoordinate().getY())^2));
+        
+        Thread perjalanan = new Thread(new Runnable(){
+        
+            @Override 
+            public void run(){
                 System.out.println("Estimasi perjalanan adalah " + jarak + " detik");
                         try{
                         Thread.sleep((long)jarak*1000);
-                        System.out.println("Countdown = " + jarak);
                         
                         }catch(Exception e){
                             
@@ -593,7 +591,7 @@ public class Sim {
                 for (int i = 10 - 1; i >= 0; i--) {
                     try {
                         Thread.sleep(1000);
-                        System.out.println("Countdown = " + i);
+                        System.out.println("Countdown = " + (i+1));
                         
                         }catch(Exception e){
                             
@@ -636,13 +634,14 @@ public class Sim {
                 for (int i = time - 1; i >= 0; i--) {
                     try {
                         Thread.sleep(1000);
-                        System.out.println("Countdown = " + i);
+                        System.out.println("Countdown = " + (i+1));
                         if (i%30==0){
                             setHeath(health-5);
                             setMood(mood+10);
                             fullness-=5;
                             System.out.println("mood bertambah sebesar 10");
                             System.out.println("health dan fullnes berkurang sebesar 5");
+                            System.out.println("");
 
                         }
                     } catch (Exception e) {
@@ -670,12 +669,13 @@ public class Sim {
                 for (int i = time - 1; i >= 0; i--) {
                     try {
                         Thread.sleep(1000);
-                        System.out.println("Countdown = " + i);
+                        System.out.println("Countdown = " + (i+1));
                         if (i%30==0){
                             setMood(mood+10);
                             setHeath(health-5);
                             System.out.println("mood bertambah sebesar 10");
                             System.out.println("health berkurang sebesar 5");
+                            System.out.println("");
                         }
                     } catch (Exception e) {
 
@@ -701,12 +701,14 @@ public class Sim {
                 for (int i = time - 1; i >= 0; i--) {
                     try {
                         Thread.sleep(1000);
-                        System.out.println("Countdown = " + i);
+                        System.out.println("Countdown = " + (i+1));
                         if (i%10==0){
                             setMood(mood+5);
                             setFullness(fullness-=5);
                             System.out.println("mood bertambah sebesar 5");
                             System.out.println("fullness berkurang sebesar 5");
+                            System.out.println("");
+                            
                         }
                     } catch (Exception e) {
 
@@ -732,7 +734,7 @@ public class Sim {
                 for (int i = time - 1; i >= 0; i--) {
                     try {
                         Thread.sleep(1000);
-                        System.out.println("Countdown = " + i);
+                        System.out.println("Countdown = " + (i+1));
                         if (i%15==0){
                             setMood(mood+10);
                             setFullness(fullness-10); 
@@ -764,13 +766,14 @@ public class Sim {
                 for (int i = time - 1; i >= 0; i--) {
                     try {
                         Thread.sleep(1000);
-                        System.out.println("Countdown = " + i);
+                        System.out.println("Countdown = " + (i+1));
                         if (i%30==0){
                             setMood(mood+10);
                             setFullness(fullness-15); 
                             setHeath(health+10); 
                             System.out.println("mood dan health bertambah sebesar 10");
                             System.out.println("fullness berkurang sebesar 15");
+                            System.out.println("");
                         }
                     } catch (Exception e) {
 
@@ -796,13 +799,14 @@ public class Sim {
                 for (int i = time - 1; i >= 0; i--) {
                     try {
                         Thread.sleep(1000);
-                        System.out.println("Countdown = " + i);
+                        System.out.println("Countdown = " + (i+1));
                         if (i%20==0){
                             setMood(mood+20);   
                             setFullness(fullness-10); 
                             setHeath(health-10);
                             System.out.println("mood bertambah sebesar 20");
                             System.out.println("fullness dan health berkurang sebesar 10");
+                            System.out.println("");
                         }
                     } catch (Exception e) {
 
@@ -828,13 +832,14 @@ public class Sim {
                 for (int i = 20 - 1; i >= 0; i--) {
                     try {
                         Thread.sleep(1000);
-                        System.out.println("Countdown = " + i);
+                        System.out.println("Countdown = " + (i+1));
                         if (i%15==0){
                             setMood(mood+10); 
                             setFullness(fullness-10); 
                             setHeath(health+5); 
                             System.out.println("mood dan health bertambah sebesar masing-masing 10 dan 5");
                             System.out.println("fullness berkurang sebesar 10");
+                            System.out.println("");
                         }
                     } catch (Exception e) {
 
@@ -867,8 +872,10 @@ public class Sim {
 
     public void viewClock() {
         System.out.print("Sisa waktu hari ini : ");
-        timeFormat(720 - world.getTime());
-
+        timeFormat(720-world.getTime());
+        System.out.println("");
+        
+        
     }
 
     public void viewSimInfo() {
@@ -1157,6 +1164,7 @@ public class Sim {
                     int waktuTidur = input.nextInt();
                     if (waktuTidur % 180 == 0) { // Cek apakah angka merupakan kelipatan 180
                         sleep(waktuTidur);
+                        checkTidur = true;
                     } else {
                         System.out.println("Input harus kelipatan 180.");
                     }

@@ -393,7 +393,8 @@ public class GameManager {
                                             + currentSim.getCurrHouse().getRightRoom(roomRoot).getRoomName());
                                 }
 
-                                else if (direction.equalsIgnoreCase("Left")) {
+                                else if (direction.equalsIgnoreCase("Left")
+                                        && currentSim.getCurrHouse().leftRoomExist(roomRoot)) {
                                     System.out.println("Room is Exist");
                                     System.out.println("The Room is : "
                                             + currentSim.getCurrHouse().getLeftRoom(roomRoot).getRoomName());
@@ -402,8 +403,8 @@ public class GameManager {
                                     currentSim.getCurrHouse().setNewRoom(room);
                                     currentSim.getCurrHouse().setDirectionNewRoom(direction);
                                     currentSim.getCurrHouse().setUpgradeHouseTime(1080);
-                                    System.out.println(
-                                            "Upgrade Time = " + currentSim.getCurrHouse().getUpgradeHouseTime());
+                                    // System.out.println(
+                                    //         "Upgrade Time = " + currentSim.getCurrHouse().getUpgradeHouseTime());
                                     isRoomSet = true;
                                 }
                             }

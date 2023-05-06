@@ -26,7 +26,7 @@ public class House {
         this.newRoom = null;
         this.directionNewRoom = "";
         this.upgradeHouseTime = 0;
-        Room firstroom = new Room("first-room");
+        Room firstroom = new Room("Main-Room");
         addRooms(firstroom);
         addToListRoom(firstroom.getRoomPoint(), firstroom);
     }

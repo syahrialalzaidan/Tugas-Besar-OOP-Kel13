@@ -45,6 +45,10 @@ public class Room { //implements ActionListener {
         this.roomName = roomName;
     }
 
+    public String[][] getSpace() {
+        return space;
+    }
+
     public HashMap<Coordinate, Items> getObject() {
         return object;
     }

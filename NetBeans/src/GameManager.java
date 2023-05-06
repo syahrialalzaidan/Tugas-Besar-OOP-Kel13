@@ -948,6 +948,7 @@ public class GameManager {
                             } catch (Exception e) {
                                 System.out.println("Input harus berupa angka");
                                 System.out.println("Silakan masukan input ulang");
+                                input.nextLine();
                                 System.out.println("");
 
                             }

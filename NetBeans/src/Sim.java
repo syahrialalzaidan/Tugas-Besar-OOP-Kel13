@@ -911,7 +911,7 @@ public class Sim {
                 boolean check1 = false;
                 while (!check1) {
                     try {
-                        System.out.print("Masukkan waktu input : ");
+                        System.out.print("Masukkan waktu input (Kelipatan 30) : ");
                         int inputTime = input.nextInt();
                         if (inputTime % 30 != 0) {
                             check1 = false;
@@ -932,7 +932,7 @@ public class Sim {
                 boolean check2 = false;
                 while (!check2) {
                     try {
-                        System.out.print("Masukkan waktu input : ");
+                        System.out.print("Masukkan waktu input (Kelipatan 20) : ");
                         int inputTime = input.nextInt();
                         if (inputTime % 20 != 0) {
                             check2 = false;
@@ -955,7 +955,7 @@ public class Sim {
                 boolean check3 = false;
                 while (!check3) {
                     try {
-                        System.out.print("Masukkan waktu input : ");
+                        System.out.print("Masukkan waktu input (Kelipatan 30 detik) : ");
                         int inputTime = input.nextInt();
                         if (inputTime % 30 != 0) {
                             check3 = false;
@@ -977,7 +977,7 @@ public class Sim {
                 boolean check4 = false;
                 while (!check4) {
                     try {
-                        System.out.print("Masukkan waktu input : ");
+                        System.out.print("Masukkan waktu input (Kelipatan 15 detik) : ");
                         int inputTime = input.nextInt();
                         if (inputTime % 15 != 0) {
                             check4 = false;

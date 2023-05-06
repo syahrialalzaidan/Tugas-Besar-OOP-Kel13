@@ -537,6 +537,7 @@ public class Sim {
                     currentHouse = house;
                     berkunjung++;
                     isBerkunjung = true;
+                    currentItems = null;
                     currentRoom = house.getRoom(0);
                     System.out.println("Sudah sampai di tujuan");
                 }
@@ -564,6 +565,7 @@ public class Sim {
                     currentHouse = house;
                     berkunjung=0;
                     isBerkunjung = false;
+                    currentItems = null;
                     currentRoom = house.getRoom(0);
                     System.out.println("Sudah sampai di tujuan");
                 }
@@ -592,7 +594,7 @@ public class Sim {
                 mood+=10;
                 fullness-=20;
                 System.out.println("mood bertambah sebesar 10");
-                System.out.println("mood berkurang sebesar 20");
+                System.out.println("fullness berkurang sebesar 20");
                 afterEating = false;
                 world.runTime(10);
                 isAlive();
@@ -1137,17 +1139,24 @@ public class Sim {
             }
             break;
             default:
-                if (input.hasNextInt()) { // Cek apakah input merupakan angka
-                    System.out.println("Masukan waktu input (Kelipatan 180) : ");
+                boolean checkTidur = false;
+                while(!checkTidur){
+                try {
+                    System.out.print("Masukan waktu input (Kelipatan 180) : ");
                     int waktuTidur = input.nextInt();
                     if (waktuTidur % 180 == 0) { // Cek apakah angka merupakan kelipatan 180
                         sleep(waktuTidur);
                     } else {
                         System.out.println("Input harus kelipatan 180.");
                     }
-                } else {
-                    System.out.println("Input harus berupa angka.");
-                }
+                } catch (Exception e) {
+                    System.out.println("Input harus berupa angka");
+                    System.out.println("Silakan masukan input ulang");
+                    System.out.println("");
+                    input.nextLine();
+                }   
+            }
+                
         }
     }
 

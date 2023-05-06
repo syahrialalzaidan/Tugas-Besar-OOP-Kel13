@@ -458,6 +458,7 @@ public class GameManager {
                     System.out.println("");
 
                     currentSim.setCurrentRoom(newcurrentRoom);
+                    currentSim.setCurrentItems(null);
                 }
 
                 else if (actionMenuInput.equals("6") || actionMenuInput.equalsIgnoreCase("Edit Room")) {

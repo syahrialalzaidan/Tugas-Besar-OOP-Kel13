@@ -534,6 +534,7 @@ public class Sim {
                     currentHouse = house;
                     berkunjung++;
                     isBerkunjung = true;
+                    currentRoom = house.getRoom(0);
                     System.out.println("Sudah sampai di tujuan");
                 }
         });
@@ -560,6 +561,7 @@ public class Sim {
                     currentHouse = house;
                     berkunjung=0;
                     isBerkunjung = false;
+                    currentRoom = house.getRoom(0);
                     System.out.println("Sudah sampai di tujuan");
                 }
         });

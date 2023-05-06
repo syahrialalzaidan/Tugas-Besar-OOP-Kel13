@@ -638,7 +638,7 @@ public class Sim {
                         if (i%30==0){
                             setHeath(health-5);
                             setMood(mood+10);
-                            fullness-=5;
+                            setFullness(fullness-5);
                             System.out.println("mood bertambah sebesar 10");
                             System.out.println("health dan fullnes berkurang sebesar 5");
                             System.out.println("");
@@ -704,7 +704,7 @@ public class Sim {
                         System.out.println("Countdown = " + (i+1));
                         if (i%10==0){
                             setMood(mood+5);
-                            setFullness(fullness-=5);
+                            setFullness(fullness-5);
                             System.out.println("mood bertambah sebesar 5");
                             System.out.println("fullness berkurang sebesar 5");
                             System.out.println("");
@@ -1043,11 +1043,11 @@ public class Sim {
             case "Kompor Gas":
                 boolean check6 = true;
                 System.out.println("Pilih makanan yang ingin dimasak");
-                System.out.println("1. Nasi Ayam");
-                System.out.println("2. Nasi Kari");
-                System.out.println("3. Susu Kacang");
-                System.out.println("4. Tumis Sayur");
-                System.out.println("5. Bistik");
+                System.out.println("1. Nasi Ayam      | Membutuhkan Nasi dan Ayam");
+                System.out.println("2. Nasi Kari      | Membutuhkan Nasi, Kentang, Wortel, dan Sapi");
+                System.out.println("3. Susu Kacang    | Membutuhkan Susu dan Kacang");
+                System.out.println("4. Tumis Sayur    | Membutuhkan Wortel dan Bayam");
+                System.out.println("5. Bistik         | Membutuhkan Sapi dan Kentang");
                 boolean Makanan = false;
                 while (!Makanan) {
                     System.out.print("Masukkan nama masakan yang ingin dimasak : ");
@@ -1075,38 +1075,38 @@ public class Sim {
 
                 break;
             case "Kompor Listrik":
-                boolean check5 = true;
-                System.out.println("Pilih makanan yang ingin dimasak");
-                System.out.println("1. Nasi Ayam");
-                System.out.println("2. Nasi Kari");
-                System.out.println("3. Susu Kacang");
-                System.out.println("4. Tumis Sayur");
-                System.out.println("5. Bistik");
-                boolean Makanan1 = false;
-                input.close();
-                while (!Makanan1) {
-                    System.out.print("Masukkan nama masakan yang ingin dimasak : ");
-                    String masakan = input.nextLine();
-                    if (masakan.equals("Nasi Ayam") || masakan.equals("Nasi Kari") ||
-                            masakan.equals("Susu Kacang") || masakan.equals("Tumis Sayur")
-                            || masakan.equals("Bistik")) {
-                        Dish dish = new Dish(masakan);
-                        for (String foods : dish.getIngredient()) {
-                            if (!getInventoryfood().getInventory().containsKey(foods)) {
-                                check5 = false;
-                            }
+            boolean check5 = true;
+            System.out.println("Pilih makanan yang ingin dimasak");
+            System.out.println("1. Nasi Ayam      | Membutuhkan Nasi dan Ayam");
+            System.out.println("2. Nasi Kari      | Membutuhkan Nasi, Kentang, Wortel, dan Sapi");
+            System.out.println("3. Susu Kacang    | Membutuhkan Susu dan Kacang");
+            System.out.println("4. Tumis Sayur    | Membutuhkan Wortel dan Bayam");
+            System.out.println("5. Bistik         | Membutuhkan Sapi dan Kentang");
+            boolean Makanan1 = false;
+            input.close();
+            while(!Makanan1){
+                System.out.print("Masukkan nama masakan yang ingin dimasak : ");
+                String masakan = input.nextLine();  
+                if (masakan.equals("Nasi Ayam")||masakan.equals("Nasi Kari")||
+                masakan.equals("Susu Kacang")||masakan.equals("Tumis Sayur")||masakan.equals("Bistik")) {
+                    Dish dish = new Dish(masakan);
+                    for (String foods : dish.getIngredient()) {
+                        if (!getInventoryfood().getInventory().containsKey(foods)) {
+                            check5 = false;
                         }
-                        if (check5) {
-                            cook(dish, getInventorydish(),
-                                    getInventoryfood());
-                        } else {
-                            System.out.println("Bahan makanan tidak cukup untuk memasak");
-                        }
-                        Makanan1 = true;
-                    } else {
-                        System.out.println("Input masakan salah, masukkan nama masakan kembali");
                     }
-                }
+                    if (check5) {
+                        cook(dish, getInventorydish(),
+                                getInventoryfood());
+                    } else {
+                        System.out.println("Bahan makanan tidak cukup untuk memasak");
+                    }
+                    Makanan1 = true;
+                }                  
+                else{
+                    System.out.println("Input masakan salah, masukkan nama masakan kembali");
+                }               
+            }
 
                 break;
             case "Sapu":

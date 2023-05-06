@@ -23,7 +23,7 @@ public class Save {
 
             System.out.println("Game Saved!");
         } catch (Exception e) {
-            System.out.println("Gagal melakukan save. Pesan error: " + e.getMessage());
+            System.out.println("Save Failed with an Error Message : " + e.getMessage());
         }
     }
 }

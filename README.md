@@ -37,8 +37,15 @@ git clone https://github.com/syahrialalzaidan/Tugas-Besar-OOP-Kel13.git
 4. Tambahkan file `.jar` `gson` pada folder dependencies
 
 ## Cara Menjalankan Program
+<<<<<<< HEAD
+ini untuk compile file java : 
+` javac -d bin -cp dependency/gson-2.8.6.jar NetBeans/src/*.java `
+
+
+=======
 Untuk compile file di Java, ketikkan di Command Line:
 
 ```
 javac -d bin -cp dependency/gson-2.8.6.jar NetBeans/src/*.java
 ```
+>>>>>>> aea93d417e11f78f81312160599d47750583b0c3

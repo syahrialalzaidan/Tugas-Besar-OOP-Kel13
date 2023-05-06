@@ -39,7 +39,7 @@ public class Sim {
         this.name = name;
         this.job = new Job(rand.nextInt(1, 8));
         this.world = world;
-        this.money = 2000;
+        this.money = 100;
         this.inventoryfood = new Inventory<Food>("Food", name);
         this.inventoryitems = new Inventory<Items>("Items", name);
         this.inventorydish = new Inventory<Dish>("Dish", name);

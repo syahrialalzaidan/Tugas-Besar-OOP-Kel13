@@ -69,6 +69,9 @@ public class Sim {
         addInventoryitems(item3);
         addInventoryitems(item4);
         addInventoryitems(item5);
+
+        // Memasukan House ke dalam World
+        world.addHouse(house);
     }
 
     public String getName(){
@@ -534,6 +537,7 @@ public class Sim {
                     currentHouse = house;
                     berkunjung++;
                     isBerkunjung = true;
+                    currentRoom = house.getRoom(0);
                     System.out.println("Sudah sampai di tujuan");
                 }
         });
@@ -560,6 +564,7 @@ public class Sim {
                     currentHouse = house;
                     berkunjung=0;
                     isBerkunjung = false;
+                    currentRoom = house.getRoom(0);
                     System.out.println("Sudah sampai di tujuan");
                 }
         });

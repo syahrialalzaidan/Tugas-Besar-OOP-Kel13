@@ -171,19 +171,13 @@ public class GameManager {
                 Point coordinate = new Point(x, y);
                 House firstHouse = new House(coordinate, namaSim);
 
-                // membuat Sim pertama
-                Sim firstSim = new Sim(namaSim, firstHouse, world);
-
-                // menset upgradeHouseTime baru untuk sim pertama
-
                 // Memasukan Sim kedalam SimList
                 addSim(namaSim, world, firstHouse);
 
                 // currentSim mengacu ke firstSim
                 currentSim = simList.get(0);
 
-                // Memasukan House ke dalam World
-                world.addHouse(currentSim.getHouse());
+                
 
                 // Menambahkan Item Default kedalam first-room
                 // Items item1 = new Items("Kasur Single");
@@ -271,6 +265,7 @@ public class GameManager {
             while (!exit) {
                 System.out.print("Masukkan pilihan Anda (Angka/Aksi): ");
                 String actionMenuInput = input.nextLine();
+                System.out.println("");
                 if (actionMenuInput.equals("0") || actionMenuInput.equalsIgnoreCase("View Menu")) {
                     printActionMenu();
                 } else if (actionMenuInput.equals("1") || actionMenuInput.equalsIgnoreCase("View Sim Info")) {

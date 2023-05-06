@@ -69,6 +69,9 @@ public class Sim {
         addInventoryitems(item3);
         addInventoryitems(item4);
         addInventoryitems(item5);
+
+        // Memasukan House ke dalam World
+        world.addHouse(house);
     }
 
     public String getName(){

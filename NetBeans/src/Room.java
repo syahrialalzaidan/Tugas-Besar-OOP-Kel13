@@ -247,7 +247,6 @@ public class Room { //implements ActionListener {
         if(checkAvailableSpace(coordinate))
         {
             this.object.put(coordinate, object);
-            System.out.println(coordinate.getX1() + " " + coordinate.getY1() + " " + coordinate.getX2() + " " + coordinate.getY2());
             String value = object.getName();
             String initial = "";
 

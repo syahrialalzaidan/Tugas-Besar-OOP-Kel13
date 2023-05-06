@@ -45,6 +45,10 @@ public class Room { //implements ActionListener {
         this.roomName = roomName;
     }
 
+    public String[][] getSpace() {
+        return space;
+    }
+
     public HashMap<Coordinate, Items> getObject() {
         return object;
     }
@@ -320,7 +324,6 @@ public class Room { //implements ActionListener {
         }
         else
         {
-            System.out.println(coordinate.getX1() + " " + coordinate.getY1() + " " + coordinate.getX2() + " " + coordinate.getY2());
             System.out.println("Tidak ada ruang untuk " + object.getName());
             return false;
         }

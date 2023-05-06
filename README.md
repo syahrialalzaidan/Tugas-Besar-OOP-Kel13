@@ -10,7 +10,9 @@
 | 18221101 | Ilmagita Nariswari          |
 | 18221159 | Gabriel P. Halomoan Panjaitan |
 
-Game Simplicity adalah game simulasi untuk melakukan kehidupan sehari-hari seperti bekerja, makan, olahraga dan lain-lain.
+## Deskripsi Singkat
+
+Game Simplicity adalah game simulasi untuk melakukan kehidupan sehari-hari seperti bekerja, makan, olahraga dan lain-lain. Tujuan dari game ini adalah menjaga agar kesejahteraan Sim tidak sampai 0 dengan melakukan berbagai macam aksi sehingga Sim tidak akan mati.
 
 ## Set Up
 Untuk menjalankan gamenya, pastikan di PC telah ter-install:

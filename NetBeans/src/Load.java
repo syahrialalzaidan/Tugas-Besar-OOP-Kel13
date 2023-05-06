@@ -18,7 +18,7 @@ public class Load {
             listsim = gson.fromJson(reader, tipe);
         }
         catch (Exception e) {
-            System.out.println("Gagal melakukan load file " + path + ". Pesan error: " + e.getMessage());
+            System.out.println("Error Loading File with a message : " + e.getMessage());
         }
         return listsim;
     }

@@ -3,7 +3,6 @@ import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 
-
 public class Sim {
 
     private String name;
@@ -11,7 +10,7 @@ public class Sim {
     private int money;
     private Inventory<Food> inventoryfood;
     private Inventory<Items> inventoryitems;
-    private Inventory<Dish> inventorydish; 
+    private Inventory<Dish> inventorydish;
     private House house;
     private World world;
     private int mood;
@@ -33,13 +32,12 @@ public class Sim {
     private List<Pair<String,Integer,Integer>> itemOrder = new ArrayList<Pair<String,Integer,Integer>>();
     private List<Pair<String,Integer,Integer>> foodOrder = new ArrayList<Pair<String,Integer,Integer>>();
 
-
-    public Sim(String name,House house, World world){
+    public Sim(String name, House house, World world) {
         Random rand = new Random();
         this.name = name;
         this.job = new Job(rand.nextInt(1, 8));
         this.world = world;
-        this.money = 2000;
+        this.money = 100;
         this.inventoryfood = new Inventory<Food>("Food", name);
         this.inventoryitems = new Inventory<Items>("Items", name);
         this.inventorydish = new Inventory<Dish>("Dish", name);
@@ -53,8 +51,8 @@ public class Sim {
         this.dailySleep = 0;
         this.dailyPay = 1;
         this.currentHouse = house;
-        this.alive = true;  
-        this.berkunjung=0;
+        this.alive = true;
+        this.berkunjung = 0;
         this.isBerkunjung = false;
         this.currentRoom = house.getRoom(0);
         this.currentItems = null;
@@ -76,105 +74,103 @@ public class Sim {
         world.addHouse(house);
     }
 
-    public String getName(){
+    public String getName() {
         return name;
     }
 
-    public Job getJob(){
+    public Job getJob() {
         return job;
     }
-    
-    public boolean getisBerkunjung(){
+
+    public boolean getisBerkunjung() {
         return isBerkunjung;
     }
-    
-    public Room getCurrentRoom(){
+
+    public Room getCurrentRoom() {
         return currentRoom;
     }
 
-    public int getMoney(){
+    public int getMoney() {
         return money;
     }
 
-    public Inventory<Food> getInventoryfood(){
+    public Inventory<Food> getInventoryfood() {
         return inventoryfood;
     }
 
-    public Inventory<Items> getInventoryitems(){
+    public Inventory<Items> getInventoryitems() {
         return inventoryitems;
     }
 
-    public Inventory<Dish> getInventorydish(){
+    public Inventory<Dish> getInventorydish() {
         return inventorydish;
     }
 
-    public void addInventoryfood(Food food){
+    public void addInventoryfood(Food food) {
         inventoryfood.addInventory(food);
     }
 
-    public void addInventoryitems(Items items){
+    public void addInventoryitems(Items items) {
         inventoryitems.addInventory(items);
     }
 
-    public void addInventorydish(Dish dish){
+    public void addInventorydish(Dish dish) {
         inventorydish.addInventory(dish);
     }
-    
-    public House getHouse(){
+
+    public House getHouse() {
         return house;
     }
 
-    public House getCurrHouse(){
+    public House getCurrHouse() {
         return currentHouse;
     }
 
-    public int getMood(){
+    public int getMood() {
         return mood;
     }
 
-    public int getHeath(){
+    public int getHeath() {
         return health;
     }
 
-
-
-    public int getFullness(){
+    public int getFullness() {
         return fullness;
     }
 
-    public int getKebelet(){
+    public int getKebelet() {
         return kebelet;
     }
 
-    public boolean getAfterEating(){
+    public boolean getAfterEating() {
         return afterEating;
     }
 
-    public int getDailyPay(){
+    public int getDailyPay() {
         return dailyPay;
     }
 
-    public int getDailySleep(){
+    public int getDailySleep() {
         return dailySleep;
     }
 
-    public int getDailyWork(){
+    public int getDailyWork() {
         return dailyWork;
     }
 
-    public boolean getAlive(){
+    public boolean getAlive() {
         return alive;
     }
 
-    public int getBerkunjung(){
+    public int getBerkunjung() {
         return berkunjung;
     }
 
-    public Items getCurrentItems(){
+    public Items getCurrentItems() {
         return currentItems;
     }
-    
-    public int getWorkTime(){
+
+    public int getWorkTime() {
         return workTime;
     }
 
@@ -191,185 +187,181 @@ public class Sim {
         this.isBerkunjung = isBerkunjung;
     }
 
-    public void setCurrentRoom(Room room){
+    public void setCurrentRoom(Room room) {
         currentRoom = room;
     }
 
-    public void setName(String name){
+    public void setName(String name) {
         this.name = name;
     }
 
-    public void setSimJob(String jobname) throws Exception{
-        this.job.setJob(jobname);}
+    public void setSimJob(String jobname) throws Exception {
+        this.job.setJob(jobname);
+    }
 
-    public void setMoney(int money){
+    public void setMoney(int money) {
         this.money = money;
     }
 
-    public void setMood(int mood){
+    public void setMood(int mood) {
         this.mood = mood;
-        if (this.mood>100){
+        if (this.mood > 100) {
             this.mood = 100;
         }
-        if (this.mood<=0){
+        if (this.mood <= 0) {
             alive = false;
         }
     }
 
-    public void setHeath(int health){
-        this.health =  health;
-        if (this.health>100){
+    public void setHeath(int health) {
+        this.health = health;
+        if (this.health > 100) {
             this.health = 100;
         }
-        if (this.health<=0){
+        if (this.health <= 0) {
             alive = false;
         }
     }
 
-    public void setFullness(int fullness){
+    public void setFullness(int fullness) {
         this.fullness = fullness;
-        if (this.fullness>100){
+        if (this.fullness > 100) {
             this.fullness = 100;
         }
-        if (this.fullness<=0){
+        if (this.fullness <= 0) {
             alive = false;
         }
     }
 
-    public void setKebelet(int kebelet){
+    public void setKebelet(int kebelet) {
         this.kebelet = kebelet;
     }
 
-    public void setHouse(House house){
+    public void setHouse(House house) {
         this.house = house;
     }
 
-    public void setCurrentHouse(House house){
+    public void setCurrentHouse(House house) {
         currentHouse = house;
     }
 
-    public void setAlive(boolean alive){
+    public void setAlive(boolean alive) {
         this.alive = alive;
     }
 
-    public void setWorkTime(int time){
+    public void setWorkTime(int time) {
         workTime = time;
     }
 
-    public void setDailyWork(int time){
+    public void setDailyWork(int time) {
         this.dailyWork = time;
     }
-    
-    public void setBerkunjung(int berkunjung){
+
+    public void setBerkunjung(int berkunjung) {
         this.berkunjung = berkunjung;
     }
 
-    public void setCurrentItems(Items items){
+    public void setCurrentItems(Items items) {
         currentItems = items;
     }
-    
-    public void setJob(Job job){
+
+    public void setJob(Job job) {
         this.job = job;
     }
 
-
-    public void addItemOrder(String A, int B, int C){
-        itemOrder.add(new Pair<>(A,B,C));
-
-    }
-
-    public void addFoodOrder(String A, int B, int C){
-        foodOrder.add(new Pair<>(A,B,C));
+    public void addItemOrder(String A, int B, int C) {
+        itemOrder.add(new Pair<>(A, B, C));
 
     }
 
-    public void removeItemOrder(int i){
+    public void addFoodOrder(String A, int B, int C) {
+        foodOrder.add(new Pair<>(A, B, C));
+
+    }
+
+    public void removeItemOrder(int i) {
         itemOrder.remove(i);
     }
 
-    public void removeFoodOrder(int i){
+    public void removeFoodOrder(int i) {
         foodOrder.remove(i);
     }
-    public List<Pair<String,Integer,Integer>> getFoodOrder(){
+
+    public List<Pair<String, Integer, Integer>> getFoodOrder() {
         return foodOrder;
     }
 
-    public List<Pair<String,Integer,Integer>> getItemOrder(){
+    public List<Pair<String, Integer, Integer>> getItemOrder() {
         return itemOrder;
     }
 
-    public void isAlive(){
-        if (mood<=0){
+    public void isAlive() {
+        if (mood <= 0) {
             System.out.println("Sim anda mati karena depresi");
-        }
-        else if(health<=0){
+        } else if (health <= 0) {
             System.out.println("Sim anda mati karena sakit");
-        }
-        else if(fullness<=0){
+        } else if (fullness <= 0) {
             System.out.println("Sim anda mati karena kelaparan");
         }
     }
 
-    public void resetSim(){
-        if (dailyPay<2){
+    public void resetSim() {
+        if (dailyPay < 2) {
             dailyPay++;
         }
-        dailySleep=0;
+        dailySleep = 0;
 
     }
 
     class InputActionException extends Exception {
-        public InputActionException(String s)
-        {
+        public InputActionException(String s) {
             // Call constructor of parent Exception
             super(s);
         }
     }
 
     class StatusException extends Exception {
-        public StatusException(String s)
-        {
+        public StatusException(String s) {
             // Call constructor of parent Exception
             super(s);
         }
     }
     //
 
-    
+    public void work(int time) throws InterruptedException {
+        Thread T = new Thread(new Runnable() {
 
-    public void work(int time) throws InterruptedException{
-        Thread T = new Thread(new Runnable(){
-        
-            @Override 
-            public void run(){
+            @Override
+            public void run() {
                 System.out.println("SIM sedang bekerja....");
-                for (int i = time-1; i >=0 ;i--){
-                        try{
+                for (int i = time - 1; i >= 0; i--) {
+                    try {
                         Thread.sleep(1000);
-                        System.out.println("Countdown = " + i);
+                        System.out.println("Countdown = " + (i+1));
                         if (i%30==0){
                             setMood(mood-10);
                             setFullness(fullness-10);
                             System.out.println("mood berkurang sebesar 10");
                             System.out.println("fullnes berkurang sebesar 10");
-                            dailyWork+=30;
-                            workTime+=30;
+                            System.out.println("");
+                            dailyWork += 30;
+                            workTime += 30;
                         }
-                        }catch(Exception e){
-                            
-                        }
-    
+                    } catch (Exception e) {
+
+                    }
+
                 }
-                if (dailyWork>=240 && dailyPay > 0){
-                    dailyWork=0;
+                if (dailyWork >= 240 && dailyPay > 0) {
+                    dailyWork = 0;
                     dailyPay--;
                     System.out.println("uang bertambah sebesar " + job.getDailyPay());
-                    money+= job.getDailyPay();
+                    money += job.getDailyPay();
                 }
                 world.runTime(time);
                 isAlive();
             }
-    
+
         });
 
         T.start();
@@ -377,158 +369,156 @@ public class Sim {
     }
 
     //
-    public void workout(int time) throws InterruptedException{
-        Thread T = new Thread(new Runnable(){
-        
-            @Override 
-            public void run(){
+    public void workout(int time) throws InterruptedException {
+        Thread T = new Thread(new Runnable() {
+
+            @Override
+            public void run() {
                 System.out.println("SIM sedang berolahraga....");
-                for (int i = time-1; i >=0 ;i--){
-                        try{
+                for (int i = time - 1; i >= 0; i--) {
+                    try {
                         Thread.sleep(1000);
-                        System.out.println("Countdown = " + i);
+                        System.out.println("Countdown = " + (i+1));
                         if (i%20==0){
                             setHeath(health+5);
                             setMood(mood+10);
                             setFullness(fullness-5);
                             System.out.println("mood dan health bertambah masing-masing 10 dan 5");
                             System.out.println("fullnes berkurang sebesar 5");
+                            System.out.println("");
                         }
-                        }catch(Exception e){
-                            
-                        }
-    
+                    } catch (Exception e) {
+
+                    }
+
                 }
                 world.runTime(time);
                 isAlive();
             }
-    
+
         });
 
         T.start();
         T.join();
 
-
-        
     }
 
-    public void sleep(int time) throws InterruptedException{
-        Thread T = new Thread(new Runnable(){
-        
-            @Override 
-            public void run(){
+    public void sleep(int time) throws InterruptedException {
+        Thread T = new Thread(new Runnable() {
+
+            @Override
+            public void run() {
                 System.out.println("SIM sedang tidur....");
-                for (int i = time-1; i >=0 ;i--){
-                        try{
+                for (int i = time - 1; i >= 0; i--) {
+                    try {
                         Thread.sleep(1000);
-                        System.out.println("Countdown = " + i);
+                        System.out.println("Countdown = " + (i+1));
                         dailySleep++;
-                        if (dailySleep%240==0){
-                            setMood(mood+30);
-                            setHeath(health+20);
-                            System.out.println("mood dan health bertambah masing-masing sebesar 30 dan 20" );
+                        if (dailySleep % 240 == 0) {
+                            setMood(mood + 30);
+                            setHeath(health + 20);
+                            System.out.println("mood dan health bertambah masing-masing sebesar 30 dan 20");
                         }
-                        }catch(Exception e){
-                            
-                        }
-    
+                    } catch (Exception e) {
+
+                    }
+
                 }
                 world.runTime(time);
-                if (time>world.getTime()){
-                    dailySleep=(time-world.getTime());
+                if (time > world.getTime()) {
+                    dailySleep = (time - world.getTime());
                 }
                 isAlive();
 
-
             }
-    
+
         });
 
         T.start();
         T.join();
     }
 
-    public void eat(Edible food,Inventory<Dish> inventorydish, Inventory<Food> inventoryfood) throws InterruptedException{
-        Thread T = new Thread(new Runnable(){
-        
-            @Override 
-            public void run(){
-                System.out.println("SIM sedang makan....");
-                for (int i = 29; i >=0 ;i--){
-                        try{
-                        Thread.sleep(1000);
-                        System.out.println("Countdown = " + i);
+    public void eat(Edible food, Inventory<Dish> inventorydish, Inventory<Food> inventoryfood)
+            throws InterruptedException {
+        Thread T = new Thread(new Runnable() {
 
-                        }catch(Exception e){
-                            
-                        }
-                      
-                             
+            @Override
+            public void run() {
+                System.out.println("SIM sedang makan....");
+                for (int i = 29; i >= 0; i--) {
+                    try {
+                        Thread.sleep(1000);
+                        System.out.println("Countdown = " + (i+1));
+
+                    } catch (Exception e) {
+
+                    }
+
                 }
-                setFullness(fullness+food.getFullness());
+                setFullness(fullness + food.getFullness());
                 System.out.println("fullness bertambah sebesar " + food.getFullness());
                 afterEating = true;
 
-                        if (food.getClass().getName().equals("Dish")){
-                            Dish temp = (Dish) food;
-                            try {
-                                inventorydish.reduceInventory(temp);
-                            } catch (Exception e) {
+                if (food.getClass().getName().equals("Dish")) {
+                    Dish temp = (Dish) food;
+                    try {
+                        inventorydish.reduceInventory(temp);
+                    } catch (Exception e) {
 
-                            }
-                        }
-                        else{
-                            Food temp = (Food) food;
-                            try {
-                                inventoryfood.reduceInventory(temp);
-                            } catch (Exception e) {
+                    }
+                } else {
+                    Food temp = (Food) food;
+                    try {
+                        inventoryfood.reduceInventory(temp);
+                    } catch (Exception e) {
 
-                            }
-                        }   
-                        world.runTime(30);
-                        isAlive();
+                    }
+                }
+                world.runTime(30);
+                isAlive();
             }
-    
+
         });
 
         T.start();
         T.join();
 
-         
+
     }
 
-    public void cook(Dish food,Inventory<Dish> inventorydish, Inventory<Food> inventoryfood) throws InterruptedException{
-        Thread T = new Thread(new Runnable(){
-        
-            @Override 
-            public void run(){
+    public void cook(Dish food, Inventory<Dish> inventorydish, Inventory<Food> inventoryfood)
+            throws InterruptedException {
+        Thread T = new Thread(new Runnable() {
+
+            @Override
+            public void run() {
                 System.out.println("SIM sedang memasak....");
-                for (double i = food.getTime()-1; i >=0 ;i--){
-                        try{
+                for (double i = food.getTime() - 1; i >= 0; i--) {
+                    try {
                         Thread.sleep(1000);
-                        System.out.println("Countdown = " + i);
+                        System.out.println("Countdown = " + (i+1));
                         
                         }catch(Exception e){
                             
                         }
 
-                    
+
                 }
-                setMood(mood+10);
+                setMood(mood + 10);
                 System.out.println("mood bertambah sebesar 10 dan masakan ditambahkan kedalam inventory");
                 inventorydish.addInventory(food);
-                for (String foods:food.getIngredient()){
-                
+                for (String foods : food.getIngredient()) {
+
                     try {
                         inventoryfood.reduceInventory(new Food(foods));
                     } catch (Exception e) {
 
                     }
                 }
-                world.runTime((int)food.getTime());
-                isAlive();               
+                world.runTime((int) food.getTime());
+                isAlive();
             }
-    
+
         });
         T.start();
         T.join();
@@ -536,7 +526,7 @@ public class Sim {
     }
 
     public void visit(House house) throws InterruptedException{
-        double jarak = Math.sqrt(Math.abs((house.getCoordinate().getX()-this.house.getCoordinate().getX())^2 + (house.getCoordinate().getY()-this.house.getCoordinate().getY())^2));
+        double jarak = Math.sqrt(Math.abs((house.getCoordinate().getX()-this.currentHouse.getCoordinate().getX())^2 + (house.getCoordinate().getY()-this.currentHouse.getCoordinate().getY())^2));
         
         Thread perjalanan = new Thread(new Runnable(){
         
@@ -546,7 +536,6 @@ public class Sim {
                 System.out.println("Estimasi perjalanan adalah " + jarak + " detik");
                         try{
                         Thread.sleep((long)jarak*1000);
-                        System.out.println("Countdown = " + jarak);
                         
                         }catch(Exception e){
                             
@@ -566,7 +555,7 @@ public class Sim {
     } 
 
     public void goHome() throws InterruptedException{
-        double jarak = Math.sqrt(Math.abs((house.getCoordinate().getX()-this.house.getCoordinate().getX())^2 + (house.getCoordinate().getY()-this.house.getCoordinate().getY())^2));
+        double jarak = Math.sqrt(Math.abs((house.getCoordinate().getX()-this.currentHouse.getCoordinate().getX())^2 + (house.getCoordinate().getY()-this.currentHouse.getCoordinate().getY())^2));
         
         Thread perjalanan = new Thread(new Runnable(){
         
@@ -575,7 +564,6 @@ public class Sim {
                 System.out.println("Estimasi perjalanan adalah " + jarak + " detik");
                         try{
                         Thread.sleep((long)jarak*1000);
-                        System.out.println("Countdown = " + jarak);
                         
                         }catch(Exception e){
                             
@@ -594,16 +582,16 @@ public class Sim {
         isAlive();
     }
 
-    public void defecate() throws InterruptedException{
-        Thread T = new Thread(new Runnable(){
-        
-            @Override 
-            public void run(){
+    public void defecate() throws InterruptedException {
+        Thread T = new Thread(new Runnable() {
+
+            @Override
+            public void run() {
                 System.out.println("SIM sedang baung air....");
-                for (int i = 10-1; i >=0 ;i--){
-                        try{
+                for (int i = 10 - 1; i >= 0; i--) {
+                    try {
                         Thread.sleep(1000);
-                        System.out.println("Countdown = " + i);
+                        System.out.println("Countdown = " + (i+1));
                         
                         }catch(Exception e){
                             
@@ -620,130 +608,133 @@ public class Sim {
                 isAlive();
 
             }
-    
+
         });
         T.start();
         T.join();
     }
 
+    // aksi tambahan
+    // Saran tambahan aksi
+    // 1. nonton tv (efek : +10 moood, -5 kesehatan, -5 kekenyanga/30 detik)
+    // 2. Scroll SimTok (efek: +10 mood/30 detik, -5 kekenyangan/30 detik)
+    // 3. Beribadah (efek: +5 mood/10 detik, -5 kekenyangan/10 detik)
+    // 4. Mandi (efek: +10 mood/15 detik, -10 kekenyangan/15 detik, +10 kesehatan/15
+    // detik )
+    // 5. berenang (efek + 10 mood/30 detik , +10 healt/30detik, -15 fullnes/30
+    // detik)
+    // 6. bermain game (efek +20mood -10 health -10 fullness/20 detik)
 
-//aksi tambahan 
-//Saran tambahan aksi
-//1. nonton tv (efek : +10 moood, -5 kesehatan, -5 kekenyanga/30 detik)
-//2. Scroll SimTok (efek: +10 mood/30 detik, -5 kekenyangan/30 detik)
-//3. Beribadah (efek: +5 mood/10 detik, -5 kekenyangan/10 detik)
-//4. Mandi (efek: +10 mood/15 detik, -10 kekenyangan/15 detik, +10 kesehatan/15 detik )
-//5. berenang (efek + 10 mood/30 detik , +10 healt/30detik, -15 fullnes/30 detik)
-//6. bermain game (efek +20mood -10 health -10 fullness/20 detik)
+    public void watchingTV(int time) throws InterruptedException {
+        Thread T = new Thread(new Runnable() {
 
-    public void watchingTV(int time) throws InterruptedException{
-        Thread T = new Thread(new Runnable(){
-        
-            @Override 
-            public void run(){
+            @Override
+            public void run() {
                 System.out.println("SIM sedang nonton tv....");
-                for (int i = time-1; i >=0 ;i--){
-                        try{
+                for (int i = time - 1; i >= 0; i--) {
+                    try {
                         Thread.sleep(1000);
-                        System.out.println("Countdown = " + i);
+                        System.out.println("Countdown = " + (i+1));
                         if (i%30==0){
                             setHeath(health-5);
                             setMood(mood+10);
-                            setFullness(fullness-5); ;
+                            setFullness(fullness-5);
                             System.out.println("mood bertambah sebesar 10");
                             System.out.println("health dan fullnes berkurang sebesar 5");
+                            System.out.println("");
 
                         }
-                        }catch(Exception e){
-                            
-                        }
-    
+                    } catch (Exception e) {
+
+                    }
+
                 }
                 world.runTime(time);
                 isAlive();
             }
-    
+
         });
 
         T.start();
         T.join();
 
-        
-       
     }
 
-    public void scrollTiktok(int time) throws InterruptedException{
-        Thread T = new Thread(new Runnable(){
-        
-            @Override 
-            public void run(){
+    public void scrollTiktok(int time) throws InterruptedException {
+        Thread T = new Thread(new Runnable() {
+
+            @Override
+            public void run() {
                 System.out.println("SIM sedang scroll tiktok....");
-                for (int i = time-1; i >=0 ;i--){
-                        try{
+                for (int i = time - 1; i >= 0; i--) {
+                    try {
                         Thread.sleep(1000);
-                        System.out.println("Countdown = " + i);
+                        System.out.println("Countdown = " + (i+1));
                         if (i%30==0){
                             setMood(mood+10);
                             setHeath(health-5);
                             System.out.println("mood bertambah sebesar 10");
                             System.out.println("health berkurang sebesar 5");
+                            System.out.println("");
                         }
-                        }catch(Exception e){
-                            
-                        }
-    
+                    } catch (Exception e) {
+
+                    }
+
                 }
                 world.runTime(time);
                 isAlive();
             }
-    
+
         });
 
         T.start();
         T.join();
     }
 
-    public void beribadah(int time) throws InterruptedException{
-        Thread T = new Thread(new Runnable(){
-        
-            @Override 
-            public void run(){
+    public void beribadah(int time) throws InterruptedException {
+        Thread T = new Thread(new Runnable() {
+
+            @Override
+            public void run() {
                 System.out.println("SIM sedang solat....");
-                for (int i = time-1; i >=0 ;i--){
-                        try{
+                for (int i = time - 1; i >= 0; i--) {
+                    try {
                         Thread.sleep(1000);
-                        System.out.println("Countdown = " + i);
+                        System.out.println("Countdown = " + (i+1));
                         if (i%10==0){
                             setMood(mood+5);
                             setFullness(fullness-5);
                             System.out.println("mood bertambah sebesar 5");
                             System.out.println("fullness berkurang sebesar 5");
-                        }
-                        }catch(Exception e){
+                            System.out.println("");
                             
                         }
-    
+                    } catch (Exception e) {
+
+                    }
+
                 }
                 world.runTime(time);
                 isAlive();
             }
-    
+
         });
 
         T.start();
         T.join();
     }
-    
-    public void takeShower(int time) throws InterruptedException{
-        Thread T = new Thread(new Runnable(){
-        
-            @Override 
-            public void run(){
+
+    public void takeShower(int time) throws InterruptedException {
+        Thread T = new Thread(new Runnable() {
+
+            @Override
+            public void run() {
                 System.out.println("SIM sedang mandi....");
-                for (int i = time-1; i >=0 ;i--){
-                        try{
+                for (int i = time - 1; i >= 0; i--) {
+                    try {
                         Thread.sleep(1000);
-                        System.out.println("Countdown = " + i);
+                        System.out.println("Countdown = " + (i+1));
                         if (i%15==0){
                             setMood(mood+10);
                             setFullness(fullness-10); 
@@ -751,143 +742,143 @@ public class Sim {
                             System.out.println("mood dan health bertambah sebesar 10");
                             System.out.println("fullness berkurang sebesar 10");
                         }
-                        }catch(Exception e){
-                            
-                        }
-    
+                    } catch (Exception e) {
+
+                    }
+
                 }
                 world.runTime(time);
                 isAlive();
             }
-    
+
         });
 
         T.start();
         T.join();
     }
 
+    public void swiming(int time) throws InterruptedException {
+        Thread T = new Thread(new Runnable() {
 
-    public void swiming(int time) throws InterruptedException{
-        Thread T = new Thread(new Runnable(){
-        
-            @Override 
-            public void run(){
+            @Override
+            public void run() {
                 System.out.println("SIM sedang berenang....");
-                for (int i = time-1; i >=0 ;i--){
-                        try{
+                for (int i = time - 1; i >= 0; i--) {
+                    try {
                         Thread.sleep(1000);
-                        System.out.println("Countdown = " + i);
+                        System.out.println("Countdown = " + (i+1));
                         if (i%30==0){
                             setMood(mood+10);
                             setFullness(fullness-15); 
                             setHeath(health+10); 
                             System.out.println("mood dan health bertambah sebesar 10");
                             System.out.println("fullness berkurang sebesar 15");
+                            System.out.println("");
                         }
-                        }catch(Exception e){
-                            
-                        }
-    
+                    } catch (Exception e) {
+
+                    }
+
                 }
                 world.runTime(time);
                 isAlive();
             }
-    
+
         });
 
         T.start();
         T.join();
     }
 
-    public void playingGame(int time) throws InterruptedException{
-        Thread T = new Thread(new Runnable(){
-        
-            @Override 
-            public void run(){
+    public void playingGame(int time) throws InterruptedException {
+        Thread T = new Thread(new Runnable() {
+
+            @Override
+            public void run() {
                 System.out.println("SIM sedang bermain valorant....");
-                for (int i = time-1; i >=0 ;i--){
-                        try{
+                for (int i = time - 1; i >= 0; i--) {
+                    try {
                         Thread.sleep(1000);
-                        System.out.println("Countdown = " + i);
+                        System.out.println("Countdown = " + (i+1));
                         if (i%20==0){
                             setMood(mood+20);   
                             setFullness(fullness-10); 
                             setHeath(health-10);
                             System.out.println("mood bertambah sebesar 20");
                             System.out.println("fullness dan health berkurang sebesar 10");
+                            System.out.println("");
                         }
-                        }catch(Exception e){
-                            
-                        }
-    
+                    } catch (Exception e) {
+
+                    }
+
                 }
                 world.runTime(time);
                 isAlive();
             }
-    
+
         });
 
         T.start();
         T.join();
     }
 
-    public void cleaningHouse() throws InterruptedException{
-        Thread T = new Thread(new Runnable(){
-        
-            @Override 
-            public void run(){
+    public void cleaningHouse() throws InterruptedException {
+        Thread T = new Thread(new Runnable() {
+
+            @Override
+            public void run() {
                 System.out.println("SIM sedang beres-beres rumah....");
-                for (int i = 20-1; i >=0 ;i--){
-                        try{
+                for (int i = 20 - 1; i >= 0; i--) {
+                    try {
                         Thread.sleep(1000);
-                        System.out.println("Countdown = " + i);
+                        System.out.println("Countdown = " + (i+1));
                         if (i%15==0){
                             setMood(mood+10); 
                             setFullness(fullness-10); 
                             setHeath(health+5); 
                             System.out.println("mood dan health bertambah sebesar masing-masing 10 dan 5");
                             System.out.println("fullness berkurang sebesar 10");
+                            System.out.println("");
                         }
-                        }catch(Exception e){
-                            
-                        }
-    
+                    } catch (Exception e) {
+
+                    }
+
                 }
                 world.runTime(20);
                 isAlive();
             }
-    
+
         });
 
         T.start();
         T.join();
     }
 
-    public void timeFormat(int time){
-        int menit = (time/60);
-        int detik = (time)%60;
-        if (menit<10 && detik<10){
-            System.out.println("0" + menit + ":0" + detik );
-        }
-        else if (menit<10){
-            System.out.println("0" + menit + ":" + detik );
-        }
-        else if (detik<10){
-            System.out.println(menit + ":0" + detik );
-        }
-        else {
-            System.out.println(menit + ":" + detik );
+    public void timeFormat(int time) {
+        int menit = (time / 60);
+        int detik = (time) % 60;
+        if (menit < 10 && detik < 10) {
+            System.out.println("0" + menit + ":0" + detik);
+        } else if (menit < 10) {
+            System.out.println("0" + menit + ":" + detik);
+        } else if (detik < 10) {
+            System.out.println(menit + ":0" + detik);
+        } else {
+            System.out.println(menit + ":" + detik);
         }
     }
 
-    public void viewClock(){
+    public void viewClock() {
         System.out.print("Sisa waktu hari ini : ");
         timeFormat(720-world.getTime());
+        System.out.println("");
         
         
     }
 
-    public void viewSimInfo(){
+    public void viewSimInfo() {
         System.out.println("        Info SIM");
         System.out.println("============================");
         System.out.println("Hari ke-"+ world.getDay() );
@@ -898,32 +889,31 @@ public class Sim {
         System.out.println("Kekenyangan  : " + fullness);
         System.out.println("Mood         : " + mood);
         System.out.println("Uang         : " + money);
-        if (house.getUpgradeHouseTime()!=0){
+        if (house.getUpgradeHouseTime() != 0) {
             System.out.println("\n\nSisa Waktu upgrade rumah : ");
             timeFormat(house.getUpgradeHouseTime());
         }
-        if (foodOrder!=null || itemOrder!= null){
+        if (foodOrder != null || itemOrder != null) {
             System.out.println("\n\nPesanan barang : ");
-            for (Pair<String,Integer,Integer> pair : itemOrder){
+            for (Pair<String, Integer, Integer> pair : itemOrder) {
                 System.out.print(pair.getB() + " buah " + pair.getA() + " : ");
                 timeFormat(pair.getC());
             }
-            for (Pair<String,Integer,Integer> pair : foodOrder){
+            for (Pair<String, Integer, Integer> pair : foodOrder) {
                 System.out.print(pair.getB() + " buah " + pair.getA() + " : ");
                 timeFormat(pair.getC());
             }
         }
     }
 
-    public void viewCurrentLocation(){
-        if (isBerkunjung){
-        System.out.print("Anda sedang berada di rumah " + currentHouse.getSimName() + ", ");
-    }   else{
-        System.out.print("Anda sedang berada di rumah anda sendiri, ");
-    }
-    System.out.println("di ruangan " + currentRoom.getRoomName());
-    currentRoom.printSpace();
-
+    public void viewCurrentLocation() {
+        if (isBerkunjung) {
+            System.out.print("Anda sedang berada di rumah " + currentHouse.getSimName() + ", ");
+        } else {
+            System.out.print("Anda sedang berada di rumah anda sendiri, ");
+        }
+        System.out.println("di ruangan " + currentRoom.getRoomName());
+        currentRoom.printSpace();
     }
 
     public void chooseAction(String aksi) throws InterruptedException {
@@ -1027,27 +1017,28 @@ public class Sim {
                 break;
             case "Meja dan Kursi":
 
-                if (inventorydish.getInventory().size()!=0 || inventoryfood.getInventory().size()!=0){
-                getInventoryfood().printInventory();
-                getInventorydish().printInventory();
-                boolean check = true;
-                while (check) {
-                    System.out.print("Pilih makanan untuk dimakan : ");
-                    String inputMakanan = input.nextLine();
-                    if (getInventoryfood().getInventory()
-                            .containsKey(inputMakanan)) {
-                        eat(new Food(inputMakanan), getInventorydish(),
-                                getInventoryfood());
-                        check = false;
-                    } else if (getInventorydish().getInventory()
-                            .containsKey(inputMakanan)) {
-                        eat(new Dish(inputMakanan), getInventorydish(),
-                                getInventoryfood());
-                    } else {
-                        System.out.println(
-                                "Kamu tidak memiliki makanan tersebut di inventory, mohon masukkan kembali makanan yang ingin dimakan");
+                if (inventorydish.getInventory().size() != 0 || inventoryfood.getInventory().size() != 0) {
+                    getInventoryfood().printInventory();
+                    getInventorydish().printInventory();
+                    boolean check = true;
+                    while (check) {
+                        System.out.print("Pilih makanan untuk dimakan : ");
+                        String inputMakanan = input.nextLine();
+                        if (getInventoryfood().getInventory()
+                                .containsKey(inputMakanan)) {
+                            eat(new Food(inputMakanan), getInventorydish(),
+                                    getInventoryfood());
+                            check = false;
+                        } else if (getInventorydish().getInventory()
+                                .containsKey(inputMakanan)) {
+                            eat(new Dish(inputMakanan), getInventorydish(),
+                                    getInventoryfood());
+                        } else {
+                            System.out.println(
+                                    "Kamu tidak memiliki makanan tersebut di inventory, mohon masukkan kembali makanan yang ingin dimakan");
+                        }
                     }
-                }}
+                }
                 break;
             case "Kompor Gas":
                 boolean check6 = true;
@@ -1058,11 +1049,12 @@ public class Sim {
                 System.out.println("4. Tumis Sayur    | Membutuhkan Wortel dan Bayam");
                 System.out.println("5. Bistik         | Membutuhkan Sapi dan Kentang");
                 boolean Makanan = false;
-                while(!Makanan){
+                while (!Makanan) {
                     System.out.print("Masukkan nama masakan yang ingin dimasak : ");
-                    String masakan = input.nextLine();  
-                    if (masakan.equals("Nasi Ayam")||masakan.equals("Nasi Kari")||
-                    masakan.equals("Susu Kacang")||masakan.equals("Tumis Sayur")||masakan.equals("Bistik")) {
+                    String masakan = input.nextLine();
+                    if (masakan.equals("Nasi Ayam") || masakan.equals("Nasi Kari") ||
+                            masakan.equals("Susu Kacang") || masakan.equals("Tumis Sayur")
+                            || masakan.equals("Bistik")) {
                         Dish dish = new Dish(masakan);
                         for (String foods : dish.getIngredient()) {
                             if (!getInventoryfood().getInventory().containsKey(foods)) {
@@ -1076,10 +1068,9 @@ public class Sim {
                             System.out.println("Bahan makanan tidak cukup untuk memasak");
                         }
                         Makanan = true;
-                    }                  
-                    else{
+                    } else {
                         System.out.println("Input masakan salah, masukkan nama masakan kembali");
-                    }               
+                    }
                 }
 
                 break;
@@ -1117,54 +1108,54 @@ public class Sim {
                 }               
             }
 
-            break;
+                break;
             case "Sapu":
                 cleaningHouse();
                 break;
             case "Sajadah":
-            boolean checkSajadah = false;
-            while (!checkSajadah) {
-                try {
-                    System.out.print("Masukkan waktu input (Kelipatan 10) : ");
-                    int inputTime = input.nextInt();
-                    if (inputTime % 10 != 0) {
-                        checkSajadah = false;
-                        System.out.println("Masukkan waktu harus keliapatan 10 detik");
-                    } else {
-                        checkSajadah = true;
-                        beribadah(inputTime);
+                boolean checkSajadah = false;
+                while (!checkSajadah) {
+                    try {
+                        System.out.print("Masukkan waktu input (Kelipatan 10) : ");
+                        int inputTime = input.nextInt();
+                        if (inputTime % 10 != 0) {
+                            checkSajadah = false;
+                            System.out.println("Masukkan waktu harus keliapatan 10 detik");
+                        } else {
+                            checkSajadah = true;
+                            beribadah(inputTime);
 
+                        }
+                    } catch (Exception e) {
+                        System.out.println("Input harus berupa angka");
+                        System.out.println("Silakan masukan input ulang");
+                        System.out.println("");
+                        input.nextLine();
                     }
-                } catch (Exception e) {
-                    System.out.println("Input harus berupa angka");
-                    System.out.println("Silakan masukan input ulang");
-                    System.out.println("");
-                    input.nextLine();
                 }
-            }
-            break;
+                break;
             case "HP":
-            boolean checkHP = false;
-            while (!checkHP) {
-                try {
-                    System.out.print("Masukkan waktu input (Kelipatan 30) : ");
-                    int inputTime = input.nextInt();
-                    if (inputTime % 30 != 0) {
-                        checkHP = false;
-                        System.out.println("Masukkan waktu harus kelipatan 30 detik");
-                    } else {
-                        checkHP = true;
-                        scrollTiktok(inputTime);
+                boolean checkHP = false;
+                while (!checkHP) {
+                    try {
+                        System.out.print("Masukkan waktu input (Kelipatan 30) : ");
+                        int inputTime = input.nextInt();
+                        if (inputTime % 30 != 0) {
+                            checkHP = false;
+                            System.out.println("Masukkan waktu harus kelipatan 30 detik");
+                        } else {
+                            checkHP = true;
+                            scrollTiktok(inputTime);
 
+                        }
+                    } catch (Exception e) {
+                        System.out.println("Input harus berupa angka");
+                        System.out.println("Silakan masukan input ulang");
+                        System.out.println("");
+                        input.nextLine();
                     }
-                } catch (Exception e) {
-                    System.out.println("Input harus berupa angka");
-                    System.out.println("Silakan masukan input ulang");
-                    System.out.println("");
-                    input.nextLine();
                 }
-            }
-            break;
+                break;
             default:
                 boolean checkTidur = false;
                 while(!checkTidur){
@@ -1188,7 +1179,4 @@ public class Sim {
         }
     }
 
-
-
-    
 }

@@ -68,7 +68,7 @@ public class World implements Serializable {
                 if (s.getDailySleep() < 180) {
                     s.setHeath(s.getHeath() - 5);
                     s.setMood(s.getMood() - 5);
-                    System.out.println("Status mood dah health berkurang karena kurang tidur");
+                    System.out.println("Status mood dah health "+ s.getName() +" berkurang karena kurang tidur");
                 }
             }
             if (s.getAfterEating()) {
@@ -78,7 +78,7 @@ public class World implements Serializable {
                 s.setHeath(s.getHeath() - 5);
                 s.setMood(s.getMood() - 5);
                 s.setKebelet(s.getKebelet() - 240);
-                System.out.println("Status mood dah health berkurang karena belum buang air");
+                System.out.println("Status mood dah health "+ s.getName() +" berkurang karena belum buang air");
             }
             if (s.getBerkunjung() != 0) {
                 s.setBerkunjung(s.getBerkunjung() + time);
@@ -87,7 +87,7 @@ public class World implements Serializable {
                     s.setMood(s.getMood() + 10 * efek);
                     s.setFullness(s.getFullness() - 10 * efek);
                     s.setBerkunjung(s.getBerkunjung() - 30 * efek);
-                    System.out.println("Akibat berkunjung status mood bertambah dan status health berkurang ");
+                    System.out.println("Akibat berkunjung status mood "+ s.getName() +" bertambah dan status health berkurang ");
                 }
             }
             for (int i = 0; i<s.getItemOrder().size() ; i++){
@@ -95,8 +95,9 @@ public class World implements Serializable {
                 if (s.getItemOrder().get(i).getC()<=0){
                     for (int j= s.getItemOrder().get(i).getB() ; j>0 ; j--){
                         s.addInventoryitems(new Items(s.getItemOrder().get(i).getA()));
-                        s.removeItemOrder(i);
+            
                     }
+                    s.removeItemOrder(i);
                     i--;
                     }
                     
@@ -107,12 +108,13 @@ public class World implements Serializable {
                 if (s.getFoodOrder().get(i).getC()<=0){
                     for (int j= s.getFoodOrder().get(i).getB() ; j>0 ; j--){
                         s.addInventoryfood(new Food(s.getFoodOrder().get(i).getA()));
-                        s.removeFoodOrder(i);
                     }
+                    s.removeFoodOrder(i);
                     i--;
                     }
                     
                 }
+                System.out.println(s.getKebelet());
         }
         for (House rumah : house) {
             if (rumah.getUpgradeHouseTime() != 0) {
@@ -123,7 +125,6 @@ public class World implements Serializable {
                 }
             }
         }
-
         this.time = now;
         resetDay();
     }

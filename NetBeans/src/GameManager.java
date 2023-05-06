@@ -849,6 +849,7 @@ public class GameManager {
                     }
                 } else if (actionMenuInput.equals("8") || actionMenuInput.equalsIgnoreCase("Change Sim")) {
                     // TODO: Change Sim
+                    if (simList.size()!=1){
                     System.out.println("Pilih Sim yang ingin dimainkan: ");
                     for (Sim sim : GameManager.getSimList()) {
                         if (!currentSim.getName().equals(sim.getName())) {
@@ -876,6 +877,9 @@ public class GameManager {
                             System.out.println("Input nama yang dimaksukan tidak ada dalam daftar sim");
                             System.out.print("Masukkan nama Sim yang ingin dimainkan: ");
                         }
+                    }}
+                    else{
+                        System.out.println("Tidak ada sim lain untuk dimainkan");
                     }
 
                 } else if (actionMenuInput.equals("9") || actionMenuInput.equalsIgnoreCase("List Object")) {
@@ -1075,13 +1079,13 @@ public class GameManager {
                                             for (Sim sim : GameManager.getSimList()) {
                                                 if (inputNama.equals(sim.getName())) {
                                                     currentSim.visit(sim.getHouse());
+                                                    check1 = true;
                                                     check = true;
                                                 }
 
                                             }
                                         } else {
-                                            System.out
-                                                    .print("Input nama yang dimaksukan tidak ada dalam daftar sim : ");
+                                            System.out.print("Input nama yang dimaksukan tidak ada dalam daftar sim : ");
                                         }
                                     }
                                 }
@@ -1521,7 +1525,13 @@ public class GameManager {
 
                 if (!currentSim.getAlive()){
                     if (simList.size()==1){
-                        
+                        exit = true;
+                        System.out.println("GAME OVER");
+                    }
+                    else{
+                        simList.remove(currentSim);
+                        currentSim = simList.get(0);
+                        System.err.println("Sekarang anda memainkan " + simList.get(0).getName());
                     }
                 }
             }

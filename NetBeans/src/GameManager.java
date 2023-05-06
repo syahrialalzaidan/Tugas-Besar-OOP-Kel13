@@ -13,7 +13,7 @@ public class GameManager {
     private static Sim currentSim = null;
     private static World world = null;
     // House currentHouse = null;
-    private static Room currentRoom = null;
+
 
     public static void addSim(String nama, World world, House house) {
         Sim sim = new Sim(nama, house, world);
@@ -458,6 +458,7 @@ public class GameManager {
                     System.out.println("");
 
                     currentSim.setCurrentRoom(newcurrentRoom);
+                    currentSim.setCurrentItems(null);
                 }
 
                 else if (actionMenuInput.equals("6") || actionMenuInput.equalsIgnoreCase("Edit Room")) {
@@ -947,6 +948,7 @@ public class GameManager {
                             } catch (Exception e) {
                                 System.out.println("Input harus berupa angka");
                                 System.out.println("Silakan masukan input ulang");
+                                input.nextLine();
                                 System.out.println("");
 
                             }

@@ -11,7 +11,7 @@ public class World implements Serializable {
     World() {
         house = new ArrayList<House>();
         time = 0;
-        day = 0;
+        day = 1;
         for (int i = 0; i < 64; i++) {
             for (int j = 0; j < 64; j++) {
                 pointHouse[i][j] = 0;
@@ -114,7 +114,7 @@ public class World implements Serializable {
                     }
                     
                 }
-                System.out.println(s.getKebelet());
+
         }
         for (House rumah : house) {
             if (rumah.getUpgradeHouseTime() != 0) {

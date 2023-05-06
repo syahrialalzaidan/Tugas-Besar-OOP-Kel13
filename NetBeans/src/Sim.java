@@ -537,6 +537,7 @@ public class Sim {
                     currentHouse = house;
                     berkunjung++;
                     isBerkunjung = true;
+                    currentItems = null;
                     currentRoom = house.getRoom(0);
                     System.out.println("Sudah sampai di tujuan");
                 }
@@ -544,7 +545,7 @@ public class Sim {
         perjalanan.start();
         perjalanan.join();
         isAlive();
-    }
+    } 
 
     public void goHome() throws InterruptedException{
         double jarak = Math.sqrt(Math.abs((house.getCoordinate().getX()-this.house.getCoordinate().getX())^2 + (house.getCoordinate().getY()-this.house.getCoordinate().getY())^2));
@@ -564,6 +565,7 @@ public class Sim {
                     currentHouse = house;
                     berkunjung=0;
                     isBerkunjung = false;
+                    currentItems = null;
                     currentRoom = house.getRoom(0);
                     System.out.println("Sudah sampai di tujuan");
                 }
@@ -589,10 +591,10 @@ public class Sim {
                         
     
                 }
-                mood+=10;
-                fullness-=20;
+                setMood(mood+10);
+                setFullness(fullness-20);
                 System.out.println("mood bertambah sebesar 10");
-                System.out.println("mood berkurang sebesar 20");
+                System.out.println("fullness berkurang sebesar 20");
                 afterEating = false;
                 world.runTime(10);
                 isAlive();
@@ -624,8 +626,8 @@ public class Sim {
                         try{
                         Thread.sleep(1000);
                         if (i%30==0){
-                            health-=5;
-                            mood+=10;
+                            setHeath(health-5);
+                            setMood(mood+10);
                             fullness-=5;
                             System.out.println("mood bertambah sebesar 10");
                             System.out.println("health dan fullnes berkurang sebesar 5");
@@ -659,8 +661,8 @@ public class Sim {
                         try{
                         Thread.sleep(1000);
                         if (i%30==0){
-                            mood+=10;
-                            health-=5;
+                            setMood(mood+10);
+                            setHeath(health-5);
                             System.out.println("mood bertambah sebesar 10");
                             System.out.println("health berkurang sebesar 5");
                         }
@@ -689,8 +691,8 @@ public class Sim {
                         try{
                         Thread.sleep(1000);
                         if (i%10==0){
-                            mood+=5;
-                            fullness-=5;
+                            setMood(mood+5);
+                            setFullness(fullness-=5);
                             System.out.println("mood bertambah sebesar 5");
                             System.out.println("fullness berkurang sebesar 5");
                         }
@@ -719,9 +721,9 @@ public class Sim {
                         try{
                         Thread.sleep(1000);
                         if (i%15==0){
-                            mood+=10;
-                            fullness-=10;
-                            health+=10;
+                            setMood(mood+10);
+                            setFullness(fullness-10); 
+                            setHeath(health+10); 
                             System.out.println("mood dan health bertambah sebesar 10");
                             System.out.println("fullness berkurang sebesar 10");
                         }
@@ -751,9 +753,9 @@ public class Sim {
                         try{
                         Thread.sleep(1000);
                         if (i%30==0){
-                            mood+=10;
-                            fullness-=15;
-                            health+=10;
+                            setMood(mood+10);
+                            setFullness(fullness-15); 
+                            setHeath(health+10); 
                             System.out.println("mood dan health bertambah sebesar 10");
                             System.out.println("fullness berkurang sebesar 15");
                         }
@@ -782,9 +784,9 @@ public class Sim {
                         try{
                         Thread.sleep(1000);
                         if (i%20==0){
-                            mood+=20;
-                            fullness-=10;
-                            health-=10;
+                            setMood(mood+20);   
+                            setFullness(fullness-10); 
+                            setHeath(health-10);
                             System.out.println("mood bertambah sebesar 20");
                             System.out.println("fullness dan health berkurang sebesar 10");
                         }
@@ -813,9 +815,9 @@ public class Sim {
                         try{
                         Thread.sleep(1000);
                         if (i%15==0){
-                            mood+=10;
-                            fullness-=10;
-                            health+=5;
+                            setMood(mood+10); 
+                            setFullness(fullness-10); 
+                            setHeath(health+5); 
                             System.out.println("mood dan health bertambah sebesar masing-masing 10 dan 5");
                             System.out.println("fullness berkurang sebesar 10");
                         }
@@ -861,6 +863,7 @@ public class Sim {
     public void viewSimInfo(){
         System.out.println("        Info SIM");
         System.out.println("============================");
+        System.out.println("Hari ke-"+ world.getDay() );
         System.out.println("Nama         : " + name);
         System.out.println("Pekerjaan    : " + job.getJobName());
         System.out.println("Gaji         : " + job.getDailyPay() + "/hari");
@@ -908,7 +911,7 @@ public class Sim {
                 boolean check1 = false;
                 while (!check1) {
                     try {
-                        System.out.print("Masukkan waktu input : ");
+                        System.out.print("Masukkan waktu input (Kelipatan 30) : ");
                         int inputTime = input.nextInt();
                         if (inputTime % 30 != 0) {
                             check1 = false;
@@ -929,7 +932,7 @@ public class Sim {
                 boolean check2 = false;
                 while (!check2) {
                     try {
-                        System.out.print("Masukkan waktu input : ");
+                        System.out.print("Masukkan waktu input (Kelipatan 20) : ");
                         int inputTime = input.nextInt();
                         if (inputTime % 20 != 0) {
                             check2 = false;
@@ -952,7 +955,7 @@ public class Sim {
                 boolean check3 = false;
                 while (!check3) {
                     try {
-                        System.out.print("Masukkan waktu input : ");
+                        System.out.print("Masukkan waktu input (Kelipatan 30 detik) : ");
                         int inputTime = input.nextInt();
                         if (inputTime % 30 != 0) {
                             check3 = false;
@@ -974,7 +977,7 @@ public class Sim {
                 boolean check4 = false;
                 while (!check4) {
                     try {
-                        System.out.print("Masukkan waktu input : ");
+                        System.out.print("Masukkan waktu input (Kelipatan 15 detik) : ");
                         int inputTime = input.nextInt();
                         if (inputTime % 15 != 0) {
                             check4 = false;
@@ -1136,17 +1139,24 @@ public class Sim {
             }
             break;
             default:
-                if (input.hasNextInt()) { // Cek apakah input merupakan angka
-                    System.out.println("Masukan waktu input (Kelipatan 180) : ");
+                boolean checkTidur = false;
+                while(!checkTidur){
+                try {
+                    System.out.print("Masukan waktu input (Kelipatan 180) : ");
                     int waktuTidur = input.nextInt();
                     if (waktuTidur % 180 == 0) { // Cek apakah angka merupakan kelipatan 180
                         sleep(waktuTidur);
                     } else {
                         System.out.println("Input harus kelipatan 180.");
                     }
-                } else {
-                    System.out.println("Input harus berupa angka.");
-                }
+                } catch (Exception e) {
+                    System.out.println("Input harus berupa angka");
+                    System.out.println("Silakan masukan input ulang");
+                    System.out.println("");
+                    input.nextLine();
+                }   
+            }
+                
         }
     }
 

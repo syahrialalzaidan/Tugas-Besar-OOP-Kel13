@@ -352,6 +352,7 @@ public class Sim {
                             setFullness(fullness-10);
                             System.out.println("mood berkurang sebesar 10");
                             System.out.println("fullnes berkurang sebesar 10");
+                            System.out.println("");
                             dailyWork+=30;
                             workTime+=30;
                         }
@@ -393,6 +394,7 @@ public class Sim {
                             setFullness(fullness-5);
                             System.out.println("mood dan health bertambah masing-masing 10 dan 5");
                             System.out.println("fullnes berkurang sebesar 5");
+                            System.out.println("");
                         }
                         }catch(Exception e){
                             
@@ -650,6 +652,7 @@ public class Sim {
                             fullness-=5;
                             System.out.println("mood bertambah sebesar 10");
                             System.out.println("health dan fullnes berkurang sebesar 5");
+                            System.out.println("");
 
                         }
                         }catch(Exception e){
@@ -685,6 +688,7 @@ public class Sim {
                             setHeath(health-5);
                             System.out.println("mood bertambah sebesar 10");
                             System.out.println("health berkurang sebesar 5");
+                            System.out.println("");
                         }
                         }catch(Exception e){
                             
@@ -716,6 +720,8 @@ public class Sim {
                             setFullness(fullness-=5);
                             System.out.println("mood bertambah sebesar 5");
                             System.out.println("fullness berkurang sebesar 5");
+                            System.out.println("");
+                            
                         }
                         }catch(Exception e){
                             
@@ -781,6 +787,7 @@ public class Sim {
                             setHeath(health+10); 
                             System.out.println("mood dan health bertambah sebesar 10");
                             System.out.println("fullness berkurang sebesar 15");
+                            System.out.println("");
                         }
                         }catch(Exception e){
                             
@@ -813,6 +820,7 @@ public class Sim {
                             setHeath(health-10);
                             System.out.println("mood bertambah sebesar 20");
                             System.out.println("fullness dan health berkurang sebesar 10");
+                            System.out.println("");
                         }
                         }catch(Exception e){
                             
@@ -845,6 +853,7 @@ public class Sim {
                             setHeath(health+5); 
                             System.out.println("mood dan health bertambah sebesar masing-masing 10 dan 5");
                             System.out.println("fullness berkurang sebesar 10");
+                            System.out.println("");
                         }
                         }catch(Exception e){
                             
@@ -881,6 +890,7 @@ public class Sim {
     public void viewClock(){
         System.out.print("Sisa waktu hari ini : ");
         timeFormat(720-world.getTime());
+        System.out.println("");
         
         
     }
@@ -1171,6 +1181,7 @@ public class Sim {
                     int waktuTidur = input.nextInt();
                     if (waktuTidur % 180 == 0) { // Cek apakah angka merupakan kelipatan 180
                         sleep(waktuTidur);
+                        checkTidur = true;
                     } else {
                         System.out.println("Input harus kelipatan 180.");
                     }

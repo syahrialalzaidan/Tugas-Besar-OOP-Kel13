@@ -273,13 +273,13 @@ public class Sim {
     }
 
     public void isAlive(){
-        if (mood<0){
+        if (mood<=0){
             System.out.println("Sim anda mati karena depresi");
         }
-        else if(health<0){
+        else if(health<=0){
             System.out.println("Sim anda mati karena sakit");
         }
-        else if(fullness<0){
+        else if(fullness<=0){
             System.out.println("Sim anda mati karena kelaparan");
         }
     }
@@ -449,7 +449,11 @@ public class Sim {
                         }
                         else{
                             Food temp = (Food) food;
-                            inventoryfood.addInventory(temp);
+                            try {
+                                inventoryfood.reduceInventory(temp);
+                            } catch (Exception e) {
+
+                            }
                         }   
                         world.runTime(30);
                         isAlive();
@@ -972,6 +976,7 @@ public class Sim {
                 break;
             case "Jam":
                 viewClock();
+                break;
             case "Meja dan Kursi":
 
                 if (inventorydish.getInventory().size()!=0 || inventoryfood.getInventory().size()!=0){
@@ -979,7 +984,7 @@ public class Sim {
                 getInventorydish().printInventory();
                 boolean check = true;
                 while (check) {
-                    System.out.println("Pilih makanan untuk dimakan : ");
+                    System.out.print("Pilih makanan untuk dimakan : ");
                     String inputMakanan = input.nextLine();
                     if (getInventoryfood().getInventory()
                             .containsKey(inputMakanan)) {

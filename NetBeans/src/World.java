@@ -95,8 +95,9 @@ public class World implements Serializable {
                 if (s.getItemOrder().get(i).getC()<=0){
                     for (int j= s.getItemOrder().get(i).getB() ; j>0 ; j--){
                         s.addInventoryitems(new Items(s.getItemOrder().get(i).getA()));
-                        s.removeItemOrder(i);
+            
                     }
+                    s.removeItemOrder(i);
                     i--;
                     }
                     
@@ -107,12 +108,13 @@ public class World implements Serializable {
                 if (s.getFoodOrder().get(i).getC()<=0){
                     for (int j= s.getFoodOrder().get(i).getB() ; j>0 ; j--){
                         s.addInventoryfood(new Food(s.getFoodOrder().get(i).getA()));
-                        s.removeFoodOrder(i);
                     }
+                    s.removeFoodOrder(i);
                     i--;
                     }
                     
                 }
+                System.out.println(s.getKebelet());
         }
         for (House rumah : house) {
             if (rumah.getUpgradeHouseTime() != 0) {
@@ -123,7 +125,6 @@ public class World implements Serializable {
                 }
             }
         }
-
         this.time = now;
         resetDay();
     }

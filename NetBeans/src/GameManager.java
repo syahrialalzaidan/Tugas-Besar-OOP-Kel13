@@ -1528,6 +1528,7 @@ public class GameManager {
                 else if (actionMenuInput.equals("16") || actionMenuInput.equalsIgnoreCase("Kamus Items"))
                 {
                     currentSim.getCurrentRoom().kamusItems();
+                    System.out.println("");
                 }
                 else {
                     // Invalid Input

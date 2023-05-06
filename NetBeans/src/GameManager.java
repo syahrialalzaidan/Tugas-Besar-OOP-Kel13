@@ -13,7 +13,7 @@ public class GameManager {
     private static Sim currentSim = null;
     private static World world = null;
     // House currentHouse = null;
-    private static Room currentRoom = null;
+
 
     public static void addSim(String nama, World world, House house) {
         Sim sim = new Sim(nama, house, world);

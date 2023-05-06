@@ -591,8 +591,8 @@ public class Sim {
                         
     
                 }
-                mood+=10;
-                fullness-=20;
+                setMood(mood+10);
+                setFullness(fullness-20);
                 System.out.println("mood bertambah sebesar 10");
                 System.out.println("fullness berkurang sebesar 20");
                 afterEating = false;
@@ -626,8 +626,8 @@ public class Sim {
                         try{
                         Thread.sleep(1000);
                         if (i%30==0){
-                            health-=5;
-                            mood+=10;
+                            setHeath(health-5);
+                            setMood(mood+10);
                             fullness-=5;
                             System.out.println("mood bertambah sebesar 10");
                             System.out.println("health dan fullnes berkurang sebesar 5");
@@ -661,8 +661,8 @@ public class Sim {
                         try{
                         Thread.sleep(1000);
                         if (i%30==0){
-                            mood+=10;
-                            health-=5;
+                            setMood(mood+10);
+                            setHeath(health-5);
                             System.out.println("mood bertambah sebesar 10");
                             System.out.println("health berkurang sebesar 5");
                         }
@@ -691,8 +691,8 @@ public class Sim {
                         try{
                         Thread.sleep(1000);
                         if (i%10==0){
-                            mood+=5;
-                            fullness-=5;
+                            setMood(mood+5);
+                            setFullness(fullness-=5);
                             System.out.println("mood bertambah sebesar 5");
                             System.out.println("fullness berkurang sebesar 5");
                         }
@@ -721,9 +721,9 @@ public class Sim {
                         try{
                         Thread.sleep(1000);
                         if (i%15==0){
-                            mood+=10;
-                            fullness-=10;
-                            health+=10;
+                            setMood(mood+10);
+                            setFullness(fullness-10); 
+                            setHeath(health+10); 
                             System.out.println("mood dan health bertambah sebesar 10");
                             System.out.println("fullness berkurang sebesar 10");
                         }
@@ -753,9 +753,9 @@ public class Sim {
                         try{
                         Thread.sleep(1000);
                         if (i%30==0){
-                            mood+=10;
-                            fullness-=15;
-                            health+=10;
+                            setMood(mood+10);
+                            setFullness(fullness-15); 
+                            setHeath(health+10); 
                             System.out.println("mood dan health bertambah sebesar 10");
                             System.out.println("fullness berkurang sebesar 15");
                         }
@@ -784,9 +784,9 @@ public class Sim {
                         try{
                         Thread.sleep(1000);
                         if (i%20==0){
-                            mood+=20;
-                            fullness-=10;
-                            health-=10;
+                            setMood(mood+20);   
+                            setFullness(fullness-10); 
+                            setHeath(health-10);
                             System.out.println("mood bertambah sebesar 20");
                             System.out.println("fullness dan health berkurang sebesar 10");
                         }
@@ -815,9 +815,9 @@ public class Sim {
                         try{
                         Thread.sleep(1000);
                         if (i%15==0){
-                            mood+=10;
-                            fullness-=10;
-                            health+=5;
+                            setMood(mood+10); 
+                            setFullness(fullness-10); 
+                            setHeath(health+5); 
                             System.out.println("mood dan health bertambah sebesar masing-masing 10 dan 5");
                             System.out.println("fullness berkurang sebesar 10");
                         }

@@ -861,6 +861,7 @@ public class Sim {
     public void viewSimInfo(){
         System.out.println("        Info SIM");
         System.out.println("============================");
+        System.out.println("Hari ke-"+ world.getDay() );
         System.out.println("Nama         : " + name);
         System.out.println("Pekerjaan    : " + job.getJobName());
         System.out.println("Gaji         : " + job.getDailyPay() + "/hari");

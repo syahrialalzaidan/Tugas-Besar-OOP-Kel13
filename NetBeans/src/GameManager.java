@@ -54,6 +54,7 @@ public class GameManager {
         System.out.println("Action: ");
         System.out.println("14. Beli barang");
         System.out.println("15. Memasang barang");
+        System.out.println("16. kamus Items");
         System.out.println("");
     }
 
@@ -111,6 +112,8 @@ public class GameManager {
         System.out.println("Membeli suatu barang");
         System.out.println("15.Memasang barang: ");
         System.out.println("Memasang barang di suatu ruangan");
+        System.out.println("16.Kamus Items");
+        System.out.println("Menampilkan kamus dari items");
         System.out.println("");
 
     }
@@ -1521,7 +1524,12 @@ public class GameManager {
                     }
                 } else if (actionMenuInput.equals("99") || actionMenuInput.equalsIgnoreCase("Help")) {
                     help();
-                } else {
+                } 
+                else if (actionMenuInput.equals("16") || actionMenuInput.equalsIgnoreCase("Kamus Items"))
+                {
+                    currentSim.getCurrentRoom().kamusItems();
+                }
+                else {
                     // Invalid Input
                     System.out.println("Aksi tidak dikenali!");
                     System.out.println("");

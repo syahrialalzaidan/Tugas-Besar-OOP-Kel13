@@ -473,26 +473,5 @@ public class Room { //implements ActionListener {
         System.out.println("13. L : Laptop");
         System.out.println("14. SHO : Shower");
     }
-
-
-    public static void main(String[] args) throws Exception
-    {
-        // MainGUI mainGUI = new MainGUI(); // Create an instance of MainGUI
-        // Room room = new Room(null);
-        Room room = new Room("Room 1");
-
-        Items objek1 = new Items("Kasur Single");
-        //System.out.println("Insert Bed");
-        room.placeObject(objek1);
-
-        room.printSpace();
-        
-        // Create an instance of MainGUI
-       
-
-        // Pass mainGUI as an argument to the Room constructor
-        //Room room = new Room(mainGUI);
-
-    }
        
 }

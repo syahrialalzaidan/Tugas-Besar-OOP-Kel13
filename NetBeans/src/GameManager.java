@@ -130,7 +130,7 @@ public class GameManager {
 
     }
 
-    public static void main(String[] args) throws Exception {
+    public static void run() throws Exception {
         Welcome();
 
         Scanner input = new Scanner(System.in);

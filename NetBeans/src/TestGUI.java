@@ -5,21 +5,21 @@ import java.awt.event.ActionListener;
 
 public class TestGUI {
     JFrame frame = new JFrame("Location");
-    ImageIcon npc = new ImageIcon("C:/Java/Tugas-Besar-OOP-Kel13/public/npc.png");
-    ImageIcon jam = new ImageIcon("C:/Java/Tugas-Besar-OOP-Kel13/public/clock-bener.png");
-    ImageIcon toilet = new ImageIcon("C:/Java/Tugas-Besar-OOP-Kel13/public/closet.png");
-    ImageIcon queenbed = new ImageIcon("C:/Java/Tugas-Besar-OOP-Kel13/public/queen.png");
-    ImageIcon singlebed = new ImageIcon("C:/Java/Tugas-Besar-OOP-Kel13/public/single.png");
-    ImageIcon kingbed = new ImageIcon("C:/Java/Tugas-Besar-OOP-Kel13/public/king.png");
-    ImageIcon mejakursi = new ImageIcon("C:/Java/Tugas-Besar-OOP-Kel13/public/mejadankursi.png");
-    ImageIcon komporgas = new ImageIcon("C:/Java/Tugas-Besar-OOP-Kel13/public/kompor-gas.png");
-    ImageIcon komporlistrik = new ImageIcon("C:/Java/Tugas-Besar-OOP-Kel13/public/kompor-listrik.png");
-    ImageIcon hp = new ImageIcon("C:/Java/Tugas-Besar-OOP-Kel13/public/handphone.png");
-    ImageIcon sajadah = new ImageIcon("C:/Java/Tugas-Besar-OOP-Kel13/public/sajadah-bener.png");
-    ImageIcon sapu = new ImageIcon("C:/Java/Tugas-Besar-OOP-Kel13/public/broom.png");
-    ImageIcon tv = new ImageIcon("C:/Java/Tugas-Besar-OOP-Kel13/public/television.png");
-    ImageIcon laptop = new ImageIcon("C:/Java/Tugas-Besar-OOP-Kel13/public/lepi.png");
-    ImageIcon shower = new ImageIcon("C:/Java/Tugas-Besar-OOP-Kel13/public/shower-bener.png");
+    ImageIcon npc = new ImageIcon("public/npc.png");
+    ImageIcon jam = new ImageIcon("public/clock-bener.png");
+    ImageIcon toilet = new ImageIcon("public/closet.png");
+    ImageIcon queenbed = new ImageIcon("public/queen.png");
+    ImageIcon singlebed = new ImageIcon("public/single.png");
+    ImageIcon kingbed = new ImageIcon("public/king.png");
+    ImageIcon mejakursi = new ImageIcon("public/mejadankursi.png");
+    ImageIcon komporgas = new ImageIcon("public/kompor-gas.png");
+    ImageIcon komporlistrik = new ImageIcon("public/kompor-listrik.png");
+    ImageIcon hp = new ImageIcon("public/handphone.png");
+    ImageIcon sajadah = new ImageIcon("public/sajadah-bener.png");
+    ImageIcon sapu = new ImageIcon("public/broom.png");
+    ImageIcon tv = new ImageIcon("public/television.png");
+    ImageIcon laptop = new ImageIcon("public/lepi.png");
+    ImageIcon shower = new ImageIcon("public/shower-bener.png");
     Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 
     // Calculate the width and height of the frame to be 50% of the screen size

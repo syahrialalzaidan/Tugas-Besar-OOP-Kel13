@@ -566,6 +566,7 @@ public class GameManager {
                     }
                 } else if (actionMenuInput.equals("8") || actionMenuInput.equalsIgnoreCase("Change Sim")) {
                     // TODO: Change Sim
+                    if (simList.size()!=1){
                     System.out.println("Pilih Sim yang ingin dimainkan: ");
                     for (Sim sim : GameManager.getSimList()) {
                         if (!currentSim.getName().equals(sim.getName())) {
@@ -592,6 +593,9 @@ public class GameManager {
                         } else {
                             System.out.print("Input nama yang dimaksukan tidak ada dalam daftar sim : ");
                         }
+                    }}
+                    else{
+                        System.out.println("Tidak ada sim lain untuk dimainkan");
                     }
 
                 } else if (actionMenuInput.equals("9") || actionMenuInput.equalsIgnoreCase("List Object")) {

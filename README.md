@@ -22,5 +22,7 @@ Sebelum memainkan Game Simplicity kita memerlukan pull dari folder git :
 
 
 ## Cara Menjalankan Program
-ini untuk compile file java :
+ini untuk compile file java : 
 ` javac -d bin -cp dependency/gson-2.8.6.jar NetBeans/src/*.java `
+
+

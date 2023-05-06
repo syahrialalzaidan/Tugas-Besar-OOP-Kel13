@@ -834,7 +834,6 @@ public class GameManager {
                             Point coordinate = new Point(x, y);
                             House rumah = new House(coordinate, inputNama);
 
-                            Sim s = new Sim(inputNama, rumah, world);
                             addSim(inputNama, world, rumah);
                             System.out.println("Sim dengan nama " + inputNama + " telah ditambahkan. ");
                             check = true;

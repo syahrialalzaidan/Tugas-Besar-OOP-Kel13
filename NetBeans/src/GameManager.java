@@ -959,12 +959,12 @@ public class GameManager {
                         // }
 
                         // Pidahkan simPoint ke Object
-                        currentSim.getCurrentRoom().setSimPoint(targetCoordinate.getX1(), targetCoordinate.getY1());
+                        currentSim.setSimPoint(targetCoordinate.getX1(), targetCoordinate.getY1());
 
                         // Simpan inisial Objek yang ingin dituju ke variabel inisial
                         currentSim.setCurrentItems(targetObject);
 
-                        currentSim.getCurrentRoom().setLastItem(targetObject.getName());
+                        //currentSim.getCurrentRoom().setLastItem(targetObject.getName());
 
                         // Print Map
 

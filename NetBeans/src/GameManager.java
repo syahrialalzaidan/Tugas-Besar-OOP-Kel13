@@ -14,7 +14,6 @@ public class GameManager {
     private static World world = null;
     // House currentHouse = null;
 
-
     public static void addSim(String nama, World world, House house) {
         Sim sim = new Sim(nama, house, world);
         simList.add(sim);
@@ -177,8 +176,6 @@ public class GameManager {
                 // currentSim mengacu ke firstSim
                 currentSim = simList.get(0);
 
-                
-
                 // Menambahkan Item Default kedalam first-room
                 // Items item1 = new Items("Kasur Single");
                 // Items item2 = new Items("Toilet");
@@ -259,6 +256,8 @@ public class GameManager {
             System.out.println("Kamu sekarang berada di " + currentSim.getCurrentRoom().getRoomName());
             currentSim.getCurrentRoom().printSpace();
             System.out.println("");
+            TestGUI test = new TestGUI();
+            test.createGUI(currentSim.getCurrentRoom().getSpace());
 
             Boolean simInHouse = true;
             printActionMenu();
@@ -469,16 +468,14 @@ public class GameManager {
                         System.out.println("Sim tidak berada di dalam rumah sendiri");
                     }
 
-                    else 
-                    {
+                    else {
                         System.out.println("Pilihlah Aksi yang anda inginkan : ");
                         System.out.println("1. Beli Barang");
                         System.out.println("2. Pindahkan Barang");
                         System.out.println("");
                         String aksi = input.nextLine();
 
-                        if(aksi.equals("1") || aksi.equalsIgnoreCase("Beli Barang"))
-                        {
+                        if (aksi.equals("1") || aksi.equalsIgnoreCase("Beli Barang")) {
                             // Masukan Aksi Beli Barang disini
                             System.out.println("Berikut adalah items yang tersedia beserta harganya:");
                             System.out.println("1. Kasur Single     | 50");
@@ -747,9 +744,8 @@ public class GameManager {
                                         }
                                     }
                                 }
-                            } 
-                        }
-                        else    /* Yang dipilih: Pindahkan barang  */
+                            }
+                        } else /* Yang dipilih: Pindahkan barang */
                         {
                             currentSim.getCurrentRoom().printSpace();
                             System.out.println("");
@@ -765,7 +761,8 @@ public class GameManager {
                                 int i = 1;
                                 for (Coordinate coordinate : listItemInRoom.keySet()) {
                                     System.out.println(
-                                            i + ". " + listItemInRoom.get(coordinate).getName() + " | Coordinate = " + " ("
+                                            i + ". " + listItemInRoom.get(coordinate).getName() + " | Coordinate = "
+                                                    + " ("
                                                     + coordinate.getX1() + "," + coordinate.getY1() + ")" + " - ("
                                                     + coordinate.getX2() + ","
                                                     + coordinate.getY2() + ")");
@@ -847,36 +844,36 @@ public class GameManager {
                     }
                 } else if (actionMenuInput.equals("8") || actionMenuInput.equalsIgnoreCase("Change Sim")) {
                     // TODO: Change Sim
-                    if (simList.size()!=1){
-                    System.out.println("Pilih Sim yang ingin dimainkan: ");
-                    for (Sim sim : GameManager.getSimList()) {
-                        if (!currentSim.getName().equals(sim.getName())) {
-                            System.out.println(sim.getName());
-                        }
-
-                    }
-                    System.out.print("Masukkan nama Sim yang ingin dimainkan: ");
-                    boolean check = false;
-                    while (!check) {
-                        String inputNama = input.nextLine();
-                        boolean checkNama = false;
+                    if (simList.size() != 1) {
+                        System.out.println("Pilih Sim yang ingin dimainkan: ");
                         for (Sim sim : GameManager.getSimList()) {
-                            if (sim.getName().equals(inputNama)) {
-                                checkNama = true;
+                            if (!currentSim.getName().equals(sim.getName())) {
+                                System.out.println(sim.getName());
+                            }
+
+                        }
+                        System.out.print("Masukkan nama Sim yang ingin dimainkan: ");
+                        boolean check = false;
+                        while (!check) {
+                            String inputNama = input.nextLine();
+                            boolean checkNama = false;
+                            for (Sim sim : GameManager.getSimList()) {
+                                if (sim.getName().equals(inputNama)) {
+                                    checkNama = true;
+                                }
+                            }
+                            if (inputNama.equals(currentSim.getName())) {
+                                System.out.print("Anda sedang memainkan Sim tersebut, silakan masukkan nama kembali :");
+                            } else if (checkNama) {
+                                changeSim(inputNama);
+                                System.out.println("Sekarang anda sedang memainkan " + inputNama);
+                                check = true;
+                            } else {
+                                System.out.println("Input nama yang dimaksukan tidak ada dalam daftar sim");
+                                System.out.print("Masukkan nama Sim yang ingin dimainkan: ");
                             }
                         }
-                        if (inputNama.equals(currentSim.getName())) {
-                            System.out.print("Anda sedang memainkan Sim tersebut, silakan masukkan nama kembali :");
-                        } else if (checkNama) {
-                            changeSim(inputNama);
-                            System.out.println("Sekarang anda sedang memainkan " + inputNama);
-                            check = true;
-                        } else {
-                            System.out.println("Input nama yang dimaksukan tidak ada dalam daftar sim");
-                            System.out.print("Masukkan nama Sim yang ingin dimainkan: ");
-                        }
-                    }}
-                    else{
+                    } else {
                         System.out.println("Tidak ada sim lain untuk dimainkan");
                     }
 
@@ -925,7 +922,9 @@ public class GameManager {
                                 + currentSim.getCurrentRoom().getRoomName() + " : ");
                         int i = 1;
                         for (Coordinate coordinate : listItemInRoom.keySet()) {
-                            System.out.println(i + ". " + listItemInRoom.get(coordinate).getName() + " - (" + coordinate.getX1() + "," + coordinate.getY1() + ")" + " - (" + coordinate.getX2() + "," + coordinate.getY2() + ")");
+                            System.out.println(i + ". " + listItemInRoom.get(coordinate).getName() + " - ("
+                                    + coordinate.getX1() + "," + coordinate.getY1() + ")" + " - (" + coordinate.getX2()
+                                    + "," + coordinate.getY2() + ")");
                             tempListCoordinate.add(coordinate);
                             i++;
                         }
@@ -969,7 +968,7 @@ public class GameManager {
                         // Simpan inisial Objek yang ingin dituju ke variabel inisial
                         currentSim.setCurrentItems(targetObject);
 
-                        //currentSim.getCurrentRoom().setLastItem(targetObject.getName());
+                        // currentSim.getCurrentRoom().setLastItem(targetObject.getName());
 
                         // Print Map
 
@@ -1084,14 +1083,14 @@ public class GameManager {
 
                                             }
                                         } else {
-                                            System.out.print("Input nama yang dimaksukan tidak ada dalam daftar sim : ");
+                                            System.out
+                                                    .print("Input nama yang dimaksukan tidak ada dalam daftar sim : ");
                                         }
                                     }
                                 }
                             } else {
                                 System.out.println("Sim sedang berkunjung");
-                                
-                                
+
                             }
 
                         } else if (ActionInput.equals("4") || ActionInput.equals("Pulang")) {
@@ -1469,13 +1468,10 @@ public class GameManager {
 
                 } else if (actionMenuInput.equals("15") || actionMenuInput.equalsIgnoreCase("Memasang barang")) {
                     // TODO: Memasang barang
-                        if(currentSim.getisBerkunjung())
-                        {
-                            System.out.println("Sim tidak berada di rumah sendiri");
-                            System.out.println("Sim tidak bisa memasang barang");
-                        }
-                        else
-                        {
+                    if (currentSim.getisBerkunjung()) {
+                        System.out.println("Sim tidak berada di rumah sendiri");
+                        System.out.println("Sim tidak bisa memasang barang");
+                    } else {
                         System.out.println("Sekarang Kamu berada di " + currentSim.getCurrentRoom().getRoomName());
                         currentSim.getCurrentRoom().printSpace();
                         System.out.println("");
@@ -1530,12 +1526,13 @@ public class GameManager {
                     System.out.println("");
                 }
 
-                if (!currentSim.getAlive()){
-                    if (simList.size()==1){
+                test.createGUI(currentSim.getCurrentRoom().getSpace());
+
+                if (!currentSim.getAlive()) {
+                    if (simList.size() == 1) {
                         exit = true;
                         System.out.println("GAME OVER");
-                    }
-                    else{
+                    } else {
                         simList.remove(currentSim);
                         currentSim = simList.get(0);
                         System.err.println("Sekarang anda memainkan " + simList.get(0).getName());

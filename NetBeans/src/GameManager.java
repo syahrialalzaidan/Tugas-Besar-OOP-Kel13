@@ -171,19 +171,13 @@ public class GameManager {
                 Point coordinate = new Point(x, y);
                 House firstHouse = new House(coordinate, namaSim);
 
-                // membuat Sim pertama
-                Sim firstSim = new Sim(namaSim, firstHouse, world);
-
-                // menset upgradeHouseTime baru untuk sim pertama
-
                 // Memasukan Sim kedalam SimList
                 addSim(namaSim, world, firstHouse);
 
                 // currentSim mengacu ke firstSim
                 currentSim = simList.get(0);
 
-                // Memasukan House ke dalam World
-                world.addHouse(currentSim.getHouse());
+                
 
                 // Menambahkan Item Default kedalam first-room
                 // Items item1 = new Items("Kasur Single");
@@ -271,6 +265,7 @@ public class GameManager {
             while (!exit) {
                 System.out.print("Masukkan pilihan Anda (Angka/Aksi): ");
                 String actionMenuInput = input.nextLine();
+                System.out.println("");
                 if (actionMenuInput.equals("0") || actionMenuInput.equalsIgnoreCase("View Menu")) {
                     printActionMenu();
                 } else if (actionMenuInput.equals("1") || actionMenuInput.equalsIgnoreCase("View Sim Info")) {
@@ -290,7 +285,7 @@ public class GameManager {
                     currentSim.getInventoryitems().printInventory();
                     System.out.println(" ");
 
-                } else if (actionMenuInput.equals("4") || actionMenuInput.equalsIgnoreCase("1")) {
+                } else if (actionMenuInput.equals("4") || actionMenuInput.equalsIgnoreCase("Upgrade House")) {
                     // TODO: Upgrade House
 
                     // Validasi apakah Sims berada didalam Rumah
@@ -470,7 +465,7 @@ public class GameManager {
 
                     // Validasi Apakah Sim berada didalam Rumah
                     if (currentSim.getisBerkunjung()) {
-                        System.out.println("Sim tidak berada di dalam rumah");
+                        System.out.println("Sim tidak berada di dalam rumah sendiri");
                     }
 
                     else 
@@ -839,7 +834,6 @@ public class GameManager {
                             Point coordinate = new Point(x, y);
                             House rumah = new House(coordinate, inputNama);
 
-                            Sim s = new Sim(inputNama, rumah, world);
                             addSim(inputNama, world, rumah);
                             System.out.println("Sim dengan nama " + inputNama + " telah ditambahkan. ");
                             check = true;
@@ -1470,49 +1464,57 @@ public class GameManager {
 
                 } else if (actionMenuInput.equals("15") || actionMenuInput.equalsIgnoreCase("Memasang barang")) {
                     // TODO: Memasang barang
-                    System.out.println("Sekarang Kamu berada di " + currentSim.getCurrentRoom().getRoomName());
-                    currentSim.getCurrentRoom().printSpace();
-                    System.out.println("");
-
-                    Inventory<Items> itemsInventory = currentSim.getInventoryitems();
-                    ArrayList<Items> listItems = itemsInventory.getInventoryList();
-                    if (listItems.isEmpty()) {
-                        System.out.println("Inventory is empty. Buy some stuff?");
-                    } else {
-                        System.out.println("Berikut adalah List Item yang dimiliki: ");
-                        for (int i = 0; i < listItems.size(); i++) {
-                            if (listItems.get(i) != null) {
-                                System.out.println((i + 1) + ". " + listItems.get(i).getName());
-                            }
+                        if(currentSim.getisBerkunjung())
+                        {
+                            System.out.println("Sim tidak berada di rumah sendiri");
+                            System.out.println("Sim tidak bisa memasang barang");
                         }
+                        else
+                        {
+                        System.out.println("Sekarang Kamu berada di " + currentSim.getCurrentRoom().getRoomName());
+                        currentSim.getCurrentRoom().printSpace();
                         System.out.println("");
 
-                        Boolean inputbenar = false;
-
-                        Items item = null;
-                        String itemName = "";
-                        while (!inputbenar) {
-                            System.out.print("Masukkan nama item yang ingin dipasang : ");
-                            itemName = input.nextLine();
+                        Inventory<Items> itemsInventory = currentSim.getInventoryitems();
+                        ArrayList<Items> listItems = itemsInventory.getInventoryList();
+                        if (listItems.isEmpty()) {
+                            System.out.println("Inventory is empty. Buy some stuff?");
+                        } else {
+                            System.out.println("Berikut adalah List Item yang dimiliki: ");
                             for (int i = 0; i < listItems.size(); i++) {
                                 if (listItems.get(i) != null) {
-                                    if (itemName.equals(listItems.get(i).getName())) {
-                                        inputbenar = true;
-                                        item = listItems.get(i);
-                                        break;
-                                    }
+                                    System.out.println((i + 1) + ". " + listItems.get(i).getName());
                                 }
                             }
-                            if (!inputbenar) {
-                                System.out.println("Item tidak ditemukan");
-                                System.out.println("Silakan masukan item ulang");
-                                System.out.println("");
-                            }
-                        }
+                            System.out.println("");
 
-                        Boolean isPlaced = currentSim.getCurrentRoom().placeObject(item);
-                        if (isPlaced) {
-                            itemsInventory.reduceInventory(itemName);
+                            Boolean inputbenar = false;
+
+                            Items item = null;
+                            String itemName = "";
+                            while (!inputbenar) {
+                                System.out.print("Masukkan nama item yang ingin dipasang : ");
+                                itemName = input.nextLine();
+                                for (int i = 0; i < listItems.size(); i++) {
+                                    if (listItems.get(i) != null) {
+                                        if (itemName.equals(listItems.get(i).getName())) {
+                                            inputbenar = true;
+                                            item = listItems.get(i);
+                                            break;
+                                        }
+                                    }
+                                }
+                                if (!inputbenar) {
+                                    System.out.println("Item tidak ditemukan");
+                                    System.out.println("Silakan masukan item ulang");
+                                    System.out.println("");
+                                }
+                            }
+
+                            Boolean isPlaced = currentSim.getCurrentRoom().placeObject(item);
+                            if (isPlaced) {
+                                itemsInventory.reduceInventory(itemName);
+                            }
                         }
                     }
                 } else if (actionMenuInput.equals("99") || actionMenuInput.equalsIgnoreCase("Help")) {
